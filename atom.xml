@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Gddhy&#39;s Blog</title>
+  
+  <subtitle>回忆个人博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://gddhy.net/"/>
+  <updated>2021-07-20T02:01:49.101Z</updated>
+  <id>https://gddhy.net/</id>
+  
+  <author>
+    <name>gddhy</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>zstermux功能拓展</title>
+    <link href="https://gddhy.net/2021/zstermux-tool/"/>
+    <id>https://gddhy.net/2021/zstermux-tool/</id>
+    <published>2021-07-20T01:43:44.000Z</published>
+    <updated>2021-07-20T02:01:49.101Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个termux一键脚本，安装运行各种好玩的，UnblockNeteaseMusic解锁云音乐代理，常用视频下载工具youtub-dl，和annie，常用磁力种子下载工具cloud-torrent，aria2，还有终端配色，修改恢复更多按键。Adguard dns服务。局域网文件共享，chfs和kodexplorer。以及lnmp建站环境的安装[旧版termux可能无法使用]。  </p><a id="more"></a>  <p><strong>需要什么就安装运行什么，不会全部安装。</strong></p><blockquote><p>上面信息来自zstermux项目的README</p></blockquote><p>对原项目里的脚本进行了些小修改，将github链接替换到github下载加速链接，移除京东脚本</p><h4 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本"></a>安装脚本</h4><p>旧版的termux可能curl都没有安装，先安装一下即可</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg <span class="keyword">install</span> curl -y</span><br></pre></td></tr></table></figure><p>下载运行脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://gddhy.net/2021/zstermux-tool/install.sh)</span>"</span></span><br></pre></td></tr></table></figure><p>后续运行脚本</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sh</span> zs.<span class="keyword">sh</span></span><br><span class="line">或者</span><br><span class="line">./zs.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure><p>也可以直接使用原项目的安装脚本（需要能直接访问github</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/zsxwz/zstermux/master/install.sh)</span>"</span></span><br></pre></td></tr></table></figure><blockquote><p>脚本来自<a href="https://github.com/zsxwz/zstermux" target="_blank" rel="noopener">zsxwz/zstermux</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个termux一键脚本，安装运行各种好玩的，UnblockNeteaseMusic解锁云音乐代理，常用视频下载工具youtub-dl，和annie，常用磁力种子下载工具cloud-torrent，aria2，还有终端配色，修改恢复更多按键。Adguard dns服务。局域网文件共享，chfs和kodexplorer。以及lnmp建站环境的安装[旧版termux可能无法使用]。  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Termux" scheme="https://gddhy.net/tags/Termux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Yilia添加标签云</title>
+    <link href="https://gddhy.net/2021/yilia-tian-jia-biao-qian-yun/"/>
+    <id>https://gddhy.net/2021/yilia-tian-jia-biao-qian-yun/</id>
+    <published>2021-07-19T01:24:50.000Z</published>
+    <updated>2021-07-20T02:01:49.073Z</updated>
+    
+    <content type="html"><![CDATA[<p>Yilia主题并没有单独的标签页，而是留在了侧栏，单独为Yilia添加一个标签云的页面  </p><a id="more"></a>  <p>在博客目录安装标签云程序</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-<span class="symbol">cloud@</span>^<span class="number">2.0</span>.* --save</span><br></pre></td></tr></table></figure><p>在主题目录 <code>themes/yilia/layout/</code> 创建 <code>tags-could.ejs</code> 文件，粘贴以下代码</p><figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby"> <span class="keyword">if</span> (site.tags.length) &#123; </span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"&lt;%-</span></span></span><span class="ruby"> url_for(<span class="string">'/js/tagcloud.js'</span>) </span><span class="xml"><span class="tag"><span class="string">%&gt;"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">src</span>=<span class="string">"&lt;%-</span></span></span><span class="ruby"> url_for(<span class="string">'/js/tagcanvas.js'</span>) </span><span class="xml"><span class="tag"><span class="string">%&gt;"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"archives-wrap"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"widget-wrap"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">header</span> <span class="attr">class</span>=<span class="string">"article-header"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"article-title"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span></span></span><span class="ruby"> _<span class="number">_</span>(<span class="string">'tagcloud'</span>) </span><span class="xml"><span class="tag">%&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myCanvasContainer"</span> <span class="attr">class</span>=<span class="string">"widget tagcloud"</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"250"</span> <span class="attr">height</span>=<span class="string">"250"</span> <span class="attr">id</span>=<span class="string">"resCanvas"</span> <span class="attr">style</span>=<span class="string">"width:100%"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">%-</span></span></span><span class="ruby"> tagcloud() </span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%</span></span></span><span class="ruby"> &#125; </span><span class="xml"><span class="tag">%&gt;</span></span></span><br></pre></td></tr></table></figure><p>标签云自定义，在博客根目录 <code>_config.yml</code> 文件添加</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo-tag-cloud</span></span><br><span class="line"><span class="attr">tag_cloud:</span></span><br><span class="line"><span class="attr">    textFont:</span> <span class="string">Trebuchet</span> <span class="string">MS,</span> <span class="string">Helvetica</span></span><br><span class="line"><span class="attr">    textColor:</span> <span class="string">'#333'</span></span><br><span class="line"><span class="attr">    textHeight:</span> <span class="number">25</span></span><br><span class="line"><span class="attr">    outlineColor:</span> <span class="string">'#E2E1D1'</span></span><br><span class="line"><span class="attr">    maxSpeed:</span> <span class="number">0.5</span></span><br><span class="line"><span class="attr">    pauseOnSelected:</span> <span class="literal">false</span> <span class="comment"># true 意味着当选中对应 tag 时,停止转动</span></span><br></pre></td></tr></table></figure><p>创建一个新的标签页</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new<span class="built_in"> page </span><span class="string">"tags"</span></span><br></pre></td></tr></table></figure><p>修改 <code>tags/index.md</code> 内容</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标签云</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"tags"</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">"tags-could"</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure><p>现在就可以本地预览查看效果了</p><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="variable">&amp;&amp;</span> hexo g <span class="variable">&amp;&amp;</span> hexo s</span><br></pre></td></tr></table></figure><p><a href="/tags">查看当前博客的标签云</a></p><blockquote><p>标签云项目<a href="https://github.com/D0n9X1n/hexo-tag-cloud" target="_blank" rel="noopener">D0n9X1n/hexo-tag-cloud</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Yilia主题并没有单独的标签页，而是留在了侧栏，单独为Yilia添加一个标签云的页面  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Hexo" scheme="https://gddhy.net/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>termux开启ssh</title>
+    <link href="https://gddhy.net/2021/termux-kai-qi-ssh/"/>
+    <id>https://gddhy.net/2021/termux-kai-qi-ssh/</id>
+    <published>2021-07-17T23:40:40.000Z</published>
+    <updated>2021-07-20T02:01:49.101Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://f-droid.org/zh_Hans/packages/com.termux/" target="_blank" rel="noopener">termux</a>里开启ssh，可以方便的让其他设备连接使用  </p><a id="more"></a>  <p>安装openssh</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg <span class="keyword">install</span> openssh</span><br></pre></td></tr></table></figure><p>设置当前用户的密码，输入密码时并不会显示，需要输入两次密码回车确认</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">passwd</span></span><br></pre></td></tr></table></figure><p>查看当前用户名</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">whoami</span></span><br></pre></td></tr></table></figure><p>启动ssh，termux的默认ssh端口在 8022</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sshd</span></span><br></pre></td></tr></table></figure><p>如果需要在termux启动时自动打开ssh</p><p>看一下termux用的是bash还是zsh，在里面添加 <code>sshd</code> 即可</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"sshd"</span> &gt;&gt; ~<span class="string">/.bashrc</span></span><br></pre></td></tr></table></figure><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"sshd"</span> &gt;&gt; ~<span class="string">/.zshrc</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://f-droid.org/zh_Hans/packages/com.termux/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;termux&lt;/a&gt;里开启ssh，可以方便的让其他设备连接使用  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Termux" scheme="https://gddhy.net/tags/Termux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网易dns和ip接口</title>
+    <link href="https://gddhy.net/2021/wang-yi-dns-jie-kou/"/>
+    <id>https://gddhy.net/2021/wang-yi-dns-jie-kou/</id>
+    <published>2021-07-12T01:41:05.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>抓包软件时发现网易云音乐会在手机网络状态变化时用这两个接口获取dns与ip信息  </p><a id="more"></a>  <p>日常要检测dns使用网易提供的网页工具就够了<br><a href="https://nstool.netease.com/" target="_blank" rel="noopener">网易dns检测</a>  </p><p>下面两个网易云音乐里用的接口仅在这里记录下</p><h4 id="接口一"><a href="#接口一" class="headerlink" title="接口一"></a>接口一</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//nstool.netease.com/info.js</span></span><br></pre></td></tr></table></figure><script src="//nstool.netease.com/info.js"></script><script type="text/javascript">  document.write('当前IP：'+ip+'  '+ip_province+' '+ip_city +' ' +ip_isp + '<br/>');  document.write('当前DNS：'+dns+'  '+dns_province+' '+dns_city +' ' +dns_isp + '<br/>');  document.write(msg + '<br/>');</script><h4 id="接口二"><a href="#接口二" class="headerlink" title="接口二"></a>接口二</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//m</span>am.netease.com<span class="regexp">/api/</span>config<span class="regexp">/getClientIp</span></span><br></pre></td></tr></table></figure><p>这个借口返回的是json信息，网页上就不演示了</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;抓包软件时发现网易云音乐会在手机网络状态变化时用这两个接口获取dns与ip信息  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS弹窗</title>
+    <link href="https://gddhy.net/2021/js-dan-chuang/"/>
+    <id>https://gddhy.net/2021/js-dan-chuang/</id>
+    <published>2021-07-11T11:52:25.000Z</published>
+    <updated>2021-07-20T02:01:49.069Z</updated>
+    
+    <content type="html"><![CDATA[<p>JS基本的弹窗和js弹出div  </p><a id="more"></a>  <h4 id="基本弹窗"><a href="#基本弹窗" class="headerlink" title="基本弹窗"></a>基本弹窗</h4><p>提示普通文本信息</p><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">"提示"</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure><h4 id="确定窗"><a href="#确定窗" class="headerlink" title="确定窗"></a>确定窗</h4><p>带确定、取消按钮的弹窗，有返回值true/false对应确定/取消被按下</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var b</span> = confirm(<span class="string">"确定？"</span>);</span><br></pre></td></tr></table></figure><h4 id="输入窗"><a href="#输入窗" class="headerlink" title="输入窗"></a>输入窗</h4><p>prompt有两个参数，第一个是提示窗标题，第二个是输入的默认值，返回用户输入的内容，可以用if判断是否有输入内容</p><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">text</span> = prompt(<span class="string">"输入"</span>, <span class="string">""</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">text</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="弹出div窗口"><a href="#弹出div窗口" class="headerlink" title="弹出div窗口"></a>弹出div窗口</h4><p>首先写一个遮罩层div，然后再写一个弹窗的div</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 遮罩层 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cover"</span> <span class="attr">style</span>=<span class="string">"background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 "</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 弹窗 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"showdiv"</span> <span class="attr">style</span>=<span class="string">"width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 标题 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;"</span> &gt;</span></span><br><span class="line">    提示</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 内容 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; "</span>&gt;</span></span><br><span class="line">    js弹窗 js弹出DIV,并使整个页面背景变暗<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 按钮 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;"</span> <span class="attr">onclick</span>=<span class="string">"closeWindow()"</span>&gt;</span></span><br><span class="line">    确 定</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>js代码：（把jq引进来）</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 弹窗</span></span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">showWindow</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#showdiv'</span>).show();  <span class="comment">//显示弹窗</span></span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#cover'</span>).css(<span class="string">'display'</span>,<span class="string">'block'</span>); <span class="comment">//显示遮罩层</span></span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#cover'</span>).css(<span class="string">'height'</span>,<span class="built_in">document</span>.body.clientHeight+<span class="string">'px'</span>); <span class="comment">//设置遮罩层的高度为当前页面高度</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="actionscript">  <span class="comment">// 关闭弹窗</span></span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#showdiv'</span>).hide();  <span class="comment">//隐藏弹窗</span></span></span><br><span class="line"><span class="javascript">    $(<span class="string">'#cover'</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);   <span class="comment">//显示遮罩层</span></span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h4 id="判断JQ引入"><a href="#判断JQ引入" class="headerlink" title="判断JQ引入"></a>判断JQ引入</h4><p>引入jq</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><p>判断引入情况</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">if</span> (<span class="keyword">typeof</span> jQuery != <span class="string">'undefined'</span>) &#123;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//jquery已引入</span></span></span><br><span class="line">&#125; </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><div id="cover" style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 "></div><div id="showdiv" style="width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff">  <div style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;">    提示  </div>  <div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">    js弹窗 js弹出DIV,并使整个页面背景变暗</div>  <div style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;" onclick="closeWindow()">    确 定  </div></div><script>  function showWindow() {    $('#showdiv').show();    $('#cover').css('display','block');    $('#cover').css('height',document.body.clientHeight+'px');   }  function closeWindow() {    $('#showdiv').hide();    $('#cover').css('display','none');  }function fdialog(){  if(confirm("确定？")){  alert('确定被按下');  } else {  alert('取消被按下');  }}function indialog(){  var text = prompt("请输入", "");  if(text){  alert('输入了：'+text);  }}function getType(){    if (typeof jQuery != 'undefined') {    alert('jquery已引入');    } else {  alert('jquery未引入');  }}</script><input type="button" onclick="javascript:alert('提示');" value="普通弹窗"><input type="button" onclick="fdialog()" value="确定窗"><input type="button" onclick="indialog()" value="输入窗"><br><input type="button" onclick="getType()" value="获取JQ状态"><input type="button" onclick="showWindow()" value="div弹窗"><blockquote><p>div弹窗转载自<a href="https://www.jb51.net/article/138647.htm" target="_blank" rel="noopener">下页、再停留：JS弹窗 JS弹出DIV并使整个页面背景变暗功能的实现代码</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JS基本的弹窗和js弹出div  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Html" scheme="https://gddhy.net/tags/Html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网页页脚</title>
+    <link href="https://gddhy.net/2021/wang-ye-ye-jiao/"/>
+    <id>https://gddhy.net/2021/wang-ye-ye-jiao/</id>
+    <published>2021-07-10T08:59:44.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>页脚样式，主要是position: fixed和position:absolute区别  </p><a id="more"></a>  <p>设置网页页脚时，可以使用css样式将内容控制显示在底部</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"position: fixed; bottom: 0; width:100%;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"text-align: center;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>其中 position: fixed 是控制显示在屏幕底部</p><p>可以改为 position:absolute 让其显示在网页底部</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;页脚样式，主要是position: fixed和position:absolute区别  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Html" scheme="https://gddhy.net/tags/Html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网页vConsole</title>
+    <link href="https://gddhy.net/2021/wang-ye-vconsole/"/>
+    <id>https://gddhy.net/2021/wang-ye-vconsole/</id>
+    <published>2021-07-09T23:33:22.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个适合移动端网页调试的js  </p><a id="more"></a>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vconsole/dist/vconsole.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> vConsole = <span class="keyword">new</span> <span class="built_in">window</span>.VConsole();</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><p>最好要在head 标签内部引用js</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> vConsole = <span class="keyword">new</span> VConsole();</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><blockquote><p><a href="https://github.com/Tencent/vConsole" target="_blank" rel="noopener">Tencent/vConsole</a></p></blockquote><script src="https://unpkg.com/vconsole/dist/vconsole.min.js"></script><script>  var vConsole = new window.VConsole();</script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个适合移动端网页调试的js  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="Html" scheme="https://gddhy.net/tags/Html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>系统医生 小米售后软件</title>
+    <link href="https://gddhy.net/2021/xi-tong-yi-sheng-mi/"/>
+    <id>https://gddhy.net/2021/xi-tong-yi-sheng-mi/</id>
+    <published>2021-07-09T11:52:59.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个是去小米售后维修手机给装的，看能直接显示的参数蛮多的，在这里分享下  </p><a id="more"></a>  <p>软件名：系统医生<br>包名：com.xiaomi.systemdoctor<br>大小：5.38M<br>版本：1.49<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/com.xiaomi.systemdoctor.apk" target="_blank" rel="noopener">apk下载</a>  </p><p><a href="http://file.market.xiaomi.com/download/AppStore/0b3065b8e925d7ef54fe02d186b0efb96ee40ba13/SystemDoctor.apk" target="_blank" rel="noopener">系统医生apk</a>（这个是小米渠道的直链）</p><blockquote><p>原分享动态<a href="https://www.coolapk.com/feed/15733142?shareKey=MDQyM2NjZDMwY2QyNjBlODM2MDE~&shareUid=778415&shareFrom=com.coolapk.market_11.2.6.1" target="_blank" rel="noopener">酷安动态</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个是去小米售后维修手机给装的，看能直接显示的参数蛮多的，在这里分享下  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络ADB调试</title>
+    <link href="https://gddhy.net/2021/wang-luo-adb-diao-shi/"/>
+    <id>https://gddhy.net/2021/wang-luo-adb-diao-shi/</id>
+    <published>2021-07-09T11:38:22.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一个可以在手机上快速打开网络adb的小工具，同样是个被酷安下架的app  </p><a id="more"></a>  <p>软件名：网络ADB调试<br>包名：com.yaerin.wadb<br>大小：37.52K<br>版本：1.7<br>软件开源：<a href="https://github.com/KagurazakaHanabi/WADB" target="_blank" rel="noopener">KagurazakaHanabi/WADB</a><br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/networkadb.apk" target="_blank" rel="noopener">networkadb.apk</a>  </p><p>电脑上使用adb命令可以达到同样的效果</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb tcpip <span class="number">5555</span></span><br></pre></td></tr></table></figure><p>不过直接在手机上用root权限打开这个会更方便，支持添加到通知栏磁贴快速开关adb调试</p><p>安卓11自带网络adb，不过11为了安全连接稍显麻烦了，这个APP同样适用</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一个可以在手机上快速打开网络adb的小工具，同样是个被酷安下架的app  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Oneindex伪静态</title>
+    <link href="https://gddhy.net/2021/oneindex-wei-jing-tai/"/>
+    <id>https://gddhy.net/2021/oneindex-wei-jing-tai/</id>
+    <published>2021-07-05T02:35:39.000Z</published>
+    <updated>2021-07-20T02:01:49.069Z</updated>
+    
+    <content type="html"><![CDATA[<p>去掉地址栏中的/?/  </p><a id="more"></a>  <p>在宝塔面板里添加站点的伪静态  </p><p>Apache转Nginx</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">if</span> (!-f <span class="variable">$request_filename</span>)&#123;</span><br><span class="line"><span class="attribute">set</span> <span class="variable">$rule_0</span> <span class="number">1</span><span class="variable">$rule_0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">if</span> (!-d <span class="variable">$request_filename</span>)&#123;</span><br><span class="line"><span class="attribute">set</span> <span class="variable">$rule_0</span> <span class="number">2</span><span class="variable">$rule_0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$rule_0</span> = <span class="string">"21"</span>)&#123;</span><br><span class="line"><span class="attribute">rewrite</span><span class="regexp"> ^/(.*)$</span> /index.php?/<span class="variable">$1</span> <span class="literal">last</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>方法来自 <a href="http://zwen.net/oneindexrewrite.html" target="_blank" rel="noopener">Zwen</a> ，整理书签时发现他的站点挂了，就去自己的宝塔后台翻到了这个代码，记录一下以备不时之需吧</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;去掉地址栏中的/?/  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Miku Weather</title>
+    <link href="https://gddhy.net/2021/miku-weather/"/>
+    <id>https://gddhy.net/2021/miku-weather/</id>
+    <published>2021-07-03T02:15:38.000Z</published>
+    <updated>2021-07-20T02:01:49.069Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个是一个Miku的桌面天气小部件  </p><a id="more"></a>  <h4 id="通用版"><a href="#通用版" class="headerlink" title="通用版"></a>通用版</h4><p>软件名：Miku Weather<br>包名：com.mikutart.mikuweather2<br>大小：3.85M<br>版本：3.9b<br>开发者：<a href="http://www.coolapk.com/u/717351" target="_blank" rel="noopener">Eggtart</a><br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/MikuWeather_3.9b.apk" target="_blank" rel="noopener">Miku Weather</a>  </p><p>本软件的图片资源取自 Sony Xperia feat. Hatsune Miku ROM 中的内置应用 Miku Weather，本软件自身是原版 Miku Weather 的仿制版本，并在功能上进行了扩展，使其支持全球天气显示。  </p><blockquote><p>Miku Weather (Eggtart Edition)内的关于信息</p></blockquote><h4 id="MIUI版"><a href="#MIUI版" class="headerlink" title="MIUI版"></a>MIUI版</h4><p>软件名：MikuWeather（MIUI）<br>包名：com.hy.mikuweather<br>大小：2.62M<br>版本：2.0<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/MikuWeatherMIUI_2.0.apk" target="_blank" rel="noopener">MIUI版</a>  </p><p>仅支持MIUI设备使用。</p><h4 id="360OS版"><a href="#360OS版" class="headerlink" title="360OS版"></a>360OS版</h4><p>这个是用在360手机上的主题插件，并非独立软件，使用需要有一定的动手能力。</p><p>下载分享文件 <code>360os_theme</code> 目录内的 <code>qikuTransparentSkin-miku.zip</code> 或 <code>qikuTransparentSkin雪miku.zip</code> 文件，替换360主题的默认文件</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="class"><span class="keyword">data</span>/<span class="keyword">data</span>/theme/qikuTransparentSkin.zip</span></span><br></pre></td></tr></table></figure><p>替换后重新添加天气插件即可。</p><p><a href="https://pan.baidu.com/s/1kWjZZ51" target="_blank" rel="noopener">度盘文件分享</a> （提取码:7463）</p><blockquote><p>基于360默认天气插件替换制作，仅支持奇酷/360运行360OS的手机</p></blockquote><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>当前页的公主天气插件，属于公主的非商业性二次创作，为粉丝/爱好者兴趣创作。</p><p>通用版未知原因，被酷安下架，为方便喜欢这个软件的用户正常下载在这里分享下。</p><p>小米不再接受个人开发者上传软件，MIUI专版不知道还能在小米应用商店挂多久，一并在这里分享下。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个是一个Miku的桌面天气小部件  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>易编辑</title>
+    <link href="https://gddhy.net/2021/yi-bian-ji/"/>
+    <id>https://gddhy.net/2021/yi-bian-ji/</id>
+    <published>2021-06-29T02:56:33.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>有谁还记得修改mrp必备的十六进制编辑器易编辑吗？风的影子曾将易编辑移植到安卓，在安卓上功能依旧强大  </p><a id="more"></a>  <p>图标：<img src="/img/preloader.gif" data-original="icon.png" alt="icon"><br>软件名：易编辑<br>包名：com.xl.HexEdit<br>大小：305.54K<br>版本：1.1<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/eHex.apk" target="_blank" rel="noopener">安卓易编辑</a><br>源代码：<a href="https://github.com/fengdeyingzi/CAPPProjects/tree/master/易编辑" target="_blank" rel="noopener">fengdeyingzi/CAPPProjects</a>  </p><p>Mrp版：<a href="http://mrp.gddhy.net/mrp/ehex2013b/" target="_blank" rel="noopener">易编辑</a><br>应用介绍：强大的十六进制编辑器，DIY必备工具  </p><p><a href="https://vmrp.gddhy.net/?f=https://cdn.jsdelivr.net/gh/gddhy/mrp-web/mrp-files/ehex2013b.mrp&title=%E6%98%93%E7%BC%96%E8%BE%91" target="_blank" rel="noopener">易编辑在线运行</a>  </p><p>易编辑是eleqian开发的十六进制编辑器，安卓版由风的影子，功能同mrp版</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有谁还记得修改mrp必备的十六进制编辑器易编辑吗？风的影子曾将易编辑移植到安卓，在安卓上功能依旧强大  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Magisk自定义更新通道</title>
+    <link href="https://gddhy.net/2021/magisk-zi-ding-yi-geng-xin-tong-dao/"/>
+    <id>https://gddhy.net/2021/magisk-zi-ding-yi-geng-xin-tong-dao/</id>
+    <published>2021-06-28T06:35:16.000Z</published>
+    <updated>2021-07-20T02:01:49.069Z</updated>
+    
+    <content type="html"><![CDATA[<p>直连Github国内网络环境有时会有点问题，所以利用Cloudflare Workers搭建了个magisk通道，利用workers直接获取magisk所需要的json文件  </p><a id="more"></a>  <h4 id="更新通道"><a href="#更新通道" class="headerlink" title="更新通道"></a>更新通道</h4><p>stable.json</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//magisk.gddhy.net/stable.json</span></span><br></pre></td></tr></table></figure><p>beta.json</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//magisk.gddhy.net/beta.json</span></span><br></pre></td></tr></table></figure><p>canary.json</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//magisk.gddhy.net/canary.json</span></span><br></pre></td></tr></table></figure><p>(点击链接窗口可以看到复制按钮)</p><h4 id="jsdelivr的cdn链接"><a href="#jsdelivr的cdn链接" class="headerlink" title="jsdelivr的cdn链接"></a>jsdelivr的cdn链接</h4><p>直接使用这几个效果或许会更好，毕竟有jsdelivr的cdn加速，会比workers去拉取github的文件再返回要快<br>stable.json</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>cdn.jsdelivr.net<span class="regexp">/gh/</span>topjohnwu<span class="regexp">/magisk-files/</span>stable.json</span><br></pre></td></tr></table></figure><p>beta.json</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>cdn.jsdelivr.net<span class="regexp">/gh/</span>topjohnwu<span class="regexp">/magisk-files/</span>beta.json</span><br></pre></td></tr></table></figure><p>canary.json</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>cdn.jsdelivr.net<span class="regexp">/gh/</span>topjohnwu<span class="regexp">/magisk-files/</span>canary.json</span><br></pre></td></tr></table></figure><hr><p>Magisk正式版从v22开始管理器、安装包、卸载包三合一，若需要从Recovery中刷入，只需要将 <code>apk</code> 后缀改为 <code>zip</code> 便可以直接刷入，若要卸载，将下载的apk文件改名为 <code>uninstall.zip</code> 刷入即可完成卸载</p><p><button onclick="down()">下载Magisk（stable）</button></p><script type="text/javascript">function down(){    fetch('https://cdn.jsdelivr.net/gh/topjohnwu/magisk-files@master/stable.json')      .then(response => response.json())      .then(data => {          window.location.href = data.magisk.link;      })      .catch(console.error)}</script><h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p>workers每天的请求次数有限制，若上面链接不能使用，可以自行搭建使用  </p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">gatherResponse</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; headers &#125; = response</span><br><span class="line">  <span class="keyword">const</span> contentType = headers.get(<span class="string">"content-type"</span>) || <span class="string">""</span></span><br><span class="line">  <span class="keyword">if</span> (contentType.includes(<span class="string">"application/json"</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.stringify(<span class="keyword">await</span> response.json())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (contentType.includes(<span class="string">"application/text"</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> response.text()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (contentType.includes(<span class="string">"text/html"</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> response.text()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> response.text()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">handleRequest</span>(<span class="params"><span class="keyword">type</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">type</span> == <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> Response.redirect(WEB_SITE, statusCode)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> init = &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">"content-type"</span>: <span class="string">"application/json;charset=UTF-8"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="keyword">type</span> == <span class="number">1</span> ? JSON_STABLE : ( <span class="keyword">type</span> == <span class="number">2</span> ? JSON_BETA : JSON_CANARY), init)</span><br><span class="line">  <span class="keyword">const</span> results = <span class="keyword">await</span> gatherResponse(response)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Response(results, init)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addEventListener(<span class="string">"fetch"</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> str = event.request.url</span><br><span class="line">  <span class="keyword">var</span> <span class="keyword">type</span> = <span class="number">0</span></span><br><span class="line">  <span class="keyword">if</span>(str.indexOf(<span class="string">"stable.json"</span>)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">type</span> = <span class="number">1</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(str.indexOf(<span class="string">"beta.json"</span>)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">type</span> = <span class="number">2</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(str.indexOf(<span class="string">"canary.json"</span>)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">type</span> = <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> event.respondWith(handleRequest(<span class="keyword">type</span>))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> WEB_SITE = <span class="string">'https://gddhy.net/2021/magisk-zi-ding-yi-geng-xin-tong-dao/'</span></span><br><span class="line"><span class="keyword">const</span> JSON_STABLE = <span class="string">'https://raw.githubusercontent.com/topjohnwu/magisk-files/master/stable.json'</span></span><br><span class="line"><span class="keyword">const</span> JSON_BETA = <span class="string">'https://raw.githubusercontent.com/topjohnwu/magisk-files/master/beta.json'</span></span><br><span class="line"><span class="keyword">const</span> JSON_CANARY = <span class="string">'https://raw.githubusercontent.com/topjohnwu/magisk-files/master/canary.json'</span></span><br><span class="line"><span class="keyword">const</span> statusCode = <span class="number">301</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;直连Github国内网络环境有时会有点问题，所以利用Cloudflare Workers搭建了个magisk通道，利用workers直接获取magisk所需要的json文件  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>安卓语言设置</title>
+    <link href="https://gddhy.net/2021/an-zhuo-yu-yan-she-zhi/"/>
+    <id>https://gddhy.net/2021/an-zhuo-yu-yan-she-zhi/</id>
+    <published>2021-06-27T12:38:16.000Z</published>
+    <updated>2021-07-20T02:01:49.109Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用这个软件可以随意设置手机系统语言，里面支持的语言特别多，你如果知道语言代码，也可以自定义语言，这个软件对于MIUI这种阉割了语言设置的ROM很有帮助  </p><a id="more"></a>  <p>图标：<img src="/img/preloader.gif" data-original="icon.png" alt="icon"><br>软件名：语言设置<br>包名：set.lang.pro<br>大小：2.40M<br>版本：6.5.0<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/LanguageSetting.apk" target="_blank" rel="noopener">直接下载</a> | <a href="https://m.shouji.com.cn/mip/down/1551079.html" target="_blank" rel="noopener">手机乐园下载</a>  </p><p>（此软件已被酷安下架，特地分享下）</p><p>软件需要root或adb的授权才能使用，附一条adb授权命令，软件内有帮助使用时会提示</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm grant set.lang.pro android.permission.CHANGE_CONFIGURATION</span><br></pre></td></tr></table></figure><p>大陆地区的手机将语言改其他地区的简体中文有惊喜，比如中国香港、新加坡，可以获得部分软件无广告的效果  </p><p>这个软件是看到 <a href="https://m.bilibili.com/video/BV1S54y1H7h2" target="_blank" rel="noopener">b站up主Finley凡的视频BV1S54y1H7h2</a> 时想起来的，去找这个软件时发现已被酷安下架，想了解效果的可以看一下这个视频</p><p>改语言并非所有软件都有效果，也有些弊端，软件不在当前语言地区提供服务的话会软件功能无法使用</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用这个软件可以随意设置手机系统语言，里面支持的语言特别多，你如果知道语言代码，也可以自定义语言，这个软件对于MIUI这种阉割了语言设置的ROM很有帮助  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>360健康卫士</title>
+    <link href="https://gddhy.net/2021/360-jian-kang-wei-shi/"/>
+    <id>https://gddhy.net/2021/360-jian-kang-wei-shi/</id>
+    <published>2021-06-26T14:49:48.000Z</published>
+    <updated>2021-07-20T02:01:49.069Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在 屏幕使用时间/数字健康 已经是各家手机的标配了，几年前这个还是单独的手机买点，下面这个健康卫士预装在360与酷派合作的奇酷手机上  </p><a id="more"></a>  <p>图标：<img src="/img/preloader.gif" data-original="icon.png" alt="icon"><br>软件名：健康卫士<br>包名：com.qiku.healthguard<br>大小：2.54M<br>版本：0.4.16.16_VER_2016.11.22_17:45:20<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/360healthguard.apk" target="_blank" rel="noopener">360健康卫士</a>  </p><p>软件功能：统计手机使用时长、软件使用次数还有健康提醒  </p><p>软件现在看起来没什么亮点（现在各家标配的功能），不过软件干净的不像360系的软件，软件已经解除应用安装限制，非奇酷手机/360手机都可以安装使用</p><p>安装时记得给自启动权限/使用情况访问权限，锁定后台</p><p>使用情况访问权限在 <code>系统设置</code> - <code>应用</code> - <code>特殊应用权限</code> - <code>使用情况访问权限</code> ，在MIUI上的位置 <code>系统设置</code> - <code>隐私保护</code> - <code>管理</code> - <code>特殊应用权限</code> - <code>使用情况访问权限</code>，找到 健康卫士 打开即可</p><p>小米魔改权限，若要使用提醒需额外的 <code>后台弹出界面</code> 权限</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在 屏幕使用时间/数字健康 已经是各家手机的标配了，几年前这个还是单独的手机买点，下面这个健康卫士预装在360与酷派合作的奇酷手机上  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安卓获取手电筒状态和开关手电筒</title>
+    <link href="https://gddhy.net/2021/an-zhuo-shou-dian-tong-cao-zuo/"/>
+    <id>https://gddhy.net/2021/an-zhuo-shou-dian-tong-cao-zuo/</id>
+    <published>2021-06-26T13:11:46.000Z</published>
+    <updated>2021-07-20T02:01:49.109Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个是之前为努比亚Mini5G制作的小程序屏蔽相机按键的手电筒部分，整理文件时发现的源码还留着，记录一下，软件在<a href="https://www.coolapk.com/feed/19687837?shareKey=ZDYzNDVmODMxZTFjNjBkNWMxMjM~&shareUid=778415&shareFrom=com.coolapk.market_11.2.5" target="_blank" rel="noopener">酷安获取</a>  </p><a id="more"></a>  <h4 id="开关手电筒"><a href="#开关手电筒" class="headerlink" title="开关手电筒"></a>开关手电筒</h4><p>调用闪光灯硬件先申请权限  </p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.FLASHLIGHT"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.CAMERA"</span>/&gt;</span></span><br></pre></td></tr></table></figure><p>开关手电筒</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> CameraManager manager;</span><br><span class="line"><span class="keyword">private</span> Camera camera;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</span><br><span class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span>(manager == <span class="keyword">null</span>)&#123;</span><br><span class="line">    manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">openFlash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">      <span class="keyword">if</span> (manager != <span class="keyword">null</span>) &#123;</span><br><span class="line">        manager.setTorchMode(<span class="string">"0"</span>, <span class="keyword">true</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      camera = Camera.open();</span><br><span class="line">      Camera.Parameters parameters = camera.getParameters();</span><br><span class="line">      parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);</span><br><span class="line">      camera.setParameters(parameters);</span><br><span class="line">      camera.startPreview();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">closeFlash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (manager == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      manager.setTorchMode(<span class="string">"0"</span>, <span class="keyword">false</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (camera == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    camera.stopPreview();</span><br><span class="line">    camera.release();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>上面开关手电筒部分用到了 <a href="https://github.com/Mason-Xu/JustAFlashLight" target="_blank" rel="noopener">Mason-Xu/JustAFlashLight</a> 项目的源码</p></blockquote><h4 id="获取手电筒状态"><a href="#获取手电筒状态" class="headerlink" title="获取手电筒状态"></a>获取手电筒状态</h4><p>接上面代码，用下面这个可以在回调中获取手电筒状态</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manager.registerTorchCallback(torchCallback, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure><p>获取到手电筒状态进行开启关闭操作</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> CameraManager.TorchCallback torchCallback = <span class="keyword">new</span> CameraManager.TorchCallback() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onTorchModeChanged</span><span class="params">( String cameraId, <span class="keyword">boolean</span> enabled)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onTorchModeChanged(cameraId, enabled);</span><br><span class="line">    manager.unregisterTorchCallback(torchCallback);</span><br><span class="line">    <span class="keyword">if</span>(!enabled)&#123;</span><br><span class="line">      <span class="comment">//手电筒状态关闭，执行开启</span></span><br><span class="line">      openFlash();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//手电筒状态开启，执行关闭</span></span><br><span class="line">      closeFlash();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>.onDestroy();</span><br><span class="line">  <span class="keyword">if</span>(manager != <span class="keyword">null</span> &amp;&amp; torchCallback != <span class="keyword">null</span>)&#123;</span><br><span class="line">    manager.unregisterTorchCallback(torchCallback);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>获取到手电筒状态直接操作手电筒有时会闪烁直接关闭，经测试可以用下面代码解决</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manager.unregisterTorchCallback(torchCallback);</span><br></pre></td></tr></table></figure><blockquote><p>获取手电筒状态，方法来自 <a href="https://www.jianshu.com/p/09e2ce731ed0" target="_blank" rel="noopener">android 9.0 获取手电筒状态以及打开/关闭手电筒</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个是之前为努比亚Mini5G制作的小程序屏蔽相机按键的手电筒部分，整理文件时发现的源码还留着，记录一下，软件在&lt;a href=&quot;https://www.coolapk.com/feed/19687837?shareKey=ZDYzNDVmODMxZTFjNjBkNWMxMjM~&amp;shareUid=778415&amp;shareFrom=com.coolapk.market_11.2.5&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;酷安获取&lt;/a&gt;  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>两个VR程序-初音ミク-GUMI</title>
+    <link href="https://gddhy.net/2021/liang-ge-vr-cheng-xu/"/>
+    <id>https://gddhy.net/2021/liang-ge-vr-cheng-xu/</id>
+    <published>2021-06-21T10:47:05.000Z</published>
+    <updated>2021-07-20T02:01:49.105Z</updated>
+    
+    <content type="html"><![CDATA[<p>两个VR看MMD的软件，很早前暴风魔镜APP里下载安装的，这个并不需要多好的VR设备，纸盒VR也可以，只是VR观看MMD，并不需要交互  </p><a id="more"></a>  <p>能在国内暴风魔镜上架，这只是正常向的MMD，其他的不要多想  </p><p>图标：<img src="/img/preloader.gif" data-original="miku.png" alt="icon"><br>软件名：[dive]WAVEFILE_初音ミク fullver.<br>包名：com.mypaceengine.mmdtest<br>大小：49.10M<br>下载：<a href="https://pan.gddhy.net/VR/[dive]WAVEFILE_%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF%20fullver._com.mypaceengine.mmdtest.apk" target="_blank" rel="noopener">获取apk</a>  </p><p>图标：<img src="/img/preloader.gif" data-original="gumi.png" alt="icon"><br>软件名：[Cardboard]OtsukimiRecital_GUMI<br>包名：com.mypaceengine.mmdtest4<br>大小：39.78M<br>下载：<a href="https://pan.gddhy.net/VR/[Cardboard]OtsukimiRecital_GUMI_com.mypaceengine.mmdtest4.apk" target="_blank" rel="noopener">获取apk</a>  </p><p>网盘下载：<a href="https://pan.baidu.com/s/1swm9X3z5pOjqWekd87sh8Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1swm9X3z5pOjqWekd87sh8Q</a> 提取码:011j<br>文件站：<a href="https://pan.gddhy.net/VR/" target="_blank" rel="noopener">https://pan.gddhy.net/VR</a>  </p><p>看软件包名是一个公司出的测试程序（mmdtest）？可能软件不止这两个，不过暴风魔镜只有上架这两个应用</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;两个VR看MMD的软件，很早前暴风魔镜APP里下载安装的，这个并不需要多好的VR设备，纸盒VR也可以，只是VR观看MMD，并不需要交互  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>两个Miku桌面小部件</title>
+    <link href="https://gddhy.net/2021/liang-ge-miku-zhuo-mian-xiao-bu-jian/"/>
+    <id>https://gddhy.net/2021/liang-ge-miku-zhuo-mian-xiao-bu-jian/</id>
+    <published>2021-06-21T08:51:29.000Z</published>
+    <updated>2021-07-20T02:01:49.105Z</updated>
+    
+    <content type="html"><![CDATA[<p>这两个桌面小部件是很早前在酷安下载的，现在也已经下架了，放博客里分享下，分别是电量小部件和时间小部件  </p><a id="more"></a>  <p>图标：<img src="/img/preloader.gif" data-original="https://cdn.jsdelivr.net/gh/gddhy/blog-res@master/apk/miku_widget/mikulaboplut.png" alt="icon"><br>软件名：電池残量表示ウィジェットver.初音ミク<br>包名：batterywidget.mikuapp.mikulaboplut<br>大小：1.77M<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/miku_widget/mikulaboplut.apk" target="_blank" rel="noopener">获取apk</a>  </p><p>图标：<img src="/img/preloader.gif" data-original="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/miku_widget/mikulabo.png" alt="icon"><br>软件名：初音ミク時計ウィジェット.千本桜<br>包名：analogclockwidget.mikuapp.mikulabo<br>大小：1.77M<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/miku_widget/mikulabo.apk" target="_blank" rel="noopener">获取apk</a>  </p><p>桌面小部件数据若想及时更新，需要保证软件后台运行，记得锁定后台和允许开机自启动</p><p>这个时钟插件在智器Z1手表上表现不错</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这两个桌面小部件是很早前在酷安下载的，现在也已经下架了，放博客里分享下，分别是电量小部件和时间小部件  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多个Provider配置</title>
+    <link href="https://gddhy.net/2021/duo-ge-provider-pei-zhi/"/>
+    <id>https://gddhy.net/2021/duo-ge-provider-pei-zhi/</id>
+    <published>2021-06-21T00:12:35.000Z</published>
+    <updated>2021-07-20T02:01:49.109Z</updated>
+    
+    <content type="html"><![CDATA[<p>程序中引用第三方带有FileProvider的SDK后，程序中再定义FileProvider会有冲突报错，可以改为使用自定义FileProvider解决  </p><a id="more"></a>  <p>程序中的FileProvider改为自定义FileProvider</p><p>在Manifest中引用，关于file_paths可以<a href="/2021/an-zhuo-tong-guo-uri-fen-xiang-wen-jian/">看这里</a></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">provider</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:name</span>=<span class="string">"net.gddhy.MyFileProvider"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:authorities</span>=<span class="string">"$&#123;applicationId&#125;.FileProvider"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:exported</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">provider</span>&gt;</span></span><br></pre></td></tr></table></figure><p>自定义类继承FileProvider</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> net.gddhy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFileProvider</span> <span class="keyword">extends</span> <span class="title">androidx</span>.<span class="title">core</span>.<span class="title">content</span>.<span class="title">FileProvider</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用时通过自定义的调用</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = MyFileProvider.getUriForFile(context, context.getPackageName()+<span class="string">".FileProvider"</span>, file);</span><br></pre></td></tr></table></figure><blockquote><p>方法来自<a href="https://www.jianshu.com/p/6f5b7b239a44" target="_blank" rel="noopener">解决多个provider配置问题 - GRock</a> 中的方案二</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;程序中引用第三方带有FileProvider的SDK后，程序中再定义FileProvider会有冲突报错，可以改为使用自定义FileProvider解决  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>老软件-单机斗地主</title>
+    <link href="https://gddhy.net/2021/lao-ruan-jian-dan-ji-dou-di-zhu/"/>
+    <id>https://gddhy.net/2021/lao-ruan-jian-dan-ji-dou-di-zhu/</id>
+    <published>2021-06-14T05:57:29.000Z</published>
+    <updated>2021-07-20T02:01:49.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>分享一个老软件，单机斗地主，软件体积比现在软件商店里的斗地主游戏小很多，只有核心功能，没在线那些乱七八糟的功能  </p><a id="more"></a>  <p>图标：<img src="/img/preloader.gif" data-original="ic_launcher.png" alt="icon"><br>软件名：单机斗地主<br>包名：com.june.game.doudizhu<br>大小：3.16M<br>版本：2.2.5<br>下载：<a href="https://cdn.jsdelivr.net/gh/gddhy/blog-res/apk/doudizhu.apk" target="_blank" rel="noopener">斗地主2.2.5</a>  </p><p>这个软件也是安卓2.x/4.x时候留下来的老版本，功能就同软件名称一样，单机版斗地主，可以局域网和朋友联机玩，在线功能没有</p><p>软件其实带了友盟的广告插件，不过版本久远，广告插件以及失效不能正常加载（软件里面只留了精品应用这个广告平台入口，不手动点击也不会触发，开发者算是很良心了，就算接了广告也不影响正常功能</p><p>想要玩纯粹的斗地主也可以试试这个，<a href="https://vmrp.gddhy.net/?f=https://cdn.jsdelivr.net/gh/gddhy/mrp-web/mrp-files/390012_240320_gtmddz.mrp&title=%E6%96%97%E5%9C%B0%E4%B8%BB" target="_blank" rel="noopener">斗地主Mrp版</a>，和单机斗地主apk一样，这个是十余年前功能机平台的游戏</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;分享一个老软件，单机斗地主，软件体积比现在软件商店里的斗地主游戏小很多，只有核心功能，没在线那些乱七八糟的功能  &lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="软件分享" scheme="https://gddhy.net/tags/%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/"/>
+    
+  </entry>
+  
+</feed>
