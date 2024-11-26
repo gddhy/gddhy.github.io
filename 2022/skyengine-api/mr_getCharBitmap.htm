@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_getCharBitmap</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>const char 
+      *mr_getCharBitmap(uint16 ch, uint16 fontSize, int *width, int 
+      *height)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>获取字符点整。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>ch</I></FONT></TD>
+      <TD>
+        <P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><FONT face=Verdana><FONT 
+        size=2><SPAN lang=EN-US 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt">Unicode</SPAN><SPAN 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt">码，若<SPAN 
+        lang=EN-US>CPU</SPAN>是<SPAN lang=EN-US>little endian</SPAN>，则该<SPAN 
+        lang=EN-US>Unicode</SPAN>码是<SPAN lang=EN-US>little 
+        endian</SPAN>，比如“<SPAN lang=EN-US>1</SPAN>”为<SPAN 
+        lang=EN-US>0x0031<O:P></O:P></SPAN></SPAN></FONT></FONT></P><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'"><FONT 
+        face=Verdana><FONT size=2>若<SPAN lang=EN-US>CPU</SPAN>是<SPAN 
+        lang=EN-US>big endian</SPAN>，则该<SPAN lang=EN-US>Unicode</SPAN>码是<SPAN 
+        lang=EN-US>big endian</SPAN>，比如“<SPAN lang=EN-US>1</SPAN>”为<SPAN 
+        lang=EN-US>0x0031</SPAN></FONT></FONT></SPAN></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>fontSize</EM></FONT></TD>
+      <TD>
+        <P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt"><FONT 
+        face=Verdana><FONT size=2>字体大小，可能的值是<SPAN lang=EN-US><SPAN 
+        style="mso-spacerun: yes">&nbsp;&nbsp; 
+        </SPAN></SPAN></FONT></FONT></SPAN></P>
+        <P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt"><FONT 
+        face=Verdana><FONT size=2><SPAN lang=EN-US><SPAN 
+        style="mso-spacerun: yes"></SPAN></SPAN></FONT></FONT></SPAN><SPAN 
+        lang=EN-US style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt"><FONT 
+        face=Verdana><FONT 
+        size=2>MR_FONT_SMALL,<O:P></O:P></FONT></FONT></SPAN></P>
+        <P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt"><FONT 
+        face=Verdana><FONT 
+        size=2>MR_FONT_MEDIUM,<O:P></O:P></FONT></FONT></SPAN></P>
+        <P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US 
+        style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt"><FONT 
+        face=Verdana><FONT 
+        size=2>MR_FONT_BIG<O:P></O:P></FONT></FONT></SPAN></P><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'"><FONT 
+        face=Verdana size=2>如果手机平台不支持多种字体，可以合并一些字体，具体策略是：若支持两种字体，将<SPAN 
+        lang=EN-US>MR_FONT_MEDIUM</SPAN>、<SPAN lang=EN-US><SPAN 
+        style="mso-spacerun: yes">&nbsp;&nbsp; 
+        </SPAN>MR_FONT_BIG</SPAN>合并；若支持一种字体，将所有字体合并。</FONT></SPAN></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>width, height</EM></FONT></TD>
+      <TD><FONT size=2>返回的字符的宽和高</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>放回字符的点整的起始地址，如果失败返回NULL。 
+当字库里没有该字体的点阵信息是，希望不要返回失败，建议返回一个”口”这样的字体信息。</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>获取unicode码ch指向的字体的点阵信息，并告之该字体的宽和高，获取到的点阵信息每一个bit表示字体的一个象素。目前的版本字体每行的象素都是以紧凑的方式排布，即不按字节对齐的方式。<BR><BR>注：若字库中的字体每行的象素必须按字节对齐，也就是说如果一个字体宽为12，则需要用两个字节来表示该信息，第二个字节的后四个bit为0，从第三个字节开始才表示下一行的点阵数据。则需要特别编译特殊的版本。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>&nbsp;</BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
