@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地服务连接助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .container {
+            background: rgba(16, 22, 36, 0.85);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+        }
+        
+        header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #a0b3c6;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .status-container {
+            margin: 40px 0;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .status-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .target-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .target-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 201, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #00c9ff;
+        }
+        
+        .target-url {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #92fe9d;
+            word-break: break-all;
+            text-align: left;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .wifi-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        
+        .wifi-loader .circle {
+            position: absolute;
+            border: 8px solid transparent;
+            border-top-color: #00c9ff;
+            border-radius: 50%;
+            animation: wifi 1.5s infinite ease-in-out;
+        }
+        
+        .wifi-loader .circle:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 0;
+            left: 0;
+            animation-delay: 0.1s;
+            opacity: 0.2;
+        }
+        
+        .wifi-loader .circle:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 10px;
+            left: 10px;
+            animation-delay: 0.2s;
+            opacity: 0.4;
+        }
+        
+        .wifi-loader .circle:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 20px;
+            left: 20px;
+            animation-delay: 0.3s;
+            opacity: 0.6;
+        }
+        
+        .wifi-loader .circle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 30px;
+            left: 30px;
+            animation-delay: 0.4s;
+            opacity: 0.8;
+        }
+        
+        .wifi-loader .dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #00c9ff;
+            border-radius: 50%;
+            top: 50px;
+            left: 50px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .status-text {
+            font-size: 1.4rem;
+            margin-top: 25px;
+            font-weight: 500;
+            color: #e0f7ff;
+        }
+        
+        .status-detail {
+            font-size: 1.1rem;
+            color: #a0b3c6;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .success {
+            color: #92fe9d;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: shake 0.5s;
+        }
+        
+        .warning {
+            color: #ffd166;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #00c9ff, #00a8ff);
+            border: none;
+            color: #0f2027;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 220px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(90deg, #00a8ff, #0097e6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00c9ff;
+            color: #00c9ff;
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 201, 255, 0.1);
+        }
+        
+        .btn-success {
+            background: linear-gradient(90deg, #92fe9d, #00d2a0);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(90deg, #ffd166, #ff9e44);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .instructions {
+            margin-top: 35px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            text-align: left;
+            border-left: 3px solid #00c9ff;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 20px;
+            color: #00c9ff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .instructions li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.7;
+            color: #cbd7e4;
+        }
+        
+        .instructions li::before {
+            content: "▹";
+            color: #92fe9d;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+        
+        .browser-compatibility {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .browser {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .browser i {
+            color: #00c9ff;
+        }
+        
+        .browser-compatible {
+            color: #92fe9d;
+        }
+        
+        .browser-limited {
+            color: #ffd166;
+        }
+        
+        @keyframes wifi {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        
+        @media (max-width: 700px) {
+            .container {
+                padding: 25px 20px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .status-card {
+                padding: 20px;
+            }
+            
+            .target-url {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                min-width: 100%;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-network-wired"></i> 本地服务连接助手</h1>
+            <p class="subtitle">安全连接您的本地网络服务 - 专为解决HTTPS环境下的HTTP服务访问问题设计</p>
+        </header>
+        
+        <div class="status-container">
+            <div class="status-card">
+                <div class="target-info">
+                    <div class="target-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="target-url">http://192.168.0.1:2333</div>
+                </div>
+                
+                <div id="loading" class="loading">
+                    <div class="wifi-loader">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="status-text">正在检测本地服务状态...</div>
+                    <div class="status-detail">正在尝试安全连接方法，请稍候</div>
+                </div>
+                
+                <div id="success" class="hidden">
+                    <div class="success"><i class="fas fa-check-circle"></i></div>
+                    <div class="status-text">服务连接成功！</div>
+                    <div class="status-detail">正在自动跳转到本地服务页面</div>
+                </div>
+                
+                <div id="error" class="hidden">
+                    <div class="error"><i class="fas fa-times-circle"></i></div>
+                    <div class="status-text">无法连接到本地服务</div>
+                    <div class="status-detail">请检查网络连接或服务状态</div>
+                    <div class="btn-group">
+                        <button id="retryBtn" class="btn">
+                            <i class="fas fa-sync-alt"></i> 重新检测
+                        </button>
+                        <button id="manualHttpBtn" class="btn btn-secondary">
+                            <i class="fas fa-plug"></i> 强制HTTP连接
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="httpsWarning" class="hidden">
+                    <div class="warning"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="status-text">安全协议限制</div>
+                    <div class="status-detail">浏览器阻止了从HTTPS到HTTP的自动跳转</div>
+                    <div class="btn-group">
+                        <button id="forceRedirectBtn" class="btn btn-warning">
+                            <i class="fas fa-bolt"></i> 强制跳转尝试
+                        </button>
+                        <button id="manualRedirectBtn" class="btn btn-success">
+                            <i class="fas fa-external-link-alt"></i> 手动访问服务
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> 国内浏览器使用指南</h3>
+            <ul>
+                <li><strong>360浏览器/QQ浏览器</strong>：点击地址栏右侧的"盾牌"图标，选择"允许加载不安全内容"</li>
+                <li><strong>UC浏览器</strong>：在设置中找到"安全设置"，关闭"安全网址检测"功能</li>
+                <li><strong>百度浏览器</strong>：手动访问时，点击"高级"→"继续访问(不安全)"</li>
+                <li><strong>微信内置浏览器</strong>：无法直接访问HTTP链接，请复制链接到系统浏览器打开</li>
+                <li>如果遇到安全警告，请选择"高级选项"→"继续访问"</li>
+                <li>确保您已连接到正确的本地网络（192.168.0.X）</li>
+            </ul>
+        </div>
+        
+        <div class="browser-compatibility">
+            <div class="browser browser-compatible">
+                <i class="fab fa-chrome"></i> Chrome 浏览器 - 完全兼容
+            </div>
+            <div class="browser browser-compatible">
+                <i class="fab fa-firefox"></i> Firefox 浏览器 - 完全兼容
+            </div>
+            <div class="browser browser-limited">
+                <i class="fab fa-edge"></i> Edge 浏览器 - 部分兼容
+            </div>
+            <div class="browser browser-limited">
+                <i class="fas fa-mobile-alt"></i> 国内浏览器 - 需特殊设置
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingEl = document.getElementById('loading');
+            const successEl = document.getElementById('success');
+            const errorEl = document.getElementById('error');
+            const httpsWarningEl = document.getElementById('httpsWarning');
+            const retryBtn = document.getElementById('retryBtn');
+            const forceRedirectBtn = document.getElementById('forceRedirectBtn');
+            const manualRedirectBtn = document.getElementById('manualRedirectBtn');
+            const manualHttpBtn = document.getElementById('manualHttpBtn');
+            
+            // 目标URL
+            const targetUrl = 'http://192.168.0.1:2333';
+            const isHttps = window.location.protocol === 'https:';
+            
+            // 初始检测
+            setTimeout(() => {
+                detectService();
+            }, 1500);
+            
+            function detectService() {
+                showLoading();
+                
+                // 如果是HTTPS环境，尝试直接跳转
+                if (isHttps) {
+                    attemptRedirect();
+                    return;
+                }
+                
+                // 在HTTP环境下尝试检测服务
+                checkServiceAvailability();
+            }
+            
+            function attemptRedirect() {
+                // 先显示警告
+                showHttpsWarning();
+                
+                // 设置超时检测是否跳转成功
+                const redirectTimeout = setTimeout(() => {
+                    // 如果3秒后还在当前页面，认为跳转失败
+                    if (document.visibilityState === 'visible') {
+                        showHttpsWarning();
+                    }
+                }, 3000);
+                
+                // 尝试跳转
+                try {
+                    window.location.href = targetUrl;
+                } catch (e) {
+                    console.error("跳转失败:", e);
+                    showHttpsWarning();
+                }
+            }
+            
+            function checkServiceAvailability() {
+                // 使用Image对象检测服务可用性
+                const img = new Image();
+                let timedOut = false;
+                
+                // 设置超时（4秒）
+                const timeout = setTimeout(() => {
+                    timedOut = true;
+                    showError();
+                }, 4000);
+                
+                img.onload = function() {
+                    if (!timedOut) {
+                        clearTimeout(timeout);
+                        showSuccess();
+                        // 延迟跳转
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 1500);
+                    }
+                };
+                
+                img.onerror = function() {
+                    if (!timedOut) {
+                        clearTimeout(timeout);
+                        showError();
+                    }
+                };
+                
+                // 添加随机参数避免缓存
+                img.src = targetUrl + '?t=' + new Date().getTime();
+            }
+            
+            function showLoading() {
+                loadingEl.classList.remove('hidden');
+                successEl.classList.add('hidden');
+                errorEl.classList.add('hidden');
+                httpsWarningEl.classList.add('hidden');
+            }
+            
+            function showSuccess() {
+                loadingEl.classList.add('hidden');
+                successEl.classList.remove('hidden');
+                errorEl.classList.add('hidden');
+                httpsWarningEl.classList.add('hidden');
+            }
+            
+            function showError() {
+                loadingEl.classList.add('hidden');
+                successEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+                httpsWarningEl.classList.add('hidden');
+            }
+            
+            function showHttpsWarning() {
+                loadingEl.classList.add('hidden');
+                successEl.classList.add('hidden');
+                errorEl.classList.add('hidden');
+                httpsWarningEl.classList.remove('hidden');
+            }
+            
+            // 事件监听
+            retryBtn.addEventListener('click', function() {
+                detectService();
+            });
+            
+            forceRedirectBtn.addEventListener('click', function() {
+                showLoading();
+                // 再次尝试跳转
+                attemptRedirect();
+            });
+            
+            manualRedirectBtn.addEventListener('click', function() {
+                // 在新标签页打开
+                window.open(targetUrl, '_blank');
+            });
+            
+            manualHttpBtn.addEventListener('click', function() {
+                // 直接跳转
+                window.location.href = targetUrl;
+            });
+        });
+    </script>
+</body>
+</html>
