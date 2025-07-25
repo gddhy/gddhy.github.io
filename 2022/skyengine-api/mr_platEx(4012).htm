@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(4012) - 电话本编辑</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      4012, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>修改，删除，添加电话本条目。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_SET_ENTRY_REQ数据结构</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_SET_ENTRY_REQ数据结构大小</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_PHB_SUCCESS&nbsp;&nbsp;&nbsp;(0+MR_PLAT_VALUE_BASE)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  请求已经发出<BR>MR_PHB_ERROR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp; 请求发送失败<BR>注：这个操作是一个异步的过程，操作的结构会通过mr_event的形式上送。<BR>具体看事件说明<A 
+  href="电话本接口.htm">电话本接口</A>。</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>T_MR_PHB_SET_ENTRY_REQ数据结构：<BR>typedef struct 
+  <BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;U16 
+  storage;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  //信息存储的位置，sim卡，还是手机<BR>&nbsp;&nbsp;&nbsp;&nbsp;U16 
+  index;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  //要修改的条目在列表中的索引（0开始），如果是0xfffff表示增加一个条目。<BR>&nbsp;&nbsp;&nbsp; T_MR_PHB_ENTRY 
+  entry;&nbsp; 
+  //具体的信息<BR>}T_MR_PHB_SET_ENTRY_REQ;<BR>注：当具体信息中的号码和名称为空的时候表示要删除index指向的那个条目。<BR>T_MR_PHB_ENTRY数据结构：<BR>typedef 
+  struct <BR>{<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;name[MR_PHB_MAX_NAME];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;number[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;homeNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;officeNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp; 
+  &nbsp;S8&nbsp;faxNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp; 
+  &nbsp;S8&nbsp;emailAddress[MR_PHB_MAX_NUMBER];<BR>}T_MR_PHB_ENTRY;<BR></P>
+  <P>电话本接口中对应的参数的定义：<BR>#define MR_PHB_MAX_NAME &nbsp;&nbsp;&nbsp;&nbsp;(36*2) 
+  //暂时定位24个字节,12个汉字.<BR>#define MR_PHB_MAX_NUMBER 
+  &nbsp;&nbsp;&nbsp;(48*2)//暂时定位可输入40个字节.40个数字<BR>#define 
+  MR_PHB_MAX_SEARCH_PATTERN &nbsp;(60*2)</P>
+  <P><BR></P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>#define ADD_NAME "addPHB"<BR>#define ADD_NUMEBER 
+  "56231023"<BR>T_MR_PHB_SET_ENTRY_REQ setReq = { 0 };<BR>T_MR_PHB_SET_ENTRY_RSP 
+  *setRsp = NULL;<BR>int32 len;<BR><BR>memset( &amp;setReq, 0 , sizeof ( 
+  T_MR_PHB_SET_ENTRY_REQ ) );<BR>str2wstr( (PCSTR)ADD_NUMEBER, 
+  (PWSTR)setReq.entry.number,(Sint32)MR_PHB_MAX_NUMBER );<BR>str2wstr( 
+  (PCSTR)ADD_NAME, (PWSTR)setReq.entry.name,(Sint32)MR_PHB_MAX_NAME 
+  );<BR>setReq.index = 
+  (U16)0xffff;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  //means add item in phone book.<BR>setReq.storage = 3;<BR>mrc_platEx(4012, 
+  (uint8*)&amp;setReq, sizeof ( T_MR_PHB_SET_ENTRY_REQ ), (uint8**)&amp;setRsp, 
+  &amp;len, NULL);<BR>&nbsp;</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
