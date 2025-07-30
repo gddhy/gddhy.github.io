@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>平台版本号规则</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT size=2 
+face="Verdana, Arial, Helvetica">&nbsp; 
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P style="MARGIN-RIGHT: 0px" dir=ltr><FONT 
+      color=#660033><B>平台版本号规则</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR SIZE=1 noShade>
+
+<P>为了区分不同的手机平台，相同平台内的不同芯片及我们移植包版本，我们使用了一个32位的版本号来标识。这个版本号是由多个十进制的数段来表示，各个数段的表示如下表(1表示低位)：</P>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>
+  <TABLE border=1 cellSpacing=0 cellPadding=5 width="87%">
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD><STRONG><FONT size=2>11以上（十进制位）</FONT></STRONG></TD>
+      <TD><FONT size=2><B>10（十进制位）</B></FONT></TD>
+      <TD><FONT size=2><B>9 （十进制位）</B></FONT></TD>
+      <TD><FONT size=2><B>8-7（十进制位）</B></FONT></TD>
+      <TD><FONT size=2><B>6-5&nbsp;（十进制位）</B></FONT></TD>
+      <TD><FONT size=2><B>4-1 （十进制位）</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD><FONT size=2>未使用</FONT></TD>
+      <TD><FONT size=2>预留</FONT></TD>
+      <TD><FONT size=2>新旧规则<I></I></FONT></TD>
+      <TD><FONT size=2>平台编码</FONT></TD>
+      <TD><FONT size=2>平台内版本号</FONT></TD>
+      <TD><FONT size=2>基线版本号</FONT></TD></TR></TBODY></TABLE></P>
+  <P>&nbsp;</P></BLOCKQUOTE></FONT>
+<H5>新旧规则</H5><FONT size=2 face="Verdana, Arial, Helvetica">
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>平台版本号的规则在2008年1月18号进行了修定，之前的为老的版本，之后的为新的版本，目前市场上的机子主要还是新版本。</P>
+  <UL>
+    <LI>0&nbsp;—— 表示老的版本 
+    <LI>1 —— 表示新版本</LI></UL></BLOCKQUOTE></FONT>
+<H5>平台编码</H5><FONT size=2 face="Verdana, Arial, Helvetica">
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>由于我们的虚拟会在不同的手机平台上进行移植，这里给不同的手机平台分配了不同的ID以做标识。</P>
+  <P>
+  <TABLE style="WIDTH: 300px; HEIGHT: 92px" border=1 cellSpacing=0 cellPadding=5 
+  width=300>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="60%"><FONT size=2><B>平台</B></FONT></TD>
+      <TD width="40%"><FONT size=2><B>平台编码</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MTK</I></FONT></TD>
+      <TD width="40%"><FONT size=2>01</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>SPREADTRUM</I></FONT></TD>
+      <TD width="40%"><FONT size=2>02</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>NXP</I></FONT></TD>
+      <TD width="40%"><FONT size=2>03</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>WinCE</I></FONT></TD>
+      <TD width="40%"><FONT size=2>04</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>Anyka</I></FONT></TD>
+      <TD width="40%"><FONT size=2>05</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>ADI</I></FONT></TD>
+      <TD width="40%"><FONT size=2>06</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>TI</I></FONT></TD>
+      <TD width="40%"><FONT size=2>07</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MSTAR</I></FONT></TD>
+      <TD width="40%"><FONT size=2>08</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>VIA</I></FONT></TD>
+      <TD width="40%"><FONT size=2>09</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>Symbian</I></FONT></TD>
+      <TD width="40%"><FONT size=2>10</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>未定义</I></FONT></TD>
+      <TD width="40%"><FONT size=2>13</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>linux</I></FONT></TD>
+      <TD width="40%"><FONT size=2>12</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>BREW</I></FONT></TD>
+      <TD width="40%"><FONT size=2>13</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>coolsand</I></FONT></TD>
+      <TD width="40%"><FONT 
+size=2>14</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE></FONT>
+<H5>平台内版本</H5><FONT size=2 face="Verdana, Arial, Helvetica">
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>同一个平台内通常会有多中芯片套系，为了区分这些芯片为平台内的每个芯片定义一个ID,这里称做平台内版本。</P>
+  <P>
+  <TABLE style="WIDTH: 300px; HEIGHT: 92px" border=1 cellSpacing=0 cellPadding=5 
+  width=300>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="60%"><FONT size=2><B>MTK平台芯片套系</B></FONT></TD>
+      <TD width="40%"><FONT size=2><B>平台内标识</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><EM><FONT size=2>MT6219</FONT></EM><FONT 
+        size=2><I></I></FONT></TD>
+      <TD width="40%"><FONT size=2>1</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT 
+        size=2><I>MT6223P<BR>MT6223<BR>MT6223P_S00</I></FONT></TD>
+      <TD width="40%"><FONT size=2>2</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6225</I></FONT></TD>
+      <TD width="40%"><FONT size=2>3</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT 
+      size=2><I>MT6226<BR>MT6226M<BR>MT6226D</I></FONT></TD>
+      <TD width="40%"><FONT size=2>4</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6228</I></FONT></TD>
+      <TD width="40%"><FONT size=2>5</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6230</I></FONT></TD>
+      <TD width="40%"><FONT size=2>6</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6227<BR>MT6227D</I></FONT></TD>
+      <TD width="40%"><FONT size=2>7</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6235</I></FONT></TD>
+      <TD width="40%"><FONT size=2>8</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6229</I></FONT></TD>
+      <TD width="40%"><FONT size=2>9</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><EM><FONT size=2>MT6253B</FONT></EM></TD>
+      <TD width="40%"><FONT size=2>10</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6238</I></FONT></TD>
+      <TD width="40%"><FONT size=2>11</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6239</I></FONT></TD>
+      <TD width="40%"><FONT size=2>12</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>MT6268</I></FONT></TD>
+      <TD width="40%"><FONT size=2>13</FONT></TD></TR></TBODY></TABLE></P>
+  <P>
+  <TABLE style="WIDTH: 300px; HEIGHT: 92px" border=1 cellSpacing=0 cellPadding=5 
+  width=300>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="60%"><FONT size=2><B>展讯平台芯片套系</B></FONT></TD>
+      <TD width="40%"><STRONG><FONT size=2>平台内标识</FONT></STRONG></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><EM><FONT size=2>6600d</FONT></EM><FONT 
+        size=2><I></I></FONT></TD>
+      <TD width="40%"><FONT size=2>1</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>6600m</I></FONT></TD>
+      <TD width="40%"><FONT size=2>2</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>rocky</I></FONT></TD>
+      <TD width="40%"><FONT size=2>3</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>nile</I></FONT></TD>
+      <TD width="40%"><FONT size=2>4</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>6600h</I></FONT></TD>
+      <TD width="40%"><FONT size=2>5</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>mocor</I></FONT></TD>
+      <TD width="40%"><FONT size=2>6</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>6600L</I></FONT></TD>
+      <TD width="40%"><FONT size=2>7</FONT></TD></TR></TBODY></TABLE></P>
+  <P>
+  <TABLE style="WIDTH: 300px; HEIGHT: 92px" border=1 cellSpacing=0 cellPadding=5 
+  width=300>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="60%"><FONT size=2><B>MSTAR平台芯片套系</B></FONT></TD>
+      <TD width="40%"><STRONG><FONT size=2>平台内标识</FONT></STRONG></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><EM><FONT size=2>8528</FONT></EM></TD>
+      <TD width="40%"><FONT size=2>1</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>8535</I></FONT></TD>
+      <TD width="40%"><FONT size=2>2</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="60%"><FONT size=2><I>8538</I></FONT></TD>
+      <TD width="40%"><FONT 
+size=2>3</FONT></TD></TR></TBODY></TABLE></P></STRONG></BLOCKQUOTE>
+<P><STRONG>基线版本</STRONG></P>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>由于我们的移植层代码会由于不同的原因会不停的进行修改和变化，其中最主要的一个原因是移植层支持的功能在不停的增加，为了表示移植层在支持接口集上的差异我们启用了基线版本来表示。这个字段目前有4个十进制数表示，细分为这么3个部分：</P>
+  <UL>
+    <LI>第4位&nbsp;—— 1表示是双卡双带的机子，0表示不是 
+    <LI>2-3位 ——&nbsp; 这两位由平台组填写，直接和移植层支持的接口集匹配（接口版本号定义请参考<A href="接口跟踪表.htm">接口跟踪表</A>） 
+    <LI>第1位 —— 2表示不支持后台运行，其他值的意义未定义</LI></UL></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
