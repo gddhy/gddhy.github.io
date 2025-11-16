@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRP模拟器与资源下载中心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #2a5298;
+        }
+        
+        .tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .featured-card {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .featured-header {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .featured-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .featured-name {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2d3748;
+            font-weight: 700;
+        }
+        
+        .featured-desc {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #4a5568;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .featured-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4a6bff;
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+        
+        .featured-btn:hover {
+            background: #3a5be0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 107, 255, 0.6);
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 1.8rem;
+            margin: 30px 0 25px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            background: #4a6bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-name {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .card-desc {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .card-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #4a6bff;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .card-btn:hover {
+            background: #3a5be0;
+        }
+        
+        .website-card .card-btn {
+            background: #38a169;
+        }
+        
+        .website-card .card-btn:hover {
+            background: #2f855a;
+        }
+        
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .loader i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .error-message {
+            text-align: center;
+            padding: 40px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .featured-name {
+                font-size: 1.5rem;
+            }
+            
+            .featured-desc {
+                font-size: 1rem;
+            }
+            
+            .tab {
+                padding: 12px 20px;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MRP模拟器与资源下载中心</h1>
+            <p class="subtitle">下载MRP商店、模拟器，访问MRP资源网站，体验“曾经丰富”的MRP应用生态</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="store">MRP商店</div>
+            <div class="tab" data-tab="simulators">模拟器下载</div>
+            <div class="tab" data-tab="websites">MRP资源网站</div>
+        </div>
+        
+        <div id="store" class="tab-content active">
+            <div id="store-container">
+                <div class="loader">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    正在加载MRP商店信息...
+                </div>
+            </div>
+        </div>
+        
+        <div id="simulators" class="tab-content">
+            <div id="simulators-container">
+                <div class="loader">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    正在加载模拟器列表...
+                </div>
+            </div>
+        </div>
+        
+        <div id="websites" class="tab-content">
+            <div id="websites-container">
+                <div class="loader">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    正在加载MRP资源网站...
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>MRP应用中心 | 提供最新最全的MRP商店、模拟器和资源网站 | 网页由AI生成</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 选项卡切换功能
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+                    
+                    // 更新活动选项卡
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // 获取MRP商店和模拟器数据
+            const storeApiUrl = '/data/MrpStoreUpdate.json';
+            const websitesApiUrl = '/data/mrpweb.json';
+            
+            const storeContainer = document.getElementById('store-container');
+            const simulatorsContainer = document.getElementById('simulators-container');
+            const websitesContainer = document.getElementById('websites-container');
+            
+            // 获取MRP商店和模拟器数据
+            fetch(storeApiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应不正常');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 处理MRP商店数据
+                    storeContainer.innerHTML = '';
+                    
+                    const storeCard = document.createElement('div');
+                    storeCard.className = 'featured-card';
+                    
+                    storeCard.innerHTML = `
+                        <div class="featured-header">
+                            <i class="fas fa-store"></i> MRP商店
+                        </div>
+                        <div class="featured-body">
+                            <h3 class="featured-name">MRP商店</h3>
+                            <p class="featured-desc">${data.note.replace(/\n/g, '<br>')}</p>
+                            <a href="${data.link}" class="featured-btn">
+                                <i class="fas fa-download"></i> 下载MRP商店
+                            </a>
+                        </div>
+                    `;
+                    
+                    storeContainer.appendChild(storeCard);
+                    
+                    // 处理模拟器数据
+                    simulatorsContainer.innerHTML = '';
+                    
+                    if (!data.simulator || data.simulator.length === 0) {
+                        simulatorsContainer.innerHTML = `
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>未找到可用的模拟器</p>
+                            </div>
+                        `;
+                    } else {
+                        simulatorsContainer.innerHTML = '<h2 class="section-title">MRP模拟器</h2>';
+                        
+                        const grid = document.createElement('div');
+                        grid.className = 'cards-grid';
+                        
+                        data.simulator.forEach(simulator => {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+                            
+                            card.innerHTML = `
+                                <div class="card-header">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-name">${simulator.name}</h3>
+                                    <a href="${simulator.link}" class="card-btn" target="_blank">
+                                        <i class="fas fa-download"></i> 下载模拟器
+                                    </a>
+                                </div>
+                            `;
+                            
+                            grid.appendChild(card);
+                        });
+                        
+                        simulatorsContainer.appendChild(grid);
+                    }
+                })
+                .catch(error => {
+                    console.error('获取MRP商店数据失败:', error);
+                    storeContainer.innerHTML = simulatorsContainer.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>加载数据时出错: ${error.message}</p>
+                            <p>请检查网络连接后刷新页面重试</p>
+                        </div>
+                    `;
+                });
+            
+            // 获取MRP网站数据
+            fetch(websitesApiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应不正常');
+                    }
+                    return response.json();
+                })
+                .then(websites => {
+                    websitesContainer.innerHTML = '';
+                    
+                    if (!websites || websites.length === 0) {
+                        websitesContainer.innerHTML = `
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>未找到可用的MRP资源网站</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    websitesContainer.innerHTML = '<h2 class="section-title">MRP资源网站</h2>';
+                    
+                    const grid = document.createElement('div');
+                    grid.className = 'cards-grid';
+                    
+                    websites.forEach(website => {
+                        const card = document.createElement('div');
+                        card.className = 'card website-card';
+                        
+                        card.innerHTML = `
+                            <div class="card-header">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-name">${website.name}</h3>
+                                ${website.note ? `<p class="card-desc">${website.note}</p>` : ''}
+                                <a href="${website.link}" class="card-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> 访问网站
+                                </a>
+                            </div>
+                        `;
+                        
+                        grid.appendChild(card);
+                    });
+                    
+                    websitesContainer.appendChild(grid);
+                })
+                .catch(error => {
+                    console.error('获取MRP网站数据失败:', error);
+                    websitesContainer.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>加载MRP网站数据时出错: ${error.message}</p>
+                            <p>请检查网络连接后刷新页面重试</p>
+                        </div>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
