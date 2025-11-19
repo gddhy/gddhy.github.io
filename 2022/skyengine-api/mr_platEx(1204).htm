@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(1204) - 切换目录</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      1204, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>切换目录。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>目录字符串指针</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>目录字符串长度</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>返回的路径字串缓冲。（GB编码）（只在输入为“Y”获取当前的路径设置的时候有效）</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>返回的路径字串的长度。</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;失败<BR>MR_IGNORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  不支持该功能</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>功能：将SkyEngine的根目录切换至新目录。目录字符串如：”C:/App/”，第一个字符表示切换至的存储设备：（盘符不区分大小写，GB编码）<BR>A：&nbsp; 
+  普通用户不可见（不可操作）存储盘；<BR>B：&nbsp; 普通用户可操作存储盘（即可usb连接在PC上操作）；<BR>C：&nbsp; 
+  外插存储设备，如mmc，sd，t-flash等；<BR>D：&nbsp; 第二外插存储设备；<BR>Y：&nbsp; 
+  获取当前的路径设置，返回型如：”C:/App/”（即必须符合上述输入标准），gb编码；<BR>Z：&nbsp; 
+  返回应用刚启动时候的目录（后继子串参数无意义）；<BR>X：&nbsp; 
+  进入vm的根目录（后继子串参数无意义）。这个根目录必须放在用户不可见的，不能卸载的盘上。在这个根目录下可以保存一些设置信息，及收费信息等；<BR>D～W： 
+  保留。<BR>第二、第三字符为“:/”，第四字符起为该存储设备上的目录名。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/* mrp code*/</P>
+  <P>BOOL SwitchDisk(const char* strDisk)&nbsp; 
+  //strDisk为目录字符串,如"A:/","B:/"<BR>{<BR>&nbsp;&nbsp; &nbsp;int 
+  ret=MR_FAILED;<BR>&nbsp;&nbsp; &nbsp;unsigned char* 
+  output=NULL;<BR>&nbsp;&nbsp;&nbsp; int32 output_len=0;<BR>&nbsp;&nbsp;&nbsp; 
+  #ifdef WIN32<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+  FALSE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;#endif<BR>&nbsp; &nbsp; ret=mrc_platEx( 
+  1204, (uint8*)strDisk, mrc_strlen(strDisk), &amp;output, &amp;output_len, NULL 
+  );<BR>&nbsp;&nbsp;&nbsp; return ret;<BR>}</P>
+  <P>BOOL GetDir(char* strDir)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;int32 
+  ret=MR_FAILED;<BR>&nbsp;&nbsp;&nbsp; int32 len;<BR>&nbsp;&nbsp;&nbsp; unsigned 
+  char* pDir=NULL;<BR>&nbsp;&nbsp;&nbsp;&nbsp;#ifdef 
+  WIN32<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+  FALSE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;#endif<BR>&nbsp;&nbsp;&nbsp; ret 
+  =mrc_platEx( 1204, (uint8*)"Y", 1, &amp;pDir, &amp;len, NULL 
+  );<BR>&nbsp;&nbsp;&nbsp; mrc_memcpy( (void*)strDir, (void*)pDir, len 
+  );<BR>&nbsp;&nbsp;&nbsp; return ret;<BR>}</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

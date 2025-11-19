@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>电话本接口</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2>
+<P><FONT face=Arial size=2></FONT>&nbsp;</P>
+<P><FONT face=Arial size=2><FONT 
+size=3><STRONG>电话本事件说明：<BR></STRONG></FONT></FONT><FONT face=Arial size=2><FONT 
+size=3><STRONG><BR></STRONG></FONT>&nbsp;&nbsp;&nbsp;&nbsp;电话本的操作事件采用mr_event的形式通知上层应用，&nbsp;mr_event(p1,p2,p3)的三个参数的具体说明如下：<BR>&nbsp;&nbsp; 
+&nbsp;p1 = 14<BR>&nbsp;&nbsp;&nbsp; p2 =&nbsp; 
+0：添加条目<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1：读取条目/*未使用*/<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;2：修改条目<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3：删除条目<BR>&nbsp;&nbsp;&nbsp; 
+p3 =&nbsp;&nbsp;MR_FAILED 
+操作失败<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MR_SUCCESS 
+操作成功</FONT></P>
+<P><FONT size=2><BR><STRONG><FONT face=Arial 
+size=3>电话本</FONT></STRONG></FONT><FONT face=Arial size=2><A 
+name=_Toc211953446><SPAN style="FONT-FAMILY: 宋体"><STRONG><FONT face=Arial 
+size=3>宏值定义：</FONT></STRONG></SPAN></A><SPAN lang=EN-US 
+style="FONT-FAMILY: 宋体"><o:p></o:p></SPAN></P>
+<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt"><SPAN lang=EN-US><FONT 
+size=3><FONT face="Times New Roman"><SPAN 
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </SPAN>#define MR_PHB_SUCCESS <SPAN 
+style="mso-tab-count: 4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN><SPAN style="mso-spacerun: yes">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 
+</SPAN>(1000)<BR>&nbsp;&nbsp;&nbsp; </FONT></FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_ERROR <SPAN 
+style="mso-tab-count: 5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp; </SPAN>(1001)<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_READY <SPAN 
+style="mso-tab-count: 5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>(1002)<BR>&nbsp;&nbsp;&nbsp; <SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_NOT_SUPPORT&nbsp;<SPAN 
+style="mso-tab-count: 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;</SPAN>(1003)<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN 
+lang=EN-US><FONT face="Times New Roman" size=3>#define 
+MR_PHB_NOT_READY&nbsp;<SPAN 
+style="mso-tab-count: 4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;</SPAN>(1004)<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_NOT_FOUND&nbsp;<SPAN 
+style="mso-tab-count: 4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>(1005)<BR>&nbsp;&nbsp;&nbsp; 
+</FONT></SPAN><SPAN lang=EN-US><FONT face="Times New Roman" size=3>#define 
+MR_PHB_STORAGE_FULL&nbsp;<SPAN 
+style="mso-tab-count: 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>(1006) 
+<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_NUMBER_TOO_LONG&nbsp;<SPAN 
+style="mso-tab-count: 2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>(1007)<BR>&nbsp;&nbsp;&nbsp; 
+</FONT></SPAN><SPAN lang=EN-US><FONT face="Times New Roman" size=3>#define 
+MR_PHB_OUT_OF_INDEX&nbsp;<SPAN 
+style="mso-tab-count: 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</SPAN>(1008)<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_MAX_NAME&nbsp;<SPAN 
+style="mso-tab-count: 4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;</SPAN>(36*2) <BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_MAX_NUMBER&nbsp;<SPAN 
+style="mso-tab-count: 3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&nbsp;</SPAN>(48*2)<BR>&nbsp;&nbsp;&nbsp; </FONT></SPAN><SPAN lang=EN-US><FONT 
+face="Times New Roman" size=3>#define MR_PHB_MAX_SEARCH_PATTERN&nbsp;<SPAN 
+style="mso-tab-count: 1">&nbsp;&nbsp; 
+&nbsp;</SPAN>(60*2)</FONT></SPAN></P></FONT></SPAN>
+<P></FONT>&nbsp;</P></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
