@@ -1,0 +1,93 @@
+
+body{
+	width: 100%;
+	height: 100%;
+	color: white;
+	font-size: 2em;
+	background: #464646;
+}
+
+#page{
+	width: 960px;
+	margin: 25px auto;
+	padding: 15px 10px 5px 15px;
+	border-radius: 10px;
+	background: #464646;
+}
+
+#container{
+	width: 960px;
+	height: 960px;
+}
+
+#bg-container{
+	width: 100%;
+	height: 100%;
+}
+
+#show{
+	width: 100%;
+	position: relative;
+	top: -50%;
+	z-index: 20;
+	font-size: 2em;
+	text-align: center;
+}
+
+#sider{
+	margin-top: 50px;
+}
+
+div.box{
+	margin: 20px 0;
+}
+
+.button{
+	background: grey;
+	display: inline-block;
+	border-radius: 5px;
+	margin-right: 50px;
+	padding: 5px 10px;
+	cursor: pointer;
+	border: 1px outset white;
+}
+
+.button:hover{
+	border: 1px inset white;
+}
+
+#show-msg{
+	margin-right: 25px;
+	display: inline-block;
+}
+
+#show-goal{
+	margin-top: 25px;
+	display: inline-block;
+}
+
+#show-score{
+	margin-left: 25px;
+	display: inline-block;
+}
+
+#show-add{
+	display: inline-block;
+	margin-left: 5px;
+	color: yellow;
+}
+
+.star{
+	width: 96px;
+	height: 96px;
+	float: left;
+	box-sizing: border-box;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+footer{
+	display: black;
+	text-align: right;
+}
+
