@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>Java笔记 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 关于包 概念：在程序中是一种逻辑概念，在Windows中对应于文件夹（或目录）   包具有层次结构，不同包间用“.”分开，这种层次结构对应于文件夹的层次结构   关键字是package，在程序中定义包的语句只能出现一次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java笔记">
+<meta property="og:url" content="https://gddhy.github.io/2019/java-bi-ji/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="1. 关于包 概念：在程序中是一种逻辑概念，在Windows中对应于文件夹（或目录）   包具有层次结构，不同包间用“.”分开，这种层次结构对应于文件夹的层次结构   关键字是package，在程序中定义包的语句只能出现一次">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java笔记">
+<meta name="twitter:description" content="1. 关于包 概念：在程序中是一种逻辑概念，在Windows中对应于文件夹（或目录）   包具有层次结构，不同包间用“.”分开，这种层次结构对应于文件夹的层次结构   关键字是package，在程序中定义包的语句只能出现一次">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-java笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java笔记
+    </h1>
+  
+
+        
+        
+
+<a href="/2019/java-bi-ji/" class="archive-article-date">
+  	<time datetime="2019-12-24T07:40:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-24</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:1.5k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈5分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-关于包"><a href="#1-关于包" class="headerlink" title="1. 关于包"></a>1. 关于包</h4><ol>
+<li>概念：在程序中是一种逻辑概念，在Windows中对应于文件夹（或目录）  </li>
+<li>包具有层次结构，不同包间用“.”分开，这种层次结构对应于文件夹的层次结构  </li>
+<li>关键字是package，在程序中定义包的语句只能出现一次  </li>
+</ol>
+<a id="more"></a>  
+<h4 id="2-Java中的访问控制方式：4种"><a href="#2-Java中的访问控制方式：4种" class="headerlink" title="2. Java中的访问控制方式：4种"></a>2. Java中的访问控制方式：4种</h4><ol>
+<li>public、private、protected和默认  </li>
+<li>针对类，只能使用public和默认  </li>
+<li>权限最大的public，最小的private</li>
+<li>子类能继承父类中除了private之外的所有成员变量和成员方法（不包括构造方法）  </li>
+</ol>
+<h4 id="3-final关键字：最终的"><a href="#3-final关键字：最终的" class="headerlink" title="3. final关键字：最终的"></a>3. final关键字：最终的</h4><ol>
+<li>可以用来修饰成员变量，通常称为常量  </li>
+<li>可以修饰成员方法，能被继承，但不能被重写  </li>
+<li>可以修饰类，能创建对象，不能被继承  </li>
+</ol>
+<h4 id="4-在Java语言中，所有类的公共父类是Object（对象类）"><a href="#4-在Java语言中，所有类的公共父类是Object（对象类）" class="headerlink" title="4. 在Java语言中，所有类的公共父类是Object（对象类）"></a>4. 在Java语言中，所有类的公共父类是Object（对象类）</h4><h4 id="5-支持的字符集"><a href="#5-支持的字符集" class="headerlink" title="5. 支持的字符集"></a>5. 支持的字符集</h4><ul>
+<li>ASCⅡ码：一个字符占1字节（8bits），汉字和英文字符所占不同  </li>
+<li>Unicode：一个字符占两个字节，对汉字和英文字符相同对待（Java）  </li>
+</ul>
+<h4 id="6-类的继承："><a href="#6-类的继承：" class="headerlink" title="6. 类的继承："></a>6. 类的继承：</h4><ol>
+<li>Java语言支持单重继承  </li>
+<li>关键字：extends  </li>
+<li>子类可以根据需要添加自己的成员变量和成员方法  </li>
+<li>子类可以重写父类中的某成员方法  </li>
+<li>状态=&gt;成员变量  </li>
+</ol>
+<h4 id="7-异常："><a href="#7-异常：" class="headerlink" title="7. 异常："></a>7. 异常：</h4><ol>
+<li>是指程序运行中的错误，而不是指逻辑错误和语法错误  </li>
+<li>多数异常能通过编译  </li>
+<li>异常不是程序预先设计好的，而异常处理则应该是预先设计好的  </li>
+</ol>
+<h4 id="8-Java语言中的控制台命令"><a href="#8-Java语言中的控制台命令" class="headerlink" title="8. Java语言中的控制台命令"></a>8. Java语言中的控制台命令</h4><ul>
+<li>编译命令：javac</li>
+<li>运行命令：java</li>
+<li>源文件：.java</li>
+<li>编译后文件：.class (二进制文件）</li>
+</ul>
+<h4 id="9-关于方法的重写（覆盖）和重载"><a href="#9-关于方法的重写（覆盖）和重载" class="headerlink" title="9. 关于方法的重写（覆盖）和重载"></a>9. 关于方法的重写（覆盖）和重载</h4><ol>
+<li>重写是指在子类中可以把父类中的某成员方法的方法体重新设计  </li>
+<li>重载是指在某类中允许出现若干个 <code>同名</code> 方法，但不允许出现相同方法  </li>
+</ol>
+<h4 id="10-数组"><a href="#10-数组" class="headerlink" title="10. 数组"></a>10. 数组</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>定义了含有3个元素的一维数组并为其初始化  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>定义了含有6个元素的二维数组并为其初始化  </p>
+<ul>
+<li>元素的默认值是0  </li>
+</ul>
+<h4 id="11-关于Java语言的特性："><a href="#11-关于Java语言的特性：" class="headerlink" title="11. 关于Java语言的特性："></a>11. 关于Java语言的特性：</h4><ol>
+<li>是完全面向对象的程序设计语言  </li>
+<li>支持跨平台，是借助于Java VM来实现  </li>
+<li>支持多线程  </li>
+<li>程序安全性高  </li>
+<li>支持分布式计算  </li>
+</ol>
+<h4 id="12-导入包中的信息，使用import"><a href="#12-导入包中的信息，使用import" class="headerlink" title="12. 导入包中的信息，使用import"></a>12. 导入包中的信息，使用import</h4><ul>
+<li>可以导入包中的类、接口、异常、错误  </li>
+<li>import语句在程序中可以出现多次  </li>
+</ul>
+<h4 id="13-抽象类、抽象方法："><a href="#13-抽象类、抽象方法：" class="headerlink" title="13. 抽象类、抽象方法："></a>13. 抽象类、抽象方法：</h4><ol>
+<li>关键字：abstract  </li>
+<li>抽象方法只包含方法的声明，而没有方法体，需要在子类中实现  </li>
+<li>抽象类可以包含0个或任意个抽象方法  </li>
+</ol>
+<h4 id="14-整形常量"><a href="#14-整形常量" class="headerlink" title="14. 整形常量"></a>14. 整形常量</h4><ul>
+<li>整形常量从进制看，分十进制、八进制、十六进制三种  </li>
+<li>八进制：数字0开头，例：0123， <del>059</del>   </li>
+<li>十六进制：以0x开头，例：0x123、0XAB<br>0x10 = (16)⑽  </li>
+</ul>
+<h4 id="15-数组元素下标从0开始"><a href="#15-数组元素下标从0开始" class="headerlink" title="15. 数组元素下标从0开始"></a>15. 数组元素下标从0开始</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"><span class="comment">//元素 a[0]、a[1]、a[2]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="16-主方法main"><a href="#16-主方法main" class="headerlink" title="16. 主方法main"></a>16. 主方法main</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>static 表示储存类别，静态  </li>
+<li>void 表示类型标识符，空类型或无类型  </li>
+<li>String 表示字符串类  </li>
+</ul>
+<h4 id="17-构造方法"><a href="#17-构造方法" class="headerlink" title="17. 构造方法"></a>17. 构造方法</h4><ol>
+<li>方法名必须与所在类名相同，无返回类型  </li>
+<li>是为对象初始化而设计的</li>
+<li>是被系统调用的  </li>
+<li>可以出现在 new 之后，也可以用this和super来调用  </li>
+</ol>
+<h4 id="18-Java支持的循环语句"><a href="#18-Java支持的循环语句" class="headerlink" title="18. Java支持的循环语句"></a>18. Java支持的循环语句</h4><ul>
+<li>有 do-while、while、for  </li>
+<li>do-while：循环体至少执行一次  </li>
+<li>while：循环体有可能一次也不执行  </li>
+<li>for：循环次数已确定的问题  </li>
+</ul>
+<h4 id="19-整数类型"><a href="#19-整数类型" class="headerlink" title="19. 整数类型"></a>19. 整数类型</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">字节数</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">byte</td>
+<td align="center">1B</td>
+<td align="center">-128~127</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">4B</td>
+<td align="center">±20亿左右</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">8B</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<ul>
+<li>布尔类型：boolean ，值true/false  </li>
+</ul>
+<h4 id="20-多分支选择"><a href="#20-多分支选择" class="headerlink" title="20. 多分支选择"></a>20. 多分支选择</h4><ol>
+<li>关键字switch、case、break、default  </li>
+<li>case后接的是常量，类型：整型、字符型  </li>
+<li>break充当某情况的出口，如果多个case执行同一个出口，则每个case后的语句依次执行  </li>
+</ol>
+<h4 id="21-面向对象中有两个基本概念：对象、类"><a href="#21-面向对象中有两个基本概念：对象、类" class="headerlink" title="21. 面向对象中有两个基本概念：对象、类"></a>21. 面向对象中有两个基本概念：对象、类</h4><ol>
+<li>对象：以类为前提，是类的 <code>实例</code>   </li>
+<li>类：是对若干个性质相似的对象其共性的一种描述，关键字是class  </li>
+</ol>
+<h4 id="22-实型常量"><a href="#22-实型常量" class="headerlink" title="22. 实型常量"></a>22. 实型常量</h4><ol>
+<li>从表现形式上看，分成小数形式和指数形式  <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">5.67e5</span>=&gt;<span class="number">5.68</span>*<span class="number">10</span>^<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>规则：e前必须要有数字，e后必须是整数  </p>
+<ol start="2">
+<li>直接写出的实型常量，如3.14，系统默认为double常量  </li>
+</ol>
+<h4 id="23-异常的处理机制：捕获-抛出"><a href="#23-异常的处理机制：捕获-抛出" class="headerlink" title="23. 异常的处理机制：捕获/抛出"></a>23. 异常的处理机制：捕获/抛出</h4><ul>
+<li>捕获：try … catch … finally  <ul>
+<li>try对应的语句块可能会产生异常  </li>
+<li>catch对应的语句块是对异常进行处理，一个try可以对应多个catch  </li>
+<li>finally对应的语句块起到过度作用  </li>
+</ul>
+</li>
+<li>抛出：throws<br>是把异常从当前方法抛出到上级方法  </li>
+<li>捕获异常是积极的处理方式<br>抛出异常是消极的处理方式</li>
+</ul>
+<h4 id="24-关于长度"><a href="#24-关于长度" class="headerlink" title="24. 关于长度"></a>24. 关于长度</h4><ol>
+<li><p>数组的长度属性：length，方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数组名.length</span><br><span class="line"><span class="comment">//元素个数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串长度：length()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对象名.length()</span><br><span class="line"><span class="comment">//字符个数</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="25-面相对象的特性"><a href="#25-面相对象的特性" class="headerlink" title="25. 面相对象的特性"></a>25. 面相对象的特性</h4><ol>
+<li>继承性：子类继承于父类</li>
+<li>封装性：某部分内部实现细节对外界隐藏</li>
+<li>多态性：属性取值的多态和功能实现的多态</li>
+</ol>
+<h4 id="26-接口及其子类"><a href="#26-接口及其子类" class="headerlink" title="26. 接口及其子类"></a>26. 接口及其子类</h4><ol>
+<li>接口是特殊的抽象类，定义的关键字是 <code>interface</code> ，包含两类内容：常量和抽象方法</li>
+<li>通过接口的子类来实现接口中的抽象方法，关键字是 <code>implements</code> ，一个子类可以实现多个接口</li>
+</ol>
+<h4 id="27-子类对象的创建过程"><a href="#27-子类对象的创建过程" class="headerlink" title="27. 子类对象的创建过程"></a>27. 子类对象的创建过程</h4><ul>
+<li>在子类对象被创建并调用其构造方法时，要先调用其父类的构造方法</li>
+</ul>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABy0lEQVR42u3aOW7EMAwF0Ln/pR0gVYrY+SQlwQGeKmPGy7MLgos+n3hd3+vul+vHSq66O3/ZwsXFHXOvx3UHej6uvl5iwMXFPc99Dl7Pt8gD0/PnSAIoLi7u27i9lKgaFnFxcf8jNy91XhHIcHFxB9yk+JmXN3kKtaBWw8XFHXB7Kcva4439XVxc3CL3Kq61Y5Ly03FxcY9wJwVJwu0VSH80YXFxcY9w88FndfvFxh0iuLi427iTULVqU0VyPi4u7kluFZ0/uDeMiZIhXFzczdxJwTMvdfJWyC9dHFxc3G3ceZGTXLtlgIqLi7uN2wtbvTQlv+etEBcX9wh3kmpMEpr86csyI1xc3BY3Gbjm4SwZrvSaqri4uCe5eUCZbNfIi58FcRcXF3fDbCIfsiYNjuqH+COE4eLiHuT2ypXJv4Uwh4uLe4RbbWpM2h/Jtfl9cHFx93F7YaXaKk0Spmhwi4uLe4Tb2/nQK12SjR2TwIeLi7uWmwevaoDrbQgbzYRxcXGXcvOCJ0lxRgnK8x1wcXFfxs0TnUk4i7q8uLi4r+dWm6SjJgguLu5BbrX4qaZB1VRmca2Gi4u7Jvf4VENP8jI5a9JwwcXFHXC/AOLvUsEYjhLjAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/xia-zai-chrome/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Chrome离线安装包下载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/bo-ke-da-jian/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android手机搭建hexo博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-关于包"><span class="toc-number">1.</span> <span class="toc-text">1. 关于包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Java中的访问控制方式：4种"><span class="toc-number">2.</span> <span class="toc-text">2. Java中的访问控制方式：4种</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-final关键字：最终的"><span class="toc-number">3.</span> <span class="toc-text">3. final关键字：最终的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-在Java语言中，所有类的公共父类是Object（对象类）"><span class="toc-number">4.</span> <span class="toc-text">4. 在Java语言中，所有类的公共父类是Object（对象类）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-支持的字符集"><span class="toc-number">5.</span> <span class="toc-text">5. 支持的字符集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-类的继承："><span class="toc-number">6.</span> <span class="toc-text">6. 类的继承：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-异常："><span class="toc-number">7.</span> <span class="toc-text">7. 异常：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Java语言中的控制台命令"><span class="toc-number">8.</span> <span class="toc-text">8. Java语言中的控制台命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-关于方法的重写（覆盖）和重载"><span class="toc-number">9.</span> <span class="toc-text">9. 关于方法的重写（覆盖）和重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-数组"><span class="toc-number">10.</span> <span class="toc-text">10. 数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-关于Java语言的特性："><span class="toc-number">11.</span> <span class="toc-text">11. 关于Java语言的特性：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-导入包中的信息，使用import"><span class="toc-number">12.</span> <span class="toc-text">12. 导入包中的信息，使用import</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-抽象类、抽象方法："><span class="toc-number">13.</span> <span class="toc-text">13. 抽象类、抽象方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-整形常量"><span class="toc-number">14.</span> <span class="toc-text">14. 整形常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-数组元素下标从0开始"><span class="toc-number">15.</span> <span class="toc-text">15. 数组元素下标从0开始</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-主方法main"><span class="toc-number">16.</span> <span class="toc-text">16. 主方法main</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-构造方法"><span class="toc-number">17.</span> <span class="toc-text">17. 构造方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-Java支持的循环语句"><span class="toc-number">18.</span> <span class="toc-text">18. Java支持的循环语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-整数类型"><span class="toc-number">19.</span> <span class="toc-text">19. 整数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-多分支选择"><span class="toc-number">20.</span> <span class="toc-text">20. 多分支选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-面向对象中有两个基本概念：对象、类"><span class="toc-number">21.</span> <span class="toc-text">21. 面向对象中有两个基本概念：对象、类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-实型常量"><span class="toc-number">22.</span> <span class="toc-text">22. 实型常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-异常的处理机制：捕获-抛出"><span class="toc-number">23.</span> <span class="toc-text">23. 异常的处理机制：捕获/抛出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-关于长度"><span class="toc-number">24.</span> <span class="toc-text">24. 关于长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#25-面相对象的特性"><span class="toc-number">25.</span> <span class="toc-text">25. 面相对象的特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#26-接口及其子类"><span class="toc-number">26.</span> <span class="toc-text">26. 接口及其子类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27-子类对象的创建过程"><span class="toc-number">27.</span> <span class="toc-text">27. 子类对象的创建过程</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

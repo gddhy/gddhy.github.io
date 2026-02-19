@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_editCreate</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>int32 
+      mr_editCreate(const char * title, const char * text, int32 type, int32 
+      max_size)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>创建编辑框。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>title</I></FONT></TD>
+      <TD><FONT size=2>编辑框的标题，unicode编码，网络字节序。</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>text</EM></FONT></TD>
+      <TD><FONT size=2>编辑框的初始内容，unicode编码，网络字节序。</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>type</EM></FONT></TD>
+      <TD><FONT size=2>输入法类型：<BR>MR_EDIT_ANY：&nbsp;&nbsp;&nbsp;&nbsp; 
+        任何字符<BR>MR_EDIT_NUMERIC： 数字<BR>MR_EDIT_PASSWORD： 密码，用“*”显示</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>max_size</EM></FONT></TD>
+      <TD><FONT 
+    size=2>最多可以输入的字符（unicode）个数，这里每一个中文、字母、数字、符号都算一个字符。</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>&gt;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;编辑框句柄<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>创建一个编辑框，并返回编辑框句柄。编辑框用来显示并提供用户编辑文字信息。text是编辑框显示的初始内容。<BR>当编辑框显示时，如果用户选择了编辑框上的某个键，系统将构造SkyEngine消息，通过mr_event函数传送给SkyEngine，消息类型为MR_DIALOG_EVENT，参数为该按键的ID。“确定”键ID为：MR_DIALOG_KEY_OK；“取消”键ID为：MR_DIALOG_KEY_CANCEL。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>int32 hEdit = 0;<BR>hEdit = mrc_editCreate( (const 
+  char*)SGL_LoadString(STR_EDIT), (const char*)SGL_LoadString(STR_EDIT), 
+  MR_DIALOG_OK_CANCEL, 100 );&nbsp;&nbsp; //STR_EDIT为编辑框初始内容的资源ID</P>
+  <P>//response the MR_DIALOG_EVENT<BR>case 
+  MR_DIALOG_EVENT:<BR>&nbsp;&nbsp;{&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;if (wParam == MR_DIALOG_KEY_CANCEL)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //your 
+  code&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;........<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  else if (wParam == MR_DIALOG_KEY_OK)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//your 
+  code&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  ........&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }<BR>&nbsp;}</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_editRelease.htm">mr_editRelease</A></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

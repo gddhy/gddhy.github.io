@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>安卓键值 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="android menu 键值,Android KeyCode安卓手机按键对应键码键值   搜集了最全的Android 安卓手机按键对应键码键值，供ADB模拟按键对模拟器的操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓键值">
+<meta property="og:url" content="https://gddhy.github.io/2023/an-zhuo-jian-zhi/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="android menu 键值,Android KeyCode安卓手机按键对应键码键值   搜集了最全的Android 安卓手机按键对应键码键值，供ADB模拟按键对模拟器的操作。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.057Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓键值">
+<meta name="twitter:description" content="android menu 键值,Android KeyCode安卓手机按键对应键码键值   搜集了最全的Android 安卓手机按键对应键码键值，供ADB模拟按键对模拟器的操作。">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-安卓键值" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      安卓键值
+    </h1>
+  
+
+        
+        
+
+<a href="/2023/an-zhuo-jian-zhi/" class="archive-article-date">
+  	<time datetime="2023-02-28T05:35:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-28</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:1.3k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈5分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>android menu 键值,Android KeyCode安卓手机按键对应键码键值  </p>
+<p>搜集了最全的Android 安卓手机按键对应键码键值，供ADB模拟按键对模拟器的操作。  </p>
+<a id="more"></a>
+
+<h4 id="电话键"><a href="#电话键" class="headerlink" title="电话键"></a>电话键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_CALL</td>
+<td align="center">拨号键</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ENDCALL</td>
+<td align="center">挂机键</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_HOME</td>
+<td align="center">按键Home</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MENU</td>
+<td align="center">菜单键</td>
+<td align="center">82</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BACK</td>
+<td align="center">返回键</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SEARCH</td>
+<td align="center">搜索键</td>
+<td align="center">84</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CAMERA</td>
+<td align="center">拍照键</td>
+<td align="center">27</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_FOCUS</td>
+<td align="center">拍照对焦键</td>
+<td align="center">80</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_POWER</td>
+<td align="center">电源键</td>
+<td align="center">26</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NOTIFICATION</td>
+<td align="center">通知键</td>
+<td align="center">83</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MUTE</td>
+<td align="center">话筒静音键</td>
+<td align="center">91</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_VOLUME_MUTE</td>
+<td align="center">扬声器静音键</td>
+<td align="center">164</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_VOLUME_UP</td>
+<td align="center">音量增加键</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_VOLUME_DOWN</td>
+<td align="center">音量减小键</td>
+<td align="center">25</td>
+</tr>
+</tbody></table>
+<h4 id="控制键"><a href="#控制键" class="headerlink" title="控制键"></a>控制键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_ENTER</td>
+<td align="center">回车键</td>
+<td align="center">66</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ESCAPE</td>
+<td align="center">ESC键</td>
+<td align="center">111</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DPAD_CENTER</td>
+<td align="center">导航键确定键</td>
+<td align="center">23</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DPAD_UP</td>
+<td align="center">导航键向上</td>
+<td align="center">19</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DPAD_DOWN</td>
+<td align="center">导航键向下</td>
+<td align="center">20</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DPAD_LEFT</td>
+<td align="center">导航键向左</td>
+<td align="center">21</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DPAD_RIGHT</td>
+<td align="center">导航键向右</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MOVE_HOME</td>
+<td align="center">光标移动到开始键</td>
+<td align="center">122</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MOVE_END</td>
+<td align="center">光标移动到末尾键</td>
+<td align="center">123</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PAGE_UP</td>
+<td align="center">向上翻页键</td>
+<td align="center">92</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PAGE_DOWN</td>
+<td align="center">向下翻页键</td>
+<td align="center">93</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DEL</td>
+<td align="center">退格键</td>
+<td align="center">67</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_FORWARD_DEL</td>
+<td align="center">删除键</td>
+<td align="center">112</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_INSERT</td>
+<td align="center">插入键</td>
+<td align="center">124</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_TAB</td>
+<td align="center">Tab键</td>
+<td align="center">61</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUM_LOCK</td>
+<td align="center">小键盘锁</td>
+<td align="center">143</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CAPS_LOCK</td>
+<td align="center">大写锁定键</td>
+<td align="center">115</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BREAK</td>
+<td align="center">Break/Pause键</td>
+<td align="center">121</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SCROLL_LOCK</td>
+<td align="center">滚动锁定键</td>
+<td align="center">116</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ZOOM_IN</td>
+<td align="center">放大键</td>
+<td align="center">168</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ZOOM_OUT</td>
+<td align="center">缩小键</td>
+<td align="center">169</td>
+</tr>
+</tbody></table>
+<h4 id="组合键"><a href="#组合键" class="headerlink" title="组合键"></a>组合键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_ALT_LEFT</td>
+<td align="center">Alt+Left</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ALT_RIGHT</td>
+<td align="center">Alt+Right</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CTRL_LEFT</td>
+<td align="center">Control+Left</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CTRL_RIGHT</td>
+<td align="center">Control+Right</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SHIFT_LEFT</td>
+<td align="center">Shift+Left</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SHIFT_RIGHT</td>
+<td align="center">Shift+Right</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="基本键"><a href="#基本键" class="headerlink" title="基本键"></a>基本键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_0</td>
+<td align="center">按键’0’</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_1</td>
+<td align="center">按键’1’</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_2</td>
+<td align="center">按键’2’</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_3</td>
+<td align="center">按键’3’</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_4</td>
+<td align="center">按键’4’</td>
+<td align="center">11</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_5</td>
+<td align="center">按键’5’</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_6</td>
+<td align="center">按键’6’</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_7</td>
+<td align="center">按键’7’</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_8</td>
+<td align="center">按键’8’</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_9</td>
+<td align="center">按键’9’</td>
+<td align="center">16</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_A</td>
+<td align="center">按键’A’</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_B</td>
+<td align="center">按键’B’</td>
+<td align="center">30</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_C</td>
+<td align="center">按键’C’</td>
+<td align="center">31</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_D</td>
+<td align="center">按键’D’</td>
+<td align="center">32</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_E</td>
+<td align="center">按键’E’</td>
+<td align="center">33</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F</td>
+<td align="center">按键’F’</td>
+<td align="center">34</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_G</td>
+<td align="center">按键’G’</td>
+<td align="center">35</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_H</td>
+<td align="center">按键’H’</td>
+<td align="center">36</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_I</td>
+<td align="center">按键’I’</td>
+<td align="center">37</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_J</td>
+<td align="center">按键’J’</td>
+<td align="center">38</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_K</td>
+<td align="center">按键’K’</td>
+<td align="center">39</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_L</td>
+<td align="center">按键’L’</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_M</td>
+<td align="center">按键’M’</td>
+<td align="center">41</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_N</td>
+<td align="center">按键’N’</td>
+<td align="center">42</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_O</td>
+<td align="center">按键’O’</td>
+<td align="center">43</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_P</td>
+<td align="center">按键’P’</td>
+<td align="center">44</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_Q</td>
+<td align="center">按键’Q’</td>
+<td align="center">45</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_R</td>
+<td align="center">按键’R’</td>
+<td align="center">46</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_S</td>
+<td align="center">按键’S’</td>
+<td align="center">47</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_T</td>
+<td align="center">按键’T’</td>
+<td align="center">48</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_U</td>
+<td align="center">按键’U’</td>
+<td align="center">49</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_V</td>
+<td align="center">按键’V’</td>
+<td align="center">50</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_W</td>
+<td align="center">按键’W’</td>
+<td align="center">51</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_X</td>
+<td align="center">按键’X’</td>
+<td align="center">52</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_Y</td>
+<td align="center">按键’Y’</td>
+<td align="center">53</td>
+</tr>
+<tr>
+<td align="center">KEYCODE_Z</td>
+<td align="center">按键’Z’</td>
+<td align="center">54</td>
+</tr>
+</tbody></table>
+<h4 id="符合键"><a href="#符合键" class="headerlink" title="符合键"></a>符合键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_PLUS</td>
+<td align="center">按键’+’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MINUS</td>
+<td align="center">按键’-‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_STAR</td>
+<td align="center">按键’*’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SLASH</td>
+<td align="center">按键’/‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_EQUALS</td>
+<td align="center">按键’=’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_AT</td>
+<td align="center">按键‘@’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_POUND</td>
+<td align="center">按键’#’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_APOSTROPHE</td>
+<td align="center">按键’’’(单引号)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BACKSLASH</td>
+<td align="center">按键’&#39;</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_COMMA</td>
+<td align="center">按键’,’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PERIOD</td>
+<td align="center">按键’.’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_LEFT_BRACKET</td>
+<td align="center">按键’[‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_RIGHT_BRACKET</td>
+<td align="center">按键’]’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SEMICOLON</td>
+<td align="center">按键’;’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_GRAVE</td>
+<td align="center">按键’`’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SPACE</td>
+<td align="center">空格键</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="小键盘键"><a href="#小键盘键" class="headerlink" title="小键盘键"></a>小键盘键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_NUMPAD_0</td>
+<td align="center">小键盘按键’0’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_1</td>
+<td align="center">小键盘按键’1’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_2</td>
+<td align="center">小键盘按键’2’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_3</td>
+<td align="center">小键盘按键’3’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_4</td>
+<td align="center">小键盘按键’4’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_5</td>
+<td align="center">小键盘按键’5’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_6</td>
+<td align="center">小键盘按键’6’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_7</td>
+<td align="center">小键盘按键’7’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_8</td>
+<td align="center">小键盘按键’8’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_9</td>
+<td align="center">小键盘按键’9’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_ADD</td>
+<td align="center">小键盘按键’+’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_SUBTRACT</td>
+<td align="center">小键盘按键’-‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_MULTIPLY</td>
+<td align="center">小键盘按键’*’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_DIVIDE</td>
+<td align="center">小键盘按键’/‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_EQUALS</td>
+<td align="center">小键盘按键’=’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_COMMA</td>
+<td align="center">小键盘按键’,’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_DOT</td>
+<td align="center">小键盘按键’.’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_LEFT_PAREN</td>
+<td align="center">小键盘按键’(‘</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_RIGHT_PAREN</td>
+<td align="center">小键盘按键’)’</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_NUMPAD_ENTER</td>
+<td align="center">小键盘按键回车</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="功能键"><a href="#功能键" class="headerlink" title="功能键"></a>功能键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_F1</td>
+<td align="center">按键F1</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F2</td>
+<td align="center">按键F2</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F3</td>
+<td align="center">按键F3</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F4</td>
+<td align="center">按键F4</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F5</td>
+<td align="center">按键F5</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F6</td>
+<td align="center">按键F6</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F7</td>
+<td align="center">按键F7</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F8</td>
+<td align="center">按键F8</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F9</td>
+<td align="center">按键F9</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F10</td>
+<td align="center">按键F10</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F11</td>
+<td align="center">按键F11</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_F12</td>
+<td align="center">按键F12</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="多媒体键"><a href="#多媒体键" class="headerlink" title="多媒体键"></a>多媒体键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_MEDIA_PLAY</td>
+<td align="center">多媒体键播放</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_STOP</td>
+<td align="center">多媒体键停止</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_PAUSE</td>
+<td align="center">多媒体键暂停</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_PLAY_PAUSE</td>
+<td align="center">多媒体键播放/暂停</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_FAST_FORWARD</td>
+<td align="center">多媒体键快进</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_REWIND</td>
+<td align="center">多媒体键快退</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_NEXT</td>
+<td align="center">多媒体键下一首</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_PREVIOUS</td>
+<td align="center">多媒体键上一首</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_CLOSE</td>
+<td align="center">多媒体键关闭</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_EJECT</td>
+<td align="center">多媒体键弹出</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_MEDIA_RECORD</td>
+<td align="center">多媒体键录音</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="手柄键"><a href="#手柄键" class="headerlink" title="手柄键"></a>手柄键</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_BUTTON_1</td>
+<td align="center">通用游戏手柄按钮#1</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_2</td>
+<td align="center">通用游戏手柄按钮#2</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_3</td>
+<td align="center">通用游戏手柄按钮#3</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_4</td>
+<td align="center">通用游戏手柄按钮#4</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_5</td>
+<td align="center">通用游戏手柄按钮#5</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_6</td>
+<td align="center">通用游戏手柄按钮#6</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_7</td>
+<td align="center">通用游戏手柄按钮#7</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_8</td>
+<td align="center">通用游戏手柄按钮#8</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_9</td>
+<td align="center">通用游戏手柄按钮#9</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_10</td>
+<td align="center">通用游戏手柄按钮#10</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_11</td>
+<td align="center">通用游戏手柄按钮#11</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_12</td>
+<td align="center">通用游戏手柄按钮#12</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_13</td>
+<td align="center">通用游戏手柄按钮#13</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_14</td>
+<td align="center">通用游戏手柄按钮#14</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_15</td>
+<td align="center">通用游戏手柄按钮#15</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_16</td>
+<td align="center">通用游戏手柄按钮#16</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_A</td>
+<td align="center">游戏手柄按钮A</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_B</td>
+<td align="center">游戏手柄按钮B</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_C</td>
+<td align="center">游戏手柄按钮C</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_X</td>
+<td align="center">游戏手柄按钮X</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_Y</td>
+<td align="center">游戏手柄按钮Y</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_Z</td>
+<td align="center">游戏手柄按钮Z</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_L1</td>
+<td align="center">游戏手柄按钮L1</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_L2</td>
+<td align="center">游戏手柄按钮L2</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_R1</td>
+<td align="center">游戏手柄按钮R1</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_R2</td>
+<td align="center">游戏手柄按钮R2</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_MODE</td>
+<td align="center">游戏手柄按钮Mode</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_SELECT</td>
+<td align="center">游戏手柄按钮Select</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_START</td>
+<td align="center">游戏手柄按钮Start</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_THUMBL</td>
+<td align="center">LeftThumbButton</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BUTTON_THUMBR</td>
+<td align="center">RightThumbButton</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="待查验证"><a href="#待查验证" class="headerlink" title="待查验证"></a>待查验证</h4><table>
+<thead>
+<tr>
+<th align="center">键名</th>
+<th align="center">描述</th>
+<th align="center">键值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">KEYCODE_NUM</td>
+<td align="center">按键Numbermodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_INFO</td>
+<td align="center">按键Info</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_APP_SWITCH</td>
+<td align="center">按键Appswitch</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_BOOKMARK</td>
+<td align="center">按键Bookmark</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_AVR_INPUT</td>
+<td align="center">按键A/VReceiverinput</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_AVR_POWER</td>
+<td align="center">按键A/VReceiverpower</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CAPTIONS</td>
+<td align="center">按键Togglecaptions</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CHANNEL_DOWN</td>
+<td align="center">按键Channeldown</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CHANNEL_UP</td>
+<td align="center">按键Channelup</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_CLEAR</td>
+<td align="center">按键Clear</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_DVR</td>
+<td align="center">按键DVR</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_ENVELOPE</td>
+<td align="center">按键Envelopespecialfunction</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_EXPLORER</td>
+<td align="center">按键Explorerspecialfunction</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_FORWARD</td>
+<td align="center">按键Forward</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_FORWARD_DEL</td>
+<td align="center">按键ForwardDelete</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_FUNCTION</td>
+<td align="center">按键Functionmodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_GUIDE</td>
+<td align="center">按键Guide</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_HEADSETHOOK</td>
+<td align="center">按键HeadsetHook</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_META_LEFT</td>
+<td align="center">按键LeftMetamodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_META_RIGHT</td>
+<td align="center">按键RightMetamodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PICTSYMBOLS</td>
+<td align="center">按键PictureSymbolsmodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PROG_BLUE</td>
+<td align="center">按键Blue“programmable”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PROG_GREEN</td>
+<td align="center">按键Green“programmable”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PROG_RED</td>
+<td align="center">按键Red“programmable”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_PROG_YELLOW</td>
+<td align="center">按键Yellow“programmable”</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SETTINGS</td>
+<td align="center">按键Settings</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SOFT_LEFT</td>
+<td align="center">按键SoftLeft (左软键)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SOFT_RIGHT</td>
+<td align="center">按键SoftRight (右软键)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_STB_INPUT</td>
+<td align="center">按键Set-top-boxinput</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_STB_POWER</td>
+<td align="center">按键Set-top-boxpower</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SWITCH_CHARSET</td>
+<td align="center">按键SwitchCharsetmodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SYM</td>
+<td align="center">按键Symbolmodifier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_SYSRQ</td>
+<td align="center">按键SystemRequest/PrintScreen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_TV</td>
+<td align="center">按键TV</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_TV_INPUT</td>
+<td align="center">按键TVinput</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_TV_POWER</td>
+<td align="center">按键TVpower</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_WINDOW</td>
+<td align="center">按键Window</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">KEYCODE_UNKNOWN</td>
+<td align="center">未知按键</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>转载自 <a href="https://blog.csdn.net/weixin_31532363/article/details/117579249" target="_blank" rel="noopener">https://blog.csdn.net/weixin_31532363/article/details/117579249</a> 有修改调整</p>
+</blockquote>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3aUW6EMAwFwL3/pekBWuizDVVJJl+r7YpkqGTZjj+feB3fVvLL/Jnfv/88sTAwMF7LOC5Xcrjqoc+enP/1hx0xMDA2YFwfLg+CecBN9iq8OAwMDIzx57MU8Do1xMDAwLiLcZ3YJWnoGQwDAwOjWsQmv88D6OQ1YWBg7Ma4q8h84vMj9xsYGBivYhzFdZ3A5Ylg/rToVBgYGEszeheQkzCdJJHN82BgYCzNyLdPWmDV4+aBuzregYGBsQaj18DKj5WE3Ulxe5rhYmBgbMaoFreTq808+SsHXAwMjNcy7h2w6DXmqgdtlq8YGBivZSSyXqqXv8XeJUH5H4SBgfFaxrxb1UsH87D7R003DAyMf8xISse8+VUdxZiPqWFgYOzAqN52Pp0m3lCLY2BgLMpIkry8JTfB5MMWzVwVAwPjtYxq2pdvkBeut824YWBgLM3It5808ScDGXn6iIGBsSqjGhzzhlp1+Kwa9DEwMHZgJENdvWTxOkz3xsh+CbUYGBhLMyZHr4bdR14iBgbGxow8OFafliNH5SsGBsZCjGqp2auVqw218rQIBgbGcoyjuKoXANXBiyRZPE0KMTAwFmVMgt2k3Z+05HoDGRgYGKsy8iCbt/urRewNCSgGBsYGjF7BmR+oOnZWGAXDwMDAKBaZeThOhjby7zEwMDDyYvLey4PCOAgGBsYGjN5oRdJEm5Ssj7TbMDAwXsgYlY6tDe5t52FgYCzN+AIBFgPxEcSDXgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2023/wu-xian-liu-liang-qia-neng-yong-duo-shao-liu-liang/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          无限流量卡能用多少流量？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/zu-zhi-ying-yong-xie-zai/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">阻止应用卸载</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#电话键"><span class="toc-number">1.</span> <span class="toc-text">电话键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#控制键"><span class="toc-number">2.</span> <span class="toc-text">控制键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组合键"><span class="toc-number">3.</span> <span class="toc-text">组合键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本键"><span class="toc-number">4.</span> <span class="toc-text">基本键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#符合键"><span class="toc-number">5.</span> <span class="toc-text">符合键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#小键盘键"><span class="toc-number">6.</span> <span class="toc-text">小键盘键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#功能键"><span class="toc-number">7.</span> <span class="toc-text">功能键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多媒体键"><span class="toc-number">8.</span> <span class="toc-text">多媒体键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手柄键"><span class="toc-number">9.</span> <span class="toc-text">手柄键</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#待查验证"><span class="toc-number">10.</span> <span class="toc-text">待查验证</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

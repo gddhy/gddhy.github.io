@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>移动改桥接 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简单记一次移动光猫改桥接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动改桥接">
+<meta property="og:url" content="https://gddhy.github.io/2024/yi-dong-guang-mao-gai-qiao-jie/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="简单记一次移动光猫改桥接">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动改桥接">
+<meta name="twitter:description" content="简单记一次移动光猫改桥接">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-移动光猫改桥接" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      移动改桥接
+    </h1>
+  
+
+        
+        
+
+<a href="/2024/yi-dong-guang-mao-gai-qiao-jie/" class="archive-article-date">
+  	<time datetime="2024-03-12T11:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-12</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:1.1k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈3分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简单记一次移动光猫改桥接  </p>
+<a id="more"></a>  
+<p>光猫型号：H60G</p>
+<p>这个型号的光猫开始没有动态管理员密码的，默认管理员账号 <code>CMCCAdmin</code> 密码 <code>aDm8H%MdA</code> ，在使用过程中发现移动后期改成了动态密码</p>
+<p>可以先进入路由器后台查看，如果默认管理员密码可以使用，则可以跳过获取管理员密码步骤</p>
+<h4 id="获取管理员密码"><a href="#获取管理员密码" class="headerlink" title="获取管理员密码"></a>获取管理员密码</h4><p>先使用光猫背后的用户账号登录光猫管理员后台，依次打开 <code>网络</code> - <code>远程管理</code> - <code>认证</code> ,记录下里面的 <code>Password</code> 的值，后续会用到</p>
+<p>使用牙签或卡针捅光猫的Reset孔，多等一会松开，等光猫重置</p>
+<p>光猫重置后使用电脑直连光猫lan口，打开光猫后台，此时可以使用光猫默认管理员账号登录</p>
+<p>账号：CMCCAdmin<br>密码：aDm8H%MdA</p>
+<p>登录依次打开 <code>安全</code> - <code>Telnet配置</code> - 勾选 <code>启用LAN侧Telnet</code>,记录下用户名、密码（也可自定义用户名密码），点击确定</p>
+<p>右上角退出账号登录，选择 <code>设备注册</code> ，输入刚才记录的password值，如果之前没有记录的话只能问宽带安装师傅询问注册码，输入注册码后等待移动下发数据注册网络</p>
+<p>移动数据下发完成后光猫管理员密码会变成动态的，此时使用Telnet修改光猫管理员密码</p>
+<p>按 <code>Win</code> + <code>R</code> 打开运行窗口输入 <code>cmd</code> 确定，打开控制台cmd窗口，输入下边命令后回车</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>出现telnet不是内部或外部命令的，去Windows可选功能里启用Telnet</p>
+</blockquote>
+<p>输入前边记录的telnet用户名（回车）<br>输入前边记录的telnet密码（回车）  </p>
+<p>识符变成 <code>~$</code> 后输入： <code>su</code> （回车）</p>
+<p>输入密码 <code>aDm8H%MdA</code> （回车）</p>
+<p>标识符变成 <code>/#</code> 此时便是以root用户登录光猫控制台</p>
+<p>修改管理员超级账号为 CMCCAdmin (可自定义)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sidbg 1 DB <span class="builtin-name">set</span> DevAuthInfo 0<span class="built_in"> User </span>CMCCAdmin</span><br></pre></td></tr></table></figure>
+
+<p>修改管理员超级账号的密码 aDm8H%MdA (可自定义)</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sidbg <span class="number">1</span> DB <span class="keyword">set</span> DevAuthInfo <span class="number">0</span> Pass aDm8H%MdA</span><br></pre></td></tr></table></figure>
+
+<p>执行上面命令后管理员密码便改为了aDm8H%MdA或自定义的密码</p>
+<h4 id="光猫改桥接"><a href="#光猫改桥接" class="headerlink" title="光猫改桥接"></a>光猫改桥接</h4><p>使用管理员账号登录光猫后台，进入 <code>网络</code> - <code>宽带设置</code> ，在链接名称里选择包含 <code>_INTERNET_R_VID_</code> 的配置，记录下设备的 <code>VLAN ID</code> </p>
+<p>记录VLAN ID后， <code>_INTERNET_R_VID_</code> 配置可以保留也可以删除（建议直接删除）</p>
+<p>在 <code>连接名称</code> 里选择 <code>新建WAN连接</code> </p>
+<p> <code>模式</code> 选择 <code>桥模式</code> </p>
+<p> <code>VLAN模式</code> 选择 <code>改写(tag)</code> </p>
+<p> <code>VLAN ID</code> 里填写刚才记录的VLAN ID</p>
+<p>使能打勾，端口绑定LAN1~4可以全打勾，也可以不选</p>
+<p>DHCP服务器使能取消勾选</p>
+<p>桥类型，我选择的 IP BRIDGE，不知道和PPPOE BRIDGE有何区别<br>业务模式选择INTERNET</p>
+<p>设置完成后确定</p>
+<p>改桥接后可以在路由器设置拨号，移动宽带账号一般为手机号，宽带密码可以询问宽带安装师傅或者自己重置密码</p>
+<h4 id="禁用移动的远程下发配置"><a href="#禁用移动的远程下发配置" class="headerlink" title="禁用移动的远程下发配置"></a>禁用移动的远程下发配置</h4><p>在 <code>网络</code> - <code>宽带设置</code> 里，连接名称选择包含 <code>TR069</code> 的配置，进入浏览器调试（F12/Ctrl+shift+i）,找到使能、修改按钮，把HTML中的 <code>disable</code> 改为 <code>enable</code> 或者直接删掉。然后取消勾选使能，点击修改</p>
+<p>在 <code>网络</code> - <code>远程管理</code> - <code>省级数字家庭管理平台服务器</code> ,使用浏览器调试把使能和下边确定按钮改为可选择（方法同上），取消勾选使能，点击下边确定保存</p>
+<p>修改完后可以再 <code>状态</code> - <code>设备信息</code> 里看到 <code>ITMS注册状态</code> 为 <code>注册失败</code> 便是成功</p>
+<h4 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h4><p>编辑短信 <code>KDMM</code> 发送到 <code>10086</code> 查询</p>
+<p>编辑短信 <code>CZKDMM</code> 发送到 <code>10086</code> 重置宽带密码</p>
+<p>使用中国移动APP，打开 <code>我的</code> - 我的家庭 - <code>家庭专区</code> -宽带服务 - <code>更多内容</code> - <code>密码修改</code> </p>
+<p>部分省市的默认密码 123123、123456、手机号后6位、身份证后6位</p>
+<blockquote>
+<p>我参考恩山论坛帖子修改的，在这里简单记录，详细图文可以在下边帖子里看到<br><a href="https://www.right.com.cn/forum/thread-5475669-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-5475669-1-1.html</a><br><a href="https://www.right.com.cn/forum/thread-8237756-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-8237756-1-1.html</a></p>
+</blockquote>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3aS24DIRBFUe9/051pBoG+r4pYAi4jy3IaTg9I/T4fvJ5fi3/Pn1z723jJkCFjW8YzXaPf8C1Hz5nvzs8mQ4aMexhk+9rVPNwY7EXOJkOGDBnk0uQXK4HJkCFDxqoLl1yR5JLleBkyZMggySRJaDvgL+XiMmTI2JCRlu+/+flf+hsyZMjYivGEKw3y+qV/dCoZMmQczUjbkKvaA+noBjqPDBkyjmbwq5Mkq+lx0zQYvXoZMmQcxwiK7wCWDoHxl/WCkSFDxgWMWpmeD08EByo9U4YMGacyamNbq0bB4vc9aiHIkCHjAkaalPLwcdWLeGlwypAh4wJGrdC2qlXQKbQN/2/IkCHjAgbfIG031gLBl+9lyJBxNCPdMh2e6Ixu8PaDDBkybmDMD5R+Tg+6eNhChgwZxzHSIlqxcI/bAEWMDBkyLmCsbQbMn9MZyBjuKEOGjKMZPJgjhblOIlp7WXF+LEOGjG0ZJIldFQJ2inovz5chQ8YFjNpgBA/p+PAZDy7/KLrJkCHjaEb6uFVHifsYo5ciQ4aMCxi1hJYEiyTF7bQiZMiQcTbjCVetrEYOSsp5cVAoQ4aMIxh88dAwvQn5RZwW9WTIkHESIy1sda7OfttgeNHLkCHjAkZ68XXS1NoQWNzClCFDhgwc9vHrNagR9quAMmTIOJpB0tS0JckbmcPAUYYMGRcwaiMX/PfzoHB+7S4ut8mQIWNDxqq4iw9q1IbDOqmvDBkytmX8AOvcIuAgvi4zAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2025/an-zhuo-lao-ruan-jian-gua-pei-quan-mian-ping/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          安卓老软件适配全面屏
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/js-jian-dan-dan-chuang/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js简单弹窗</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#获取管理员密码"><span class="toc-number">1.</span> <span class="toc-text">获取管理员密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#光猫改桥接"><span class="toc-number">2.</span> <span class="toc-text">光猫改桥接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#禁用移动的远程下发配置"><span class="toc-number">3.</span> <span class="toc-text">禁用移动的远程下发配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重置密码"><span class="toc-number">4.</span> <span class="toc-text">重置密码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

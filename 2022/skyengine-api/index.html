@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>SKYENGINE API 参考手册 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是斯凯平台的开发文档，简单整理了下，适合在手机上打开阅读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SKYENGINE API 参考手册">
+<meta property="og:url" content="https://gddhy.github.io/2022/skyengine-api/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="这是斯凯平台的开发文档，简单整理了下，适合在手机上打开阅读">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SKYENGINE API 参考手册">
+<meta name="twitter:description" content="这是斯凯平台的开发文档，简单整理了下，适合在手机上打开阅读">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-skyengine-api" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SKYENGINE API 参考手册
+    </h1>
+  
+
+        
+        
+
+<a href="/2022/skyengine-api/" class="archive-article-date">
+  	<time datetime="2022-12-05T01:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-05</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:2.4k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈9分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是斯凯平台的开发文档，简单整理了下，适合在手机上打开阅读  </p>
+<a id="more"></a>
+
+<ul>
+<li>
+<a href="introduction.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> SKYENGINE 简介</a>
+</li>
+
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> SKYENGINE 运行机制</summary>
+<ul>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 启动流程</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 文件系统</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 网络模型</a></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> SKYENGINE 移植</summary>
+<ul>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 系统要求</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 移植步骤</a></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 外部移植接口</summary>
+<a style="PADDING-LEFT: 20px" href="外部移植接口.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 外部移植接口</a>
+<ul>
+<li><a href="mr_start_dsm.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_start_dsm</a></li>
+<li><a href="mr_start_dsmB.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_start_dsmB</a></li>
+<li><a href="mr_start_dsmC.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_start_dsmC</a></li>
+<li><a href="mr_start_dsm_ex.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_start_dsm_ex</a></li>
+<li><a href="mr_stop.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_stop</a></li>
+<li><a href="mr_pauseApp.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_pauseApp</a></li>
+<li><a href="mr_resumeApp.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_resumeApp</a></li>
+<li><a href="mr_event.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_event</a></li>
+<li><a href="mr_timer.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_timer</a></li>
+<li><a href="mr_smsIndiaction.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_smsIndiaction</a></li>
+<li><a href="mr_save_mrp.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_save_mrp</a></li>
+<li><a href="mr_newSIMInd.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_newSIMInd</a></li>
+<li><a href="mr_registerAPP.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_registerAPP</a></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 抽象移植接口</summary>
+<a style="PADDING-LEFT: 20px" href="abstract_api.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 抽象移植接口</a>
+
+<ul>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 输出接口</summary>
+<ul>
+<li><a href="mr_drawBitmap.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_drawBitmap</a></li>
+<li><a href="mr_getCharBitmap.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getCharBitmap</a></li>
+<li><a href="mr_getScreenInfo.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getScreenInfo</a></li>
+<li><a href="mr_startShake.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_startShake</a></li>
+<li><a href="mr_playSound.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_playSound</a></li>
+<li><a href="mr_stopSound.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_stopSound</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 定时器接口</summary>
+<ul>
+<li><a href="mr_timerStart.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_timerStart</a></li>
+<li><a href="mr_timerStop.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_timerStop</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 文件系统接口</summary>
+<ul>
+<li><a href="mr_getLen.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getLen</a></li>
+<li><a href="mr_open.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_open</a></li>
+<li><a href="mr_read.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_read</a></li>
+<li><a href="mr_write.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_write</a></li>
+<li><a href="mr_close.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_close</a></li>
+<li><a href="mr_info.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_info</a></li>
+<li><a href="mr_seek.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_seek</a></li>
+<li><a href="mr_remove.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_remove</a></li>
+<li><a href="mr_rename.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_rename</a></li>
+<li><a href="mr_mkDir.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_mkDir</a></li>
+<li><a href="mr_rmDir.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_rmDir</a></li>
+<li><a href="mr_findStart.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_findStart</a></li>
+<li><a href="mr_findGetNext.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_findGetNext</a></li>
+<li><a href="mr_findStop.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_findStop</a></li>
+<li><a href="mr_ferrno.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_ferrno</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 通信接口</summary>
+<ul>
+<li><a href="mr_sendSms.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_sendSms</a></li>
+<li><a href="mr_call.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_call</a></li>
+<li><a href="mr_connectWAP.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_connectWAP</a></li>
+<li><a href="mr_getNetworkID.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getNetworkID</a></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 网络接口</summary>
+<ul>
+<li><a href="mr_initNetwork.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_initNetwork</a></li>
+<li><a href="mr_closeNetwork.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_closeNetwork</a></li>
+<li><a href="mr_getHostByName.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getHostByName</a></li>
+<li><a href="mr_socket.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_socket</a></li>
+<li><a href="mr_connect.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_connect</a></li>
+<li><a href="mr_closeSocket.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_closeSocket</a></li>
+<li><a href="mr_recv.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_recv</a></li>
+<li><a href="mr_send.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_send</a></li>
+<li><a href="mr_recvfrom.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_recvfrom</a></li>
+<li><a href="mr_sendto.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_sendto</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 本地UI接口</summary>
+<ul>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 菜单接口</summary>
+<ul>
+<li><a href="mr_menuCreate.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_menuCreate</a></li>
+<li><a href="mr_menuSetItem.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_menuSetItem</a></li>
+<li><a href="mr_menuShow.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_menuShow</a></li>
+<li><a href="mr_menuRelease.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_menuRelease</a></li>
+<li><a href="mr_menuRefresh.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_menuRefresh</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 对话框接口</summary>
+<ul>
+<li><a href="mr_dialogCreate.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_dialogCreate</a></li>
+<li><a href="mr_dialogRefresh.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_dialogRefresh</a></li>
+<li><a href="mr_dialogRelease.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_dialogRelease</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 文本框接口</summary>
+<ul>
+<li><a href="mr_textCreate.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_textCreate</a></li>
+<li><a href="mr_textRefresh.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_textRefresh</a></li>
+<li><a href="mr_textRelease.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_textRelease</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 编辑框接口</summary>
+<ul>
+<li><a href="mr_editCreate.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_editCreate</a></li>
+<li><a href="mr_editRelease.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_editRelease</a></li>
+<li><a href="mr_editGetText.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_editGetText</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 可扩展窗体接口</summary>
+<ul>
+<li><a href="mr_winCreate.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_winCreate</a></li>
+<li><a href="mr_winRelease.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_winRelease</a></li>
+</ul>
+</details></li>
+</ul></details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 其他系统基本接口</summary>
+<ul>
+<li><a href="mr_printf.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_printf</a></li>
+<li><a href="mr_mem_get.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_mem_get</a></li>
+<li><a href="mr_mem_free.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_mem_free</a></li>
+<li><a href="mr_exit.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_exit</a></li>
+<li><a href="mr_getTime.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getTime</a></li>
+<li><a href="mr_getDatetime.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getDatetime</a></li>
+<li><a href="mr_getUserInfo.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_getUserInfo</a></li>
+<li><a href="mr_sleep.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 扩展接口(mr_plat/mr_platEx)</summary>
+<a style="PADDING-LEFT: 20px" href="扩展接口.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 扩展接口(mr_plat/mr_platEx)</a>
+<ul>
+<li><a href="mr_plat.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat</a></li>
+<li><a href="mr_platEx.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx</a></li>
+<li><a href="code.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> code 定义</a></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 展讯平台专有接口</summary>
+<ul>
+<li><a href="mr_plat(1).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1) - 调节CPU频率</a></li>
+<li><a href="mr_plat(2).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2) - 获取平台可映射虚拟键数</a></li>
+<li><a href="mr_plat(3).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(3) - 获取虚拟键状态</a></li>
+<li><a href="mr_plat(4).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4) - nes特殊操作</a></li>
+<li><a href="mr_plat(5).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(5) - 保存模拟器游戏积分</a></li>
+<li><a href="mr_plat(6).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(6) - 读取模拟器游戏积分</a></li>
+<li><a href="mr_plat(7).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(7) - 按键音开启关闭控制</a></li>
+<li><a href="mr_plat(8).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(8) - 设置wap下载的.nes保存所使用的存储器</a></li>
+<li><a href="mr_platEx(11).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(11) - 获取手机平台的mp3存储目录名称</a></li>
+<li><a href="mr_platEx(12).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(12) - 获取手机平台的picture存储目录名称</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 本地UI扩展接口</summary>
+<ul>
+<li><a href="mr_platEx(1).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1) - 创建一个单/多选菜单</a></li>
+<li><a href="mr_platEx(2).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2) - 设置菜单项</a></li>
+<li><a href="mr_platEx(3).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3)</a></li>
+<li><a href="mr_platEx(4).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4)</a></li>
+<li><a href="mr_platEx(5).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5)</a></li>
+<li><a href="mr_plat(104).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(104) - 销毁窗口而不画屏幕</a></li>
+<li><a href="mr_platEx(5101).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5101) - 修改本地UI的左右软键文本</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 文件系统扩展接口</summary>
+<ul>
+<li><a href="mr_plat(1218).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1218) - 查询存储卡的状态</a></li>
+<li><a href="mr_plat(1231).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1231) - 获得当前文件的指针的位置</a></li>
+<li><a href="mr_platEx(1204).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1204) - 切换目录</a></li>
+<li><a href="mr_platEx(1305).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1305) - 获得指定盘符的剩余空间</a></li>
+<li><a href="mr_platEx(1306).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1306) - 获取存储设备的名称</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 网络扩展接口</summary>
+<ul>
+<li><a href="mr_plat(1001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1001) - 查询socket的连接状态</a></li>
+<li><a href="mr_plat(1002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1002) - 设置socket的连接等待时间</a></li>
+<li><a href="mr_platEx(1003).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1003) - 绑定一个socket到本机端口</a></li>
+<li><a href="mr_platEx(1226).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1226) - 获取PLMN</a></li>
+<li><a href="mr_plat(1327).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1327) - 查询WIFI是否可用</a></li>
+<li><a href="mr_plat(1328).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1328) - 设置是否使用WIFI联网</a></li>
+<li><a href="mr_platEx(6004).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6004) - 查询最后一次联网时间</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 后台程序接口</summary>
+<ul>
+<li><a href="mr_plat(1003).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1003) - 激活后台程序到前台</a></li>
+<li><a href="mr_platEx(1004).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1004) - 切换到后台运行</a></li>
+<li><a href="mr_platEx(1005).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1005) - 在状态栏上显示图标</a></li>
+<li><a href="mr_plat(1006).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1006) - 隐藏状态栏上的图标</a></li>
+<li><a href="mr_plat(1326).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1326) - 控制状态栏显示</a></li>
+<li><a href="mr_plat(1391).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1391) - 查询是否支持后台接口</a></li>
+<li><a href="mr_platEx(6000).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6000) - 查询桌面气泡框是否支持</a></li>
+<li><a href="mr_platEx(6001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6001) - 显示桌面气泡框</a></li>
+<li><a href="mr_platEx(6002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6002) - 隐藏桌面气泡框</a></li>
+<li><a href="mr_platEx(6003).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6003) - 是否在待机界面</a></li>
+<li><a href="mr_platEx(1323).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1323) - 设置异步转后台</a></li>
+<li><a href="mr_platEx(6005).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(6005) - 停止异步转后台</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 音频接口</summary>
+<ul>
+<li><a href="mr_platEx(201x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(201x) - 设备初始化</a></li>
+<li><a href="mr_platEx(202x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(202x) - 加载一个文件</a></li>
+<li><a href="mr_plat(1302).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1302) - 设置声音的大小</a></li>
+<li><a href="mr_platEx(203x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(203x) - 加载缓冲数据</a></li>
+<li><a href="mr_platEx(204x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(204x) - 从当前的位置开始播放</a></li>
+<li><a href="mr_platEx(205x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(205x) - 暂停播放</a></li>
+<li><a href="mr_platEx(206x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(206x) - 继续播放</a></li>
+<li><a href="mr_platEx(207x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(207x) - 停止播放</a></li>
+<li><a href="mr_platEx(208x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(208x) - 关闭设备</a></li>
+<li><a href="mr_platEx(209x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(209x) - 获取当前设备的状态</a></li>
+<li><a href="mr_platEx(210x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(210x) - 设置播放位置，已经播放了多少时间</a></li>
+<li><a href="mr_platEx(211x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(211x) - 设置播放位置，已经播放了相对文件或者缓冲的起始位置的偏移量</a></li>
+<li><a href="mr_platEx(212x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(212x) - 获取整首歌的播放时间</a></li>
+<li><a href="mr_platEx(213x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(213x) - 获取当前的播放进度时间</a></li>
+<li><a href="mr_platEx(215x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(215x) - 获取当前的播放进度时间</a></li>
+<li><a href="mr_platEx(216x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(216x) - 多媒体模块释放</a></li>
+<li><a href="mr_platEx(220x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(220x) - 占用IRAM</a></li>
+<li><a href="mr_platEx(221x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(221x) - 释放IRAM</a></li>
+<li><a href="mr_platEx(222x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(222x) - 多通道加载</a></li>
+<li><a href="mr_platEx(223x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(223x) - 多通道播放已经加载的数据</a></li>
+<li><a href="mr_platEx(224x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(224x) - 多通道播放停止</a></li>
+<li><a href="mr_platEx(225x).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(225x) - 多通道释放已经加载的数据</a></li>
+<li><a href="mr_plat(102).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(102) - 告知驱动PCM写入数据的绝对地址</a></li>
+<li><a href="mr_plat(103).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(103) - 取得PCM数据已经播放掉的数据的绝对地址</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> CAMERA 接口</summary>
+<ul>
+<li><a href="mr_plat(2500).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2500) - 初始化</a></li>
+<li><a href="mr_platEx(2501).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2501) - 进入预览状态</a></li>
+<li><a href="mr_plat(2502).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2502) - 暂停</a></li>
+<li><a href="mr_plat(2503).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2503) - 恢复</a></li>
+<li><a href="mr_plat(2504).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2504) - 关闭</a></li>
+<li><a href="mr_platEx(2505).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2505) - 拍照</a></li>
+<li><a href="mr_plat(2506).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2506) - 获得缩放等级</a></li>
+<li><a href="mr_plat(2507).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2507) - 放大</a></li>
+<li><a href="mr_plat(2508).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2508) - 缩小</a></li>
+<li><a href="mr_platEx(2509).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2509) - 获取预览数据</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 录音接口</summary>
+<ul>
+<li><a href="mr_platEx(2700).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2700) - 开始录音</a></li>
+<li><a href="mr_plat(2701).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2701) - 暂停</a></li>
+<li><a href="mr_plat(2702).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2702) - 恢复</a></li>
+<li><a href="mr_plat(2703).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(2703) - 停止</a></li>
+<li><a href="mr_platEx(2704).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(2704) - 获得PCM数据</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 图片接口</summary>
+<ul>
+<li><a href="mr_platEx(3001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3001) - 获取图片信息</a></li>
+<li><a href="mr_platEx(3002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3002) - 图片解码</a></li>
+<li><a href="mr_platEx(3003).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3003) - 查询解码状态</a></li>
+<li><a href="mr_platEx(3004).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3004) - gif解码</a></li>
+<li><a href="mr_platEx(3005).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3005) - 释放gif解码资源</a></li>
+<li><a href="mr_platEx(3007).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3007) - 绘制BUFFER</a></li>
+<li><a href="mr_platEx(3008).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3008) - 获取ACTIVE LAYER</a></li>
+<li><a href="mr_platEx(3009).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3009) - DMA异步刷屏</a></li>
+<li><a href="mr_platEx(3010).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3010) - 直接调用平台接口将图片绘制到指定的矩形内</a></li>
+<li><a href="mr_platEx(3011).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3011) - 显示gif动画</a></li>
+<li><a href="mr_plat(3012).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(3012) - 停止动画</a></li>
+<li><a href="mr_platEx(3013).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3013)</a></li>
+<li><a href="mr_platEx(3014).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3014) - 绘制mtk资源格式的图片</a></li>
+<li><a href="mr_platEx(3015).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(3015) - 绘制mtk资源格式的gif动画</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 电话本接口</summary>
+<a style="PADDING-LEFT: 20px" href="电话本接口.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 电话本接口</a>
+<ul>
+<li><a href="mr_platEx(4011).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4011) - 电话本搜索</a></li>
+<li><a href="mr_platEx(4012).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4012) - 电话本编辑</a></li>
+<li><a href="mr_platEx(4016).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4016) - 获取条目信息</a></li>
+<li><a href="mr_plat(4017).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4017) - 拷贝记录</a></li>
+<li><a href="mr_platEx(4021).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4021) - 设置本机号码</a></li>
+<li><a href="mr_plat(4022).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4022) - 获取本机号码</a></li>
+<li><a href="mr_plat(4031).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4031) - 删除所有记录</a></li>
+<li><a href="mr_platEx(4032).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4032) - 获取电话本条数</a></li>
+<li><a href="mr_platEx(4033).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4033) - 获取电话本操作状态</a></li>
+<li><a href="mr_platEx(4041).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4041) - 创建平台电话本浏览对象</a></li>
+<li><a href="mr_platEx(4042).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4042) - 获得选中记录信息</a></li>
+<li><a href="mr_platEx(4043).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(4043) - 销毁电话本浏览对象</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> * 短信模块接口</summary>
+<ul>
+<li><a href="mr_platEx(1008).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1008) - 调用mtk的发送短信界面</a></li>
+<li><a href="mr_plat(1011).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1011) - 设置收到新短信的时候是否显示提示界面</a></li>
+<li><a href="mr_plat(1100).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1100) - 获得短信操作的状态</a></li>
+<li><a href="mr_plat(1101).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1101) - 获得短信信箱中短息的条数</a></li>
+<li><a href="mr_platEx(1102).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1102) - 获得指定一条短信的信息</a></li>
+<li><a href="mr_platEx(1103).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1103) - 读取一条短信</a></li>
+<li><a href="mr_platEx(1104).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1104) - 删除一条短信</a></li>
+<li><a href="mr_plat(1105).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1105) - 发送获得手机和sim卡存储空间</a></li>
+<li><a href="mr_plat(1106).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1106) - 获得短信中心</a></li>
+<li><a href="mr_platEx(1203).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1203) - 发送彩信</a></li>
+<li><a href="mr_platEx(4101).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> * mr_platEx(4101) - 设置要自动删除短信的条件</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 数据账号接口</summary>
+<a style="PADDING-LEFT: 20px" href="数据账号接口.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 数据账号接口</a>
+<ul>
+<li><a href="mr_plat(1107).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1107) - 发送获得apn信息的请求</a></li>
+<li><a href="mr_platEx(1108).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1108) - 从缓存中读取apn信息</a></li>
+<li><a href="mr_platEx(1109).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1109) - 设置apn信息</a></li>
+<li><a href="mr_plat(1110).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1110) - 设置apn使用的标志位</a></li>
+<li><a href="mr_plat(1111).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1111) - 调用mtk的界面设置apn</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 手机信息查询及设置接口</summary>
+<ul>
+<li><a href="mr_plat(1205).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1205) - 获取手机是否是触摸屏信息</a></li>
+<li><a href="mr_plat(1214).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1214) - 设置挂机键是否回IDLE</a></li>
+<li><a href="mr_platEx(1009).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1009) - 设置墙纸</a></li>
+<li><a href="mr_platEx(1116).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1116) - 获取编译时间</a></li>
+<li><a href="mr_platEx(1117).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1117) - 获取硬件版本号</a></li>
+<li><a href="mr_platEx(1221).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1221) - 获取APPLIST标题</a></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> LCD旋转</summary>
+<ul>
+<li><a href="mr_plat(101).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(101) - 设置旋转角度</a></li>
+<li><a href="mr_plat(105).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(105) - 获取旋转角度</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 主题</summary>
+<ul>
+<li><a href="mr_platEx(1112).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1112) - 激活手机主题</a></li>
+<li><a href="mr_plat(1113).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1113) - 还原手机主题</a></li>
+<li><a href="mr_plat(1114).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1114) - 获得当前激活的主题的appid</a></li>
+<li><a href="mr_plat(1115).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1115) - 设置主题中主菜单当前选中的宫格的index</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 铃音</summary>
+<ul>
+<li><a href="mr_platEx(1208).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1208) - 设置手机铃声</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 语言</summary>
+<ul>
+<li><a href="mr_plat(1206).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1206) - 获取手机当前设置的语言</a></li>
+<li><a href="mr_platEx(0x90002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(0x90002)</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 情景模式</summary>
+<ul>
+<li><a href="mr_plat(1213).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1213) - 获得手机当前的情景模式</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 字体</summary>
+<ul>
+<li><a href="mr_platEx(1201).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1201) - 获取字宽字高</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> SIM卡信息</summary>
+<ul>
+<li><a href="mr_plat(1004).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1004) - 设置使用SIM卡</a></li>
+<li><a href="mr_platEx(1307).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1307) - 获取SIM卡个数信息</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 时间日期</summary>
+<ul>
+<li><a href="mr_platEx(5001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5001) - 获取手机时间</a></li>
+<li><a href="mr_platEx(5002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5002) - 设置手机时间</a></li>
+<li><a href="mr_platEx(5011).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5011) - 设置手机闹钟</a></li>
+<li><a href="mr_platEx(5013).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5013) - 获得手机闹钟个数</a></li>
+<li><a href="mr_platEx(5014).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5014) - 设置闹钟</a></li>
+<li><a href="mr_platEx(0x90001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(0x90001) - 获取当前时区信息</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> NES模拟器接口</summary>
+<ul>
+<li><a href="mr_platEx(1210).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1210) - 获取NES模拟器按键布局</a></li>
+<li><a href="mr_platEx(1220).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1220) - 获得rom目录</a></li>
+<li><a href="mr_platEx(1225).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1225) - 获取手柄信息</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> * 获取菜单树接口</summary>
+<ul>
+<li><a href="mr_platEx(106).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> * mr_platEx(106) - 获得手机菜单树</a></li>
+<li><a href="mr_platEx(1324).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> * mr_platEx(1324) - 获得主菜单信息</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 文件浏览接口</summary>
+<ul>
+<li><a href="mr_platEx(1401).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1401) - 初始化筛选器</a></li>
+<li><a href="mr_platEx(1402).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1402) - 设置要显示的文件类型</a></li>
+<li><a href="mr_platEx(1403).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1403) - 设置不要显示的文件类型</a></li>
+<li><a href="mr_platEx(1404).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1404) - 调用平台本地浏览界面</a></li>
+<li><a href="mr_platEx(1405).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1405) - 获得选中的文件路径</a></li>
+<li><a href="mr_platEx(1406).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1406) - 销毁浏览器对象</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 动感芯片接口</summary>
+<a style="PADDING-LEFT: 20px" href="动感芯片接口.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 动感芯片接口</a>
+<ul>
+<li><a href="mr_plat(4001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4001) - 停止动感芯片监听</a></li>
+<li><a href="mr_plat(4002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4002) - 给动感芯片上电</a></li>
+<li><a href="mr_plat(4003).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4003) - 给动感芯片断电</a></li>
+<li><a href="mr_plat(4004).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4004) - 动感芯片监听晃动模式</a></li>
+<li><a href="mr_plat(4005).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4005) - 动感芯片监听倾斜模式</a></li>
+<li><a href="mr_plat(4006).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(4006) - 获取动感芯片上送的数值的范围值</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 层接口</summary>
+<ul>
+<li><a href="mr_platEx(1308).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1308) - 设置参与刷新的层</a></li>
+<li><a href="mr_platEx(1309).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1309) - 创建层</a></li>
+<li><a href="mr_plat(1310).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1310) - 释放层</a></li>
+<li><a href="mr_platEx(1311).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1311) - 获得base层的句柄</a></li>
+<li><a href="mr_plat(1312).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1312) - 设置激活层</a></li>
+<li><a href="mr_platEx(1313).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1313) - 设置层位置</a></li>
+<li><a href="mr_plat(1314).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1314) - 设置png的背景层</a></li>
+<li><a href="mr_platEx(1315).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1315) - 获取激活层信息</a></li>
+<li><a href="mr_platEx(1316).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1316) - 层叠加</a></li>
+<li><a href="mr_plat(1317).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1317) - 设置层的透明值</a></li>
+<li><a href="mr_plat(1318).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1318) - 关闭层的透明属性</a></li>
+<li><a href="mr_plat(1319).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1319) - 设置层的透明色</a></li>
+<li><a href="mr_plat(1320).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1320) - 关闭层的透明色处理</a></li>
+<li><a href="mr_plat(1321).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1321) - 设置刷屏锁</a></li>
+<li><a href="mr_plat(1322).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1322) - 取消刷屏锁</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 信号强度接口</summary>
+<ul>
+<li><a href="mr_plat(1016).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1016) -初始化</a></li>
+<li><a href="mr_platEx(1017).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1017) - 获得信号强度</a></li>
+<li><a href="mr_plat(1018).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1018) - 关闭</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 背光接口</summary>
+<ul>
+<li><a href="mr_plat(1020).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1020) - 获得当前背光状态</a></li>
+<li><a href="mr_platEx(1222).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1222) - 设置背光一直为开</a></li>
+<li><a href="mr_platEx(1223).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1223) - 恢复背光设置</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 位置信息接口</summary>
+<ul>
+<li><a href="mr_plat(1215).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1215) - 初始化</a></li>
+<li><a href="mr_plat(1216).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1216) - 关闭</a></li>
+<li><a href="mr_platEx(1224).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1224) - 获取小区ID</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 内存扩展接口</summary>
+<ul>
+<li><a href="mr_platEx(1001).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1001) - 获取屏幕缓冲</a></li>
+<li><a href="mr_platEx(1002).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1002) - 释放屏幕缓冲</a></li>
+<li><a href="mr_platEx(1012).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1012) - 申请内部RAM</a></li>
+<li><a href="mr_platEx(1013).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1013) - 释放内部RAM</a></li>
+<li><a href="mr_platEx(1014).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1014) - 申请扩展内存</a></li>
+<li><a href="mr_platEx(1015).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1015) - 释放扩展内存</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> QQ相关接口</summary>
+<ul>
+<li><a href="mr_platEx(1006).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1006) - 启动平台QQ</a></li>
+<li><a href="mr_platEx(1332).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1332) -SKYQQ接口</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 天气预报相关接口</summary>
+<ul>
+<li><a href="mr_plat(1217).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1217) - 退出天气预报</a></li>
+<li><a href="mr_platEx(5015).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5015) - 获得天气信息</a></li>
+<li><a href="mr_platEx(5016).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5016) - 进入天气预报</a></li>
+<li><a href="mr_platEx(5017).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5017) - 退出天气预报</a></li>
+<li><a href="mr_platEx(5018).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5018) - 获取天气通知</a></li>
+<li><a href="mr_platEx(5019).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(5019) - 获取天气桌面信息</a></li>
+</ul>
+</details></li>
+<li><details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 其他未归类接口</summary>
+<ul>
+<li><a href="mr_plat(1211).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1211) - 生成随机数</a></li>
+<li><a href="mr_plat(1325).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1325) - 绘制主菜单背景</a></li>
+<li><a href="mr_plat(1333).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_plat(1333) - 进入TODO LIST</a></li>
+<li><a href="mr_platEx(1207).htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> mr_platEx(1207) - UNICODE 转 GB</a></li>
+</ul>
+</details></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> 附录</summary>
+<ul>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 系统常量定义</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 系统类型定义</a></li>
+<li><a href="平台版本号规则.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 平台版本号规则</a></li>
+<li><a href="接口跟踪表.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 接口跟踪表</a></li>
+<li><a href="接口平台实现一览表.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 接口平台实现一览表</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 发布记录</a></li>
+</ul>
+</details>
+</li>
+
+<li>
+<details>
+<summary><i class="fa fa-book" aria-hidden="true"></i> FAQ</summary>
+<ul>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> MTK平台如何添加菜单</a></li>
+<li><a href="$$unsavedpage.htm"><i class="fa fa-file-text-o" aria-hidden="true"></i> 什么叫固化及多入口</a></li>
+</ul>
+</details>
+</li>
+</ul>
+
+
+<p>所有带 <i class="fa fa-book" aria-hidden="true"></i> 的标题均可点击展开</p>
+<p><a href="SKYENGINE-API.chm">当前文档下载</a>  </p>
+<p>其他文档、开发环境可以前往 <a href="http://sohehe4.ysepan.com/" target="_blank" rel="noopener">http://sohehe4.ysepan.com/</a> 或 <a href="https://github.com/vmrp/mrpdev" target="_blank" rel="noopener">https://github.com/vmrp/mrpdev</a> 下载查看</p>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3awYrDMAxF0f7/T2dgVoWS9D7JGSby9SoUN/XpQsiSXi+8jt/1/vy+zvZ8Pl+/mexvLRkyZDyWcVwucsTr/Z87zz4h7z/7lgwZMnZg1IIseQP/C8jfcfq5DBkyZIB0jQdHEpplyJAhY1XA7ezhF2YZMmTI4Cna9SGuw2sNectdXIYMGQ9k1BoDf/N8e39DhgwZ/55xhIuHxdrvFk8lQ4aM0Yx03IEkfxzAy20oHMuQIWMDxqrRivS6m45foHKbDBkyBjH41THdmQ5PLOtsyJAhYxyjnybyBJGMX6wK6DJkyJjE4MlZLaWrFePSERAZMmTMZvAmZa0N2W8wkDAtQ4aM2Yz0uLw0trZV8OU8MmTIGM1IE7ta35CEzvRiLEOGjH0Y3ForrtWamvHYhwwZMjZmoIQMF87SdmZrWkSGDBmDGGmLsfaTaeBeNuMmQ4aMEYx+6zEdAqsV476EexkyZGzDSIv+tXbmqualDBky9mGsutDyBmTtEhukqjJkyBjHSIv7/Prab44GZ5AhQ8YGjE7yRw7RH8VAA2EyZMgYyuCvq5XV0kZCrRUqQ4aM2YwjXLWDpt9Ng68MGTJmM9Jgl7YWalfTNJWUIUPGDgyeGvJKFx+26A9kyJAhYx8GCYv8WGkZLj0nqh3KkCFjS0Z6Eb1uD6TlPDTjJkOGDBlhmrhqD2m1ypAhYwdGLeTx/ek7b+/EypAh41GMzgWS/CQP34TduQbLkCHjgYwf4QdLqSpKe20AAAAASUVORK5CYII=" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2022/java-zi-fu-chuan-de-jia-mi-suan-fa/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java字符串的加密算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/yun-jin-yao-yue-ren-wu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">云堇 邀约任务</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

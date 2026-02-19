@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>Mrp商店下载</title>
+</head>
+<body>
+  <script>
+  fetch('/data/MrpStoreUpdate.json')
+  	.then(response => response.json())
+  	.then(data => {
+  		window.location.href = data.link;
+  	})
+  	.catch(console.error)
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(3013)</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      3013, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>MR_SET_ANIMATION_BLT_CB，未实现。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>输入参数的起始地址</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>输入参数大小（字节数）</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>输出参数的起始地址</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>输出参数大小（字节数）</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT 
+        size=2>回调函数，由移植层返回给应用，如果应用成发现这个返回值为非空，那么需要在使用完返回数据后调用这个cb函数来释放移植层分配的资源</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp; 
+  成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 
+  失败<BR>MR_IGNORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  不支持该功能</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>Mythroad透明调用这个接口。APP层上的对应命令将会透明调用至移植层，移植层的返回值也将透明返回至APP层。该扩展接口可用于特殊的平台命令/操作。cb的输出参数是资源清理回调函数，函数的类型定义如下：<BR>typedef 
+  void (*MR_PLAT_EX_CB)(uint8* output, int32 
+  output_len);<BR>若移植层需要在mr_platEx函数返回后进行清理工作（比如output的内存是移植层动态申请的，需要VM层使用完后释放），可以给cb赋值，VM层在使用过output后，会调用cb。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>&nbsp;</BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

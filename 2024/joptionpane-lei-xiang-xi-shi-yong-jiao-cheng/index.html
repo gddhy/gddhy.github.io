@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>超详细的Java弹窗样式及使用教程【JOptionPane类详细使用教程】 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JOptionPane类是Swing程序设计中进行弹窗设置的主要方式，本文将详细对Java弹窗进行总结，包括弹窗的设置方法和对内容的读取！敬请阅读！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超详细的Java弹窗样式及使用教程【JOptionPane类详细使用教程】">
+<meta property="og:url" content="https://gddhy.github.io/2024/joptionpane-lei-xiang-xi-shi-yong-jiao-cheng/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="JOptionPane类是Swing程序设计中进行弹窗设置的主要方式，本文将详细对Java弹窗进行总结，包括弹窗的设置方法和对内容的读取！敬请阅读！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超详细的Java弹窗样式及使用教程【JOptionPane类详细使用教程】">
+<meta name="twitter:description" content="JOptionPane类是Swing程序设计中进行弹窗设置的主要方式，本文将详细对Java弹窗进行总结，包括弹窗的设置方法和对内容的读取！敬请阅读！">
+<meta name="twitter:image" content="https://gddhy.github.io/img/preloader.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-JOptionPane类详细使用教程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      超详细的Java弹窗样式及使用教程【JOptionPane类详细使用教程】
+    </h1>
+  
+
+        
+        
+
+<a href="/2024/joptionpane-lei-xiang-xi-shi-yong-jiao-cheng/" class="archive-article-date">
+  	<time datetime="2024-01-19T12:09:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-19</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:1.4k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈5分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>JOptionPane类是Swing程序设计中进行弹窗设置的主要方式，本文将详细对Java弹窗进行总结，包括弹窗的设置方法和对内容的读取！敬请阅读！</p>
+</blockquote>
+<a id="more"></a>
+
+<p>Hello！你好哇，我是灰小猿，一个超会写bug的沙雕程序猿！</p>
+<p>今天来和大家分享一个Swing程序设计中关于JOptionPane类的使用，该类的作用呢，其实主要就是设置弹窗，所以在这里也就和大家总结了常用的弹窗设置的方法以及JOptionPane类详细使用说明！</p>
+<p>话不多说上教程！</p>
+<p>JOptionPane类属于Swing组件中的一种，所以导入方式如下：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">import</span> javax.swing.JOptionPane;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="四种消息提示框"><a href="#四种消息提示框" class="headerlink" title="四种消息提示框"></a>四种消息提示框</h4><p>在该类中常用的常用的四种消息提示框为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">showConfirmDialog();</th>
+<th align="center">确认对话框</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">showInputDialog();</td>
+<td align="center">输入对话框</td>
+</tr>
+<tr>
+<td align="center">showMessageDialog();</td>
+<td align="center">消息对话框</td>
+</tr>
+<tr>
+<td align="center">showOptionDialog();</td>
+<td align="center">选择对话框</td>
+</tr>
+</tbody></table>
+<h4 id="五种消息类型"><a href="#五种消息类型" class="headerlink" title="五种消息类型"></a>五种消息类型</h4><p>并且每一种消息框都有五种不同的消息类型，消息类型不同时，弹窗所对应的图标也就不同，以下是这五种消息类型：</p>
+<table>
+<thead>
+<tr>
+<th align="center">消息类型</th>
+<th align="center">消息参数</th>
+<th align="center">显示图标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">错误消息</td>
+<td align="center">ERROR_MESSAGE</td>
+<td align="center"><img src="/img/preloader.gif" data-original="20200818165317141.png" alt="image"></td>
+</tr>
+<tr>
+<td align="center">提示消息</td>
+<td align="center">INFORMATION_MESSAGE</td>
+<td align="center"><img src="/img/preloader.gif" data-original="20200818165327684.png" alt="img"></td>
+</tr>
+<tr>
+<td align="center">警告消息</td>
+<td align="center">WARNING_MESSAGE</td>
+<td align="center"><img src="/img/preloader.gif" data-original="20200818165334754.png" alt="img"></td>
+</tr>
+<tr>
+<td align="center">提问消息</td>
+<td align="center">QUESTION_MESSAGE</td>
+<td align="center"><img src="/img/preloader.gif" data-original="20200818165337796.png" alt="img"></td>
+</tr>
+<tr>
+<td align="center">简约无图标</td>
+<td align="center">PLAIN_MESSAGE</td>
+<td align="center">无图标，直接显示消息内容</td>
+</tr>
+</tbody></table>
+<p>在使用不同类型的消息框时，输入不同的消息类型参数，就可以得到相应的消息框。</p>
+<h4 id="九种对话框参数"><a href="#九种对话框参数" class="headerlink" title="九种对话框参数"></a>九种对话框参数</h4><p>每一种消息提示框都对应有不同的参数的方法，从而得到不同的效果，但总结起来，这四种消息提示框的方法中都基本需要这九个参数：</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">parentComponent</td>
+<td align="center">对话框所在的容器</td>
+</tr>
+<tr>
+<td align="center">Message</td>
+<td align="center">对话框现实的内容</td>
+</tr>
+<tr>
+<td align="center">Title</td>
+<td align="center">对话框标题</td>
+</tr>
+<tr>
+<td align="center">Option type</td>
+<td align="center">选择按钮类型</td>
+</tr>
+<tr>
+<td align="center">Message type</td>
+<td align="center">消息类型</td>
+</tr>
+<tr>
+<td align="center">Icon</td>
+<td align="center">自定义消息图标</td>
+</tr>
+<tr>
+<td align="center">initialSelectionValue</td>
+<td align="center">默认选项或信息</td>
+</tr>
+<tr>
+<td align="center">selectionValues</td>
+<td align="center">选择选项</td>
+</tr>
+<tr>
+<td align="center">Options</td>
+<td align="center">操作选项</td>
+</tr>
+</tbody></table>
+<p>因为这四种对话框中所需要的参数都是以上九种，所以接下来对每一种对话框进行分析，</p>
+<h4 id="确认对话框"><a href="#确认对话框" class="headerlink" title="确认对话框"></a>确认对话框</h4><p>确认对话框（showConfirmDialog）有以下四种构造函数，其中的参数与上表相对应：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">parentComponent</span>, <span class="params">message</span>)</span></span><br><span class="line"><span class="number">2</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">optionType</span>)</span></span><br><span class="line"><span class="number">3</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">optionType</span>,<span class="params">messageType</span>)</span></span><br><span class="line"><span class="number">4</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">optionType</span>, <span class="params">messageType</span>, <span class="params">icon</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>实例如下</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">null</span>,<span class="string">"这是确认对话框吗？"</span>,<span class="string">"提示"</span>,JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE)</span>;	<span class="comment">//确认对话框</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818165632962.png" alt="img"></p>
+<p>对确认消息对话框消息进行接收的方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> userOption =  <span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">ConfirmDialog(<span class="params">null</span>,<span class="string">"这是确认对话框吗？"</span>,<span class="string">"提示"</span>,JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE)</span>;	<span class="comment">//确认对话框</span></span><br><span class="line"><span class="comment">//如果用户选择的是OK</span></span><br><span class="line"><span class="keyword">if</span> (userOption<span class="operator"> == </span>JOptionPane.OK_OPTION) &#123;</span><br><span class="line"> <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>err.println(<span class="string">"是"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line"> <span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(<span class="string">"否"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="输入对话框"><a href="#输入对话框" class="headerlink" title="输入对话框"></a>输入对话框</h4><p>输入对话框（showInputDialog）有六种构造函数，分别如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">message</span>)</span>;</span><br><span class="line"><span class="number">2</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">parentComponent</span>, <span class="params">message</span>)</span>;</span><br><span class="line"><span class="number">3</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">message</span>, <span class="params">initialSelectionValue</span>)</span>;</span><br><span class="line"><span class="number">4</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">parentComponent</span>,<span class="params">message</span>,<span class="params">initialSelectionValue</span>)</span></span><br><span class="line"><span class="number">5</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">parentComponent</span>,<span class="params">message</span>, <span class="params">title</span>, <span class="params">messageType</span>)</span>;</span><br><span class="line"><span class="number">6</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">messageType</span>, <span class="params">icon</span>, <span class="params">selectionValues</span>, <span class="params">initialSelectionValue</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>下面有两个关于该对话框的实例：</p>
+<p>1、显示输入框，供用户输入，实例如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">null</span>,<span class="string">"请输入你的生日："</span>,<span class="string">"输入"</span>,JOptionPane.WARNING_MESSAGE)</span>;		<span class="comment">//输入对话框</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818170039284.png" alt="img"></p>
+<p>普通输入框情况下获取用户输入内容的方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String info = <span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">null</span>,<span class="string">"请输入你的生日："</span>,<span class="string">"输入"</span>,JOptionPane.WARNING_MESSAGE)</span>;		<span class="comment">//输入对话框</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(info);</span><br></pre></td></tr></table></figure>
+
+<p>2、设置一个下拉框，供用户选择输入，最后一个参数表示下拉框默认显示的内容，实例如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String <span class="literal">[]</span> options = &#123;<span class="string">"A选项"</span>,<span class="string">"B选项"</span>,<span class="string">"C选项"</span>,<span class="string">"D选项"</span>&#125;;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">InputDialog(<span class="params">null</span>,<span class="string">"请输入你的选项："</span>,<span class="string">"提示"</span>,JOptionPane.QUESTION_MESSAGE,<span class="params">null</span>,<span class="params">options</span>,<span class="params">options</span>[2])</span>;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818170317641.png" alt></p>
+<p>下拉框情况下获取用户输入内容的方法：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String [] <span class="keyword">options</span> = &#123;"A选项","B选项","C选项","D选项"&#125;;</span><br><span class="line">String <span class="keyword">info</span> =  (String)JOptionPane.showInputDialog(<span class="keyword">null</span>,"请输入你的选项：","提示",JOptionPane.QUESTION_MESSAGE,<span class="keyword">null</span>,<span class="keyword">options</span>,<span class="keyword">options</span>[<span class="number">2</span>]);</span><br><span class="line"><span class="keyword">System</span>.<span class="keyword">out</span>.println(<span class="keyword">info</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="消息对话框"><a href="#消息对话框" class="headerlink" title="消息对话框"></a>消息对话框</h4><p>消息对话框（showMessageDialog）有三种构造函数，具体如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">MessageDialog(<span class="params">parentComponent</span>, <span class="params">message</span>)</span>;</span><br><span class="line"><span class="number">2</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">MessageDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">messageType</span>)</span>;</span><br><span class="line"><span class="number">3</span>、<span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">MessageDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">messageType</span>, <span class="params">icon</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>实例如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">MessageDialog(<span class="params">null</span>,<span class="string">"这里是消息提示对话框！"</span>,<span class="string">"消息提示"</span>,JOptionPane.WARNING_MESSAGE)</span>;	<span class="comment">//消息对话框</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818170613202.png" alt></p>
+<h4 id="选择对话框"><a href="#选择对话框" class="headerlink" title="选择对话框"></a>选择对话框</h4><p>选择对话框（howOptionDialog）只有一种构造函数如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">OptionDialog(<span class="params">parentComponent</span>, <span class="params">message</span>, <span class="params">title</span>, <span class="params">optionType</span>, <span class="params">messageType</span>, <span class="params">icon</span>, <span class="params">options</span>, <span class="params">initialValue</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>使用实例如下。最后一个参数表示默认选择的内容，：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String <span class="literal">[]</span> options = &#123;<span class="string">"A选项"</span>,<span class="string">"B选项"</span>,<span class="string">"C选项"</span>,<span class="string">"D选项"</span>&#125;;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">OptionDialog(<span class="params">null</span>,<span class="string">"请选择你的选项："</span>,<span class="string">"提示"</span>,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,<span class="params">null</span>,<span class="params">options</span>,<span class="params">options</span>[0])</span>;		<span class="comment">//选择对话框*/</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818170737500.png" alt></p>
+<p>选择对话框下获取用户选项的方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String <span class="literal">[]</span> options = &#123;<span class="string">"A选项"</span>,<span class="string">"B选项"</span>,<span class="string">"C选项"</span>,<span class="string">"D选项"</span>&#125;;</span><br><span class="line"><span class="built_in">int</span> n =  <span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">OptionDialog(<span class="params">null</span>,<span class="string">"请选择你的选项："</span>,<span class="string">"提示"</span>,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,<span class="params">null</span>,<span class="params">options</span>,<span class="params">options</span>[0])</span>;		<span class="comment">//选择对话框*/</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.println(options<span class="literal">[<span class="identifier">n</span>]</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义消息图标"><a href="#自定义消息图标" class="headerlink" title="自定义消息图标"></a>自定义消息图标</h4><p>自定义对话框图标的方法如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ImageIcon icon = <span class="keyword">new</span> <span class="constructor">ImageIcon(<span class="string">"it.jpg"</span>)</span>;	<span class="comment">//注意设置图片尺寸，50*50px较适合</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">JOptionPane</span>.</span></span>show<span class="constructor">MessageDialog(<span class="params">null</span>, <span class="string">"这是自定义图标！"</span>,<span class="string">"提示"</span>,JOptionPane.WARNING_MESSAGE,<span class="params">icon</span>)</span>;</span><br><span class="line"><span class="comment">//该消息框的提示图标会被自定义的图标覆盖掉</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：<br><img src="/img/preloader.gif" data-original="20200818170925372.png" alt></p>
+<p>关于JOptionPane类中弹窗的使用就先分享到这里，之后还会对其他使用继续更新！</p>
+<p>觉得有用记得点赞关注哟！</p>
+<p>大灰狼陪你一起进步！</p>
+<p>同时你也可以关注我的微信公众号“灰狼洞主”后台回复“Java笔记”获取Java精讲视频、面试宝典、项目案例剖析、项目架构等超多资料分享！</p>
+<p><img src="/img/preloader.gif" data-original="20200818171130454.jpg" alt></p>
+<blockquote>
+<p>转载自<a href="https://blog.csdn.net/weixin_44985880/article/details/108081685" target="_blank" rel="noopener">灰小猿-超详细的Java弹窗样式及使用教程【JOptionPane类详细使用教程】</a></p>
+</blockquote>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3awY7iMBAEUP7/p9nzagRT1W2zrPRyQkxI/DxS3Kn24xEfzx/Hz7++P/P99+/vm5y5OvDw8PDWQ88H9+o6yRCfwZFP4sux4eHh4V3j5Q/lnJ1P3PsJyhcJPDw8vO/kRRddVLZJKY+Hh4f3f/GSAZ2dlH+87uHh4eEtwoj30UNeLufF90ezFjw8PLyYl3eRvufzlf4eHh4e3rqrngevs2lKWmhtw+yvK+Dh4eFd4M1C2LzIPlX+5ufj4eHhfYY3e5S38UEe++63GuDh4eHd5s22Dsw2s+akWdpQ/3/w8PDwFrz8lps2VXv3fKKj/h4eHh7eId4snG23QM2GlU/iYz9cPDw8vHi0+81VN3Y05AtG0QDDw8PDO8prH75tyZu3/2ehQ/HGgIeHh3eIt9ku0IatszvWMDw8PLyP8NrL5Rutish1sWgVbwx4eHh4I96shG2/T8DJ/6FdYPDw8PDu8ZIHd37jUyHspiFX7InAw8PDK3mzRlQe0SY3nk1Nu1Tg4eHhneXlL/ybkrctwfOx/XI+Hh4e3lFe8rM2mGh57d2LgBgPDw/vAm/WAGu3F7Rl8b64X20dwMPDwyt5+av+KuEYhREzNh4eHt4N3qbAPRXUJr/dLGB4eHh4Z3mbbU/59+0dZwtGHUbg4eHhLXhtWZyfn0cVbQhSvDHg4eHhXeAlhXVbUufhbHvHPDTBw8PDu8dLtgi0DbCkXN5EwNGE4uHh4R3lPcsjb/m3Ie++5fZyTxkeHh7eUd7sgbuJcWcLT/75wHqCh4eHF/fWE0D+q9kmqqRATxYGPDw8vM/wNp2jNm6YxbuzIBgPDw/ve3jtQBNkuyxdXBjw8PDwPsg7G1vMing8PDy8z/DaQCEPatvFoy3Hf0Hi4eHhXeBtXvjbQWzAs6gCDw8P7yjvD0h7xToNVnF7AAAAAElFTkSuQmCC" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/shi-yong-java-diao-yong-cmd-ming-ling/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          使用Java调用cmd命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/kong-zhi-tai-cao-zuo-da-yin-ji/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">控制台操作打印机</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#四种消息提示框"><span class="toc-number">1.</span> <span class="toc-text">四种消息提示框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#五种消息类型"><span class="toc-number">2.</span> <span class="toc-text">五种消息类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#九种对话框参数"><span class="toc-number">3.</span> <span class="toc-text">九种对话框参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#确认对话框"><span class="toc-number">4.</span> <span class="toc-text">确认对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输入对话框"><span class="toc-number">5.</span> <span class="toc-text">输入对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#消息对话框"><span class="toc-number">6.</span> <span class="toc-text">消息对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择对话框"><span class="toc-number">7.</span> <span class="toc-text">选择对话框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义消息图标"><span class="toc-number">8.</span> <span class="toc-text">自定义消息图标</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

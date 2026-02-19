@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>仿酷安客户端的主题切换动画效果 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是一个仿酷安主题切换的动画，之前是在 郭霖的微信公众号 上了解到的，最近想要使用时发现按照Github上的方法添加依赖时已经无法使用，作者在Github上没有留下源码，不过好在在作者Gitee中找到了这份源码，可以直接拿来使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="仿酷安客户端的主题切换动画效果">
+<meta property="og:url" content="https://gddhy.github.io/2022/fang-ku-an-ke-hu-duan-de-zhu-ti-qie-huan-dong-hua-xiao-guo/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:description" content="这是一个仿酷安主题切换的动画，之前是在 郭霖的微信公众号 上了解到的，最近想要使用时发现按照Github上的方法添加依赖时已经无法使用，作者在Github上没有留下源码，不过好在在作者Gitee中找到了这份源码，可以直接拿来使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="仿酷安客户端的主题切换动画效果">
+<meta name="twitter:description" content="这是一个仿酷安主题切换的动画，之前是在 郭霖的微信公众号 上了解到的，最近想要使用时发现按照Github上的方法添加依赖时已经无法使用，作者在Github上没有留下源码，不过好在在作者Gitee中找到了这份源码，可以直接拿来使用">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-仿酷安客户端的主题切换动画效果" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      仿酷安客户端的主题切换动画效果
+    </h1>
+  
+
+        
+        
+
+<a href="/2022/fang-ku-an-ke-hu-duan-de-zhu-ti-qie-huan-dong-hua-xiao-guo/" class="archive-article-date">
+  	<time datetime="2022-09-30T10:51:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-30</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:1.2k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈6分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个仿酷安主题切换的动画，之前是在 <a href="https://mp.weixin.qq.com/s/WXXMLoFexy5lnTikeXcvEQ" target="_blank" rel="noopener">郭霖的微信公众号</a> 上了解到的，最近想要使用时发现按照Github上的方法添加依赖时已经无法使用，作者在Github上没有留下源码，不过好在在作者Gitee中找到了这份源码，可以直接拿来使用  </p>
+<a id="more"></a>  
+<p>使用时直接将下面源码添加到程序中就行</p>
+<h4 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h4><table>
+<thead>
+<tr>
+<th align="center">Method</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">create(View onClickView)</td>
+<td align="center">创建动画对象(静态方法)</td>
+</tr>
+<tr>
+<td align="center">setDuration(long duration)</td>
+<td align="center">设置动画时长</td>
+</tr>
+<tr>
+<td align="center">setOnAnimationEndListener(Listener listener)</td>
+<td align="center">动画播放完毕监听器</td>
+</tr>
+<tr>
+<td align="center">start()</td>
+<td align="center">开始播放动画</td>
+</tr>
+</tbody></table>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">public</span> <span class="type">void</span> onClick(<span class="keyword">View</span> <span class="keyword">view</span>) &#123;</span><br><span class="line">    RippleAnimation.<span class="keyword">create</span>(<span class="keyword">view</span>).setDuration(duration).<span class="keyword">start</span>();</span><br><span class="line">    </span><br><span class="line">    //在这里切换你的主题</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作者的Git<br><a href="https://github.com/wuyr/RippleAnimation" target="_blank" rel="noopener">https://github.com/wuyr/RippleAnimation</a><br><a href="https://gitee.com/dingyi222666/RippleAnimation" target="_blank" rel="noopener">https://gitee.com/dingyi222666/RippleAnimation</a>   </p>
+<h4 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br></pre></td><td class="code"><pre><span class="line">package com.wuyr.rippleanimation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.animation.Animator;</span><br><span class="line"><span class="keyword">import</span> android.animation.AnimatorListenerAdapter;</span><br><span class="line"><span class="keyword">import</span> android.animation.ValueAnimator;</span><br><span class="line"><span class="keyword">import</span> android.annotation.SuppressLint;</span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.ContextWrapper;</span><br><span class="line"><span class="keyword">import</span> android.graphics.Bitmap;</span><br><span class="line"><span class="keyword">import</span> android.graphics.Canvas;</span><br><span class="line"><span class="keyword">import</span> android.graphics.Paint;</span><br><span class="line"><span class="keyword">import</span> android.graphics.PorterDuff;</span><br><span class="line"><span class="keyword">import</span> android.graphics.PorterDuffXfermode;</span><br><span class="line"><span class="keyword">import</span> android.graphics.RectF;</span><br><span class="line"><span class="keyword">import</span> android.os.Build;</span><br><span class="line"><span class="keyword">import</span> android.view.MotionEvent;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewParent;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by wuyr on 3/15/18 5:23 PM.</span></span><br><span class="line"><span class="comment"> * GitHub: https://github.com/wuyr/RippleAnimation</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">@SuppressLint(<span class="string">"ViewConstructor"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RippleAnimation</span> <span class="title">extends</span> <span class="title">View</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Bitmap mBackground;<span class="comment">//屏幕截图</span></span><br><span class="line">    <span class="keyword">private</span> Paint mPaint;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mMaxRadius, mStartRadius, mCurrentRadius;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isStarted;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> mDuration;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mStartX, mStartY;<span class="comment">//扩散的起点</span></span><br><span class="line">    <span class="keyword">private</span> ViewGroup mRootView;<span class="comment">//DecorView</span></span><br><span class="line">    <span class="keyword">private</span> OnAnimationEndListener mOnAnimationEndListener;</span><br><span class="line">    <span class="keyword">private</span> Animator.AnimatorListener mAnimatorListener;</span><br><span class="line">    <span class="keyword">private</span> ValueAnimator.AnimatorUpdateListener mAnimatorUpdateListener;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RippleAnimation <span class="title">create</span><span class="params">(View onClickView)</span> </span>&#123;</span><br><span class="line">        Context context = onClickView.getContext();</span><br><span class="line">        <span class="keyword">int</span> newWidth = onClickView.getWidth() / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> newHeight = onClickView.getHeight() / <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//计算起点位置</span></span><br><span class="line">        <span class="keyword">float</span> startX = getAbsoluteX(onClickView) + newWidth;</span><br><span class="line">        <span class="keyword">float</span> startY = getAbsoluteY(onClickView) + newHeight;</span><br><span class="line">        <span class="comment">//起始半径</span></span><br><span class="line">        <span class="comment">//因为我们要避免遮挡按钮</span></span><br><span class="line">        <span class="keyword">int</span> radius = Math.<span class="built_in">max</span>(newWidth, newHeight);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RippleAnimation(context, startX, startY, radius);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">RippleAnimation</span><span class="params">(Context context, <span class="keyword">float</span> startX, <span class="keyword">float</span> startY, <span class="keyword">int</span> radius)</span> </span>&#123;</span><br><span class="line">        super(context);</span><br><span class="line">        <span class="comment">//获取activity的根视图,用来添加本View</span></span><br><span class="line">        mRootView = (ViewGroup) getActivityFromContext(context).getWindow().getDecorView();</span><br><span class="line">        mStartX = startX;</span><br><span class="line">        mStartY = startY;</span><br><span class="line">        mStartRadius = radius;</span><br><span class="line">        mPaint = <span class="keyword">new</span> Paint();</span><br><span class="line">        mPaint.setAntiAlias(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//设置为擦除模式</span></span><br><span class="line">        mPaint.setXfermode(<span class="keyword">new</span> PorterDuffXfermode(PorterDuff.Mode.CLEAR));</span><br><span class="line">        updateMaxRadius();</span><br><span class="line">        initListener();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * try get host activity from view.</span></span><br><span class="line"><span class="comment">     * views hosted on floating window like dialog and toast will sure return null.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @return host activity</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Activity <span class="title">getActivityFromContext</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (context instanceof ContextWrapper) &#123;</span><br><span class="line">            <span class="keyword">if</span> (context instanceof Activity) &#123;</span><br><span class="line">                <span class="keyword">return</span> (Activity) context;</span><br><span class="line">            &#125;</span><br><span class="line">            context = ((ContextWrapper) context).getBaseContext();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Activity not found!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开始播放动画</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!isStarted) &#123;</span><br><span class="line">            isStarted = <span class="literal">true</span>;</span><br><span class="line">            updateBackground();</span><br><span class="line">            attachToRootView();</span><br><span class="line">            getAnimator().start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置动画时长</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RippleAnimation <span class="title">setDuration</span><span class="params">(<span class="keyword">long</span> duration)</span> </span>&#123;</span><br><span class="line">        mDuration = duration;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mAnimatorListener = <span class="keyword">new</span> AnimatorListenerAdapter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onAnimationEnd(Animator animation) &#123;</span><br><span class="line">                <span class="keyword">if</span> (mOnAnimationEndListener != null) &#123;</span><br><span class="line">                    mOnAnimationEndListener.onAnimationEnd();</span><br><span class="line">                &#125;</span><br><span class="line">                isStarted = <span class="literal">false</span>;</span><br><span class="line">                <span class="comment">//动画播放完毕, 移除本View</span></span><br><span class="line">                detachFromRootView();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        mAnimatorUpdateListener = <span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                <span class="comment">//更新圆的半径</span></span><br><span class="line">                mCurrentRadius = (<span class="keyword">int</span>) (<span class="keyword">float</span>) animation.getAnimatedValue() + mStartRadius;</span><br><span class="line">                postInvalidate();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据起始点将屏幕分成4个小矩形,mMaxRadius就是取它们中最大的矩形的对角线长度</span></span><br><span class="line"><span class="comment">     * 这样的话, 无论起始点在屏幕中的哪一个位置上, 我们绘制的圆形总是能覆盖屏幕</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateMaxRadius</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//将屏幕分成4个小矩形</span></span><br><span class="line">        RectF leftTop = <span class="keyword">new</span> RectF(<span class="number">0</span>, <span class="number">0</span>, mStartX + mStartRadius, mStartY + mStartRadius);</span><br><span class="line">        RectF rightTop = <span class="keyword">new</span> RectF(leftTop.right, <span class="number">0</span>, mRootView.getRight(), leftTop.bottom);</span><br><span class="line">        RectF leftBottom = <span class="keyword">new</span> RectF(<span class="number">0</span>, leftTop.bottom, leftTop.right, mRootView.getBottom());</span><br><span class="line">        RectF rightBottom = <span class="keyword">new</span> RectF(leftBottom.right, leftTop.bottom, mRootView.getRight(), leftBottom.bottom);</span><br><span class="line">        <span class="comment">//分别获取对角线长度</span></span><br><span class="line">        <span class="keyword">double</span> leftTopHypotenuse = Math.<span class="built_in">sqrt</span>(Math.<span class="built_in">pow</span>(leftTop.<span class="built_in">width</span>(), <span class="number">2</span>) + Math.<span class="built_in">pow</span>(leftTop.<span class="built_in">height</span>(), <span class="number">2</span>));</span><br><span class="line">        <span class="keyword">double</span> rightTopHypotenuse = Math.<span class="built_in">sqrt</span>(Math.<span class="built_in">pow</span>(rightTop.<span class="built_in">width</span>(), <span class="number">2</span>) + Math.<span class="built_in">pow</span>(rightTop.<span class="built_in">height</span>(), <span class="number">2</span>));</span><br><span class="line">        <span class="keyword">double</span> leftBottomHypotenuse = Math.<span class="built_in">sqrt</span>(Math.<span class="built_in">pow</span>(leftBottom.<span class="built_in">width</span>(), <span class="number">2</span>) + Math.<span class="built_in">pow</span>(leftBottom.<span class="built_in">height</span>(), <span class="number">2</span>));</span><br><span class="line">        <span class="keyword">double</span> rightBottomHypotenuse = Math.<span class="built_in">sqrt</span>(Math.<span class="built_in">pow</span>(rightBottom.<span class="built_in">width</span>(), <span class="number">2</span>) + Math.<span class="built_in">pow</span>(rightBottom.<span class="built_in">height</span>(), <span class="number">2</span>));</span><br><span class="line">        <span class="comment">//取最大值</span></span><br><span class="line">        mMaxRadius = (<span class="keyword">int</span>) Math.<span class="built_in">max</span>(</span><br><span class="line">                Math.<span class="built_in">max</span>(leftTopHypotenuse, rightTopHypotenuse),</span><br><span class="line">                Math.<span class="built_in">max</span>(leftBottomHypotenuse, rightBottomHypotenuse));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加到根视图</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">attachToRootView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));</span><br><span class="line">        mRootView.addView(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从根视图中移除并释放资源</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">detachFromRootView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mRootView != null) &#123;</span><br><span class="line">            mRootView.removeView(<span class="keyword">this</span>);</span><br><span class="line">            mRootView = null;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mBackground != null) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!mBackground.isRecycled()) &#123;</span><br><span class="line">                mBackground.recycle();</span><br><span class="line">            &#125;</span><br><span class="line">            mBackground = null;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mPaint != null) &#123;</span><br><span class="line">            mPaint = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新屏幕截图</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateBackground</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mBackground != null &amp;&amp; !mBackground.isRecycled()) &#123;</span><br><span class="line">            mBackground.recycle();</span><br><span class="line">        &#125;</span><br><span class="line">        mBackground = getBitmapFromView(mRootView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由canvas更新背景截图（drawingCache已废弃）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Bitmap <span class="title">getBitmapFromView</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        view.measure(MeasureSpec.makeMeasureSpec(view.getLayoutParams().<span class="built_in">width</span>, MeasureSpec.EXACTLY),</span><br><span class="line">                MeasureSpec.makeMeasureSpec(view.getLayoutParams().<span class="built_in">height</span>, MeasureSpec.EXACTLY));</span><br><span class="line">        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);</span><br><span class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(bitmap);</span><br><span class="line">        view.draw(canvas);</span><br><span class="line">        <span class="keyword">return</span> bitmap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取view在屏幕中的绝对x坐标</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">getAbsoluteX</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> x = view.getX();</span><br><span class="line">        ViewParent parent = view.getParent();</span><br><span class="line">        <span class="keyword">if</span> (parent instanceof View) &#123;</span><br><span class="line">            x += getAbsoluteX((View) parent);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取view在屏幕中的绝对y坐标</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">getAbsoluteY</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> y = view.getY();</span><br><span class="line">        ViewParent parent = view.getParent();</span><br><span class="line">        <span class="keyword">if</span> (parent instanceof View) &#123;</span><br><span class="line">            y += getAbsoluteY((View) parent);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//在新的图层上面绘制</span></span><br><span class="line">        <span class="keyword">int</span> layer;</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">            layer = canvas.saveLayer(<span class="number">0</span>, <span class="number">0</span>, getWidth(), getHeight(), null);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            layer = canvas.saveLayer(<span class="number">0</span>, <span class="number">0</span>, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.drawBitmap(mBackground, <span class="number">0</span>, <span class="number">0</span>, null);</span><br><span class="line">        canvas.drawCircle(mStartX, mStartY, mCurrentRadius, mPaint);</span><br><span class="line">        canvas.restoreToCount(layer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> ValueAnimator <span class="title">getAnimator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ValueAnimator valueAnimator = ValueAnimator.ofFloat(<span class="number">0</span>, mMaxRadius).setDuration(mDuration);</span><br><span class="line">        valueAnimator.addUpdateListener(mAnimatorUpdateListener);</span><br><span class="line">        valueAnimator.addListener(mAnimatorListener);</span><br><span class="line">        <span class="keyword">return</span> valueAnimator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置动画结束监听器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RippleAnimation <span class="title">setOnAnimationEndListener</span><span class="params">(OnAnimationEndListener listener)</span> </span>&#123;</span><br><span class="line">        mOnAnimationEndListener = listener;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressLint(<span class="string">"ClickableViewAccessibility"</span>)</span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> interface OnAnimationEndListener &#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJ0lEQVR42u3aQXLbQAwEQP3/08oDEpMDgIpJqHlyuaz19vIwWgCvV/y8f3iu+svqZ/9e5/WJBxsbG/sh7Pfhc7zFZIXjT111WLkFGxsbeyv7OBjyuJofZR5ax0dwYsTGxsb+YnZ+VejBqlcUbGxsbOxJgB1vNz/EpGA0D1psbGzs3ew8JBJqEkL5kf1yLQ0bGxv79uy8K3r/nz/S38bGxsa+MftdfKrjMr3y0yQUIwU2Njb2IvakYHTtBaZKnV9gsLGxsfexewWg/BqQrJ83d6vtjeabxMbGxr49e17Er8ZVvsX8uPPX848bGDY2NvY69qTEU71m5GM3yU4KYYmNjY39Nexki8lG82JQdZSnOaCDjY2NvYidt0uTYEsweWlp3kI++RtsbGzs1exqA/h/Dt9UQzRq9GJjY2M/lj0/s2rs5V3X3gUmiltsbGzsL2NXWwJ5WSdvElcHdE4CDxsbG3sdu0qdXBhyfL5afhDY2NjY+9jVoKoO5XyiGZAcVi+esbGxsZ/Inl8tJkM2vRGf3n4uvlFhY2Nj34adl+DzEMp/Xx0Dyl9PEqjY2NjYO9jv4lONvUJBpzW406wRYWNjYy9iV1u8k5ZtXmbKj2MSutjY2Nib2HlZvxpI+WrXdjyiT2FjY2OvYPe6wdUCfa/xUH0lhZWxsbGxF7F7X+WrjeH8mK49lKjRi42Njf1w9mRzk5jprT9vV/x4FcHGxsZ+LLs6cJP8g6SsUw2t6n+PDhQbGxt7EXvS6O2V76uh1SsqlXsX2NjY2I9lX1UMyjfdi8BCnSx/z9jY2NiL2PmX/uQ3SbT0Rn/yZsZJDGNjY2OvZvcGYqrFqV6UXnZY2NjY2OvY+WUgKffPC0CTqIsuM9jY2Ngr2O/iM4mcvJDUO5T8BWBjY2NvYk++0PdGfKrxlrScq+NB2NjY2PvYvVL+pFUwH7jptTSwsbGxd7Pzsk4ePHnDuNoqnpeZsLGxsbFzQBJv1WtGdVcn/W1sbGzsL2Pn5adJIzkfCertChsbG3sfu3ep6IVWXnjKB4Oq40TY2NjYm9jVcsykBZuX8ifrJE1fbGxs7BXsP8IMsLwQr7q6AAAAAElFTkSuQmCC" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2022/qi-ye-wei-xin-tong-zhi/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          企业微信通知
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/context-zhuan-activity/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Context转Activity</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#APIs"><span class="toc-number">1.</span> <span class="toc-text">APIs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例"><span class="toc-number">2.</span> <span class="toc-text">使用示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相关代码"><span class="toc-number">3.</span> <span class="toc-text">相关代码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

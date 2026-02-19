@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(4016) - 获取条目信息</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      4016, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>获得电话本中指定的一个条目的信息。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_GET_ENTRY_REQ数据结构</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_GET_ENTRY_REQ数据结构大小</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_GET_ENTRY_RSP数据结构指针</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>T_MR_PHB_GET_ENTRY_RSP数据结构大小</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_PHB_OUT_OF_INDEX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT 
+  face="Times New Roman" 
+  size=3>(1008)</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  索引越界<BR>MR_PHB_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;(1000)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;读取成功<BR>MR_PHB_NOT_READY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1004)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  /*电话本初始化中*/</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>T_MR_PHB_GET_ENTRY_REQ数据结构：<BR>typedef struct<BR>{<BR>&nbsp;&nbsp;&nbsp; 
+  U16 index;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;//条目在列表中的索引<BR>&nbsp;&nbsp;&nbsp; U16&nbsp; 
+  storage;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;//条目保存的位置。<BR>}T_MR_PHB_GET_ENTRY_REQ;<BR>注：此处的index 
+  是相对于具体的存储位置而言的，不是在列表中的位置。<BR><BR>T_MR_PHB_GET_ENTRY_RSP数据结构：<BR>typedef 
+  struct<BR>{<BR>&nbsp;&nbsp;&nbsp; T_MR_PHB_ENTRY 
+  entry;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  //本条目的具体信息<BR>}T_MR_PHB_GET_ENTRY_RSP;<BR>T_MR_PHB_ENTRY数据结构：<BR>typedef 
+  struct <BR>{<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;name[MR_PHB_MAX_NAME];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;number[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;homeNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp;&nbsp; 
+  S8&nbsp;officeNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp; 
+  &nbsp;S8&nbsp;faxNumber[MR_PHB_MAX_NUMBER];<BR>&nbsp;&nbsp; 
+  &nbsp;S8&nbsp;emailAddress[MR_PHB_MAX_NUMBER];<BR>}T_MR_PHB_ENTRY;<BR></P>
+  <P>电话本接口中对应的参数的定义：<BR>#define MR_PHB_MAX_NAME &nbsp;&nbsp;&nbsp;&nbsp;(36*2) 
+  //暂时定位24个字节,12个汉字.<BR>#define MR_PHB_MAX_NUMBER 
+  &nbsp;&nbsp;&nbsp;(48*2)//暂时定位可输入40个字节.40个数字<BR>#define 
+  MR_PHB_MAX_SEARCH_PATTERN &nbsp;(60*2)<BR></P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>T_MR_PHB_GET_ENTRY_REQ getReq = { 0 };<BR>T_MR_PHB_GET_ENTRY_RSP *getRsp = 
+  NULL;<BR>int32 len;<BR><BR>getReq.index = 0;<BR>getReq.storage = 
+  3;<BR>mrc_platEx(4016, (uint8*)&amp;getReq, sizeof ( T_MR_PHB_SEARCH_REQ ), 
+  (uint8**)&amp;getRsp, &amp;len, NULL);</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

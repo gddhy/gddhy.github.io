@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_connect</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>int32 
+      mr_connect(int32 s, int32 ip, uint16 port, int32 
+  type)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>建立 socket 连接。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>s</I></FONT></TD>
+      <TD><FONT size=2>socket 句柄</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>ip</EM></FONT></TD>
+      <TD><FONT size=2>对端ip地址</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>port</EM></FONT></TD>
+      <TD><FONT size=2>对端端口号</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>type</EM></FONT></TD>
+      <TD>
+        <P><FONT 
+        size=2>&nbsp;MR_SOCKET_BLOCK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        //阻塞方式（同步方式）<BR>&nbsp;MR_SOCKET_NONBLOCK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        //非阻塞方式（异步方式）</FONT></P></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败<BR>MR_WAITING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;使用异步方式进行连接，VM需要轮询该socket的状态以获知连接状况</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>初始化SkyEngine引擎，并运行指定的应用。当SkyEngine引擎启动时会调用mr_mem_get获取引擎需要的内存。 
+  mr_mem_get函数由移植者实现，以取得引擎需要的内存。entry是SkyEngine入口参数。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>#define IPADDR(a,b,c,d)&nbsp; (((uint32)a)&lt;&lt;24 | 
+  ((uint32)b)&lt;&lt;16 | ((uint32)c)&lt;&lt;8 | ((uint32)d))<BR>int32 hSoc = 
+  0;<BR><BR>hSoc = mrc_socket( MR_SOCK_STREAM, MR_IPPROTO_TCP );<BR>mrc_connect( 
+  hSoc , IPADDR(119, 75, 218, 45),&nbsp;80, MR_SOCKET_NONBLOCK);</P></BLOCKQUOTE>
+<BLOCKQUOTE></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_socket.htm">mr_socket</A><BR><A href="mr_closeSocket.htm">mr_closeSocket</A></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.9.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="https://gddhy.github.io">
+  <title>山寨手机游戏平台介绍 | Gddhy&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="mtk,旧机博物馆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="山寨手机游戏平台介绍">
+<meta property="og:url" content="https://gddhy.github.io/2020/mtk-game-platform/index.html">
+<meta property="og:site_name" content="Gddhy&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://gddhy.github.io/img/preloader.gif">
+<meta property="og:updated_time" content="2026-02-19T20:52:36.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="山寨手机游戏平台介绍">
+<meta name="twitter:image" content="https://gddhy.github.io/img/preloader.gif">
+  
+    <link rel="alternative" href="/atom.xml" title="Gddhy&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.0cf68a.css">
+<!--异步加载-->
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css" media="jscourse" onload="this.media='all'">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#4d4d4d">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+</html>
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/me.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">gddhy</a></h1>
+		</hgroup>
+		
+		
+		
+		<a id="hitokoto" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';">_(:з」∠)_ 加载中...</a>
+		<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+		<script src="/js/fetch.min.js"></script>
+		<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+				<li><a href="/tags/essay">工具</a></li>
+	        
+				<li><a href="/about">关于</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn" id="mobile-menu">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/me.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">gddhy</h1>
+			</hgroup>
+			
+			
+		    <p class="header-subtitle"><i class="icon icon-quo-left"></i><a id="hitokoto2" href="#"  onmouseover="this.style.color='#7fffd4';" onmouseout="this.style.color='aliceblue';" style="color:#696969">_(:з」∠)_ 加载中...</a></i></p>
+	     	<script src="https://lib.baomitu.com/bluebird/3.7.2/bluebird.min.js"></script>
+	    	<script src="/js/fetch.min.js"></script>
+		    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto2" defer></script>
+	    	
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="coolapk" target="_blank" href="https://www.coolapk.com/u/778415" title="coolapk"><i class="icon-coolapk"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/279154676" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:gddhy@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="github" target="_blank" href="https://github.com/gddhy" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss"><i class="icon-rss"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/essay">工具</a></li>
+		        
+					<li style="width: 25%"><a href="/about">关于</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-mtk-game-platform" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      山寨手机游戏平台介绍
+    </h1>
+  
+
+        
+        
+
+<a href="/2020/mtk-game-platform/" class="archive-article-date">
+  	<time datetime="2020-12-07T14:47:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-07</time>
+</a>
+
+
+<div>
+<span class="archive-article-date">
+  <i class="fa fa-font"aria-hidden="true"></i>字数统计:4.8k字
+</span>
+<span class="archive-article-date">
+  <i class="fa fa-file-text-o"aria-hidden="true"></i> 阅读时长≈17分
+</span>
+</div>
+
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/img/preloader.gif" data-original="https://cdn2.iconfinder.com/data/icons/Mobile_Device_Icons_by_pierocksmysocks/Mobile%20Device%20Icons%20128/HP%20Ipaq%20211.png" alt="mobile"></p>
+<a id="more"></a>  
+<p>A,首先针对手机最多的斯凯MRP</p>
+<p>本文首先针对斯凯主文件Mythroad的手机进行分析，其它文件夹可以参考！机型不同文中所讲文件夹可能与你的手机文件夹名略有不同！文件夹名字中的240*320为分辨率，依你的手机分辨率而定</p>
+<p>MRP常见文件夹</p>
+<p>最常见文件夹就是Mythroad，</p>
+<p>常见手机是：金立、中天、亿城等，Downdate/mr</p>
+<p>常见手机为金鹏，Mulgame常见金鹏、长虹，有的长虹手机直接命命为游戏，@ahong适用用于长虹老机型，（出厂时一般都隐藏了）Download 是手机自带娱乐园的文件夹，预设为隐藏，Games常见手机为AUX.如果你手机斯凯主文件夹隐藏，可以根据我说的文件夹重建，如果出现文件（夹）已存在，就是你所需的文件夹！mrapp是展迅平台MRP文件夹！展迅mrp虽然亦为斯凯公司开发，但软件和游戏并不通用！</p>
+<p>我的手机支持MRP但没有游戏下载列表怎么办？？</p>
+<p>a,我的自带应用QQ,MSN,股票，凯越(书城）储存在mythroad/app240320，下载游戏下载列表local.seg储存在mythroad/pp240320里所有2开头的文件夹！此列表没有已下载项！新手机都使用此列表</p>
+<p>b,我的自带应用QQ,MSN,股票，凯越(书城）储存在其它文件夹，下载游戏下载列表applist.mrp储存在对应文件夹QQ-qqlist8240x320,MSN-msnlist240x320,股票-stocklis240x320，凯越(书城）-books240x320，QQ网游-qqgamelist240x320，此游戏列表已停止更新，没有任何价值了</p>
+<p>c，无任何自带斯凯应用，只能通过按*#220807#，下载applist.mrp储存在mythroad！此游戏下载列表已停止更新，没有任何价值了</p>
+<p>1，判断手机是否支持mrp</p>
+<p>   a,内存卡有mythroad，Downdate/mr，Mulgame，@ahong，Download，Games文件夹，并确保是在本手机非手动生成</p>
+<p>   b,待机按  <code>*#220807#</code> ，出现“请稍候”或连接网络，稍后出现“错误指令”，*#220807#联网404 NOT FOUND的手机斯凯主文件夹是downdata/mr</p>
+<p>   c,有的手机自带浏览器下载mrp，会提示“执行文档”</p>
+<p>2，mrp入口简介，</p>
+<p>   a，自带应用QQ,MSN,股票，凯越(书城），QQ网游有游戏列表，游戏列表有已下载，此类手机的游戏列表applist.mrp和你要安装的mrp应用储存在：QQ-qqlist8240x320,MSN-msnlist240x320,股票-stocklis240x320，凯越(书城）-books240x320，QQ网游-qqgamelist240x320等，你下载的应用到对应QQ,MSN,股票，凯越(书城），QQ网游的游戏列表的已下载就可以找到了！</p>
+<p>   b,我的手机 <code>*#220807#</code> 有反应， <code>*#220807#</code> 启动的就是储存在mythroad的dsm_gm.mrp，那你就可以下载入口文件dsm_gm.mrp！游戏储存在mythroad文件夹下后。再按 <code>*#220807#</code> 就可以看到他了（如果已经下载了dsm_gm.mrp， <code>*#220807#</code> 依然联网，出现“错误指令，请参考“4，为什么我下载了dsm_gm.mrp,按*#220807#依然联网，出现错误指令？”</p>
+<p>   c,我的手机有曲奇，游戏需要放到mythroad/app240320，然后到曲奇的收藏就可以找到他啦</p>
+<p>d，手机自带应用的游戏列表没有已下载，*#220807#代码屏蔽，又无游戏中心曲奇的手机，此类手机的游戏列表为local.seg，请访问mrpz.wep.cc下载分类——系统应用——含已下载local.seg游戏列表！列表游戏都储存在app240320文件夹，列表通过串码编号识别mrp应用，所以改文件名替换没用的，把你要用的软件修改成列表中任意游戏的串码编号，就可以在该列表启动了！</p>
+<p>3，mrp运行白屏黑屏重启</p>
+<p>   a，黑屏重启，白屏无任何数字及字母，多是内存不足</p>
+<p>   b，白屏出现以下字母”start .mr:212: cann’t   be run direct”，遇到这种情况,就把运行白屏的MRP复制到MRP文件夹下的mor_list17文件夹下，使用应用软件yyrj.mrp打开</p>
+<p>   c，白屏出现以下字母“not enought memery”,内存不足</p>
+<p>   d，白屏出现以下字母“start.mr1827”:bad argument#1 to’getn’(table expected,got nil),这种情况多事按下*#220807#出现的，原因是你下载的applist.mrp列表是在应用软件yyrj.mrp使用的</p>
+<p>   e，白屏出现以下字母“start.mr:285:cann’tfind sdk key”，缺少斯凯授权文件</p>
+<p>4，为什么我下载了dsm_gm.mrp,按*#220807#依然联网，出现“错误指令”？？</p>
+<p>   请尝试把dsm_gm.mrp改名DSM_GM.mrp。如果还不行就下载曲奇组件cookie.mrp改名dsm_gm.mrp（其它组件appmgr.mrp，cookie.mrp，sgl.mrp也要下载至mythroad/plugin240320文件夹），部分新手机已不能识别以前的dsm_gm.mrp。关于曲奇请参考“5，MRP常见文件介绍—— d，ipqq.mrp”</p>
+<p>5，MRP常见文件介绍</p>
+<p>   a，dsm_gm.mrp</p>
+<p>入口文件，缺少此文件按 <code>*#220807#</code> 无法进入应用。您也可以将任意mrp文件改成此名，此时再按下*#220807#启动的就是你改名的文件！注：并不是所有文件都可直接改名dsm_gm.mrp启动！放在mythroad。新手机已淘汰此文件</p>
+<p>   b，applist.mrp</p>
+<p>列表文件，斯凯提供的游戏下载列表，放在mythroad。新手机已放弃了applist.mrp游戏下载列表，和曲奇一样都是seg格式的！列表也已停止更新。</p>
+<p>   c，yyrj.mrp</p>
+<p>应用软件，可以启动无法在手机直接运行的MRP软件！放在mythroad，它的应用要放在放在mythroad/mor_list17文件夹。新手机已淘汰此文件</p>
+<p>   d，ipqq.mrp</p>
+<p>曲奇，现在叫冒泡了。曲奇的游戏需要放到mythroad/app240320！曲奇实现了applist.mrp+dsm_gm.mrp+yyrj.mrp的功能，并且操作方便，队列下载应用，更加智能化！曲奇可以启动任何MRP游戏及软件！曲奇更新列表死机多发生在2.2版！建议升级曲奇版本！按*#220807#启动曲奇出现的频繁更新组件是因为mythroad下的cookie不是最新版，只需将mythroad/plugin240320文件夹的cookie替换掉mythroad下的cookie即可！曲奇的应用储存在app240320文件夹，内含100文件夹（入口文件夹，设置），cfg文件夹（服务器地址，应用识别文件），res文件夹（图标logo），sgm文件夹（列表）；plugin240320是曲奇组件文件夹内含appmgr.mrp，cookie.mrp，font.mrp（小字体），sgl.mrp，plugin.mrp；System是曲奇系统文件夹，内含小字体字库以及冒泡社区及其他账号资料！曲奇的升级，通常它自己会更新！手动更新办法将plugin240320的appmgr.mrp，cookie.mrp，sgl.mrp替换至新版，删除app240320/100和app240320/sgm文件夹，删除app240320/cfg下的localapp.sav和localdir.sav，下载对应新服务器文件mtes.conf（5.0版才需要）存至app240320/cfg。</p>
+<p>  e，QQ网游</p>
+<p>qqsoll.mrp    QQ网游斗地主3.3正式版</p>
+<p>list_et3.mrp QQ网游列表，使用生成qqgamelist文件夹内含网游大厅qqgh.mrp，</p>
+<p>网游大厅qqgh.mrp生成QQGame文件夹，内含QQ网游斗地主，麻将，五子棋等！网游大厅qqgh.mrp也可不必放在QQ网游列表list_et3.mrp，可以单独使用！QQ网游斗地主3.3正式版qqsoll.mrp升级成网游大厅qqgh.mrp！新手机已不支持list_et3.mrp，直接使用网游大厅qqgh.mrp即可。</p>
+<p>   f，nes模拟器</p>
+<p>很多手机不支持，黑屏重启！常见问题解决办法：未授权，放在应用软件yyrj.mrp启动或替换成QQ网游大厅在QQ网游列表运行；黑屏重启，建议关闭模拟器声音，如无效，你就放弃吧！nes游戏放在mythroad/nes。新手机已不支持此文件</p>
+<p>   g，QQ</p>
+<p>关于替换自带QQ，可以尝试找到自带QQ文件，替换成自己要改的文件！如不行可在电脑端修改要替换的文件文件头，修改成自带QQ的！还不行，进入QQ就要更新，那就放弃吧！目前还没解决办法！关于挂机返回，尝试一：长按 <code>*</code>  二：先按0再按 <code>*</code>  三：长按 <code>*#</code>  四：先按9后长按 <code>*</code>  五：先按6后长按 <code>*</code>  六：先按4后长按 <code>*</code>  七：先按3后长按 <code>*</code>  八：就是点屏幕上方的图标有的手机不同 另外再说两个返回的方法、这个可能反回但已是掉线： 一：在双卡之间切换一下或者切换一下飞航模式 二：把3G里加为书签，直登书签里的也可以、都可以返回、但已经掉线了，触屏手机可以点击屏幕上方的斯凯或QQ图标，如果还不行建议放弃</p>
+<p>通过数字证书，VRE能够保证程序的完整性，防止骇客纂改程序文件。?SDK。VRE SDK为开发者提供了完整的工具和文档，包括集成开发环境、模拟器、参考文档和示范代码。?运营支撑系统。运营支撑系统为合作伙伴提供了强有力的运营支持能力，合作伙伴通过支撑系统能够随时了解到产品的下载和盈利情况，了解市场趋势从而更好地优化产品。</p>
+<p>6.艾华lav格式:</p>
+<p>如果内存卡里有Iava文件夹目录,特别是里面有lav格式软件，就说明支持。</p>
+<p>下载启动方式：先将下载的lav和iad文件复制到Iava目录下，然后打开手机上的Iava世界，您将能看到列表中有您刚刚复制过来的软件，点击软件，选择安装，安装成功以后列表中会出现安装成功的软件，点击，选运行就可以使用了。如果您想删除这个软件，可以点击软件，选删除，系统询问是否删除的时候点确认就将此软件删除了。</p>
+<p>   7.酷宇mor、sor、ior格式:</p>
+<p>MOR系上海酷宇通讯有限公司开发的酷宇MORE平台，适用国产手机。平台特点：微内核结构，内存空间占用极小：ROM&lt;50k,RAM&lt;10k动态内存管理技术，有效的使用内存资源：应用只有在被运行时才加载到RAM中来。一旦程序退出，RAM就可以释放。执行的高效性：MORE底层核心部分用汇编编写，应用使用C语言开发和编译，在图形显示等各方面都经过优化，大型游戏运行速度流畅。全面支持C/C++，便于各种应用和游戏的移植。可视化开发、调试和编译环境。如果内存卡里有.mor格式文件软件，就说明支持。下载启动方式：将mor放到存储卡的任意目录，在手机的文档管理中打开此目录，选中以拼音命名的mor文件，选择选项-打开就开始安装游戏。如果选项中没有打开菜单就不可以玩此游戏。安装好后会在该目录生成一个中文名的.mor文件和一个游戏目录。打开中文名的mor文件就可以开始游戏。旧的安装文件可以删除。</p>
+<p>8.至尊宝met meg，mex格式:</p>
+<p>至尊宝游戏平台是上海杨讯计算机科技有限责任公司开发的基于mtk芯片的手机游戏运行环境。      </p>
+<p>上海扬讯计算机科技有限责任公司，成立于2002 年。是国内最早一批专注于手机增值软件领域的高科技公司。扬讯秉承创新理念，不断革新商业模式，成功研发多项填补国内空白的核心专利技术，并推出了国内第一款拥有自主知识产权的Merig?手机虚拟机。Merig?已被数百家知名手机终端厂商和设计公司广泛预装，近百家合作伙伴通过Merig?开发游戏和软件，拥有超过千名注册工程师，Merig?为海内外近亿手机用户提供手机软件产品及服务。扬讯已引入国际资本合作，力争将Merig?在虚拟机领域打造成为一个世界顶尖的品牌。     </p>
+<p>至尊宝游戏平台有2种格式：    </p>
+<p> 0.8.X平台支持MET格式，     </p>
+<p>0.9.1平台支持MEG格式。其中0.9.1平台（MEG格式）支持QQ</p>
+<p>.a，判断手机是否支持至尊宝平台： 目前手机的至尊宝平台主要分为两个版本0.8.0和0.9.1。其中0.8.0支持的文件类型为MET，0.9.1支持的文件类型为MEG，0.8.0版本的不支持QQ，因为现在的至尊宝QQ都是MEG格式的。</p>
+<p>要想知道手机是否支持至尊宝平台主要是看内存卡目录下是否有merig或者mestep文件夹，有merig文件夹的是0.9.1版本，有mestep文件夹的是0.8.0版本。 (我看到的至尊宝平台的手机的版本和文件夹都是这麽对应的，可能有个别机型例外，具体版本情况可以在手机至尊宝游戏城中查看)</p>
+<p> b，游戏或者应用的安装： 手机游戏或者应用都是放在内存卡的merig里application目录或者mestep里application目录下，安装的时候看好自己的机器是支持MET还是MEG。</p>
+<p>c，游戏或应用的运行： 一般手机都自带至尊宝游戏城(有的名字不叫这个，改名啦)，这样的手机你放在merig里application目录或者mestep里application目录下的游戏在至尊宝游戏城的游戏列表下就可以看到了，点名字就可以运行。我今天看到一台手机他的QQ不在至尊宝游戏城中，而是在工具箱-QQ，但是QQ文件的安装目录和上面的一样。</p>
+<p> d，游戏或应用不能正常运行的解决方法： 如果有些游戏或应用不能启动，比如QQ启动的时候显示加载中。。 。几秒种后返回待机画面，解决方法是删除merig或者mestep文件夹，再启动手机的时候或自动重新建立merig或者mestep文件夹，重新安装QQ就可以正常启动了。还有安装完在游戏城找不到游戏，首先要保证安装的游戏文件名不要有中文，然后删除merig或者mestep文件夹，再进入手机上至尊宝游戏城，什麽都不要点退出，它会自建merig/application文件夹或者mestep/application文件夹，重新在application里安装游戏一般就可以了。 游戏列表不显示还有一种解决方法，首先找到存储卡中merig/application或者mestep/application,把你下载的.meg或者.MET文件放进去（一定弄清楚自己手机支持的到底是MET还是MEG） 然后.在merig/application下，把手机原来的引导文件merig.meg文件名称修改下（如改成merig11.meg) 接着.在merig/appinstall下，把merig文件名修改下（随便修改） 那麽.再次进入手机上至尊宝游戏城，上面会显示你放入游戏的列表，点击游戏名运行，就可以了。</p>
+<p>注意：有些至尊宝平台需要application文件夹下有应用引导文件才能正常运行应用软件和游戏。其中内存卡的有merig目录的是0.9.1版本的，他的应用引导文件是merig.meg,安装在merig里application目录内存卡的有mestep目录的是0.8.0版本的，他的应用引导文件是mestep.met,安装在mestep里application目录下 注：文件中不要有汉字！</p>
+<p>mex新格式新版本，游戏放置在存储卡的MexApp文件目录下，游戏有MexApp和Mexsys</p>
+<p> 9.windows系统手机，支持cab,exe格式软件，同时一般都支持java.</p>
+<p>  10.诺基亚手机支持sis、sisx 和java格式.</p>
+<p>  11。cbe   cbd酷吧平台</p>
+<p>   上海酷吧</p>
+<p>酷吧平台的全名为酷吧娱乐平台。      酷吧平台是由上海酷吧信息技术有限公司推出的手机中间件平台，向广大用户提供酷吧软件的应用环境。</p>
+<p>编辑本段特点</p>
+<p>   ·跨平台的C语言的运行环境，无需JAVA支持；      ·酷吧应用平台移植只需要50K RAM 和150K ROM，其他几十款应用软件只需要放在T-FLASH卡即可行；      ·支持mtk、展讯、高通、英飞凌等封闭式平台的应用软件空中下载功能；      ·支持动态链接库，可从T-FLASH卡上运行软件；      ·应用软件运行及响应速度更快（较JAVA程序来说）。酷吧应用文件的后缀名是CBE和CBD。      酷吧应用文件存放在Coolbar_H_QCIF文件夹</p>
+<p>  12.魔畅手机平台 ;jra</p>
+<p>JRA文件是国产MTK平台新出的一种格式，并非JAVA的JAR文件，两者文件后缀相似，但并不能混为一谈。 看你手机是否支持JRA文件很简单： 首先看你手机有无apple文件夹，如果有那么恭喜你，你的手机支持，没有也别灰心，也许是不小心删掉了，就看你手机有没有手机电视功能，或智能乐园选项，如果有那也是支持的。手机电视有这张画面就支持 2.支持怎么下载应用JRA软件？ JRA软件？ 很简单只要把下载的JRA文件放到apple文件夹下download目录里就可以 很简单只要把下载的JRA文件放到apple文件夹下download目录里就可以了。路径：apple\download\下载的JRA文件 完成 3.软件的安装： 只要把下载的JRA文件放到apple文件夹下download目录里就可以了。 路径：apple\download\下载的JRA文件 完成 安装要进入下载中心-选项-应用管理-方向右键选择要安装的程序即可！如果游戏名不是英文或数字，下载修改名为英文或数字名</p>
+<p>13.ROM 优百特 ;smc 好像是游戏虚拟机</p>
+<p>  14.gtbox 上海格瑞游戏; gbx</p>
+<p>  15，mmlive快乐宝平台</p>
+<p>文件夹mmlive,储存在mmlive/app，文件格式mpp,游戏下载页面点击下载如果已经下载过了就是启动该游戏，目前该平台游戏比较白痴</p>
+<p>C,mtk常见文件夹作用</p>
+<p>1.Audio 铃声,录音 2.Ebook/book/books 电子书 3.Photos/Photo 照片 4.Received 接受外来文件夹 5.TTS/asr 语音王 6.Video/Videos/My Video 视频 7.kuaitu 快图 8.SongLibrary 点歌台 9.Game/Games/ KKgame MyNes /Nes/Nesmrp 游戏 10.TigerMap 老虎地图 11.Images 图片保存文件夹 12.Vord 电话本 13.edushi 三维城市地图 14.tl_player 天籁传音 15.umphone 电子名片或语音王 16.brs存放网页和下载17.map jcs格式电子地图 18.phbimage彩信图片 19.cmbrw上网有关</p>
+<blockquote>
+<p>转载内容，文章来源<a href="https://www.hhtjim.com/cottage-game-platform-introduction.html" target="_blank" rel="noopener">山寨手机游戏平台介绍-HHTjim’S 部落格</a>  </p>
+</blockquote>
+<p>受限于md文件解析，修改*#等标记，可以去原文查看<br>ps.最近跟着群友怀旧mrp，收了几台支持斯凯mrp/酷宇/沃勤mre/掌盟平台的旧手机，有时间再来折腾，说不定还能再写点什么</p>
+
+      
+      
+      
+      <!--添加代码开始-->
+      
+        <div class="declare" hidden="hidden"></div>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/mm_reward_qrcode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">mtk</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">旧机博物馆</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3ay27CMBAF0P7/T9NNF0iU9F7bVIp9skKUEB8qjeb19RVfj6fr9Z131/Mnr7/5+p1lFwYGxm0Z+VFe38//muPzz2NgYJzGuA6FydHfff7tgy9DeX42DAwMjOR1HkCvYXlaiYGBgTHGmCmDMTAwMBLGTMssCcRt8+6DtTgGBsYNGXnX/f9ff2S+gYGBcSvGo7zy0WPbbhs7z8+9GBgYWzPatC8pO/N2f96GS0piDAyM0xjt8DJ6zPSPUncNMTAwtmBEyrLEnWnAJchf7sLAwDiMMRZY82Cd35WkiRgYGKcx1q5zzSSCbZqIgYGxN6NN2trHzLfhitUKDAyMTRntolVyiLX3RndhYGBszZgJoG0qOV8SR8koBgbGpoykBT82GGgL2oRU/B8wMDC2YKxqeK1ayJhatsDAwNiasWp5IjnWWAH8R2MOAwPjSEZLSlLAdsxZpKcYGBhbM8aGi3nLLA/BC/qFGBgYWzPG1knH0soZUjS8xMDA2JrRYsYK2iQotw07DAyM0xj5UfJwnBSleagtpqMYGBibMtrB5NpG/9g5MTAw9mY8yit/fLv41ZbNdVKIgYFxW8bYZDD/ilWjheSHwMDA2JsxFmTzJl27VNEuZ2BgYJzDGCsyBx85tKAW5bkYGBgYQysRqxYsoqYbBgYGRlymzgTWdkSBgYFxDqNd/GqbdMnAoG3JYWBgnMNoS8d2VDk2YGiHmhgYGJsyvgE/1gPxVRdSoAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/yun-jiu-gong-zhong-chu-jian/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          云九宫中初见 视频壁纸
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/bo-ke-su-du-you-hua/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客访问速度优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+      
+    
+    
+  
+  
+    <div style="margin:10px;padding:10px;background:#fff;">
+      <div class="article-entry">
+        <center>留言已关闭
+<script>
+var qqlink = '交流前往<a class="qq" target="_blank" href="https://jq.qq.com/?_wv=1027&k=5jUckY8" title="qq"><i class="icon-qq"></i></a>';
+if(navigator.userAgent.match(/Mobile Safari\//i)) {
+  document.write('<br />' + qqlink);
+} else {
+  document.write('，' + qqlink);
+}
+</script>
+        </center>
+      </div>
+    </div>
+  
+
+
+    <!-- 萌萌的计数器 -->
+    <div>
+    <center>
+    <img src="https://count.getloli.com/@:gddhy?name=%3Agddhy&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" alt=":gddhy" style="max-width: 100%;height: auto;">
+    </center>
+    </div>
+
+
+  
+
+  
+
+  
+
+  
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    	<!--2026-->
+    		&copy;<script type="text/javascript">document.write(new Date().getFullYear())</script>  gddhy 
+
+
+      </div>
+      
+      
+      <div class="footer-middle">
+     	<span id="sitetime"></span>
+<script type="text/javascript" src="/js/sitetime.js"></script>
+      </div>
+      
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script src="/js/page.js"></script><script src="/main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">软件分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">game</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mtk</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MIUI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">旧机博物馆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Termux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">原神</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Win</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Html</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">安卓学习笔记</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子俱乐部</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://luotianyi.vc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Luminous&#39; Home</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://i.yzjlb.net/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>影子博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.himiku.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>初之音</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://zhaoq.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ZhaoQuinn &#39;s Blog</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://lib.baomitu.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/clipboard_use.js"></script>
+
+<!--在QQ内隐藏评论 有输入框腾讯会拦截-->
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("mobile-menu").style.display = "none";
+document.getElementById("comments").style.display = "none";
+}})
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "78371dfddfb940b48346a7dba9af9000"}'></script><!-- End Cloudflare Web Analytics -->
+
+
+<script src="/live2d/auto_waifu.js"></script>
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1771534389384')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

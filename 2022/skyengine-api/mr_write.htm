@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_write</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+size=2><FONT face=Verdana>&nbsp; </FONT>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT face=Verdana 
+      color=#660033><B>int32 mr_write(MR_FILE_HANDLE f, void *p, uint32 
+      l)</B></FONT></P></TD></TR></TBODY></TABLE><BR><FONT face=Verdana>
+<HR noShade SIZE=1>
+</FONT>
+<H5><FONT face=Verdana>Description</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>写文件。</FONT></BLOCKQUOTE>
+<H5><FONT face=Verdana>Parameters</FONT></H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT face=Verdana size=2><B>Name</B></FONT></TD>
+      <TD><FONT face=Verdana size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT face=Verdana size=2><I>f</I></FONT></TD>
+      <TD><FONT face=Verdana size=2><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'">文件句柄</SPAN></FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>p</EM></FONT></TD>
+      <TD><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'"><FONT 
+        face=Verdana size=2>待写入数据存放地址</FONT></SPAN></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>l</EM></FONT></TD>
+      <TD><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'"><FONT 
+        face=Verdana 
+size=2>待写入数据长度</FONT></SPAN></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Return Value</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P><FONT face=Verdana>&gt; 
+  0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  实际写入的字节数<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Remarks</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P><FONT 
+  face=Verdana>初始化SkyEngine引擎，并运行指定的应用。当SkyEngine引擎启动时会调用mr_mem_get获取引擎需要的内存。 
+  mr_mem_get函数由移植者实现，以取得引擎需要的内存。entry是SkyEngine入口参数。</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Example</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>
+  <P>/*mrp code*/</P>
+  <P>MR_FILE_HANDLE fh;<BR>char buffer[60] = "Hello sky!";<BR>fh = 
+  mrc_open(&nbsp;"testFile.txt", MR_FILE_RDWR&nbsp;);&nbsp; 
+  //可读写方式打开文件testFile.txt<BR>mrc_write(&nbsp;fh, &nbsp;(void*)buffer, 
+  sizeof(buffer) );<BR>mrc_close(&nbsp;fh );<BR></P></FONT></BLOCKQUOTE>
+<H5><SPAN><FONT face=Verdana><BR>See Also</FONT></SPAN></H5>
+<BLOCKQUOTE>
+  <P><FONT face=Verdana><A href="mr_open.htm">mr_open</A><BR><A href="mr_close.htm">mr_close</A></FONT><A href="mr_start_dsm_ex.htm"></A></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
