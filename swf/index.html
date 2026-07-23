@@ -1,0 +1,2301 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#6750A4">
+    <title>SWF 播放器</title>
+
+    <!-- Ruffle -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS Reset & Variables ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --md-primary: #6750A4;
+            --md-on-primary: #FFFFFF;
+            --md-primary-container: #EADDFF;
+            --md-on-primary-container: #21005D;
+            --md-secondary: #625B71;
+            --md-surface: #FEF7FF;
+            --md-surface-variant: #E7E0EC;
+            --md-surface-container: #F3EDF7;
+            --md-surface-container-high: #ECE6F0;
+            --md-on-surface: #1D1B20;
+            --md-on-surface-variant: #49454F;
+            --md-outline: #79747E;
+            --md-outline-variant: #CAC4D0;
+            --md-error: #B3261E;
+            --md-on-error: #FFFFFF;
+            --md-error-container: #F9DEDC;
+            --md-on-error-container: #410E0B;
+            --md-success: #386A20;
+            --md-success-container: #C6ECA3;
+            --md-shadow: rgba(0, 0, 0, 0.2);
+            --md-radius-sm: 8px;
+            --md-radius-md: 12px;
+            --md-radius-lg: 16px;
+            --md-radius-xl: 28px;
+            --md-elevation-1: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+            --md-elevation-2: 0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
+            --md-elevation-3: 0 1px 3px 0 rgba(0,0,0,0.3), 0 4px 8px 3px rgba(0,0,0,0.15);
+            --md-elevation-4: 0 2px 3px 0 rgba(0,0,0,0.3), 0 6px 10px 4px rgba(0,0,0,0.15);
+            --md-transition: 200ms cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--md-surface);
+            color: var(--md-on-surface);
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            /* ===== Prevent text selection globally ===== */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none; /* iOS Safari: prevent long-press callout */
+        }
+
+        /* Allow text selection in input/textarea (search, rename dialog, etc.) */
+        input, textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: default;
+        }
+
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--md-outline-variant); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--md-outline); }
+
+        /* ===== Top App Bar ===== */
+        .app-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 64px;
+            background: var(--md-surface-container);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 100;
+            gap: 12px;
+            transition: box-shadow var(--md-transition);
+        }
+
+        .app-bar.scrolled {
+            box-shadow: var(--md-elevation-2);
+        }
+
+        .app-bar-title {
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0;
+            flex: 1;
+            color: var(--md-on-surface);
+        }
+
+        .app-bar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--md-on-surface-variant);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--md-transition);
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .app-bar-icon:hover { background: rgba(103,80,164,0.08); }
+        .app-bar-icon:active { background: rgba(103,80,164,0.12); }
+        .app-bar-icon .material-icons { font-size: 24px; }
+
+        .app-bar .logo-icon {
+            color: var(--md-primary);
+        }
+
+        /* ===== Main Content ===== */
+        main {
+            padding-top: 64px;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+        }
+
+        /* ===== Section Header ===== */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 24px 0 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--md-primary);
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        .file-count-badge {
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 16px;
+        }
+
+        /* ===== Empty State ===== */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+            min-height: 50vh;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 80px;
+            color: var(--md-outline-variant);
+            margin-bottom: 16px;
+        }
+
+        .empty-state h2 {
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--md-on-surface);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            color: var(--md-on-surface-variant);
+            line-height: 1.5;
+            max-width: 360px;
+            margin-bottom: 24px;
+        }
+
+        /* ===== SWF Card Grid ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .swf-card {
+            background: var(--md-surface-container);
+            border-radius: var(--md-radius-md);
+            overflow: hidden;
+            transition: box-shadow var(--md-transition), transform var(--md-transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .swf-card:hover {
+            box-shadow: var(--md-elevation-2);
+            transform: translateY(-2px);
+        }
+
+        .swf-card-thumb {
+            height: 160px;
+            background: linear-gradient(135deg, #D0BCFF 0%, #FFD8E4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .swf-card-thumb .thumb-icon {
+            font-size: 56px;
+            color: var(--md-primary);
+            opacity: 0.7;
+        }
+
+        .swf-card-thumb .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--md-transition);
+            cursor: pointer;
+        }
+
+        .swf-card-thumb:hover .play-overlay { opacity: 1; }
+
+        .play-overlay .material-icons {
+            font-size: 48px;
+            color: white;
+        }
+
+        .swf-card-body {
+            padding: 12px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .swf-card-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--md-on-surface);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .swf-card-meta {
+            font-size: 12px;
+            color: var(--md-on-surface-variant);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .swf-card-meta .material-icons {
+            font-size: 14px;
+        }
+
+        .swf-card-actions {
+            display: flex;
+            gap: 4px;
+            padding: 4px 8px 8px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .card-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background var(--md-transition), box-shadow var(--md-transition);
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .card-action-btn .material-icons { font-size: 18px; }
+
+        .btn-play {
+            background: var(--md-primary);
+            color: var(--md-on-primary);
+        }
+        .btn-play:hover { background: #7965B0; box-shadow: var(--md-elevation-1); }
+
+        .btn-delete {
+            background: transparent;
+            color: var(--md-error);
+        }
+        .btn-delete:hover { background: var(--md-error-container); }
+
+        .btn-rename {
+            background: transparent;
+            color: var(--md-on-surface-variant);
+        }
+        .btn-rename:hover { background: rgba(103,80,164,0.08); color: var(--md-primary); }
+
+        .btn-download {
+            background: transparent;
+            color: var(--md-on-surface-variant);
+        }
+        .btn-download:hover { background: rgba(103,80,164,0.08); color: var(--md-primary); }
+
+        /* ===== FAB ===== */
+        .fab {
+            position: fixed;
+            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+            right: calc(24px + env(safe-area-inset-right, 0px));
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--md-primary);
+            color: var(--md-on-primary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--md-elevation-3);
+            transition: box-shadow var(--md-transition), transform var(--md-transition), background var(--md-transition);
+            z-index: 90;
+        }
+
+        .fab:hover {
+            background: #7965B0;
+            box-shadow: var(--md-elevation-4);
+            transform: scale(1.05);
+        }
+
+        .fab:active {
+            transform: scale(0.95);
+        }
+
+        .fab .material-icons { font-size: 24px; }
+
+        .fab.extended {
+            width: auto;
+            padding: 0 20px;
+            gap: 8px;
+            border-radius: 16px;
+        }
+
+        .fab.extended .fab-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== Extended FAB on desktop ===== */
+        @media (min-width: 600px) {
+            .fab {
+                bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+                right: calc(32px + env(safe-area-inset-right, 0px));
+            }
+        }
+
+        /* ===== Player View ===== */
+        .player-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .player-overlay.active {
+            display: flex;
+        }
+
+        .player-topbar {
+            height: 56px;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            gap: 4px;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .player-topbar-title {
+            flex: 1;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 8px;
+        }
+
+        .player-topbar button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--md-transition);
+        }
+
+        /* Only apply hover on devices that truly support it (mouse/trackpad).
+           On touch devices :hover sticks after tap, causing a persistent
+           "pressed" look. */
+        @media (hover: hover) {
+            .player-topbar button:hover {
+                background: rgba(255,255,255,0.12);
+            }
+        }
+
+        .player-topbar button .material-icons { font-size: 24px; }
+
+        .player-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #ruffle-player {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .player-loading {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .player-loading .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.2);
+            border-top-color: var(--md-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .player-loading p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== Virtual Keyboard ===== */
+        .virtual-keyboard {
+            display: none;
+            background: #1a1a2e;
+            padding: 6px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            flex-shrink: 0;
+        }
+
+        .player-overlay.keyboard-active .virtual-keyboard {
+            display: block;
+        }
+
+        .vk-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .vk-dpad {
+            display: grid;
+            grid-template-columns: repeat(3, 44px);
+            grid-template-rows: repeat(2, 44px);
+            gap: 3px;
+        }
+        .vk-dpad .vk-key:nth-child(1) { grid-column: 2; grid-row: 1; }
+        .vk-dpad .vk-key:nth-child(2) { grid-column: 1; grid-row: 2; }
+        .vk-dpad .vk-key:nth-child(3) { grid-column: 2; grid-row: 2; }
+        .vk-dpad .vk-key:nth-child(4) { grid-column: 3; grid-row: 2; }
+
+        .vk-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 44px);
+            grid-template-rows: repeat(3, 44px);
+            gap: 3px;
+        }
+
+        .vk-bottom-row {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .vk-numbers {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .vk-key {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            border: none;
+            background: #2d2d4a;
+            color: #e0e0e0;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.1s, transform 0.05s;
+            touch-action: none;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Pressed state is managed entirely by JS (.pressed class) via pointer
+           events. The :active pseudo-class is intentionally NOT used because on
+           touch devices it can "stick" after the finger lifts, leaving the key
+           visually pressed. */
+        .vk-key.pressed {
+            background: #6750A4;
+            color: #fff;
+            transform: scale(0.92);
+        }
+
+        .vk-key.vk-sm {
+            min-width: 36px;
+            height: 36px;
+            font-size: 12px;
+        }
+
+        .vk-key.vk-wide {
+            min-width: 80px;
+            flex: 1;
+        }
+
+        .vk-key.vk-arrow {
+            font-size: 20px;
+        }
+
+        .player-overlay.keyboard-active .player-container {
+            align-items: flex-start;
+        }
+
+        #btn-keyboard.active {
+            background: rgba(103, 80, 164, 0.4);
+        }
+
+        /* ===== Keyboard Layout Switch Button (in player topbar) ===== */
+        /* Pill-shaped button sitting left of the keyboard toggle in the topbar.
+           Hidden by default; only visible while the virtual keyboard is open. */
+        #btn-vk-toggle {
+            display: none;
+            width: auto;
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            border-radius: 18px;
+            border: none;
+            background: rgba(103, 80, 164, 0.5);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            white-space: nowrap;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex-shrink: 0;
+            transition: background 0.15s, transform 0.05s;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        @media (hover: hover) {
+            #btn-vk-toggle:hover { background: rgba(103, 80, 164, 0.7); }
+        }
+        #btn-vk-toggle:active { transform: scale(0.96); }
+        #btn-vk-toggle .material-icons { font-size: 18px; }
+
+        /* Show the layout switch only while the virtual keyboard is visible */
+        .player-overlay.keyboard-active #btn-vk-toggle {
+            display: inline-flex;
+        }
+
+        /* Narrow screens: icon-only to save topbar space */
+        @media (max-width: 480px) {
+            #btn-vk-toggle { padding: 0 8px; }
+            #btn-vk-toggle .vk-toggle-label { display: none; }
+        }
+
+        /* Compact layout keeps original flex-wrap behavior */
+        .vk-layout-compact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* Full keyboard: column of rows, hidden by default */
+        .vk-layout-full {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        .vk-row {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            flex-wrap: nowrap;
+        }
+
+        /* Switch visibility */
+        .virtual-keyboard.full-mode .vk-layout-compact { display: none; }
+        .virtual-keyboard.full-mode .vk-layout-full { display: flex; }
+
+        /* Full keyboard keys are a bit smaller to fit more keys */
+        .vk-layout-full .vk-key {
+            min-width: 32px;
+            height: 36px;
+            font-size: 12px;
+        }
+        .vk-layout-full .vk-key.vk-fn {
+            min-width: 48px;
+            font-size: 10px;
+        }
+        .vk-layout-full .vk-key.vk-backspace {
+            min-width: 56px;
+        }
+        .vk-layout-full .vk-key.vk-space {
+            min-width: 140px;
+            flex: 1;
+            max-width: 240px;
+        }
+
+        /* Mobile adjustments for full keyboard */
+        @media (max-width: 600px) {
+            .vk-layout-full {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                /* Hide the scrollbar — dragging the keyboard scrolls it (see
+                   setupKeyboardDragScroll in JS). pan-y lets the page scroll
+                   vertically while we handle the horizontal drag ourselves. */
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                touch-action: pan-y;
+            }
+            .vk-layout-full::-webkit-scrollbar {
+                display: none;
+            }
+            .vk-layout-full .vk-key {
+                min-width: 26px;
+                height: 32px;
+                font-size: 11px;
+            }
+            .vk-layout-full .vk-key.vk-fn {
+                min-width: 38px;
+                font-size: 9px;
+            }
+            .vk-layout-full .vk-key.vk-backspace {
+                min-width: 44px;
+            }
+            .vk-layout-full .vk-key.vk-space {
+                min-width: 90px;
+            }
+        }
+
+        /* Grab/grabbing cursor on mouse devices for the draggable keyboard */
+        @media (hover: hover) and (max-width: 600px) {
+            .vk-layout-full { cursor: grab; }
+            .vk-layout-full.dragging { cursor: grabbing; }
+        }
+
+        /* Mobile: stack keyboard sections vertically */
+        @media (max-width: 600px) {
+            .virtual-keyboard {
+                padding: 4px;
+            }
+            .vk-layout {
+                gap: 4px;
+            }
+            .vk-dpad {
+                grid-template-columns: repeat(3, 40px);
+                grid-template-rows: repeat(2, 40px);
+            }
+            .vk-actions {
+                grid-template-columns: repeat(3, 40px);
+                grid-template-rows: repeat(3, 40px);
+            }
+            .vk-key {
+                min-width: 40px;
+                height: 40px;
+                font-size: 13px;
+            }
+            .vk-key.vk-sm {
+                min-width: 32px;
+                height: 32px;
+                font-size: 11px;
+            }
+            .vk-key.vk-wide {
+                min-width: 60px;
+            }
+        }
+
+        /* ===== Snackbar ===== */
+        .snackbar {
+            position: fixed;
+            bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #322F35;
+            color: #F5EFF7;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: var(--md-elevation-3);
+            z-index: 2000;
+            opacity: 0;
+            transition: transform var(--md-transition), opacity var(--md-transition);
+            max-width: 90vw;
+            min-width: 280px;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .snackbar.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== Dialog ===== */
+        .dialog-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .dialog-overlay.active {
+            display: flex;
+        }
+
+        .dialog {
+            background: var(--md-surface-container-high);
+            border-radius: var(--md-radius-xl);
+            max-width: 400px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: var(--md-elevation-3);
+            animation: dialog-enter var(--md-transition);
+        }
+
+        @keyframes dialog-enter {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .dialog h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: var(--md-on-surface);
+        }
+
+        .dialog p {
+            font-size: 14px;
+            color: var(--md-on-surface-variant);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .dialog-btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background var(--md-transition);
+        }
+
+        .dialog-btn.text {
+            background: transparent;
+            color: var(--md-primary);
+        }
+        .dialog-btn.text:hover { background: rgba(103,80,164,0.08); }
+
+        .dialog-btn.danger {
+            background: var(--md-error);
+            color: var(--md-on-error);
+        }
+        .dialog-btn.danger:hover { background: #9A1F1A; }
+
+        .dialog-btn.primary {
+            background: var(--md-primary);
+            color: var(--md-on-primary);
+        }
+        .dialog-btn.primary:hover { background: #7965B0; }
+
+        /* Rename input */
+        .rename-input-wrapper {
+            display: flex;
+            align-items: center;
+            background: var(--md-surface-container);
+            border-radius: var(--md-radius-sm);
+            padding: 0 16px;
+            margin-bottom: 24px;
+            border: 2px solid var(--md-outline-variant);
+            transition: border-color var(--md-transition);
+        }
+
+        .rename-input-wrapper:focus-within {
+            border-color: var(--md-primary);
+        }
+
+        .rename-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--md-on-surface);
+            outline: none;
+            padding: 14px 0;
+            min-width: 0;
+        }
+
+        .rename-suffix {
+            color: var(--md-on-surface-variant);
+            font-size: 15px;
+            user-select: none;
+            -webkit-user-select: none;
+            white-space: nowrap;
+        }
+
+        /* ===== Ripple effect ===== */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 确保 FAB 的 .ripple 类不会覆盖 position: fixed */
+        .fab.ripple {
+            position: fixed;
+        }
+
+        .ripple-wave {
+            position: absolute;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.3;
+            transform: scale(0);
+            animation: ripple 0.4s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* ===== Mobile responsive ===== */
+        @media (max-width: 599px) {
+            main {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .app-bar {
+                height: 56px;
+                padding: 0 8px;
+            }
+
+            main { padding-top: 56px; }
+
+            .app-bar-title { font-size: 19px; }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .fab {
+                bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+                right: calc(16px + env(safe-area-inset-right, 0px));
+                width: 56px;
+                height: 56px;
+            }
+
+            .swf-card-thumb { height: 140px; }
+
+            .snackbar {
+                bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+                width: calc(100vw - 32px);
+                min-width: auto;
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 904px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== Search bar ===== */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--md-surface-container-high);
+            border-radius: 28px;
+            padding: 4px 4px 4px 16px;
+            margin-bottom: 8px;
+            gap: 8px;
+            transition: box-shadow var(--md-transition);
+        }
+
+        .search-bar:focus-within {
+            box-shadow: var(--md-elevation-1);
+        }
+
+        .search-bar .material-icons {
+            color: var(--md-on-surface-variant);
+            font-size: 22px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 15px;
+            color: var(--md-on-surface);
+            outline: none;
+            padding: 10px 0;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--md-on-surface-variant);
+        }
+
+        .search-clear {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--md-on-surface-variant);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .search-clear:hover { background: rgba(0,0,0,0.06); }
+
+        /* hidden file input */
+        #file-input { display: none; }
+
+        /* Drag & drop */
+        .drag-zone {
+            position: fixed;
+            inset: 0;
+            background: rgba(103,80,164,0.1);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .drag-zone.active { display: flex; }
+
+        .drag-zone-content {
+            border: 3px dashed var(--md-primary);
+            border-radius: 28px;
+            padding: 48px 64px;
+            text-align: center;
+            background: var(--md-surface);
+        }
+
+        .drag-zone-content .material-icons {
+            font-size: 64px;
+            color: var(--md-primary);
+        }
+
+        .drag-zone-content p {
+            font-size: 18px;
+            color: var(--md-primary);
+            margin-top: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== App Bar ===== -->
+    <header class="app-bar" id="app-bar">
+        <span class="material-icons logo-icon">movie_filter</span>
+        <span class="app-bar-title">SWF 播放器</span>
+        <button class="app-bar-icon" id="btn-add-top" title="添加 SWF 文件">
+            <span class="material-icons">add</span>
+        </button>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main id="main-content">
+        <!-- Search bar -->
+        <div style="padding-top: 16px;">
+            <div class="search-bar">
+                <span class="material-icons">search</span>
+                <input type="text" id="search-input" placeholder="搜索 SWF 文件...">
+                <button class="search-clear" id="search-clear" style="display:none;">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Section header -->
+        <div class="section-header">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <span class="section-title">我的 SWF 文件</span>
+                <span class="file-count-badge" id="file-count">0 个文件</span>
+            </div>
+        </div>
+
+        <!-- Card grid / Empty state -->
+        <div id="card-grid" class="card-grid" style="display:none;"></div>
+
+        <div id="empty-state" class="empty-state">
+            <span class="material-icons empty-icon">flash_on</span>
+            <h2>还没有 SWF 文件</h2>
+            <p>点击右下角的按钮添加 SWF 文件，文件将存储在浏览器本地，不会上传到服务器，下次打开仍然可用。</p>
+        </div>
+    </main>
+
+    <!-- ===== FAB ===== -->
+    <button class="fab ripple" id="fab-add" title="添加 SWF 文件">
+        <span class="material-icons">add</span>
+    </button>
+
+    <!-- ===== File Input ===== -->
+    <input type="file" id="file-input" multiple>
+
+    <!-- ===== Drag & Drop Zone ===== -->
+    <div class="drag-zone" id="drag-zone">
+        <div class="drag-zone-content">
+            <span class="material-icons">file_download</span>
+            <p>松开以添加 SWF 文件</p>
+        </div>
+    </div>
+
+    <!-- ===== Player Overlay ===== -->
+    <div class="player-overlay" id="player-overlay">
+        <div class="player-topbar">
+            <button id="btn-back" title="返回">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <span class="player-topbar-title" id="player-title">播放中</span>
+            <button id="btn-vk-toggle" title="切换键盘布局" type="button">
+                <span class="material-icons">swap_horiz</span>
+                <span class="vk-toggle-label">完整键盘</span>
+            </button>
+            <button id="btn-keyboard" title="虚拟键盘">
+                <span class="material-icons">keyboard</span>
+            </button>
+            <button id="btn-fullscreen" title="全屏">
+                <span class="material-icons">fullscreen</span>
+            </button>
+        </div>
+        <div class="player-container" id="player-container">
+            <div class="player-loading" id="player-loading">
+                <div class="spinner"></div>
+                <p>正在加载 SWF 文件...</p>
+            </div>
+        </div>
+        <!-- ===== Virtual Keyboard ===== -->
+        <div class="virtual-keyboard" id="virtual-keyboard">
+            <!-- Compact keyboard (original) -->
+            <div class="vk-layout vk-layout-compact">
+                <div class="vk-dpad">
+                    <button class="vk-key vk-arrow" data-key="ArrowUp" data-code="ArrowUp" data-keycode="38">↑</button>
+                    <button class="vk-key vk-arrow" data-key="ArrowLeft" data-code="ArrowLeft" data-keycode="37">←</button>
+                    <button class="vk-key vk-arrow" data-key="ArrowDown" data-code="ArrowDown" data-keycode="40">↓</button>
+                    <button class="vk-key vk-arrow" data-key="ArrowRight" data-code="ArrowRight" data-keycode="39">→</button>
+                </div>
+                <div class="vk-actions">
+                    <button class="vk-key" data-key="q" data-code="KeyQ" data-keycode="81">Q</button>
+                    <button class="vk-key" data-key="w" data-code="KeyW" data-keycode="87">W</button>
+                    <button class="vk-key" data-key="e" data-code="KeyE" data-keycode="69">E</button>
+                    <button class="vk-key" data-key="a" data-code="KeyA" data-keycode="65">A</button>
+                    <button class="vk-key" data-key="s" data-code="KeyS" data-keycode="83">S</button>
+                    <button class="vk-key" data-key="d" data-code="KeyD" data-keycode="68">D</button>
+                    <button class="vk-key" data-key="z" data-code="KeyZ" data-keycode="90">Z</button>
+                    <button class="vk-key" data-key="x" data-code="KeyX" data-keycode="88">X</button>
+                    <button class="vk-key" data-key="c" data-code="KeyC" data-keycode="67">C</button>
+                </div>
+                <div class="vk-bottom-row">
+                    <button class="vk-key vk-wide" data-key=" " data-code="Space" data-keycode="32">Space</button>
+                    <button class="vk-key" data-key="Enter" data-code="Enter" data-keycode="13">↵</button>
+                    <button class="vk-key" data-key="Shift" data-code="ShiftLeft" data-keycode="16">Shift</button>
+                </div>
+                <div class="vk-numbers">
+                    <button class="vk-key vk-sm" data-key="1" data-code="Digit1" data-keycode="49">1</button>
+                    <button class="vk-key vk-sm" data-key="2" data-code="Digit2" data-keycode="50">2</button>
+                    <button class="vk-key vk-sm" data-key="3" data-code="Digit3" data-keycode="51">3</button>
+                    <button class="vk-key vk-sm" data-key="4" data-code="Digit4" data-keycode="52">4</button>
+                    <button class="vk-key vk-sm" data-key="5" data-code="Digit5" data-keycode="53">5</button>
+                    <button class="vk-key vk-sm" data-key="6" data-code="Digit6" data-keycode="54">6</button>
+                </div>
+            </div>
+
+            <!-- Full keyboard -->
+            <div class="vk-layout vk-layout-full">
+                <!-- Row 1: function & numbers -->
+                <div class="vk-row">
+                    <button class="vk-key vk-sm vk-fn" data-key="Escape" data-code="Escape" data-keycode="27">Esc</button>
+                    <button class="vk-key vk-sm" data-key="1" data-code="Digit1" data-keycode="49">1</button>
+                    <button class="vk-key vk-sm" data-key="2" data-code="Digit2" data-keycode="50">2</button>
+                    <button class="vk-key vk-sm" data-key="3" data-code="Digit3" data-keycode="51">3</button>
+                    <button class="vk-key vk-sm" data-key="4" data-code="Digit4" data-keycode="52">4</button>
+                    <button class="vk-key vk-sm" data-key="5" data-code="Digit5" data-keycode="53">5</button>
+                    <button class="vk-key vk-sm" data-key="6" data-code="Digit6" data-keycode="54">6</button>
+                    <button class="vk-key vk-sm" data-key="7" data-code="Digit7" data-keycode="55">7</button>
+                    <button class="vk-key vk-sm" data-key="8" data-code="Digit8" data-keycode="56">8</button>
+                    <button class="vk-key vk-sm" data-key="9" data-code="Digit9" data-keycode="57">9</button>
+                    <button class="vk-key vk-sm" data-key="0" data-code="Digit0" data-keycode="48">0</button>
+                    <button class="vk-key vk-sm" data-key="-" data-code="Minus" data-keycode="189">-</button>
+                    <button class="vk-key vk-sm" data-key="=" data-code="Equal" data-keycode="187">=</button>
+                    <button class="vk-key vk-sm vk-fn vk-backspace" data-key="Backspace" data-code="Backspace" data-keycode="8">⌫</button>
+                </div>
+                <!-- Row 2 -->
+                <div class="vk-row">
+                    <button class="vk-key vk-sm vk-fn" data-key="Tab" data-code="Tab" data-keycode="9">Tab</button>
+                    <button class="vk-key vk-sm" data-key="q" data-code="KeyQ" data-keycode="81">Q</button>
+                    <button class="vk-key vk-sm" data-key="w" data-code="KeyW" data-keycode="87">W</button>
+                    <button class="vk-key vk-sm" data-key="e" data-code="KeyE" data-keycode="69">E</button>
+                    <button class="vk-key vk-sm" data-key="r" data-code="KeyR" data-keycode="82">R</button>
+                    <button class="vk-key vk-sm" data-key="t" data-code="KeyT" data-keycode="84">T</button>
+                    <button class="vk-key vk-sm" data-key="y" data-code="KeyY" data-keycode="89">Y</button>
+                    <button class="vk-key vk-sm" data-key="u" data-code="KeyU" data-keycode="85">U</button>
+                    <button class="vk-key vk-sm" data-key="i" data-code="KeyI" data-keycode="73">I</button>
+                    <button class="vk-key vk-sm" data-key="o" data-code="KeyO" data-keycode="79">O</button>
+                    <button class="vk-key vk-sm" data-key="p" data-code="KeyP" data-keycode="80">P</button>
+                    <button class="vk-key vk-sm" data-key="[" data-code="BracketLeft" data-keycode="219">[</button>
+                    <button class="vk-key vk-sm" data-key="]" data-code="BracketRight" data-keycode="221">]</button>
+                    <button class="vk-key vk-sm" data-key="\" data-code="Backslash" data-keycode="220">\</button>
+                </div>
+                <!-- Row 3 -->
+                <div class="vk-row">
+                    <button class="vk-key vk-sm vk-fn" data-key="CapsLock" data-code="CapsLock" data-keycode="20">Caps</button>
+                    <button class="vk-key vk-sm" data-key="a" data-code="KeyA" data-keycode="65">A</button>
+                    <button class="vk-key vk-sm" data-key="s" data-code="KeyS" data-keycode="83">S</button>
+                    <button class="vk-key vk-sm" data-key="d" data-code="KeyD" data-keycode="68">D</button>
+                    <button class="vk-key vk-sm" data-key="f" data-code="KeyF" data-keycode="70">F</button>
+                    <button class="vk-key vk-sm" data-key="g" data-code="KeyG" data-keycode="71">G</button>
+                    <button class="vk-key vk-sm" data-key="h" data-code="KeyH" data-keycode="72">H</button>
+                    <button class="vk-key vk-sm" data-key="j" data-code="KeyJ" data-keycode="74">J</button>
+                    <button class="vk-key vk-sm" data-key="k" data-code="KeyK" data-keycode="75">K</button>
+                    <button class="vk-key vk-sm" data-key="l" data-code="KeyL" data-keycode="76">L</button>
+                    <button class="vk-key vk-sm" data-key=";" data-code="Semicolon" data-keycode="186">;</button>
+                    <button class="vk-key vk-sm" data-key="'" data-code="Quote" data-keycode="222">'</button>
+                    <button class="vk-key vk-sm vk-fn vk-backspace" data-key="Enter" data-code="Enter" data-keycode="13">Enter</button>
+                </div>
+                <!-- Row 4 -->
+                <div class="vk-row">
+                    <button class="vk-key vk-sm vk-fn" data-key="Shift" data-code="ShiftLeft" data-keycode="16">Shift</button>
+                    <button class="vk-key vk-sm" data-key="z" data-code="KeyZ" data-keycode="90">Z</button>
+                    <button class="vk-key vk-sm" data-key="x" data-code="KeyX" data-keycode="88">X</button>
+                    <button class="vk-key vk-sm" data-key="c" data-code="KeyC" data-keycode="67">C</button>
+                    <button class="vk-key vk-sm" data-key="v" data-code="KeyV" data-keycode="86">V</button>
+                    <button class="vk-key vk-sm" data-key="b" data-code="KeyB" data-keycode="66">B</button>
+                    <button class="vk-key vk-sm" data-key="n" data-code="KeyN" data-keycode="78">N</button>
+                    <button class="vk-key vk-sm" data-key="m" data-code="KeyM" data-keycode="77">M</button>
+                    <button class="vk-key vk-sm" data-key="," data-code="Comma" data-keycode="188">,</button>
+                    <button class="vk-key vk-sm" data-key="." data-code="Period" data-keycode="190">.</button>
+                    <button class="vk-key vk-sm" data-key="/" data-code="Slash" data-keycode="191">/</button>
+                    <button class="vk-key vk-sm vk-fn" data-key="Shift" data-code="ShiftRight" data-keycode="16">Shift</button>
+                </div>
+                <!-- Row 5: modifiers + space + arrows -->
+                <div class="vk-row">
+                    <button class="vk-key vk-sm vk-fn" data-key="Control" data-code="ControlLeft" data-keycode="17">Ctrl</button>
+                    <button class="vk-key vk-sm vk-fn" data-key="Alt" data-code="AltLeft" data-keycode="18">Alt</button>
+                    <button class="vk-key vk-sm vk-space" data-key=" " data-code="Space" data-keycode="32">Space</button>
+                    <button class="vk-key vk-sm vk-fn" data-key="Alt" data-code="AltRight" data-keycode="18">Alt</button>
+                    <button class="vk-key vk-sm vk-fn" data-key="Control" data-code="ControlRight" data-keycode="17">Ctrl</button>
+                    <button class="vk-key vk-sm vk-arrow" data-key="ArrowLeft" data-code="ArrowLeft" data-keycode="37">←</button>
+                    <button class="vk-key vk-sm vk-arrow" data-key="ArrowUp" data-code="ArrowUp" data-keycode="38">↑</button>
+                    <button class="vk-key vk-sm vk-arrow" data-key="ArrowDown" data-code="ArrowDown" data-keycode="40">↓</button>
+                    <button class="vk-key vk-sm vk-arrow" data-key="ArrowRight" data-code="ArrowRight" data-keycode="39">→</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Delete Confirmation Dialog ===== -->
+    <div class="dialog-overlay" id="delete-dialog">
+        <div class="dialog">
+            <h3>删除文件</h3>
+            <p id="delete-dialog-text">确定要删除这个 SWF 文件吗？此操作无法撤销。</p>
+            <div class="dialog-actions">
+                <button class="dialog-btn text" id="btn-cancel-delete">取消</button>
+                <button class="dialog-btn danger" id="btn-confirm-delete">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Rename Dialog ===== -->
+    <div class="dialog-overlay" id="rename-dialog">
+        <div class="dialog">
+            <h3>重命名</h3>
+            <div class="rename-input-wrapper">
+                <input type="text" id="rename-input" class="rename-input" placeholder="输入文件名" autocomplete="off">
+                <span class="rename-suffix">.swf</span>
+            </div>
+            <div class="dialog-actions">
+                <button class="dialog-btn text" id="btn-cancel-rename">取消</button>
+                <button class="dialog-btn primary" id="btn-confirm-rename">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Snackbar ===== -->
+    <div class="snackbar" id="snackbar"></div>
+
+    <script>
+        // ==========================================
+        //  IndexedDB Manager
+        // ==========================================
+        const DB_NAME = 'SWFPlayerDB';
+        const DB_VERSION = 2;
+        const STORE_NAME = 'swfFiles';
+        let db = null;
+
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => {
+                    db = request.result;
+                    resolve(db);
+                };
+
+                request.onupgradeneeded = (event) => {
+                    const database = event.target.result;
+                    if (!database.objectStoreNames.contains(STORE_NAME)) {
+                        const store = database.createObjectStore(STORE_NAME, {
+                            keyPath: 'id',
+                            autoIncrement: true
+                        });
+                        store.createIndex('name', 'name', { unique: false });
+                        store.createIndex('dateAdded', 'dateAdded', { unique: false });
+                    }
+                };
+            });
+        }
+
+        function addFileToDB(file) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+
+                const record = {
+                    name: file.name,
+                    size: file.size,
+                    blob: file,
+                    dateAdded: Date.now()
+                };
+
+                const request = store.add(record);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function getAllFiles() {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.getAll();
+
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function getFileById(id) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.get(id);
+
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function deleteFileFromDB(id) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.delete(id);
+
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        function updateFileNameInDB(id, newName) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.get(id);
+
+                request.onsuccess = () => {
+                    const record = request.result;
+                    if (record) {
+                        record.name = newName;
+                        const updateRequest = store.put(record);
+                        updateRequest.onsuccess = () => resolve();
+                        updateRequest.onerror = () => reject(updateRequest.error);
+                    } else {
+                        reject(new Error('文件不存在'));
+                    }
+                };
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // ==========================================
+        //  UI Helpers
+        // ==========================================
+        function showSnackbar(message, duration = 3000) {
+            const snackbar = document.getElementById('snackbar');
+            snackbar.textContent = message;
+            snackbar.classList.add('show');
+            clearTimeout(snackbar._timer);
+            snackbar._timer = setTimeout(() => {
+                snackbar.classList.remove('show');
+            }, duration);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+
+            if (diff < 60000) return '刚刚';
+            if (diff < 3600000) return Math.floor(diff / 60000) + ' 分钟前';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + ' 小时前';
+            if (diff < 604800000) return Math.floor(diff / 86400000) + ' 天前';
+
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+        }
+
+        function rippleEffect(e) {
+            const target = e.currentTarget;
+            const rect = target.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = (e.clientX || e.touches?.[0]?.clientX || rect.left + rect.width/2) - rect.left - size / 2;
+            const y = (e.clientY || e.touches?.[0]?.clientY || rect.top + rect.height/2) - rect.top - size / 2;
+
+            const wave = document.createElement('span');
+            wave.className = 'ripple-wave';
+            wave.style.width = wave.style.height = size + 'px';
+            wave.style.left = x + 'px';
+            wave.style.top = y + 'px';
+
+            target.appendChild(wave);
+            setTimeout(() => wave.remove(), 400);
+        }
+
+        // ==========================================
+        //  Render File List
+        // ==========================================
+        let allFiles = [];
+        let searchQuery = '';
+
+        async function refreshFileList() {
+            allFiles = await getAllFiles();
+            renderFileList();
+        }
+
+        function renderFileList() {
+            const grid = document.getElementById('card-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countBadge = document.getElementById('file-count');
+
+            let filtered = allFiles;
+            if (searchQuery) {
+                filtered = allFiles.filter(f =>
+                    f.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+
+            countBadge.textContent = `${allFiles.length} 个文件`;
+
+            if (allFiles.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'flex';
+                return;
+            }
+
+            if (filtered.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'flex';
+                emptyState.querySelector('h2').textContent = '未找到匹配的文件';
+                emptyState.querySelector('p').textContent = `没有包含 "${searchQuery}" 的 SWF 文件`;
+                emptyState.querySelector('.empty-icon').textContent = 'search_off';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.style.display = 'grid';
+
+            // Sort by dateAdded descending
+            filtered.sort((a, b) => b.dateAdded - a.dateAdded);
+
+            grid.innerHTML = filtered.map(file => `
+                <div class="swf-card" data-id="${file.id}">
+                    <div class="swf-card-thumb" onclick="playSWF(${file.id})">
+                        <span class="material-icons thumb-icon">movie</span>
+                        <div class="play-overlay">
+                            <span class="material-icons">play_circle_filled</span>
+                        </div>
+                    </div>
+                    <div class="swf-card-body">
+                        <div class="swf-card-name" title="${escapeHtml(file.name)}">${escapeHtml(file.name)}</div>
+                        <div class="swf-card-meta">
+                            <span class="material-icons">storage</span>
+                            <span>${formatFileSize(file.size)}</span>
+                            <span>·</span>
+                            <span>${formatDate(file.dateAdded)}</span>
+                        </div>
+                    </div>
+                    <div class="swf-card-actions">
+                        <button class="card-action-btn btn-play" onclick="playSWF(${file.id})">
+                            <span class="material-icons">play_arrow</span>
+                            播放
+                        </button>
+                        <button class="card-action-btn btn-rename" onclick="confirmRename(${file.id}, '${escapeHtml(file.name).replace(/'/g, "\\'")}')">
+                            <span class="material-icons">edit</span>
+                        </button>
+                        <button class="card-action-btn btn-download" onclick="downloadFile(${file.id})">
+                            <span class="material-icons">download</span>
+                        </button>
+                        <button class="card-action-btn btn-delete" onclick="confirmDelete(${file.id}, '${escapeHtml(file.name).replace(/'/g, "\\'")}')">
+                            <span class="material-icons">delete_outline</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ==========================================
+        //  File Operations
+        // ==========================================
+        async function handleFiles(files) {
+            const allFiles = Array.from(files);
+            const swfFiles = [];
+            const invalidFiles = [];
+
+            for (const f of allFiles) {
+                if (isSWFFile(f)) {
+                    swfFiles.push(f);
+                } else {
+                    invalidFiles.push(f);
+                }
+            }
+
+            // Show snackbar for non-SWF files
+            if (invalidFiles.length > 0) {
+                if (invalidFiles.length === 1) {
+                    showSnackbar(`"${invalidFiles[0].name}" 不是 SWF 文件，无法添加`);
+                } else {
+                    const names = invalidFiles.slice(0, 3).map(f => `"${f.name}"`).join('、');
+                    const extra = invalidFiles.length > 3 ? ` 等 ${invalidFiles.length} 个文件` : '';
+                    showSnackbar(`${names}${extra} 不是 SWF 文件，无法添加`);
+                }
+            }
+
+            if (swfFiles.length === 0 && invalidFiles.length > 0) {
+                return;
+            }
+
+            let success = 0;
+            let fail = 0;
+            for (const file of swfFiles) {
+                try {
+                    await addFileToDB(file);
+                    success++;
+                } catch (err) {
+                    console.error('添加文件失败:', err);
+                    fail++;
+                }
+            }
+
+            if (success > 0) {
+                const msg = invalidFiles.length > 0
+                    ? `已添加 ${success} 个 SWF 文件，${invalidFiles.length} 个非 SWF 文件已跳过`
+                    : `已添加 ${success} 个 SWF 文件`;
+                showSnackbar(msg);
+                await refreshFileList();
+            } else if (fail > 0 && invalidFiles.length === 0) {
+                showSnackbar('添加文件失败');
+            }
+        }
+
+        // Check if a file is a SWF file (by extension or MIME type)
+        function isSWFFile(file) {
+            const name = file.name.toLowerCase();
+            const type = file.type.toLowerCase();
+            return name.endsWith('.swf') || type === 'application/x-shockwave-flash';
+        }
+
+        // Delete confirmation
+        let pendingDeleteId = null;
+
+        function confirmDelete(id, name) {
+            pendingDeleteId = id;
+            document.getElementById('delete-dialog-text').textContent =
+                `确定要删除 "${name}" 吗？此操作无法撤销。`;
+            document.getElementById('delete-dialog').classList.add('active');
+        }
+
+        async function executeDelete() {
+            if (pendingDeleteId === null) return;
+
+            try {
+                await deleteFileFromDB(pendingDeleteId);
+                showSnackbar('文件已删除');
+                await refreshFileList();
+            } catch (err) {
+                console.error('删除失败:', err);
+                showSnackbar('删除失败');
+            } finally {
+                pendingDeleteId = null;
+                document.getElementById('delete-dialog').classList.remove('active');
+            }
+        }
+
+        // Rename
+        let pendingRenameId = null;
+
+        function confirmRename(id, name) {
+            pendingRenameId = id;
+            // Strip .swf extension for editing
+            const baseName = name.replace(/\.swf$/i, '');
+            const input = document.getElementById('rename-input');
+            input.value = baseName;
+            document.getElementById('rename-dialog').classList.add('active');
+            // Focus and select after dialog animation
+            setTimeout(() => {
+                input.focus();
+                input.select();
+            }, 100);
+        }
+
+        async function executeRename() {
+            if (pendingRenameId === null) return;
+
+            const input = document.getElementById('rename-input');
+            const newName = input.value.trim();
+
+            if (!newName) {
+                showSnackbar('文件名不能为空');
+                return;
+            }
+
+            // Check for invalid filename characters
+            if (/[<>:"/\\|?*]/.test(newName)) {
+                showSnackbar('文件名包含非法字符');
+                return;
+            }
+
+            const fullName = newName + '.swf';
+
+            try {
+                await updateFileNameInDB(pendingRenameId, fullName);
+                showSnackbar('文件名已修改');
+                await refreshFileList();
+            } catch (err) {
+                console.error('重命名失败:', err);
+                showSnackbar('重命名失败');
+            } finally {
+                pendingRenameId = null;
+                document.getElementById('rename-dialog').classList.remove('active');
+            }
+        }
+
+        // ==========================================
+        //  Ruffle Player
+        // ==========================================
+        let currentPlayer = null;
+        let currentBlobUrl = null;
+
+        async function playSWF(id) {
+            const file = await getFileById(id);
+            if (!file) {
+                showSnackbar('文件不存在');
+                return;
+            }
+
+            // Show player overlay
+            const overlay = document.getElementById('player-overlay');
+            const container = document.getElementById('player-container');
+            const titleEl = document.getElementById('player-title');
+
+            titleEl.textContent = file.name;
+            overlay.classList.add('active');
+
+            // Ensure loading div is present
+            ensureLoadingDiv(container);
+
+            // Show loading overlay
+            const loading = document.getElementById('player-loading');
+            loading.style.display = 'flex';
+
+            // Clean up previous player (only remove ruffle player, keep loading div)
+            cleanupPlayer();
+
+            // Create blob URL
+            currentBlobUrl = URL.createObjectURL(file.blob);
+
+            try {
+                // Wait for Ruffle to be ready
+                await waitForRuffle();
+
+                // Configure Ruffle
+                window.RufflePlayer = window.RufflePlayer || {};
+                window.RufflePlayer.config = {
+                    autoplay: 'on',
+                    unmuteOverlay: 'visible',
+                    backgroundColor: '#000000',
+                    letterbox: 'on',
+                    upgradeToSecureVersion: true,
+                    maxExecutionDuration: 999,
+                    logLevel: 'warn',
+                    base: null,
+                    menu: true,
+                    salign: '',
+                    scale: 'showAll',
+                    quality: 'high',
+                };
+
+                const ruffle = window.RufflePlayer.newest();
+                currentPlayer = ruffle.createPlayer();
+                currentPlayer.id = 'ruffle-player';
+                currentPlayer.tabIndex = 0;
+                currentPlayer.style.width = '100%';
+                currentPlayer.style.height = '100%';
+
+                // Remove only old ruffle-player, keep loading div intact
+                const oldPlayer = container.querySelector('#ruffle-player');
+                if (oldPlayer) oldPlayer.remove();
+
+                // Add player alongside loading div
+                container.appendChild(currentPlayer);
+
+                // Load the SWF
+                await currentPlayer.load(currentBlobUrl);
+
+                loading.style.display = 'none';
+
+            } catch (err) {
+                console.error('播放失败:', err);
+                loading.innerHTML = `
+                    <span class="material-icons" style="font-size:48px; color:var(--md-error);">error_outline</span>
+                    <p>播放失败：${escapeHtml(err.message || '未知错误')}</p>
+                `;
+                loading.style.display = 'flex';
+            }
+        }
+
+        // Ensure the loading div exists inside the container
+        function ensureLoadingDiv(container) {
+            let loading = document.getElementById('player-loading');
+            if (!loading || !container.contains(loading)) {
+                loading = document.createElement('div');
+                loading.id = 'player-loading';
+                loading.className = 'player-loading';
+                loading.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>正在加载 SWF 文件...</p>
+                `;
+                container.appendChild(loading);
+            }
+        }
+
+        function waitForRuffle() {
+            return new Promise((resolve, reject) => {
+                let attempts = 0;
+                const check = () => {
+                    attempts++;
+                    if (window.RufflePlayer && window.RufflePlayer.newest) {
+                        resolve();
+                    } else if (attempts > 50) {
+                        reject(new Error('Ruffle 加载超时'));
+                    } else {
+                        setTimeout(check, 100);
+                    }
+                };
+                check();
+            });
+        }
+
+        function cleanupPlayer() {
+            if (currentPlayer) {
+                try {
+                    currentPlayer.remove();
+                } catch(e) {}
+                currentPlayer = null;
+            }
+            if (currentBlobUrl) {
+                URL.revokeObjectURL(currentBlobUrl);
+                currentBlobUrl = null;
+            }
+        }
+
+        function closePlayer() {
+            const overlay = document.getElementById('player-overlay');
+            const container = document.getElementById('player-container');
+
+            // Close virtual keyboard
+            closeKeyboard();
+
+            // Exit fullscreen if active
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+
+            cleanupPlayer();
+
+            // Ensure loading div exists and restore its content
+            ensureLoadingDiv(container);
+            const loading = document.getElementById('player-loading');
+            loading.innerHTML = `
+                <div class="spinner"></div>
+                <p>正在加载 SWF 文件...</p>
+            `;
+            loading.style.display = 'none';
+
+            overlay.classList.remove('active');
+        }
+
+        // ==========================================
+        //  Fullscreen
+        // ==========================================
+        function toggleFullscreen() {
+            const container = document.getElementById('player-container');
+            const fullscreenIcon = document.querySelector('#btn-fullscreen .material-icons');
+
+            if (!document.fullscreenElement) {
+                // Close keyboard before entering fullscreen
+                closeKeyboard();
+                const el = container;
+                const request = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+                if (request) {
+                    request.call(el).then(() => {
+                        fullscreenIcon.textContent = 'fullscreen_exit';
+                    }).catch(err => {
+                        console.error('全屏失败:', err);
+                        showSnackbar('无法进入全屏模式');
+                    });
+                }
+            } else {
+                document.exitFullscreen().then(() => {
+                    fullscreenIcon.textContent = 'fullscreen';
+                }).catch(() => {});
+            }
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            const fullscreenIcon = document.querySelector('#btn-fullscreen .material-icons');
+            fullscreenIcon.textContent = document.fullscreenElement ? 'fullscreen_exit' : 'fullscreen';
+        });
+
+        // ==========================================
+        //  Virtual Keyboard
+        // ==========================================
+        let keyboardActive = false;
+        let virtualKeyDispatching = false;
+
+        function toggleKeyboard() {
+            const overlay = document.getElementById('player-overlay');
+            const kbBtn = document.getElementById('btn-keyboard');
+            const kbIcon = kbBtn.querySelector('.material-icons');
+
+            keyboardActive = !keyboardActive;
+
+            if (keyboardActive) {
+                // Exit fullscreen if active
+                if (document.fullscreenElement) {
+                    document.exitFullscreen().catch(() => {});
+                }
+                overlay.classList.add('keyboard-active');
+                kbBtn.classList.add('active');
+                kbIcon.textContent = 'keyboard_hide';
+                // Focus the player so keyboard events are received immediately
+                if (currentPlayer) {
+                    setTimeout(() => currentPlayer.focus({ preventScroll: true }), 100);
+                }
+            } else {
+                overlay.classList.remove('keyboard-active');
+                kbBtn.classList.remove('active');
+                kbIcon.textContent = 'keyboard';
+            }
+        }
+
+        function closeKeyboard() {
+            if (!keyboardActive) return;
+            keyboardActive = false;
+            const overlay = document.getElementById('player-overlay');
+            const kbBtn = document.getElementById('btn-keyboard');
+            const kbIcon = kbBtn.querySelector('.material-icons');
+            overlay.classList.remove('keyboard-active');
+            kbBtn.classList.remove('active');
+            kbIcon.textContent = 'keyboard';
+        }
+
+        function createKeyboardEvent(type, key, code, keyCode) {
+            const event = new KeyboardEvent(type, {
+                key: key,
+                code: code,
+                bubbles: true,
+                cancelable: true,
+                composed: true,
+            });
+            // keyCode/which are read-only in constructor, override via defineProperty
+            try {
+                Object.defineProperty(event, 'keyCode', { get: () => keyCode });
+                Object.defineProperty(event, 'which', { get: () => keyCode });
+            } catch(e) {}
+            return event;
+        }
+
+        function sendKeyEvent(type, key, code, keyCode) {
+            if (!currentPlayer) return;
+            virtualKeyDispatching = true;
+            try {
+                // Ensure the player has focus before dispatching key events.
+                // Ruffle's internal keyboard handler ignores events when the
+                // player element (or its shadow-DOM canvas) is not the active
+                // element. Clicking the virtual keyboard moves focus away, so
+                // we must reclaim it before every dispatch.
+                if (document.activeElement !== currentPlayer) {
+                    currentPlayer.focus({ preventScroll: true });
+                }
+
+                // Dispatch on player element
+                const event = createKeyboardEvent(type, key, code, keyCode);
+                currentPlayer.dispatchEvent(event);
+
+                // Also dispatch on internal canvas (Ruffle shadow root) as fallback
+                const canvas = currentPlayer.shadowRoot?.querySelector('canvas');
+                if (canvas) {
+                    canvas.dispatchEvent(createKeyboardEvent(type, key, code, keyCode));
+                }
+            } finally {
+                virtualKeyDispatching = false;
+            }
+        }
+
+        function setupVirtualKeyboard() {
+            const keys = document.querySelectorAll('.vk-key');
+            keys.forEach(keyEl => {
+                const key = keyEl.dataset.key;
+                const code = keyEl.dataset.code;
+                const keyCode = parseInt(keyEl.dataset.keycode);
+
+                const press = (e) => {
+                    e.preventDefault();
+                    keyEl.classList.add('pressed');
+                    sendKeyEvent('keydown', key, code, keyCode);
+                    // Release implicit pointer capture (Chrome sets it on touch
+                    // pointerdown) so that pointerleave fires when the finger
+                    // slides off the key, preventing a stuck "pressed" look.
+                    if (e.pointerId !== undefined && keyEl.releasePointerCapture) {
+                        try { keyEl.releasePointerCapture(e.pointerId); } catch (_) {}
+                    }
+                };
+
+                const release = (e) => {
+                    e.preventDefault();
+                    keyEl.classList.remove('pressed');
+                    sendKeyEvent('keyup', key, code, keyCode);
+                };
+
+                keyEl.addEventListener('pointerdown', press);
+                keyEl.addEventListener('pointerup', release);
+                keyEl.addEventListener('pointerleave', (e) => {
+                    if (keyEl.classList.contains('pressed')) {
+                        release(e);
+                    }
+                });
+                keyEl.addEventListener('pointercancel', release);
+                // Prevent context menu on long press
+                keyEl.addEventListener('contextmenu', (e) => e.preventDefault());
+            });
+        }
+
+        // Drag-to-scroll for the full keyboard on narrow screens where it
+        // overflows horizontally. The scrollbar is hidden (see CSS); instead
+        // the user drags the keyboard itself to scroll left/right.
+        function setupKeyboardDragScroll() {
+            const scroller = document.querySelector('.vk-layout-full');
+            if (!scroller) return;
+
+            let down = false;
+            let dragging = false;
+            let startX = 0;
+            let startScroll = 0;
+            const THRESHOLD = 6; // px of movement before a press becomes a drag
+
+            scroller.addEventListener('pointerdown', (e) => {
+                // Only engage when the keyboard actually overflows horizontally
+                if (scroller.scrollWidth <= scroller.clientWidth) return;
+                down = true;
+                dragging = false;
+                startX = e.clientX;
+                startScroll = scroller.scrollLeft;
+            });
+
+            scroller.addEventListener('pointermove', (e) => {
+                if (!down) return;
+                const dx = e.clientX - startX;
+                if (!dragging && Math.abs(dx) > THRESHOLD) {
+                    dragging = true;
+                    scroller.classList.add('dragging');
+                }
+                if (dragging) {
+                    scroller.scrollLeft = startScroll - dx;
+                    e.preventDefault();
+                }
+            });
+
+            const end = () => {
+                if (!down) return;
+                down = false;
+                if (dragging) {
+                    dragging = false;
+                    scroller.classList.remove('dragging');
+                    // Suppress the click that follows a drag so a key isn't toggled
+                    const suppress = (ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        scroller.removeEventListener('click', suppress, true);
+                    };
+                    scroller.addEventListener('click', suppress, true);
+                }
+            };
+
+            scroller.addEventListener('pointerup', end);
+            scroller.addEventListener('pointercancel', end);
+            scroller.addEventListener('pointerleave', end);
+        }
+
+        // Switch between compact and full keyboard layouts
+        function toggleKeyboardLayout() {
+            const kb = document.getElementById('virtual-keyboard');
+            const label = document.querySelector('#btn-vk-toggle .vk-toggle-label');
+            const isFull = kb.classList.toggle('full-mode');
+            label.textContent = isFull ? '精简键盘' : '完整键盘';
+            // Clear any stuck "pressed" state from the previous layout
+            kb.querySelectorAll('.vk-key.pressed').forEach(el => el.classList.remove('pressed'));
+            // Reclaim focus for the player so key events keep flowing
+            if (currentPlayer) {
+                setTimeout(() => currentPlayer.focus({ preventScroll: true }), 50);
+            }
+        }
+
+        // ==========================================
+        //  Event Listeners
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            // ===== Prevent right-click context menu globally =====
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            });
+
+            // ===== Prevent text selection via drag (PC) =====
+            document.addEventListener('selectstart', (e) => {
+                // Allow selection inside input/textarea
+                const tag = e.target.tagName;
+                if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+                e.preventDefault();
+            });
+
+            // ===== Prevent drag of text/images/elements (PC) =====
+            // dragstart fires when dragging in-page elements (text, images, etc.).
+            // File drag-and-drop from the OS uses dragenter/dragover/drop on
+            // window, which are handled separately below and are NOT affected.
+            document.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+
+            // Initialize DB
+            try {
+                await openDB();
+                await refreshFileList();
+            } catch (err) {
+                console.error('数据库初始化失败:', err);
+                showSnackbar('数据库初始化失败');
+            }
+
+            // FAB click -> open file dialog
+            document.getElementById('fab-add').addEventListener('click', () => {
+                document.getElementById('file-input').click();
+            });
+
+            // Top bar add button
+            document.getElementById('btn-add-top').addEventListener('click', () => {
+                document.getElementById('file-input').click();
+            });
+
+            // Add ripple to FAB
+            document.getElementById('fab-add').classList.add('ripple');
+            document.querySelectorAll('.ripple').forEach(el => {
+                el.addEventListener('click', rippleEffect);
+            });
+
+            // File input change
+            document.getElementById('file-input').addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFiles(e.target.files);
+                    e.target.value = ''; // reset for re-selection
+                }
+            });
+
+            // Search
+            const searchInput = document.getElementById('search-input');
+            const searchClear = document.getElementById('search-clear');
+
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.trim();
+                searchClear.style.display = searchQuery ? 'flex' : 'none';
+                renderFileList();
+            });
+
+            searchClear.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                searchClear.style.display = 'none';
+                renderFileList();
+            });
+
+            // Player controls
+            document.getElementById('btn-back').addEventListener('click', closePlayer);
+            document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+            document.getElementById('btn-keyboard').addEventListener('click', toggleKeyboard);
+            document.getElementById('btn-vk-toggle').addEventListener('click', toggleKeyboardLayout);
+
+            // Virtual keyboard
+            setupVirtualKeyboard();
+            setupKeyboardDragScroll();
+
+            // Delete dialog
+            document.getElementById('btn-cancel-delete').addEventListener('click', () => {
+                pendingDeleteId = null;
+                document.getElementById('delete-dialog').classList.remove('active');
+            });
+            document.getElementById('btn-confirm-delete').addEventListener('click', executeDelete);
+
+            // Close dialog on overlay click
+            document.getElementById('delete-dialog').addEventListener('click', (e) => {
+                if (e.target.id === 'delete-dialog') {
+                    pendingDeleteId = null;
+                    document.getElementById('delete-dialog').classList.remove('active');
+                }
+            });
+
+            // Rename dialog
+            document.getElementById('btn-cancel-rename').addEventListener('click', () => {
+                pendingRenameId = null;
+                document.getElementById('rename-dialog').classList.remove('active');
+            });
+            document.getElementById('btn-confirm-rename').addEventListener('click', executeRename);
+            document.getElementById('rename-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    executeRename();
+                }
+            });
+            document.getElementById('rename-dialog').addEventListener('click', (e) => {
+                if (e.target.id === 'rename-dialog') {
+                    pendingRenameId = null;
+                    document.getElementById('rename-dialog').classList.remove('active');
+                }
+            });
+
+            // App bar shadow on scroll
+            window.addEventListener('scroll', () => {
+                const appBar = document.getElementById('app-bar');
+                if (window.scrollY > 0) {
+                    appBar.classList.add('scrolled');
+                } else {
+                    appBar.classList.remove('scrolled');
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Skip virtual keyboard dispatched events
+                if (virtualKeyDispatching) return;
+
+                if (e.key === 'Escape') {
+                    if (document.getElementById('player-overlay').classList.contains('active')) {
+                        if (!document.fullscreenElement) {
+                            closePlayer();
+                        }
+                    }
+                    if (document.getElementById('delete-dialog').classList.contains('active')) {
+                        pendingDeleteId = null;
+                        document.getElementById('delete-dialog').classList.remove('active');
+                    }
+                    if (document.getElementById('rename-dialog').classList.contains('active')) {
+                        pendingRenameId = null;
+                        document.getElementById('rename-dialog').classList.remove('active');
+                    }
+                }
+                if (e.key === 'f' || e.key === 'F') {
+                    if (document.getElementById('player-overlay').classList.contains('active')) {
+                        toggleFullscreen();
+                    }
+                }
+            });
+
+            // Drag & Drop
+            let dragCounter = 0;
+            const dragZone = document.getElementById('drag-zone');
+
+            window.addEventListener('dragenter', (e) => {
+                e.preventDefault();
+                dragCounter++;
+                if (e.dataTransfer.types.includes('Files')) {
+                    dragZone.classList.add('active');
+                }
+            });
+
+            window.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dragCounter--;
+                if (dragCounter <= 0) {
+                    dragCounter = 0;
+                    dragZone.classList.remove('active');
+                }
+            });
+
+            window.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            window.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dragCounter = 0;
+                dragZone.classList.remove('active');
+                if (e.dataTransfer.files.length > 0) {
+                    handleFiles(e.dataTransfer.files);
+                }
+            });
+
+            // Prevent default drag behaviors
+            ['dragend'].forEach(eventName => {
+                document.addEventListener(eventName, () => {
+                    dragCounter = 0;
+                    dragZone.classList.remove('active');
+                });
+            });
+        });
+
+        // Download
+        async function downloadFile(id) {
+            try {
+                const file = await getFileById(id);
+                if (!file || !file.blob) {
+                    showSnackbar('文件不存在');
+                    return;
+                }
+                const url = URL.createObjectURL(file.blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showSnackbar('下载已开始');
+            } catch (err) {
+                console.error('下载失败:', err);
+                showSnackbar('下载失败');
+            }
+        }
+
+        // Expose functions for inline onclick
+        window.playSWF = playSWF;
+        window.confirmDelete = confirmDelete;
+        window.confirmRename = confirmRename;
+        window.downloadFile = downloadFile;
+    </script>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(222x) - 多通道加载</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      222x, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>多通道加载。加载一个用于多通道的数据，目前只支持wav和midi&nbsp;。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>T_BG_PLAY_REQ数据结构指针</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>T_BG_PLAY_REQ数据结构大小</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;失败<BR>其他&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  一个句柄，以后操作（播放，停止，关闭）都使用本句柄。</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>T_BG_PLAY_REQ数据结构：<BR>typedef struct<BR>{<BR>&nbsp;&nbsp;&nbsp; &nbsp;uint8 
+  *data;<BR>&nbsp;&nbsp;&nbsp;&nbsp; uint32 len;<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;int32 loop;<BR>}T_BG_PLAY_REQ;</P>
+  <P>platEx(222x)其中x代表音频类型的枚举值：<BR>typedef enum 
+  tagT_MEDIA_TYPE<BR>{<BR>&nbsp;&nbsp;&nbsp; &nbsp;MEDIA_MIDI = 
+  1,<BR>&nbsp;&nbsp;&nbsp;&nbsp; MEDIA_WAVE,<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  MEDIA_MP3,<BR>&nbsp;&nbsp;&nbsp; &nbsp;MEDIA_AMR,<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;MEDIA_PCM,<BR>&nbsp;&nbsp; &nbsp;&nbsp;MEDIA_M4A,<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;MEDIA_AAC,<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;MEDIA_LYRIC,<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;MEDIA_UNKNOW<BR>}T_MEDIA_TYPE;</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>void GetAudioDataStream(const char* name,char*buf,int32 
+  buflen)<BR>{<BR>&nbsp;&nbsp; MR_FILE_HANDLE fh;<BR>&nbsp; &nbsp;int 
+  len=0;<BR>&nbsp;&nbsp; fh = mrc_open( name, MR_FILE_RDONLY );<BR>&nbsp; 
+  &nbsp;len = mrc_read( fh, (void *)buf, buflen );<BR>&nbsp;&nbsp; mrc_close( 
+  fh) ;<BR>}<BR><BR>int32 MultipathLoadAudio(const char* 
+  audioName)<BR>{<BR>&nbsp;&nbsp; T_BG_PLAY_REQ loadReq;<BR>&nbsp;&nbsp; int32 
+  len_wav;<BR>&nbsp;&nbsp; char *buffer_wav = NULL;<BR>&nbsp;&nbsp; int32 
+  hdl_wav = 0;<BR><BR>&nbsp; &nbsp;len_wav = mrc_getLen( audioName 
+  );<BR>&nbsp;&nbsp; buffer_wav = (char*)malloc(len_wav);<BR>&nbsp; 
+  &nbsp;GetAudioDataStream( audioName, buffer_wav, len_wav );<BR><BR>&nbsp; 
+  &nbsp;loadReq.data = buffer_wav;<BR>&nbsp;&nbsp; loadReq.len = 
+  len_wav;<BR>&nbsp;&nbsp; loadReq.loop = 0;<BR>&nbsp;&nbsp;&nbsp;hdl_wav = 
+  mrc_platEx( 2222, (uint8*)&amp;loadReq, sizeof(T_BG_PLAY_REQ), NULL, NULL, 
+  NULL );<BR>&nbsp;&nbsp; if(MR_FAILED == re)<BR>&nbsp; &nbsp;&nbsp;&nbsp; 
+  &nbsp;&nbsp;return MR_FAILED;<BR>&nbsp; &nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;&nbsp; return hdl_wav;<BR>}</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_platEx(225x).htm">mr_platEx(225x)</A><A href="mr_start_dsm_ex.htm"></A></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
