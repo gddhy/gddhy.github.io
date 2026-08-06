@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView更新助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #1a73e8, #4285f4);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 25px;
+            padding: 25px;
+            border-left: 4px solid #4285f4;
+        }
+        
+        .info-card h2 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-label {
+            width: 120px;
+            font-weight: 600;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-value {
+            flex: 1;
+            font-weight: 500;
+            color: #1a73e8;
+        }
+        
+        .update-section {
+            padding: 0 25px 30px;
+        }
+        
+        .update-section h2 {
+            color: #1a73e8;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .option-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.15);
+            border-color: #4285f4;
+        }
+        
+        .option-card h3 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #1a73e8, #4285f4);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .recommended {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #1a73e8;
+        }
+        
+        .recommended::before {
+            content: "推荐";
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: #1a73e8;
+            color: white;
+            padding: 4px 35px;
+            font-size: 13px;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+        
+        .footer-note {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            margin: 0 25px;
+        }
+        
+        @media (max-width: 600px) {
+            .info-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .info-label {
+                width: 100%;
+            }
+            
+            .download-options {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-sync-alt"></i> WebView更新助手</h1>
+            <p>检测并更新您的WebView组件以获取最佳浏览体验</p>
+        </header>
+        
+        <div class="info-card">
+            <h2><i class="fas fa-info-circle"></i> 当前WebView信息</h2>
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-box"></i> 包名 (Package)</div>
+                <div class="info-value" id="pkg-value">com.example.webview</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-code-branch"></i> 版本 (Version)</div>
+                <div class="info-value" id="ver-value">89.0.4389.105</div>
+            </div>
+        </div>
+        
+        <div class="update-section">
+            <h2><i class="fas fa-download"></i> 获取最新版本</h2>
+            <div class="download-options">
+                <div class="option-card recommended" id="playstore" style="display: none;">
+                    <h3><i class="fab fa-google-play"></i> Google Play商店</h3>
+                    <p>从官方Google Play商店下载最新版本的Android System WebView</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.google.android.webview" class="btn" target="_blank"><i class="fas fa-download"></i> 前往下载</a>
+                </div>
+                
+                <div class="option-card">
+                    <h3><i class="fab fa-android"></i> FILEHIPPO下载</h3>
+                    <p>从FILEHIPPO下载新版的WebView安装包</p>
+                    <a href="https://filehippo.com/zh/android/download_android-system-webview/" class="btn" target="_blank"><i class="fas fa-download"></i> 前往下载</a>
+                </div>
+                
+                <div class="option-card">
+                    <h3><i class="fab fa-android"></i> Malavida下载</h3>
+                    <p>从Malavida下载新版的WebView安装包</p>
+                    <a href="https://www.malavida.com/en/soft/android-system-webview/android/" class="btn" target="_blank"><i class="fas fa-download"></i> 获取安装包</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p><i class="fas fa-exclamation-circle"></i> 保持WebView更新可以获得更好的安全性、性能和兼容性</p>
+        </div>
+    </div>
+
+    <script>
+        // 解析URL参数
+        function getUrlParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || '未提供';
+        }
+
+        // 更新页面信息
+        function updatePageInfo() {
+            const pkg = getUrlParam('pkg');
+            const ver = getUrlParam('ver');
+            const isPlay = getUrlParam('play');
+            
+            document.getElementById('pkg-value').textContent = pkg;
+            document.getElementById('ver-value').textContent = ver;
+
+            let boolValue = /^true$/i.test(isPlay)
+            if(boolValue){
+                document.getElementById('playstore').style.display = 'block';
+            }
+        }
+
+        // 页面加载完成后执行
+        window.onload = updatePageInfo;
+    </script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>下载SWF播放器</title>
+    <style>
+        /* ===== 全局重置 & 字体 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(145deg, #f0f4f8 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ===== 卡片容器 ===== */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 40px 32px 36px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.20), 0 8px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.30);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 28px 72px rgba(0, 20, 40, 0.25);
+        }
+
+        /* ===== 头部图标 & 标题 ===== */
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .app-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.35);
+        }
+
+        .app-title-group {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1a2f;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .app-subtitle {
+            font-size: 13px;
+            color: #5f7a9a;
+            margin-top: 2px;
+            font-weight: 400;
+        }
+
+        /* ===== 状态提示 ===== */
+        .status-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 40px;
+            margin-bottom: 18px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.02);
+            transition: background 0.3s ease;
+        }
+
+        .status-area .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(26, 115, 232, 0.15);
+            border-top-color: #1a73e8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            flex-shrink: 0;
+        }
+
+        .status-area .status-text {
+            font-size: 14px;
+            color: #5f7a9a;
+            font-weight: 450;
+            transition: color 0.3s ease;
+        }
+
+        .status-area .status-text.success {
+            color: #0e7c4b;
+        }
+        .status-area .status-text.error {
+            color: #c62828;
+        }
+        .status-area .status-text.downloading {
+            color: #1a73e8;
+        }
+
+        /* ===== 进度条 ===== */
+        .progress-container {
+            display: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+
+        .progress-container.active {
+            display: block;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1a73e8, #42a5f5);
+            border-radius: 4px;
+            transition: width 0.25s ease;
+        }
+
+        /* ===== 下载按钮 ===== */
+        .btn-download {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.35);
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-download:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(26, 115, 232, 0.45);
+        }
+
+        .btn-download:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .btn-download:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.20);
+        }
+
+        .btn-download .btn-icon {
+            font-size: 22px;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-download .btn-text {
+            transition: opacity 0.25s ease;
+        }
+
+        .btn-download .btn-spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.25);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .btn-download.loading .btn-spinner {
+            display: block;
+        }
+        .btn-download.loading .btn-icon {
+            display: none;
+        }
+        .btn-download.loading .btn-text {
+            opacity: 0.8;
+        }
+        .btn-download.loading .btn-icon-done {
+            display: none;
+        }
+
+        .btn-download.done {
+            background: linear-gradient(135deg, #0e7c4b, #0a5e3a);
+            box-shadow: 0 8px 24px rgba(14, 124, 75, 0.35);
+        }
+
+        .btn-download.done .btn-icon {
+            display: none;
+        }
+        .btn-download.done .btn-icon-done {
+            display: inline;
+        }
+
+        .btn-icon-done {
+            display: none;
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        /* ===== 动画 ===== */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 480px) {
+            .card {
+                padding: 28px 20px 28px;
+                border-radius: 24px;
+            }
+
+            .app-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+                border-radius: 14px;
+            }
+
+            .app-title {
+                font-size: 20px;
+            }
+
+            .btn-download {
+                font-size: 16px;
+                padding: 14px 16px;
+                border-radius: 14px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .card {
+                padding: 20px 14px 24px;
+            }
+
+            .app-title {
+                font-size: 18px;
+            }
+        }
+
+        /* ===== 暗色模式适配 ===== */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(145deg, #121a26, #1a2634);
+            }
+
+            .card {
+                background: rgba(28, 38, 52, 0.90);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-color: rgba(255, 255, 255, 0.08);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.50);
+            }
+
+            .app-title {
+                color: #e8edf4;
+            }
+
+            .app-subtitle {
+                color: #8aa0c0;
+            }
+
+            .status-area {
+                background: rgba(255, 255, 255, 0.03);
+            }
+
+            .status-area .status-text {
+                color: #8aa0c0;
+            }
+
+            .status-area .status-text.success {
+                color: #4caf84;
+            }
+            .status-area .status-text.error {
+                color: #ef6b6b;
+            }
+            .status-area .status-text.downloading {
+                color: #64b5f6;
+            }
+
+            .progress-container {
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .btn-download {
+                background: linear-gradient(135deg, #1a73e8, #0d47a1);
+                box-shadow: 0 8px 24px rgba(26, 115, 232, 0.30);
+            }
+
+            .btn-download.done {
+                background: linear-gradient(135deg, #0e7c4b, #0a5e3a);
+                box-shadow: 0 8px 24px rgba(14, 124, 75, 0.30);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" role="main" aria-label="下载卡片">
+        <!-- ===== 头部 ===== -->
+        <div class="app-header">
+            <div class="app-icon" aria-hidden="true">📦</div>
+            <div class="app-title-group">
+                <h1 class="app-title">下载SWF播放器</h1>
+                <div class="app-subtitle">Android 安装包</div>
+            </div>
+        </div>
+
+        <!-- ===== 状态区域 ===== -->
+        <div class="status-area" id="statusArea">
+            <div class="spinner" id="statusSpinner" aria-hidden="true"></div>
+            <span class="status-text" id="statusText">🔍 正在获取版本信息…</span>
+        </div>
+
+        <!-- ===== 进度条 ===== -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <!-- ===== 下载按钮 ===== -->
+        <button class="btn-download" id="downloadBtn" aria-label="下载 SWF 播放器 APK">
+            <span class="btn-icon" aria-hidden="true">⬇️</span>
+            <span class="btn-icon-done" aria-hidden="true">✅</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+            <span class="btn-text" id="btnText">开始下载</span>
+        </button>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== DOM 引用 =====
+            const statusText = document.getElementById('statusText');
+            const statusSpinner = document.getElementById('statusSpinner');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('btnText');
+
+            // ===== 状态变量 =====
+            let isDownloading = false;
+            let isDone = false;
+            let apiData = null;
+            let fileBlob = null;
+
+            // ===== API 地址 =====
+            const API_URL = '/swf/android/data.json';
+
+            // ===== 工具：更新状态 =====
+            function setStatus(text, type) {
+                statusText.textContent = text;
+                statusText.className = 'status-text' + (type ? ' ' + type : '');
+                if (type === 'downloading' || type === 'loading') {
+                    statusSpinner.style.display = 'block';
+                } else {
+                    statusSpinner.style.display = 'none';
+                }
+            }
+
+            // ===== 工具：更新进度条 =====
+            function setProgress(percent) {
+                const p = Math.min(100, Math.max(0, percent));
+                progressBar.style.width = p + '%';
+                progressBar.setAttribute('aria-valuenow', p);
+                if (p > 0 && p < 100) {
+                    progressContainer.classList.add('active');
+                } else {
+                    progressContainer.classList.remove('active');
+                }
+            }
+
+            function resetProgress() {
+                progressBar.style.width = '0%';
+                progressBar.setAttribute('aria-valuenow', 0);
+                progressContainer.classList.remove('active');
+            }
+
+            // ===== 1. 获取 API 数据 =====
+            async function fetchApiData() {
+                try {
+                    setStatus('📡 正在获取版本信息…', 'loading');
+                    const response = await fetch(API_URL, {
+                        cache: 'no-cache',
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status} ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    if (typeof data !== 'object' || data === null) {
+                        throw new Error('API 返回的数据格式无效');
+                    }
+                    if (!data.link || typeof data.link !== 'string') {
+                        throw new Error('API 返回的数据缺少有效的 link 字段');
+                    }
+
+                    apiData = data;
+                    setStatus('✅ 版本信息获取成功，开始自动下载', 'success');
+                    return data;
+
+                } catch (err) {
+                    console.error('[API 获取失败]', err);
+                    setStatus('⚠️ ' + err.message, 'error');
+                    downloadBtn.disabled = true;
+                    btnText.textContent = '加载失败';
+                    throw err;
+                }
+            }
+
+            // ===== 2. 下载 APK 文件（流式） =====
+            async function downloadApk(link) {
+                if (isDownloading) return;
+                if (isDone) {
+                    triggerSave();
+                    return;
+                }
+
+                isDownloading = true;
+                downloadBtn.disabled = true;
+                downloadBtn.classList.add('loading');
+                btnText.textContent = '下载中…';
+                resetProgress();
+                setStatus('⏳ 正在下载文件…', 'downloading');
+
+                try {
+                    const response = await fetch(link, {
+                        cache: 'no-cache',
+                        headers: { 'Accept': 'application/vnd.android.package-archive, application/octet-stream, */*' }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status} ${response.statusText}`);
+                    }
+
+                    const contentLength = response.headers.get('content-length');
+                    const total = contentLength ? parseInt(contentLength, 10) : 0;
+                    const reader = response.body.getReader();
+                    const chunks = [];
+                    let loaded = 0;
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        chunks.push(value);
+                        loaded += value.length;
+
+                        if (total > 0) {
+                            const percent = (loaded / total) * 100;
+                            setProgress(percent);
+                            setStatus(`⏳ 下载中 ${Math.round(percent)}%`, 'downloading');
+                        } else {
+                            const mb = (loaded / (1024 * 1024)).toFixed(1);
+                            setStatus(`⏳ 已下载 ${mb} MB`, 'downloading');
+                        }
+                    }
+
+                    const blob = new Blob(chunks, {
+                        type: response.headers.get('content-type') || 'application/vnd.android.package-archive'
+                    });
+
+                    fileBlob = blob;
+                    setProgress(100);
+                    setStatus('✅ 下载完成！正在保存…', 'success');
+
+                    triggerSave();
+
+                    isDone = true;
+                    downloadBtn.classList.remove('loading');
+                    downloadBtn.classList.add('done');
+                    btnText.textContent = '已下载 ✅';
+
+                } catch (err) {
+                    console.error('[下载失败]', err);
+                    setStatus('❌ 下载失败：' + err.message, 'error');
+                    btnText.textContent = '重试';
+                    downloadBtn.classList.remove('loading');
+                    downloadBtn.disabled = false;
+                    isDownloading = false;
+                    resetProgress();
+                } finally {
+                    if (!isDone) {
+                        downloadBtn.disabled = false;
+                        downloadBtn.classList.remove('loading');
+                        if (!downloadBtn.classList.contains('done')) {
+                            btnText.textContent = '重试';
+                        }
+                        isDownloading = false;
+                    }
+                }
+            }
+
+            // ===== 3. 触发浏览器保存 =====
+            function triggerSave() {
+                if (!fileBlob) {
+                    setStatus('⚠️ 没有可保存的文件', 'error');
+                    return;
+                }
+
+                try {
+                    const fileName = 'SWF播放器.apk';
+                    const url = URL.createObjectURL(fileBlob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    setTimeout(() => URL.revokeObjectURL(url), 3000);
+                    setStatus(`✅ 文件已保存为 “${fileName}”`, 'success');
+
+                    isDone = true;
+                    isDownloading = false;
+                    downloadBtn.disabled = false;
+                    downloadBtn.classList.remove('loading');
+                    downloadBtn.classList.add('done');
+                    btnText.textContent = '已下载 ✅';
+
+                } catch (err) {
+                    console.error('[保存失败]', err);
+                    setStatus('❌ 保存文件失败：' + err.message, 'error');
+                    isDownloading = false;
+                    downloadBtn.disabled = false;
+                    downloadBtn.classList.remove('loading');
+                    btnText.textContent = '重试';
+                }
+            }
+
+            // ===== 4. 点击按钮（手动重试或重新保存） =====
+            async function handleDownload() {
+                if (isDone && fileBlob) {
+                    triggerSave();
+                    return;
+                }
+                if (isDownloading) return;
+                if (!apiData) {
+                    try {
+                        await fetchApiData();
+                    } catch (e) {
+                        return;
+                    }
+                }
+                if (!apiData || !apiData.link) {
+                    setStatus('⚠️ 未获取到有效的下载链接', 'error');
+                    return;
+                }
+                await downloadApk(apiData.link);
+            }
+
+            // ===== 5. 页面加载自动执行 =====
+            async function init() {
+                setStatus('🔍 正在获取版本信息…', 'loading');
+                downloadBtn.disabled = true;
+                try {
+                    await fetchApiData();
+                    // 自动触发下载
+                    if (apiData && apiData.link) {
+                        await downloadApk(apiData.link);
+                    }
+                } catch (e) {
+                    // 错误已显示
+                } finally {
+                    // 如果还未完成下载（例如失败），启用按钮
+                    if (!isDone) {
+                        downloadBtn.disabled = false;
+                        btnText.textContent = '重试';
+                    }
+                }
+            }
+
+            // ===== 6. 事件绑定 =====
+            downloadBtn.addEventListener('click', handleDownload);
+
+            // ===== 7. 启动 =====
+            init();
+
+        })();
+    </script>
+
+</body>
+</html>

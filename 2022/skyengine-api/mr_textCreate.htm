@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_textCreate</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>int32 
+      mr_textCreate(const char * title, const char * text, int32 
+      type)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>建立文本框。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>title</I></FONT></TD>
+      <TD><FONT size=2>文本框的标题，unicode编码，网络字节序。</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>text</EM></FONT></TD>
+      <TD><FONT size=2>文本框内容，unicode编码，网络字节序。</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>type</EM></FONT></TD>
+      <TD><FONT 
+        size=2>文本框类型：<BR>MR_DIALOG_OK：文本框有“确定”键。<BR>MR_DIALOG_OK_CANCEL：文本框有“确定”和“取消”键。<BR>MR_DIALOG_CANCEL：文本框有 
+        “取消”键。</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>&gt;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  对话框句柄<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>创建一个文本框，并返回文本框句柄。文本框用来显示只读的文字信息。文本框和对话框并没有本质的区别，仅仅是显示方式上的不同，在使用上它们的主要区别是：对话框的内容一般较短，文本框的内容一般较长，对话框一般实现为弹出式的窗口，文本框一般实现为全屏式的窗口。也可以将对话框和文本框用相同方式实现。<BR><BR>文本框和对话框的消息参数是一样的。当文本框显示时，如果用户选择了文本框上的某个键，系统将构造SkyEngine消息，通过mr_event函数传送给SkyEngine，消息类型为MR_DIALOG_EVENT，参数为该按键的ID。“确定”键ID为：MR_DIALOG_KEY_OK；“取消”键ID为：MR_DIALOG_KEY_CANCEL。</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>int32 hText = 0;<BR>hText = mrc_textCreate( (const 
+  char*)SGL_LoadString(STR_TEXT), (const char*)SGL_LoadString(STR_TEXT), 
+  MR_DIALOG_OK_CANCEL ); //STR_TEXT文本框显示字符串资源ID</P>
+  <P>//response the MR_DIALOG_EVENT<BR>case 
+  MR_DIALOG_EVENT:<BR>&nbsp;&nbsp;{&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;if (wParam == MR_DIALOG_KEY_CANCEL)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //your 
+  code&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;........<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  else if (wParam == MR_DIALOG_KEY_OK)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//your 
+  code&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  ........&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }<BR>&nbsp;}</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE><A href="mr_textRelease.htm">mr_textRelease</A></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

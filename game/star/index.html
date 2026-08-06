@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>消灭星星</title>
+	<script type="text/javascript">
+/*动态加载css*/
+if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|wOSBrowser|BrowserNG|WebOS)/i))) {
+    document.write('<link rel="stylesheet" type="text/css" href="css/index-phone.css">');
+}
+else{
+    document.write('<link rel="stylesheet" type="text/css" href="css/index-pc.css"/>');
+}
+	</script>
+	<script src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/index.min.js"></script>
+</head>
+
+<body>
+	<main id="page">
+		<div id="container">
+			<div id="bg-container"></div>
+			<div id="show"></div>
+		</div>
+
+		<div id="sider">
+
+			<div class="box">
+				<div id="show-msg"></div>
+				<div id="show-goal"></div>
+				<div id="show-score"></div>
+				<div id="show-add"></div>
+			</div>
+
+			<div class="box">
+				<div class="button" onclick="musicSetChange();" id="music-set"></div>
+				<div class="button" onclick="restartGame();">重新开始</div>
+			</div>
+
+			<audio id="bg-music" src="sound/classicbg.ogg" loop></audio>
+			<audio id="music" src="sound/ppop.ogg"></audio>
+		</div>
+
+		<footer>copyright luoluo.</footer>
+	</main>
+</body>
+
+</html>
