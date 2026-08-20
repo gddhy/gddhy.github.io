@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_findGetNext</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+size=2><FONT face=Verdana>&nbsp; </FONT>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT face=Verdana 
+      color=#660033><B>int32 mr_findGetNext(MR_SEARCH_HANDLE search_handle, 
+      char* buffer, uint32 len)</B></FONT></P></TD></TR></TBODY></TABLE><BR><FONT 
+face=Verdana>
+<HR noShade SIZE=1>
+</FONT>
+<H5><FONT face=Verdana>Description</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>取得一个目录搜索的结果。</FONT></BLOCKQUOTE>
+<H5><FONT face=Verdana>Parameters</FONT></H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT face=Verdana size=2><B>Name</B></FONT></TD>
+      <TD><FONT face=Verdana size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT face=Verdana size=2><I>search_handle</I></FONT></TD>
+      <TD><FONT face=Verdana size=2>调用mr_findStart时返回的查找句柄</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>buffer</EM></FONT></TD>
+      <TD><FONT face=Verdana><FONT size=2><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'; mso-bidi-font-size: 12.0pt; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">缓冲区，用于存放查找成功时文件名或一级子目录名，</SPAN><SPAN 
+        lang=EN-US 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 'Arial','sans-serif'; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 宋体">GB</SPAN><SPAN 
+        style="FONT-SIZE: 10.5pt; FONT-FAMILY: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'; mso-bidi-font-size: 12.0pt; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial">编码</SPAN></FONT></FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>len</EM></FONT></TD>
+      <TD><FONT face=Verdana 
+size=2>缓冲区大小</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Return Value</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px"><FONT face=Verdana>
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Remarks</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P><FONT 
+  face=Verdana>取得一个目录搜索的结果。将结果放置于buffer中。当目录中的结果都遍历过后，返回NULL。<BR>这里需要注意的是，使用mr_findGetNext获得的子目录不能是“.”和“..”。</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Example</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>
+  <P><FONT face=Verdana>/*mrp code*/</FONT></P>
+  <P><FONT face=Verdana>int32&nbsp;hFnd = 0;<BR></FONT><FONT face=Verdana>char 
+  buffer[60] = { 0 };<BR>char buffer_fndGetNxt[60] = { 0&nbsp;};<BR></FONT><FONT 
+  face=Verdana><BR>hFnd = mrc_findStart(&nbsp;"testDir", buffer, 
+  sizeof(buffer)&nbsp;);<BR>mrc_findGetNext(&nbsp;hFnd, buffer_fndGetNxt, 
+  sizeof(buffer_fndGetNxt)&nbsp;);</FONT></P></BLOCKQUOTE></FONT>
+<BLOCKQUOTE></BLOCKQUOTE>
+<H5><SPAN><FONT face=Verdana>See Also</FONT></SPAN></H5>
+<BLOCKQUOTE>
+  <P><FONT face=Verdana><A href="mr_findStart.htm">mr_findStart</A><BR><A href="mr_findStop.htm">mr_findStop</A></FONT></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

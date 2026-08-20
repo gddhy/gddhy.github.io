@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>扩展接口(mr_plat/mr_platEx)</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT size=2 
+face="Verdana, Arial, Helvetica">&nbsp; 
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P style="MARGIN-RIGHT: 0px" dir=ltr><FONT 
+      color=#660033><B>扩展接口</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR SIZE=1 noShade>
+
+<BLOCKQUOTE>
+  <P>mr_plat和mr_platEx接口的主要目的是：在不对VM进行修改的前提下，可以扩展VM支持的功能，使得VM扩展功能不必在新增抽象接口。Mythroad透明调用这个接口。APP层上的对应命令将会透明调用至移植层，移植层的返回值也将透明返回至APP层。</P>
+  <P>考虑到mr_plat和mr_platEx接口会使用MR_SUCCESS、MR_FAILED、MR_WAITING、MR_IGNORE等返回值来表示mr_plat和mr_platEx接口本身的执行情况，定义偏移MR_PLAT_VALUE_BASE 
+  = 1000，当mr_plat或mr_platEx需要返回（有限）整型数值时，加上偏移量MR_PLAT_VALUE_BASE。</P>
+  <P>之前已经存在了不少加MR_PLAT_VALUE_BASE作为返回值的接口，后续的接口不建议使用这个处理返回值的方法，这样会使返回值具有多重功能，而有可能1000加上这个值刚好就是MR_SUCCESS等里面的一个，将会导致错误。还有就是mr_plat接口和mr_platEx都具有扩展虚拟机的功能，在通常情况下，不在建议通过mr_plat来扩展，全部通过mr_platEx来扩展，这样做的好处在于同一个模块的功能不会一部分code是通过mr_palt调用的，而另一部分的code是通过mr_platEx来调用的。</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
