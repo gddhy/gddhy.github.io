@@ -1,0 +1,90 @@
+{
+    "name": "MRP编辑器",
+    "short_name": "MRP编辑器",
+    "description": "一个用于编辑MRP应用文件的工具，支持查看和修改MRP文件的基本信息和内部文件列表。",
+    "id": "/app/mrpeditor/",
+    "start_url": "/app/mrpeditor/",
+    "scope": "/app/mrpeditor/",
+    "display": "standalone",
+    "orientation": "any",
+    "lang": "zh-CN",
+    "background_color": "#f5f5f5",
+    "theme_color": "#3498db",
+    "icons": [
+        {
+            "src": "/app/mrpeditor/icon.png",
+            "sizes": "40x40",
+            "type": "image/png"
+        },
+        {
+            "src": "/app/mrpeditor/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/app/mrpeditor/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "launch_handler": {
+        "client_mode": "navigate-new"
+    },
+    "file_handlers": [
+        {
+            "action": "/app/mrpeditor/",
+            "name": "MRP编辑器",
+            "accept": {
+                "application/x-mrp": [".mrp"]
+            },
+            "icons": [
+                {
+                    "src": "/app/mrpeditor/icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "action": "/app/mrpeditor/BmaViewer/",
+            "name": "冒泡BMP查看器",
+            "accept": {
+                "image/bmp": [".bmp"],
+                "application/octet-stream": [".bma"]
+            },
+            "icons": [
+                {
+                    "src": "/app/mrpeditor/icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "action": "/app/mrpeditor/RcEditor/",
+            "name": "RC编辑器",
+            "accept": {
+                "application/octet-stream": [".rc"]
+            },
+            "icons": [
+                {
+                    "src": "/app/mrpeditor/rc.png",
+                    "sizes": "40x40",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/app/mrpeditor/RcEditor/rc-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/app/mrpeditor/RcEditor/rc-512.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ]
+}

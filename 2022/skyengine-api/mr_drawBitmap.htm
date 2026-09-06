@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_drawBitmap</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+size=2><FONT face=Verdana>&nbsp; </FONT>
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P style="MARGIN-RIGHT: 0px" dir=ltr><FONT color=#660033 
+      face=Verdana><B>void mr_drawBitmap(uint16* bmp, int16 x, int16 y, uint16 
+      w, uint16 h)</B></FONT></P></TD></TR></TBODY></TABLE><BR><FONT face=Verdana>
+<HR SIZE=1 noShade>
+</FONT>
+<H5><FONT face=Verdana>Description</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>绘制BITMAP。</FONT></BLOCKQUOTE>
+<H5><FONT face=Verdana>Parameters</FONT></H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" border=1 cellSpacing=0 cellPadding=5 width="87%">
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2 face=Verdana><B>Name</B></FONT></TD>
+      <TD><FONT size=2 face=Verdana><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2 face=Verdana><I>bmp</I></FONT></TD>
+      <TD><FONT size=2 face=Verdana>图片在内存中存放的地址首指针</FONT><FONT 
+      size=2></FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2 face=Verdana><EM>x,y</EM></FONT></TD>
+      <TD><FONT size=2 face=Verdana>图片左上角在屏幕中的坐标</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2 face=Verdana><EM>w,h</EM></FONT></TD>
+      <TD><SPAN 
+        style="FONT-FAMILY: 宋体; FONT-SIZE: 10.5pt; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-bidi-font-family: 'Times New Roman'"><FONT 
+        size=2 face=Verdana>图片宽<SPAN lang=EN-US>, 
+    </SPAN>图片高</FONT></SPAN></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Return Value</FONT></H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P><FONT face=Verdana>无返回值。</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Remarks</FONT></H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P><FONT 
+  face=Verdana>将bmp指向的Bitmap图片绘制于屏幕中。bmp指向的图片格式是16bit色深的w*h大小的Bitmap图片，象素顺序是：从左上角的象素开始，从左到右，从上到下排列象素。每个象素的16bit的r,g,b分别为：5 
+  bit、6 bit、5 
+  bit。<BR>如纯红色为：0b1111100000000000<BR>如纯绿色为：0b0000011111100000<BR>如纯篮色为：0b0000000000011111</FONT></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Example</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana></FONT>&nbsp;</BLOCKQUOTE>
+<H5><SPAN><FONT face=Verdana>See Also</FONT></SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"><FONT 
+  face=Verdana></FONT></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

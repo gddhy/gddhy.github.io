@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>B站BV号链接生成器 | 自动拼接视频地址</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, 'Noto Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* 主卡片容器 */
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            padding: 1.8rem 1.8rem 2.2rem;
+        }
+
+        /* 标题区域 */
+        .header {
+            margin-bottom: 1.8rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FB7299, #00A1D6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.3rem;
+        }
+        .header p {
+            color: #5e6f8d;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        /* 输入框组 */
+        .input-group {
+            margin-bottom: 1.8rem;
+        }
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            color: #1e2a3e;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .input-label i {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .bv-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1.2rem;
+            background: #ffffff;
+            transition: all 0.2s;
+            outline: none;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-weight: 500;
+            color: #0f172a;
+        }
+        .bv-input:focus {
+            border-color: #00A1D6;
+            box-shadow: 0 0 0 3px rgba(0,161,214,0.2);
+        }
+        .hint-text {
+            font-size: 0.7rem;
+            color: #7c8ba0;
+            margin-top: 0.5rem;
+            margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .hint-text span {
+            background: #eef2ff;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        /* 双按钮区域 */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            flex: 1;
+            min-width: 130px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 2.5rem;
+            background: #f1f5f9;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            backdrop-filter: blur(2px);
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #00A1D6;
+            color: white;
+            box-shadow: 0 6px 12px -8px rgba(0,161,214,0.4);
+        }
+        .btn-primary:active {
+            transform: scale(0.97);
+            background: #008bb8;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            color: #1f3a5f;
+        }
+        .btn-secondary:active {
+            transform: scale(0.97);
+            background: #e6edf4;
+        }
+        @media (hover: hover) {
+            .btn-primary:hover { background: #008bb8; transform: translateY(-1px); }
+            .btn-secondary:hover { background: #e9f0f8; border-color: #cbd5e1; }
+        }
+        /* 移动端增大可点击区域，但保持按钮间距 */
+        @media (max-width: 550px) {
+            .btn {
+                padding: 0.9rem 0.4rem;
+                min-width: 120px;
+            }
+        }
+
+        /* 链接展示区域 */
+        .link-section {
+            background: #f8fafc;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1rem;
+            border: 1px solid #eef2ff;
+            transition: all 0.2s;
+        }
+        .link-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #5b6e8c;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .link-preview {
+            word-break: break-all;
+            background: #ffffff;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e9edf2;
+            transition: all 0.1s;
+            font-size: 0.9rem;
+        }
+        .link-preview a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #00A1D6;
+            transition: 0.2s;
+            display: inline-block;
+            word-break: break-all;
+        }
+        .link-preview a:hover {
+            text-decoration: underline;
+            color: #FB7299;
+        }
+        .empty-link-message {
+            color: #94a3b8;
+            font-style: normal;
+            font-weight: 450;
+        }
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background-color: #1e293b;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 85vw;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .toast-message.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8b9ab0;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.4rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .btn {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <h1>🔗 BV号链接生成器</h1>
+        <p>自动拼接 · 一键跳转 · 剪贴板助手</p>
+    </div>
+
+    <div class="input-group">
+        <div class="input-label">
+            <i>🎬</i> <span>B站视频 BV 号</span>
+        </div>
+        <input type="text" id="bvInput" class="bv-input" placeholder="例如：BV1es41127Fd" autocomplete="off" spellcheck="false">
+        <div class="hint-text">
+            💡 支持直接输入BV号，前后空格自动忽略
+            <span>✨ 智能识别</span>
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button id="pasteGetBtn" class="btn btn-secondary">📋 获取剪贴板</button>
+        <button id="copyLinkBtn" class="btn btn-primary">📎 复制完整链接</button>
+    </div>
+
+    <div class="link-section">
+        <div class="link-label">
+            🌐 拼接地址（点击可直接观看）
+        </div>
+        <div class="link-preview" id="linkPreviewArea">
+            <!-- 动态生成链接或占位 -->
+            <span class="empty-link-message">等待输入BV号...</span>
+        </div>
+    </div>
+    <footer>自动拼接前缀 https://www.bilibili.com/video/ <br> 新标签打开</footer>
+</div>
+
+<!-- 简易 Toast 容器 -->
+<div id="toastMsg" class="toast-message"></div>
+
+<script>
+    (function() {
+        // DOM 元素
+        const bvInput = document.getElementById('bvInput');
+        const linkPreviewArea = document.getElementById('linkPreviewArea');
+        const pasteGetBtn = document.getElementById('pasteGetBtn');
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const toast = document.getElementById('toastMsg');
+
+        // 常量：B站视频前缀
+        const BILI_PREFIX = 'https://www.bilibili.com/video/';
+
+        // 工具函数：显示短暂提示 (支持多端)
+        let toastTimer = null;
+        function showMessage(text, isError = false) {
+            if (toastTimer) clearTimeout(toastTimer);
+            toast.textContent = text;
+            toast.style.backgroundColor = isError ? '#b91c1c' : '#1e293b';
+            toast.classList.add('show');
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        }
+
+        // 安全拼接：对bv号进行 encodeURIComponent 防止注入/非法字符，同时保证链接安全
+        function buildFullUrl(rawBV) {
+            if (!rawBV || typeof rawBV !== 'string') return '';
+            let trimmed = rawBV.trim();
+            if (trimmed === '') return '';
+            const encodedBV = encodeURIComponent(trimmed);
+            const fullUrl = BILI_PREFIX + encodedBV;
+            if (fullUrl.startsWith(BILI_PREFIX)) {
+                return fullUrl;
+            }
+            return '';
+        }
+        
+        // 智能提取BV号: 从任意文本中提取出标准BV号
+        function extractBVFromText(text) {
+            if (!text || typeof text !== 'string') return '';
+            let raw = text.trim();
+            const bvRegex = /(BV[a-zA-Z0-9]{8,})/;
+            const match = raw.match(bvRegex);
+            if (match && match[1]) {
+                return match[1];
+            }
+            if (raw.includes('bilibili.com/video/')) {
+                const videoSegmentRegex = /\/video\/([^?#]+)/;
+                const segmentMatch = raw.match(videoSegmentRegex);
+                if (segmentMatch && segmentMatch[1]) {
+                    let candidate = segmentMatch[1];
+                    const innerBV = candidate.match(/(BV[a-zA-Z0-9]+)/);
+                    if (innerBV) return innerBV[1];
+                    return candidate.split(/[?#]/)[0];
+                }
+            }
+            const looseBV = raw.match(/(BV[a-zA-Z0-9]+)/);
+            if (looseBV) return looseBV[1];
+            return raw.trim();
+        }
+
+        // 核心更新预览区域
+        function updateLinkPreview() {
+            let rawValue = bvInput.value;
+            const trimmedBV = rawValue.trim();
+            let fullLink = '';
+            let displayText = '';
+            let isValid = false;
+            
+            if (trimmedBV !== '') {
+                fullLink = buildFullUrl(trimmedBV);
+                if (fullLink) {
+                    isValid = true;
+                    displayText = fullLink;
+                } else {
+                    displayText = BILI_PREFIX + encodeURIComponent(trimmedBV);
+                    fullLink = displayText;
+                    isValid = true;
+                }
+            }
+            
+            if (isValid && fullLink) {
+                const linkElem = document.createElement('a');
+                linkElem.href = fullLink;
+                linkElem.target = '_blank';
+                linkElem.rel = 'noopener noreferrer';
+                linkElem.textContent = displayText;
+                linkElem.style.textDecoration = 'none';
+                linkElem.style.color = '#00A1D6';
+                linkElem.style.fontWeight = '500';
+                linkElem.style.wordBreak = 'break-all';
+                linkElem.addEventListener('mouseenter', () => { linkElem.style.textDecoration = 'underline'; });
+                linkElem.addEventListener('mouseleave', () => { linkElem.style.textDecoration = 'none'; });
+                linkPreviewArea.innerHTML = '';
+                linkPreviewArea.appendChild(linkElem);
+                const hintSpan = document.createElement('span');
+                hintSpan.textContent = ' ↗';
+                hintSpan.style.fontSize = '0.8rem';
+                hintSpan.style.marginLeft = '4px';
+                hintSpan.style.color = '#94a3b8';
+                linkPreviewArea.appendChild(hintSpan);
+            } else {
+                linkPreviewArea.innerHTML = '<span class="empty-link-message">📭 暂无BV号，输入后自动生成链接 ✨</span>';
+            }
+        }
+        
+        function getCurrentFullLink() {
+            const rawBV = bvInput.value;
+            const trimmed = rawBV.trim();
+            if (!trimmed) return '';
+            return buildFullUrl(trimmed);
+        }
+        
+        async function copyFullLinkToClipboard() {
+            const linkToCopy = getCurrentFullLink();
+            if (!linkToCopy) {
+                showMessage('❌ 暂无有效BV号，无法复制链接', true);
+                return;
+            }
+            try {
+                await navigator.clipboard.writeText(linkToCopy);
+                showMessage('✅ 完整链接已复制到剪贴板！');
+            } catch (err) {
+                fallbackCopyText(linkToCopy);
+            }
+        }
+        
+        function fallbackCopyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.top = '-100px';
+            textarea.style.left = '-100px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            const success = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            if (success) {
+                showMessage('✅ 链接已复制 (兼容模式)');
+            } else {
+                showMessage('❌ 复制失败，请手动复制', true);
+            }
+        }
+        
+        // 获取剪贴板内容并智能填充BV号（关键修改：避免弹出键盘）
+        async function getClipboardAndFill() {
+            if (!navigator.clipboard || !navigator.clipboard.readText) {
+                showMessage('⚠️ 当前浏览器不支持读取剪贴板，请手动输入', true);
+                return;
+            }
+            try {
+                const clipboardText = await navigator.clipboard.readText();
+                if (!clipboardText || clipboardText.trim() === '') {
+                    showMessage('📭 剪贴板内容为空', true);
+                    return;
+                }
+                let extractedBV = extractBVFromText(clipboardText);
+                if (!extractedBV) {
+                    extractedBV = clipboardText.trim();
+                    if (extractedBV.length > 60) {
+                        showMessage('剪贴板文本未识别出BV号，已填充原文本，请手动修正', true);
+                    } else {
+                        showMessage('未识别出BV号，已填充原文，您可修改', true);
+                    }
+                } else {
+                    showMessage(`✨ 已识别BV号: ${extractedBV}`);
+                }
+                bvInput.value = extractedBV;
+                updateLinkPreview();
+                
+                // 【核心修复】阻止移动端自动弹出软键盘：主动让输入框失去焦点
+                // 注意：仅当当前激活元素是输入框时才blur，避免影响其他元素
+                if (document.activeElement === bvInput) {
+                    bvInput.blur();
+                }
+                // 即使没有焦点，也确保失去焦点（防止某些浏览器在填充后自动聚焦）
+                bvInput.blur();
+            } catch (err) {
+                console.error('读取剪贴板失败:', err);
+                let errorMsg = '无法读取剪贴板，请检查权限或手动输入';
+                if (err.name === 'NotAllowedError') {
+                    errorMsg = '未获得剪贴板读取权限，请手动输入BV号';
+                } else if (err.message) {
+                    errorMsg = `读取失败: ${err.message.substring(0, 40)}`;
+                }
+                showMessage(errorMsg, true);
+            }
+        }
+        
+        function onInputChange() {
+            updateLinkPreview();
+        }
+        
+        function handlePaste(e) {
+            setTimeout(() => {
+                let currentVal = bvInput.value;
+                if (currentVal) {
+                    const smartBV = extractBVFromText(currentVal);
+                    if (smartBV && smartBV !== currentVal.trim()) {
+                        bvInput.value = smartBV;
+                        showMessage('🔍 自动提取BV号: ' + smartBV);
+                        updateLinkPreview();
+                    } else {
+                        updateLinkPreview();
+                    }
+                } else {
+                    updateLinkPreview();
+                }
+            }, 10);
+        }
+        
+        function init() {
+            bvInput.addEventListener('input', onInputChange);
+            bvInput.addEventListener('paste', handlePaste);
+            pasteGetBtn.addEventListener('click', getClipboardAndFill);
+            copyLinkBtn.addEventListener('click', copyFullLinkToClipboard);
+            updateLinkPreview();
+            
+            bvInput.addEventListener('blur', function() {
+                let raw = bvInput.value;
+                if (raw !== raw.trim()) {
+                    bvInput.value = raw.trim();
+                    updateLinkPreview();
+                }
+            });
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+</script>
+</body>
+</html>
