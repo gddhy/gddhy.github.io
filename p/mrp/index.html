@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRP模拟器与资源下载中心</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <style>
+        /* ===== Material Design 3 Tokens ===== */
+        :root {
+            --md-primary: #4355b9;
+            --md-on-primary: #ffffff;
+            --md-primary-container: #dde1ff;
+            --md-on-primary-container: #001159;
+            --md-secondary-container: #e0e0f9;
+            --md-on-secondary-container: #1b1b4d;
+            --md-tertiary: #7a5244;
+            --md-tertiary-container: #ffd9cc;
+            --md-on-tertiary-container: #2f1107;
+            --md-surface: #fbf8ff;
+            --md-surface-container-low: #f5f2fa;
+            --md-surface-container: #efedf4;
+            --md-surface-container-high: #e9e7ef;
+            --md-on-surface: #1a1b21;
+            --md-on-surface-variant: #45464f;
+            --md-outline: #767680;
+            --md-outline-variant: #c6c5d0;
+            --md-error: #ba1a1a;
+            --md-error-container: #ffdad6;
+            --md-on-error-container: #410002;
+            --md-success: #386a20;
+            --md-success-container: #c1eeab;
+
+            --md-elev-1: 0 1px 2px rgba(0,0,0,.3), 0 1px 3px 1px rgba(0,0,0,.15);
+            --md-elev-2: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
+            --md-elev-3: 0 1px 3px rgba(0,0,0,.3), 0 4px 8px 3px rgba(0,0,0,.15);
+
+            --md-radius-s: 8px;
+            --md-radius-m: 12px;
+            --md-radius-l: 16px;
+            --md-radius-xl: 28px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Noto Sans SC', 'Segoe UI', sans-serif;
+            background: var(--md-surface);
+            color: var(--md-on-surface);
+            min-height: 100vh;
+        }
+
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            user-select: none;
+        }
+
+        /* ===== Top App Bar ===== */
+        .app-bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--md-surface);
+            color: var(--md-on-surface);
+            padding: 12px 20px 0;
+            box-shadow: var(--md-elev-1);
+            border-bottom: 1px solid var(--md-outline-variant);
+        }
+
+        .app-bar .bar-row {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 8px 12px;
+        }
+
+        .app-bar .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--md-radius-m);
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .app-bar h1 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            letter-spacing: .1px;
+        }
+
+        .app-bar .subtitle {
+            font-size: .82rem;
+            color: var(--md-on-surface-variant);
+            margin-top: 2px;
+        }
+
+        /* ===== Navigation Tabs ===== */
+        .tabs {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar { display: none; }
+
+        .tab {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--md-on-surface-variant);
+            font: 500 .95rem/1 'Roboto', 'Noto Sans SC', sans-serif;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .tab:hover { background: var(--md-surface-container-high); }
+
+        .tab.active {
+            background: var(--md-secondary-container);
+            color: var(--md-on-secondary-container);
+        }
+
+        .tab .material-symbols-rounded { font-size: 20px; }
+
+        /* ===== Main Content ===== */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 20px 48px;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active {
+            display: block;
+            animation: fadeUp .35s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--md-on-surface);
+            margin: 8px 0 20px;
+        }
+
+        .section-title .material-symbols-rounded { color: var(--md-primary); }
+
+        /* ===== Featured Card (MRP 商店) ===== */
+        .featured-card {
+            background: linear-gradient(135deg, var(--md-primary) 0%, #6b5ec7 100%);
+            color: var(--md-on-primary);
+            border-radius: var(--md-radius-xl);
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: var(--md-elev-2);
+            margin-bottom: 32px;
+        }
+
+        .featured-card .featured-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .featured-card .featured-icon .material-symbols-rounded { font-size: 40px; }
+
+        .featured-card .featured-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .featured-card .featured-desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: .92;
+            max-width: 620px;
+            margin: 0 auto 26px;
+        }
+
+        /* ===== Buttons ===== */
+        .md-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 48px;
+            padding: 0 26px;
+            border: none;
+            border-radius: 999px;
+            font: 600 .95rem 'Roboto', 'Noto Sans SC', sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            transition: box-shadow .2s ease, transform .15s ease, background .2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .md-btn:hover { box-shadow: var(--md-elev-1); }
+        .md-btn:active { transform: scale(.97); }
+
+        .md-btn.filled {
+            background: var(--md-primary);
+            color: var(--md-on-primary);
+        }
+
+        .md-btn.on-primary {
+            background: #fff;
+            color: var(--md-primary);
+        }
+
+        .md-btn.tonal {
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+        }
+
+        .md-btn.green {
+            background: var(--md-success);
+            color: #fff;
+        }
+
+        .md-btn.full { width: 100%; }
+
+        /* ===== Cards Grid ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--md-surface-container-low);
+            border: 1px solid var(--md-outline-variant);
+            border-radius: var(--md-radius-l);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow .25s ease, transform .2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--md-elev-2);
+            transform: translateY(-3px);
+        }
+
+        .card .card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .card .card-icon.blue {
+            background: var(--md-primary-container);
+            color: var(--md-on-primary-container);
+        }
+
+        .card .card-icon.green {
+            background: var(--md-success-container);
+            color: var(--md-on-surface);
+        }
+
+        .card .card-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card .card-desc {
+            font-size: .92rem;
+            line-height: 1.6;
+            color: var(--md-on-surface-variant);
+            margin-bottom: 20px;
+            flex-grow: 1;
+            overflow-wrap: break-word;
+        }
+
+        /* ===== Loader ===== */
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 56px 20px;
+            color: var(--md-on-surface-variant);
+            font-size: .98rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--md-primary-container);
+            border-top-color: var(--md-primary);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== Error / Empty ===== */
+        .state-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 36px 24px;
+            border-radius: var(--md-radius-l);
+            background: var(--md-error-container);
+            color: var(--md-on-error-container);
+            text-align: center;
+            font-size: .95rem;
+            line-height: 1.6;
+        }
+
+        .state-box .material-symbols-rounded { font-size: 36px; }
+
+        .md-btn.error {
+            background: var(--md-error);
+            color: #fff;
+            margin-top: 8px;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            color: var(--md-on-surface-variant);
+            font-size: .85rem;
+            padding: 28px 20px 40px;
+        }
+
+        /* ===== Snackbar ===== */
+        .snackbar {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 200%);
+            background: #313033;
+            color: #f4eff4;
+            padding: 14px 20px;
+            border-radius: var(--md-radius-s);
+            font-size: .9rem;
+            box-shadow: var(--md-elev-3);
+            transition: transform .3s ease;
+            z-index: 100;
+            max-width: 90vw;
+        }
+
+        .snackbar.show { transform: translate(-50%, 0); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .featured-card { padding: 28px 20px; }
+            .featured-card .featured-name { font-size: 1.4rem; }
+            .app-bar h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top App Bar -->
+    <header class="app-bar">
+        <div class="bar-row">
+            <div class="logo-icon">
+                <span class="material-symbols-rounded">apps</span>
+            </div>
+            <div>
+                <h1>MRP模拟器与资源下载中心</h1>
+                <p class="subtitle">下载MRP商店、模拟器，访问MRP资源网站，体验“曾经丰富”的MRP应用生态</p>
+            </div>
+        </div>
+        <nav class="tabs" role="tablist">
+            <button class="tab active" data-tab="store-sim" role="tab" aria-selected="true">
+                <span class="material-symbols-rounded">storefront</span>商店与模拟器
+            </button>
+            <button class="tab" data-tab="websites" role="tab" aria-selected="false">
+                <span class="material-symbols-rounded">public</span>MRP资源网站
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="store-sim" class="tab-content active" role="tabpanel">
+            <div id="store-container">
+                <div class="loader">
+                    <div class="spinner"></div>
+                    正在加载MRP商店信息...
+                </div>
+            </div>
+            <div id="simulators-container">
+                <div class="loader">
+                    <div class="spinner"></div>
+                    正在加载模拟器列表...
+                </div>
+            </div>
+        </section>
+
+        <section id="websites" class="tab-content" role="tabpanel">
+            <div id="websites-container">
+                <div class="loader">
+                    <div class="spinner"></div>
+                    正在加载MRP资源网站...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>MRP应用中心 | 提供最新最全的MRP商店、模拟器和资源网站 | 网页由AI生成</p>
+    </footer>
+
+    <div class="snackbar" id="snackbar"></div>
+
+    <script>
+        // ===== API 基础域名 =====
+        const API_BASE = 'https://gddhy.net';
+        const storeApiUrl = API_BASE + '/data/MrpStoreUpdate.json';
+        const websitesApiUrl = API_BASE + '/data/mrpweb.json';
+
+        // ===== Snackbar 提示 =====
+        let snackbarTimer = null;
+        function showSnackbar(message) {
+            const bar = document.getElementById('snackbar');
+            bar.textContent = message;
+            bar.classList.add('show');
+            clearTimeout(snackbarTimer);
+            snackbarTimer = setTimeout(() => bar.classList.remove('show'), 3500);
+        }
+
+        // ===== 选项卡切换 =====
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
+                    tabContents.forEach(tc => tc.classList.remove('active'));
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+
+            // ===== MRP商店 + 模拟器 =====
+            const storeContainer = document.getElementById('store-container');
+            const simulatorsContainer = document.getElementById('simulators-container');
+            const websitesContainer = document.getElementById('websites-container');
+
+            function errorBox(message) {
+                return `
+                    <div class="state-box">
+                        <span class="material-symbols-rounded">error</span>
+                        <p>${message}</p>
+                        <button class="md-btn error" onclick="location.reload()">
+                            <span class="material-symbols-rounded">refresh</span>重试
+                        </button>
+                    </div>
+                `;
+            }
+
+            function esc(str) {
+                return String(str == null ? '' : str)
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            }
+
+            function safeLink(link) {
+                var s = String(link || '').trim();
+                return /^https?:\/\//i.test(s) ? esc(s) : '#';
+            }
+
+            fetch(storeApiUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    // MRP商店 Featured 卡片
+                    storeContainer.innerHTML = `
+                        <div class="featured-card">
+                            <div class="featured-icon">
+                                <span class="material-symbols-rounded">storefront</span>
+                            </div>
+                            <h2 class="featured-name">MRP商店</h2>
+                            <p class="featured-desc">${esc(data.note).replace(/\n/g, '<br>')}</p>
+                            <a href="${safeLink(data.link)}" class="md-btn on-primary">
+                                <span class="material-symbols-rounded">download</span>下载MRP商店
+                            </a>
+                        </div>
+                    `;
+
+                    // 模拟器列表
+                    if (!data.simulator || data.simulator.length === 0) {
+                        simulatorsContainer.innerHTML = `
+                            <h2 class="section-title">
+                                <span class="material-symbols-rounded">phone_android</span>MRP模拟器
+                            </h2>
+                            <div class="state-box" style="background:var(--md-surface-container);color:var(--md-on-surface-variant)">
+                                <span class="material-symbols-rounded">inventory_2</span>
+                                <p>未找到可用的模拟器</p>
+                            </div>
+                        `;
+                    } else {
+                        simulatorsContainer.innerHTML = `
+                            <h2 class="section-title">
+                                <span class="material-symbols-rounded">phone_android</span>MRP模拟器
+                            </h2>
+                            <div class="cards-grid">
+                                ${data.simulator.map(sim => `
+                                    <div class="card">
+                                        <div class="card-icon blue">
+                                            <span class="material-symbols-rounded">smartphone</span>
+                                        </div>
+                                        <h3 class="card-name">${esc(sim.name)}</h3>
+                                        <a href="${safeLink(sim.link)}" class="md-btn filled full" target="_blank" rel="noopener">
+                                            <span class="material-symbols-rounded">${/\.apk(\?|$)/i.test(String(sim.link || '')) ? 'download' : 'open_in_new'}</span>${/\.apk(\?|$)/i.test(String(sim.link || '')) ? '下载模拟器' : '访问网站'}
+                                        </a>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    showSnackbar('MRP商店数据加载完成');
+                })
+                .catch(error => {
+                    console.error('获取MRP商店数据失败:', error);
+                    storeContainer.innerHTML = errorBox('加载数据时出错: ' + esc(error.message) + '<br>请检查网络连接后重试');
+                    simulatorsContainer.innerHTML = '';
+                });
+
+            // ===== MRP资源网站 =====
+            fetch(websitesApiUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                    return response.json();
+                })
+                .then(websites => {
+                    if (!Array.isArray(websites) || websites.length === 0) {
+                        websitesContainer.innerHTML = `
+                            <h2 class="section-title">
+                                <span class="material-symbols-rounded">public</span>MRP资源网站
+                            </h2>
+                            <div class="state-box" style="background:var(--md-surface-container);color:var(--md-on-surface-variant)">
+                                <span class="material-symbols-rounded">inventory_2</span>
+                                <p>未找到可用的MRP资源网站</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    websitesContainer.innerHTML = `
+                        <h2 class="section-title">
+                            <span class="material-symbols-rounded">public</span>MRP资源网站
+                        </h2>
+                        <div class="cards-grid">
+                            ${websites.map(site => `
+                                <div class="card">
+                                    <div class="card-icon green">
+                                        <span class="material-symbols-rounded">language</span>
+                                    </div>
+                                    <h3 class="card-name">${esc(site.name)}</h3>
+                                    ${site.note ? `<p class="card-desc">${esc(site.note)}</p>` : ''}
+                                    <a href="${safeLink(site.link)}" class="md-btn green full" target="_blank" rel="noopener">
+                                        <span class="material-symbols-rounded">open_in_new</span>访问网站
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('获取MRP网站数据失败:', error);
+                    websitesContainer.innerHTML =
+                        errorBox('加载MRP网站数据时出错: ' + esc(error.message) + '<br>请检查网络连接后重试');
+                });
+        });
+    </script>
+</body>
+</html>

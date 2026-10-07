@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="tomato.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小番茄图片混淆</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --md-primary: #4f1787;
+    --md-primary-light: #f3edfb;
+    --md-primary-tint: #efe6fb;
+    --md-surface: #ffffff;
+    --md-bg: #f4f5f7;
+    --md-on-surface: #1f1f1f;
+    --md-on-surface-medium: #5f6368;
+    --md-outline: #dadce0;
+    --md-radius: 12px;
+    /* Material elevation tokens */
+    --elev-1: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    --elev-2: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+    --elev-4: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
+    --elev-appbar: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    --font: 'Roboto', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    background: var(--md-bg);
+    color: var(--md-on-surface);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== App Bar ===== */
+.md-appbar{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background: var(--md-primary);
+    color: #fff;
+    box-shadow: var(--elev-appbar);
+}
+.md-appbar .md-logo{
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.16);
+    margin-right: 14px;
+}
+.md-appbar .md-title{
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .2px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin: -2px -6px;
+    transition: background-color .2s ease;
+}
+.md-appbar .md-title:hover{
+    background: rgba(255,255,255,.12);
+}
+/* 介绍隐藏时，标题显示一个可恢复的提示小圆点 */
+.md-appbar.intro-hidden .md-title::after{
+    content: "· 点击恢复介绍";
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,.7);
+    letter-spacing: 0;
+}
+.md-appbar .md-subtitle{
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: .8;
+}
+
+/* ===== Layout ===== */
+.md-container{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 16px 96px;
+}
+
+.md-card{
+    background: var(--md-surface);
+    border-radius: var(--md-radius);
+    box-shadow: var(--elev-1);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.md-intro{
+    position: relative;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--md-on-surface-medium);
+    text-align: center;
+    padding-right: 40px;
+}
+/* 介绍卡片右上角关闭按钮 */
+.md-intro-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #9aa0a6;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+.md-intro-close:hover{
+    background: #f1f3f4;
+    color: #5f6368;
+}
+.md-intro-close:active{
+    background: #e3e5e8;
+}
+
+/* ===== Upload / Drop Zone (Material outlined) ===== */
+.drop-zone{
+    width: 100%;
+    max-width: 460px;
+    min-height: 200px;
+    margin: 0 auto;
+    border: 2px dashed var(--md-outline);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 28px 16px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .15s, box-shadow .2s;
+    background: #fafafa;
+    user-select: none;
+    position: relative;
+}
+.drop-zone:hover{
+    border-color: var(--md-primary);
+    background: var(--md-primary-light);
+    box-shadow: var(--elev-1);
+}
+.drop-zone.dragover{
+    border-color: var(--md-primary);
+    background: var(--md-primary-tint);
+    transform: scale(1.01);
+    box-shadow: var(--elev-2);
+}
+.drop-zone .dz-icon{
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--md-primary-light);
+    color: var(--md-primary);
+    margin-bottom: 4px;
+    transition: background .2s, color .2s;
+}
+.drop-zone:hover .dz-icon,
+.drop-zone.dragover .dz-icon{
+    background: var(--md-primary);
+    color: #fff;
+}
+.drop-zone .dz-title{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+.drop-zone .dz-action{
+    font-size: 14px;
+    color: var(--md-on-surface-medium);
+}
+.drop-zone .dz-action strong{
+    color: var(--md-primary);
+}
+.drop-zone .dz-hint{
+    font-size: 12px;
+    color: #9aa0a6;
+    margin-top: 4px;
+}
+.drop-zone.hidden{
+    display: none;
+}
+
+/* ===== Material Buttons ===== */
+.md-actions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px 0 4px;
+}
+.md-btn{
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-radius: 6px;
+    height: 40px;
+    min-width: 96px;
+    padding: 0 22px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .4px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    transition: box-shadow .2s ease, background-color .2s ease, transform .08s ease, filter .2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.md-btn:hover{
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    filter: brightness(1.06);
+}
+.md-btn:active{
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    transform: translateY(1px);
+}
+.md-btn.bg-enc{ background-color: #4f1787; }
+.md-btn.bg-dec{ background-color: #eb3678; }
+.md-btn.bg-re { background-color: #fb773c; }
+.md-btn.bg-dl { background-color: #3c8bfb; }
+
+/* 清除图片按钮（操作栏首位，未选图时隐藏） */
+.md-btn.bg-clear{ background-color: #757575; }
+
+/* Ripple */
+.ripple{
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.45);
+    transform: scale(0);
+    animation: ripple-anim .6s linear;
+    pointer-events: none;
+}
+@keyframes ripple-anim{
+    to{ transform: scale(2.6); opacity: 0; }
+}
+
+/* ===== Image Preview Card ===== */
+.md-preview{
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+.md-preview.show{ display: block; }
+#display-img{
+    max-width: 100%;
+    max-height: calc(100vh - 320px);
+    border-radius: 8px;
+    box-shadow: var(--elev-2);
+}
+
+/* ===== Footer（固定于页面底部） ===== */
+.md-footer{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    padding: 12px 16px;
+    background: var(--md-surface);
+    border-top: 1px solid var(--md-outline);
+    box-shadow: 0 -1px 3px rgba(0,0,0,.10);
+    font-size: 12px;
+    color: #9aa0a6;
+    line-height: 1.7;
+    text-align: center;
+}
+.md-footer a{
+    color: var(--md-on-surface-medium);
+    text-decoration: none;
+}
+.md-footer a:hover{
+    color: var(--md-primary);
+    text-decoration: underline;
+}
+
+/* ===== Snackbar（Material 提示条，通用） ===== */
+.md-snackbar{
+    position: fixed;
+    left: 50%;
+    bottom: 88px;
+    transform: translateX(-50%) translateY(20px);
+    min-width: 288px;
+    max-width: calc(100vw - 32px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 16px;
+    background: #323232;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    font-size: 14px;
+    font-family: var(--font);
+    line-height: 1.4;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 30;
+}
+.md-snackbar.show{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+@media (max-width: 600px){
+    .md-appbar{ padding: 0 16px; }
+    .md-appbar .md-subtitle{ display: none; }
+    .md-container{ padding: 20px 12px 110px; }
+    .md-btn{ flex: 1 1 40%; min-width: 0; }
+}
+</style>
+</head>
+<body>
+<header class="md-appbar">
+    <div class="md-logo">
+        <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 43.9999C35.0457 43.9999 44 36.6126 44 27.4999C44 21.0579 39.5252 15.7014 33 12.9841L29.5 14.4999L30 19.9999L23.5 17.9999L17 19.9999V14.4999L14 12.9841C8.02199 15.837 4 21.3926 4 27.4999C4 36.6126 12.9543 43.9999 24 43.9999Z" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M23.5 4L27.3088 9.11672L36 9.90983L29.6628 14.4833L31.5 21L23.5 18L15.5 21L17.3371 14.4833L11 9.90983L19.6911 9.11672L23.5 4Z" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <div class="md-title" id="appTitle" title="点击可重新显示介绍卡片">小番茄图片混淆</div>
+    <div class="md-subtitle">基于空间填充曲线的图片混淆</div>
+</header>
+
+<main class="md-container">
+    <section class="md-card md-intro" id="introCard">
+        <button class="md-intro-close" id="introClose" type="button" aria-label="关闭介绍" title="关闭介绍">&times;</button>
+        基于空间填充曲线的新一代图片混淆。混淆算法保持像素的空间相关性，混淆图被压缩仍能保持色彩。仅供技术交流使用。此程序生成的图片格式为 JPEG，质量 1。
+    </section>
+
+    <section class="md-card">
+        <div class="drop-zone" id="dropZone">
+            <div class="dz-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+            </div>
+            <div class="dz-title">将图片拖放到此处</div>
+            <div class="dz-action">或 <strong>点击选择文件</strong></div>
+            <div class="dz-hint">也可直接 Ctrl+V 粘贴剪贴板中的图片</div>
+            <input type="file" accept="image/*" id="ipt" style="display:none" />
+        </div>
+
+        <div class="md-actions">
+            <button id="clear" class="md-btn bg-clear" type="button" style="display:none">清除图片</button>
+            <button id="enc" class="md-btn bg-enc">混淆</button>
+            <button id="dec" class="md-btn bg-dec">解混淆</button>
+            <button id="re" class="md-btn bg-re">还原</button>
+            <button id="download" class="md-btn bg-dl">下载</button>
+        </div>
+
+        <div class="md-preview" id="preview">
+            <img id="display-img" alt="预览图" />
+        </div>
+    </section>
+</main>
+
+<footer class="md-footer">
+    <p style="margin:0;">源码来自 <a href="https://github.com/iris10086/pic-scramble" target="_blank">He Jieze</a>，孤独的回忆修改</p>
+</footer>
+
+<div id="snackbar" class="md-snackbar" role="alert" aria-live="assertive">
+    <span id="snackbar-msg"></span>
+</div>
+<script>
+function gilbert2d(width, height) {
+    /**
+     * Generalized Hilbert ('gilbert') space-filling curve for arbitrary-sized
+     * 2D rectangular grids. Generates discrete 2D coordinates to fill a rectangle
+     * of size (width x height).
+     */
+    const coordinates = [];
+
+    if (width >= height) {
+        generate2d(0, 0, width, 0, 0, height, coordinates);
+    } else {
+        generate2d(0, 0, 0, height, width, 0, coordinates);
+    }
+
+    return coordinates;
+}
+
+function generate2d(x, y, ax, ay, bx, by, coordinates) {
+    const w = Math.abs(ax + ay);
+    const h = Math.abs(bx + by);
+
+    const dax = Math.sign(ax), day = Math.sign(ay); // unit major direction
+    const dbx = Math.sign(bx), dby = Math.sign(by); // unit orthogonal direction
+
+    if (h === 1) {
+        // trivial row fill
+        for (let i = 0; i < w; i++) {
+            coordinates.push([x, y]);
+            x += dax;
+            y += day;
+        }
+        return;
+    }
+
+    if (w === 1) {
+        // trivial column fill
+        for (let i = 0; i < h; i++) {
+            coordinates.push([x, y]);
+            x += dbx;
+            y += dby;
+        }
+        return;
+    }
+
+    let ax2 = Math.floor(ax / 2), ay2 = Math.floor(ay / 2);
+    let bx2 = Math.floor(bx / 2), by2 = Math.floor(by / 2);
+
+    const w2 = Math.abs(ax2 + ay2);
+    const h2 = Math.abs(bx2 + by2);
+
+    if (2 * w > 3 * h) {
+        if ((w2 % 2) && (w > 2)) {
+            // prefer even steps
+            ax2 += dax;
+            ay2 += day;
+        }
+
+        // long case: split in two parts only
+        generate2d(x, y, ax2, ay2, bx, by, coordinates);
+        generate2d(x + ax2, y + ay2, ax - ax2, ay - ay2, bx, by, coordinates);
+
+    } else {
+        if ((h2 % 2) && (h > 2)) {
+            // prefer even steps
+            bx2 += dbx;
+            by2 += dby;
+        }
+
+        // standard case: one step up, one long horizontal, one step down
+        generate2d(x, y, bx2, by2, ax2, ay2, coordinates);
+        generate2d(x + bx2, y + by2, ax, ay, bx - bx2, by - by2, coordinates);
+        generate2d(x + (ax - dax) + (bx2 - dbx), y + (ay - day) + (by2 - dby),
+            -bx2, -by2, -(ax - ax2), -(ay - ay2), coordinates);
+    }
+}
+</script>
+<script>
+const img = document.getElementById("display-img")
+const preview = document.getElementById("preview")
+function setsrc(src){
+    URL.revokeObjectURL(img.src)
+    img.src = src
+    img.style.display = "inline-block"
+    preview.classList.add("show")
+    const c = document.getElementById("clear")
+    if(c) c.style.display = ""
+}
+function encrypt(img){
+    const cvs = document.createElement("canvas")
+    const width = cvs.width = img.width
+    const height = cvs.height = img.height
+    const ctx = cvs.getContext("2d")
+    ctx.drawImage(img, 0, 0)
+    const imgdata = ctx.getImageData(0, 0, width, height)
+    const imgdata2 = new ImageData(width, height)
+    const curve = gilbert2d(width, height)
+    const offset = Math.round((Math.sqrt(5) - 1) / 2 * width * height)
+    for(let i = 0; i < width * height; i++){
+        const old_pos = curve[i]
+        const new_pos = curve[(i + offset) % (width * height)]
+        const old_p = 4 * (old_pos[0] + old_pos[1] * width)
+        const new_p = 4 * (new_pos[0] + new_pos[1] * width)
+        imgdata2.data.set(imgdata.data.slice(old_p, old_p + 4), new_p)
+    }
+    ctx.putImageData(imgdata2, 0, 0)
+    cvs.toBlob(b => {
+        currentOp = "混淆"
+        setsrc(URL.createObjectURL(b))
+    }, "image/jpeg", 1)
+    //})
+}
+function decrypt(img){
+    const cvs = document.createElement("canvas")
+    const width = cvs.width = img.width
+    const height = cvs.height = img.height
+    const ctx = cvs.getContext("2d")
+    ctx.drawImage(img, 0, 0)
+    const imgdata = ctx.getImageData(0, 0, width, height)
+    const imgdata2 = new ImageData(width, height)
+    const curve = gilbert2d(width, height)
+    const offset = Math.round((Math.sqrt(5) - 1) / 2 * width * height)
+    for(let i = 0; i < width * height; i++){
+        const old_pos = curve[i]
+        const new_pos = curve[(i + offset) % (width * height)]
+        const old_p = 4 * (old_pos[0] + old_pos[1] * width)
+        const new_p = 4 * (new_pos[0] + new_pos[1] * width)
+        imgdata2.data.set(imgdata.data.slice(new_p, new_p + 4), old_p)
+    }
+    ctx.putImageData(imgdata2, 0, 0)
+    cvs.toBlob(b => {
+        currentOp = "解混淆"
+        setsrc(URL.createObjectURL(b))
+    }, "image/jpeg", 1)
+    //})
+}
+// ===== 图片加载：文件选择 + 拖拽 + 粘贴 =====
+let originalFile = null
+let currentOp = ""
+const dropZone = document.getElementById("dropZone")
+
+function loadImage(file){
+    if(file && file.type.startsWith("image/")){
+        originalFile = file
+        currentOp = ""
+        dropZone.classList.add("hidden")
+        setsrc(URL.createObjectURL(file))
+    } else if(file){
+        // 选中的不是图片文件，提示用户
+        showSnackbar("请选择图片文件（JPG / PNG / GIF / WEBP 等）")
+        ipt.value = "" // 允许再次选择同一文件时重新触发 onchange
+    }
+}
+
+// ===== Snackbar 提示（通用：任何位置调用 showSnackbar(msg) 即可） =====
+const snackbar = document.getElementById("snackbar")
+const snackbarMsg = document.getElementById("snackbar-msg")
+let snackbarTimer = null
+function showSnackbar(msg){
+    snackbarMsg.textContent = msg
+    snackbar.classList.add("show")
+    clearTimeout(snackbarTimer)
+    snackbarTimer = setTimeout(() => snackbar.classList.remove("show"), 4000)
+}
+
+const ipt = document.getElementById("ipt")
+ipt.onchange = () => {
+    if(ipt.files.length > 0){
+        loadImage(ipt.files[0])
+    }
+}
+
+// 点击上传区域 → 触发文件选择
+dropZone.addEventListener("click", () => ipt.click())
+
+// 拖拽上传（全局 + dropZone 高亮）
+document.addEventListener("dragover", e => {
+    e.preventDefault()
+    dropZone.classList.add("dragover")
+})
+document.addEventListener("dragleave", e => {
+    e.preventDefault()
+    dropZone.classList.remove("dragover")
+})
+document.addEventListener("drop", e => {
+    e.preventDefault()
+    dropZone.classList.remove("dragover")
+    const file = e.dataTransfer.files[0]
+    if(file) loadImage(file)
+})
+
+// 剪贴板粘贴
+document.addEventListener("paste", e => {
+    const items = e.clipboardData?.items
+    if(!items) return
+    for(const item of items){
+        if(item.type.startsWith("image/")){
+            const file = item.getAsFile()
+            if(file) loadImage(file)
+            break
+        }
+    }
+})
+const btn_enc = document.getElementById("enc")
+btn_enc.onclick = () => {
+    if(img.src){
+        img.style.display = "none"
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                encrypt(img)
+            })
+        })
+    }
+}
+const btn_dec = document.getElementById("dec")
+btn_dec.onclick = () => {
+    if(img.src){
+        img.style.display = "none"
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                decrypt(img)
+            })
+        })
+    }
+}
+const btn_restore = document.getElementById("re")
+btn_restore.onclick = () => {
+    currentOp = ""
+    if(originalFile){
+        setsrc(URL.createObjectURL(originalFile))
+    }else if(ipt.files.length > 0){
+        setsrc(URL.createObjectURL(ipt.files[0]))
+    }
+}
+
+// 生成 "YYYYMMDD-HHMMSS" 格式时间戳
+function fmtStamp(d){
+    const p = n => String(n).padStart(2, '0');
+    return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate())
+        + '-' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+}
+// 构造下载文件名：有原始文件名则用 原文件名_时间戳.jpg，否则用 processed_image_时间戳.jpg
+function buildDownloadName(){
+    const stamp = fmtStamp(new Date());
+    let base = "processed_image";
+    if(originalFile && originalFile.name){
+        base = originalFile.name.replace(/\.[^.]+$/, ""); // 去掉扩展名，保留主文件名
+    }
+    const op = currentOp ? "_" + currentOp : "";
+    return base + op + "_" + stamp + ".jpg";
+}
+const btn_download = document.getElementById("download")
+btn_download.onclick = () => {
+    if(img.src && img.style.display !== "none"){
+        const a = document.createElement('a')
+        a.href = img.src
+        a.download = buildDownloadName()
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+    }
+}
+
+// 清除已选图片：移除预览、恢复上传卡片，方便重新选择
+const btn_clear = document.getElementById("clear")
+btn_clear.addEventListener("click", () => {
+    if(img.src) URL.revokeObjectURL(img.src)
+    img.removeAttribute("src")
+    img.style.display = "none"
+    preview.classList.remove("show")
+    dropZone.classList.remove("hidden")
+    originalFile = null
+    currentOp = ""
+    ipt.value = "" // 允许再次选择同一文件时重新触发 onchange
+    btn_clear.style.display = "none"
+})
+
+// ===== Material Design 水波纹（ripple）效果 =====
+function attachRipple(el){
+    el.addEventListener("pointerdown", function(e){
+        const rect = el.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+        ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+        el.appendChild(ripple);
+        ripple.addEventListener("animationend", () => ripple.remove());
+    });
+}
+document.querySelectorAll(".md-btn").forEach(attachRipple);
+
+// ===== 介绍卡片：关闭 + 恢复（localStorage 持久化） =====
+const introCard = document.getElementById("introCard")
+const introClose = document.getElementById("introClose")
+const appTitle = document.getElementById("appTitle")
+const INTRO_KEY = "pic_scramble_intro_closed"
+
+function hideIntro(){
+    introCard.style.display = "none"
+    document.querySelector(".md-appbar").classList.add("intro-hidden")
+}
+function showIntro(){
+    introCard.style.display = ""
+    document.querySelector(".md-appbar").classList.remove("intro-hidden")
+}
+function persistIntroClosed(){
+    try { localStorage.setItem(INTRO_KEY, "1") } catch(e){}
+}
+function clearIntroClosed(){
+    try { localStorage.removeItem(INTRO_KEY) } catch(e){}
+}
+
+// 初始化：若上次已关闭，则本次不展示
+if(localStorage.getItem(INTRO_KEY) === "1"){
+    hideIntro()
+}
+
+// 点击关闭按钮：隐藏并记录状态
+introClose.addEventListener("click", () => {
+    hideIntro()
+    persistIntroClosed()
+    showSnackbar("已隐藏介绍卡片，点击顶部标题可重新显示")
+})
+
+// 点击标题：清除关闭状态并恢复介绍卡片
+appTitle.addEventListener("click", () => {
+    clearIntroClosed()
+    if(introCard.style.display === "none"){
+        showIntro()
+        showSnackbar("已重新显示介绍卡片")
+    }
+})
+</script>
+</html>

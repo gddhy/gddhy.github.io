@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=0.9">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WAP网页转码</title>
+<style type="text/css">
+body{text-align:center;margin:auto}a{text-decoration:none}
+</style>
+</head>
+<body>
+<p>WAP网页转码</p>
+
+<form onsubmit="return search()" style="box-shadow: 0 0 5px rgba(70,70,40,.255); -webkit-animation: fadeIn 2.5s; animation: fadeIn 2.5s; background-color:  rgba(255,255,255,.0); border-radius: 3px; display: table; vertical-align: middle; width: 80%; height: 20px; max-width: 400px; margin: 10px auto;">
+<input style="outline: 0; height: 40px; float: right; color: #4a4266; font-size: 18px; font-weight: 500; border: none; background-color: transparent; padding: 0 13px 0 13px" type="submit" id="search_submit" value="打开" >
+<span style="display: block; font-size: 12px; overflow: hidden; padding-left: 2px; vertical-align: middle;"><input style="width: 90%; height: 40px; background-color: transparent; border: none; outline: 0; font-size: 16px; color: #4a4266; padding: 0 10px; border-radius: 50px" type="text" value="" autocomplete="off" id="search_input" placeholder="✎...   输入网址" ></span>
+</form>
+
+<script type="text/javascript">function search(){if(document.getElementById("search_input").value != ""){window.location.href = "http://wap.sogou.com/transcoding/sweb/detail.jsp?g_ut=2&url=" + document.getElementById("search_input").value;document.getElementById("search_input").value = "";}return false;}</script>
+
+<p>当前使用的是搜狗网页转码<br/>输入网址要包含https://或http://</p>
+<p>例如：查看wap版B站输入 https://bilibili.com<br/><br/><a href="http://wap.sogou.com/transcoding/sweb/detail.jsp?g_ut=2&url=https%3A%2F%2Fbilibili.com">也可以点此查看wap版哔哩哔哩的效果</a></p>
+<p><b>智能机打开网页会被搜狗插入广告</b><br/>功能机不支持js/css所以无广告</p>
+
+<p><a href="/2021/gua-he-zao-qi-yi-dong-she-bei-de-wang-ye-liu-lan/">前往博客查看完整说明</a></p>
+
+<script>
+window.addEventListener('load',function(){
+if(navigator.userAgent.match(/QQ\//i)) {
+document.getElementById("search_input").style.display="none";
+}})
+</script>
+</body>
+</html>

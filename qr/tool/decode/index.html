@@ -1,0 +1,66 @@
+<!--
+ * author:wenqd
+ * email:309820722@qq.com
+ * date:2019-09-18 09:34
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.9">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>二维码识别</title>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+        <script src="jsQR.js"></script>
+    </head>
+    <body>
+        <span lan_id="bc">选择图片</span> <input type="file"  id="pictureChange"/>
+        <div>
+            <h2>识别结果：</h2>
+            <ul id="result">
+            </ul>
+        </div>
+        <div style="position: fixed; bottom: 0; width:100%;text-align: center;">
+        <p><a href="/qr">二维码生成</a></p>
+         <p>当前页面来源<a href="https://www.cnblogs.com/wenqd/p/11541030.html">Victor—— : 前端js解析识别图片二维码</a></p>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $("body").append('<canvas id="qrcanvas" style="display:none;"></canvas>')
+        $("#pictureChange").change(function (e) {
+            var file = e.target.files[0];
+            if(window.FileReader) {
+                var fr = new FileReader();
+                fr.readAsDataURL(file);
+                fr.onloadend = function(e) {
+                    var base64Data = e.target.result;
+                    base64ToqR(base64Data)
+                }
+            }
+        })
+        function base64ToqR(data) {
+            var c = document.getElementById("qrcanvas");
+            var ctx = c.getContext("2d");
+     
+            var img = new Image();
+            img.src = data;
+            img.onload = function() {
+                $("#qrcanvas").attr("width",img.width)
+                $("#qrcanvas").attr("height",img.height)
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                var imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                    inversionAttempts: "dontInvert",
+                });
+                if(code){
+                    showCode(code.data)
+                }else{
+                    alert("识别错误")
+                }
+            };
+        }
+        function showCode(code){
+            $("#result").append("<li>"+code+"</li>")
+        }
+    </script>
+</html>

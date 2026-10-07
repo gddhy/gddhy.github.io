@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_event</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT size=2 
+face="Verdana, Arial, Helvetica">&nbsp; 
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P style="MARGIN-RIGHT: 0px" dir=ltr><FONT color=#660033><B>int32 
+      mr_event(int16 type, int32 param1, int32 
+  param2)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR SIZE=1 noShade>
+
+<H5>Description</H5>
+<BLOCKQUOTE>发送事件给虚拟机，在应用层将通过mrc_event接收到相应的消息。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" border=1 cellSpacing=0 cellPadding=5 width="87%">
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>type</EM></FONT></TD>
+      <TD><FONT size=2>虚拟机预定义的事件类型，各个事件类型的具体定义请参考MR_EVENT_E</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT size=2><EM>param1</EM></FONT></TD>
+      <TD><FONT size=2>参数1，由事件定义</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>param2</I></FONT></TD>
+      <TD><FONT size=2>参数2，由事件定义</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>当成功将事件发送到虚拟机并进行处理后将返回MR_SUCCESS, 
+  如果未将事件传到虚拟机将返回MR_FAILED，如果是虚拟机不支持的事件将返回MR_IGNORE。在返回值上这里有一点要特别注意，mr_event的返回值不等于mrc_event的返回值，某些时候我们可能期望通过mr_event来调用应用中的相应功能，但切记，通过mrc_event返回的值，在平台的移植层是得不到的。</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>在移植层将本地的事件转换成虚拟机事件后，需要通过mr_event 
+  将事件发送到虚拟机，应用层会由mrc_event接收，这里的发送是同步的，其实就是同步的调用过程，mr_event发送的事件遵循公共且唯一的定义，各个事件可带有1至2个参数，参数的个数和具体的移植由事件本身定义，应用和移植层遵循此协议。</P>
+  <P>事件定义</P>
+  <P>enum {<BR>&nbsp;&nbsp; MR_KEY_PRESS,&nbsp;/*按键按下事件, param1 
+  为按键值*/<BR>&nbsp;&nbsp; MR_KEY_RELEASE,&nbsp;/*1*/<BR>&nbsp;&nbsp; 
+  MR_MOUSE_DOWN,&nbsp;/*2*/<BR>&nbsp;&nbsp; 
+  MR_MOUSE_UP,&nbsp;&nbsp;/*3*/<BR>&nbsp;&nbsp; 
+  MR_MENU_SELECT,&nbsp;/*4*/<BR>&nbsp;&nbsp; 
+  MR_MENU_RETURN,&nbsp;/*5*/<BR>&nbsp;&nbsp; 
+  MR_DIALOG_EVENT,&nbsp;/*6*/<BR>&nbsp;&nbsp; 
+  MR_SMS_INDICATION,&nbsp;/*7*/<BR>&nbsp;&nbsp; 
+  MR_EVENT_EXIT,&nbsp;/*8*/<BR>&nbsp;&nbsp; 
+  MR_SMS_RESULT,&nbsp;/*9*/<BR>&nbsp;&nbsp; 
+  MR_LOCALUI_EVENT,&nbsp;/*10*/<BR>&nbsp;&nbsp; 
+  MR_OSD_EVENT,&nbsp;/*11*/<BR>&nbsp;&nbsp; 
+  MR_MOUSE_MOVE,&nbsp;/*12*/<BR>&nbsp;&nbsp; 
+  MR_ERROR_EVENT,&nbsp;/*13执行异常通过这个事件来通知*/&nbsp; <BR>&nbsp;&nbsp; 
+  MR_PHB_EVENT,<BR>&nbsp;&nbsp; MR_SMS_OP_EVENT,<BR>&nbsp;&nbsp; 
+  MR_SMS_GET_SC,<BR>&nbsp;&nbsp; MR_DATA_ACCOUNT_EVENT,<BR>&nbsp;&nbsp; 
+  MR_MOTION_EVENT,<BR>&nbsp;&nbsp; MR_MCHAT_EVENT = 
+100,<BR>}MR_EVENT_E;</P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>&nbsp;</BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>&nbsp;</BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>
