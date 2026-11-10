@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_seek</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+size=2><FONT face=Verdana>&nbsp; </FONT>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT face=Verdana 
+      color=#660033><B>int32 mr_seek(MR_FILE_HANDLE f, int32 pos, int 
+      method)</B></FONT></P></TD></TR></TBODY></TABLE><BR><FONT face=Verdana>
+<HR noShade SIZE=1>
+</FONT>
+<H5><FONT face=Verdana>Description</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>设置文件读写指针。</FONT></BLOCKQUOTE>
+<H5><FONT face=Verdana>Parameters</FONT></H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT face=Verdana size=2><B>Name</B></FONT></TD>
+      <TD><FONT face=Verdana size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT face=Verdana size=2><I>f</I></FONT></TD>
+      <TD><FONT face=Verdana size=2>文件句柄</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>pos</EM></FONT></TD>
+      <TD><FONT face=Verdana size=2>文件读写指针位置</FONT></TD></TR>
+    <TR>
+      <TD width="20%"><FONT face=Verdana size=2><EM>method</EM></FONT></TD>
+      <TD><FONT face=Verdana size=2>设置方式,可能的取值为：<BR>&nbsp;&nbsp; MR_SEEK_SET, 
+        //从文件头开始搜索；<BR>&nbsp;&nbsp; MR_SEEK_CUR, //从文件尾开始搜索；<BR>&nbsp;&nbsp; 
+        MR_SEEK_END, //从文件当前位置开始搜索；</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Return Value</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px"><FONT face=Verdana>
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败</P></FONT></BLOCKQUOTE>
+<H5><FONT face=Verdana>Remarks</FONT></H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P><FONT face=Verdana></FONT>&nbsp;</P></BLOCKQUOTE>
+<H5><FONT face=Verdana>Example</FONT></H5>
+<BLOCKQUOTE><FONT face=Verdana>
+  <P>/*mrp code*/</P>
+  <P>MR_FILE_HANDLE fh;<BR>fh = mrc_open(&nbsp;"testFile.txt", 
+  MR_FILE_RDWR&nbsp;);&nbsp;<BR>mrc_seek( fh, 10, MR_SEEK_SET);&nbsp; 
+  //从文件头开始搜索；<BR>mrc_seek( fh, 0, MR_SEEK_END);&nbsp; //从文件尾开始搜索；<BR>mrc_seek( 
+  fh, 10, MR_SEEK_CUR);&nbsp; //从文件当前位置开始搜索；<BR>mrc_close(&nbsp;fh 
+);&nbsp;</P></BLOCKQUOTE></FONT>
+<BLOCKQUOTE></BLOCKQUOTE>
+<H5><SPAN><FONT face=Verdana>See Also</FONT></SPAN></H5>
+<BLOCKQUOTE>
+  <P><FONT face=Verdana><A href="mr_open.htm">mr_open</A><BR><A href="mr_close.htm">mr_close</A></FONT></P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

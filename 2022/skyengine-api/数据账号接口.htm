@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>数据账号接口</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT size=2 
+face="Verdana, Arial, Helvetica">&nbsp; 
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+  <TBODY>
+  <TR vAlign=top>
+    <TD width="100%">
+      <P style="MARGIN-RIGHT: 0px" dir=ltr><FONT 
+      color=#660033><B>MTK平台账号资料管理流程</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR SIZE=1 noShade>
+
+<H5>Mythroad 联网流程介绍 (TCP)</H5>
+<BLOCKQUOTE>初始化网络（mr_initNetwork）-&gt;创建连接（mr_socket）<BR>-&gt;连接服务器（mr_connect）-&gt;收发数据(mr_recv, 
+  mr_send)<BR>-&gt;关闭连接（mr_closeSocket）-&gt;断开网络（mr_closeNetwork）</BLOCKQUOTE>
+<H5>MTK账号资料管理介绍</H5>
+<BLOCKQUOTE>
+  <P>在mtk上账号资料分为两类：<BR>A、&nbsp;GSM账号资料（电路交换方式）<BR>B、&nbsp;GPRS账号资料<BR>每种账号一般留有10个槽位（槽位个数手机设计公司可以进行调节）在创建socket的时候，有一个参数就是指这个账号资料的序号。目前Mythroad固定使用GPRS账号的最后一个槽位.</P></BLOCKQUOTE>
+<H5>国内账号资料管理流程</H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>在程序初始化网络（即调用mr_initNetwork）的时候，根据不通的拨号方式（CMNET,CMWAP，默认是CMNET）对指定槽位的账号资料进行设置（不论是否已经设置过，都会进行设置）。<BR>优点：用户不需要关心账号资料的设置<BR>缺点：如果是运营商的对联网的账号资料进行修改的话，就会造成无法连接网络的情况出现。</P></BLOCKQUOTE>
+<H5>手机wap账号资料的管理</H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>在wap的菜单中有这样一个菜单：<BR>进入这个菜单后，会把手机上有的账号资料在列表中罗列出来供用户进行选择。</P></BLOCKQUOTE>
+<H5>新账号资料管理方案（适用国内和海外）</H5></FONT>
+<BLOCKQUOTE>
+  <H5>流程图</H5>
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P><IMG alt="" src="image/apn.PNG"></P>
+    <H5>新增接口</H5>
+    <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+      <P><FONT size=2 
+      face=Verdana>1、&nbsp;本地UI设置账号资料接口<BR>2、&nbsp;设置账号资料接口<BR>3、&nbsp;读取账号资料接口<BR>4、&nbsp;设置是否使用当前设置接口（默认是不使用当前设置，设置的结果只对一次VM运行起作用，重新启动VM后自动复位）</FONT></P></BLOCKQUOTE>
+    <H5>优缺点</H5>
+    <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+      <P><FONT size=2 
+      face=Verdana>优点：<BR>1、&nbsp;账号资料可以完全保密<BR>2、&nbsp;实现复杂度低<BR>缺点：<BR>1、&nbsp;检索的表是预置的无法修改（添加、删除）<BR>2、&nbsp;当表中没有记录的时候需要用户来设置（增加用户使用的难度）</FONT></P></BLOCKQUOTE></BLOCKQUOTE></BLOCKQUOTE><FONT 
+size=2 face="Verdana, Arial, Helvetica">
+<H5><SPAN>代码实现</SPAN></H5>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <P>国内目前的实现：<BR> 国内现在拨号流程基本如下，工具用户的参数，拨CMWAP或者CMNET。<BR><BR> 海外： <BR>自动模式： 
+  根据当前的MCC/MNC查询APN的数据库，如果有匹配项就使用匹配的APN信息进行拨号，如果出海外，你还得带上mr_getAPN接口的实现。 手动模式： 
+  通过用户选择特定的数据账号，并将其保存下来。拨号的时候使用这个账号的信息进行拨号。</P></BLOCKQUOTE></FONT>
+<BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+  <H5 dir=ltr>MTK上CODE的参考定义</H5><FONT size=2 face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P dir=ltr>#define 
+    MR_GET_DATA_ACCOUNT_REQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    1107&nbsp;//mr_plat<BR>#define 
+    MR_GET_DATA_ACCOUNT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    1108 //mr_platEx<BR>#define 
+    MR_SET_DATA_ACCOUNT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    1109 //mr_platEx<BR>#define MR_SET_DATA_ACCOUNT_USE_FLAG 1110 
+    //mr_plat<BR>#define MR_SET_DATA_ACCOUNT_MTK_UI&nbsp;&nbsp;&nbsp;&nbsp; 1111 
+    // mr_plat</P></BLOCKQUOTE></FONT>
+  <H5 dir=ltr>MR_GET_DATA_ACCOUNT_REQ</H5><FONT size=2 
+  face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P 
+    dir=ltr>功能：发起获取数据账号的请求，在MTK上为异步方式，这个CODE需要配和MR_GET_DATA_ACCOUNT来取的数据账号的值<BR>参数：无<BR>返回：失败MR_FAILED, 
+    获取过程中返回MR_WAITING，成功MR_SUCCESS<BR>如果是异步返回的，获取成功后需要通知虚拟机，如下：<BR>mr_event(MR_DATA_ACCOUNT_EVENT, 
+    MR_DATA_ACCOUNT_OP_GET, ret);</P>
+    <P dir=ltr>下面是2个枚举值在的定义，第3个参数 MR_SUCCESS 表示成功，MR_FAILED表示失败</P>
+    <P dir=ltr>enum {<BR>&nbsp;&nbsp; 
+    MR_KEY_PRESS,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*0*/<BR>&nbsp;&nbsp; 
+    MR_KEY_RELEASE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*1*/<BR>&nbsp;&nbsp; 
+    MR_MOUSE_DOWN,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*2*/<BR>&nbsp;&nbsp; 
+    MR_MOUSE_UP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*3*/<BR>&nbsp;&nbsp; 
+    MR_MENU_SELECT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*4*/<BR>&nbsp;&nbsp; 
+    MR_MENU_RETURN,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*5*/<BR>&nbsp;&nbsp; MR_DIALOG_EVENT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*6*/<BR>&nbsp;&nbsp; MR_SMS_INDICATION,&nbsp;&nbsp; /*7*/<BR>&nbsp;&nbsp; 
+    MR_EVENT_EXIT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*8*/<BR>&nbsp;&nbsp; 
+    MR_SMS_RESULT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*9*/<BR>&nbsp;&nbsp; MR_LOCALUI_EVENT,&nbsp;&nbsp;&nbsp; 
+    /*10*/<BR>&nbsp;&nbsp; 
+    MR_OSD_EVENT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*11*/<BR>&nbsp;&nbsp; 
+    MR_MOUSE_MOVE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*12*/<BR>&nbsp;&nbsp; 
+    MR_ERROR_EVENT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    /*13执行异常通过这个事件来通知*/&nbsp; <BR>&nbsp;&nbsp; MR_PHB_EVENT,<BR>&nbsp;&nbsp; 
+    MR_SMS_OP_EVENT,<BR>&nbsp;&nbsp; MR_SMS_GET_SC,<BR>&nbsp;&nbsp; 
+    MR_DATA_ACCOUNT_EVENT,<BR>&nbsp;&nbsp; MR_MOTION_EVENT,<BR>};</P>
+    <P 
+    dir=ltr>enum<BR>{<BR>&nbsp;MR_DATA_ACCOUNT_OP_GET,<BR>&nbsp;MR_DATA_ACCOUNT_OP_SET,<BR>};</P></BLOCKQUOTE></FONT>
+  <H5 dir=ltr>MR_GET_DATA_ACCOUNT</H5><FONT size=2 
+  face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P dir=ltr>功能：返回由MR_GET_DATA_ACCOUNT_REQ发起获取的数据账号值<BR>参数通过: output, 
+    output_len参数返回类型为T_DSM_DATA_ACCOUNT 
+    的数据账号（这个结构的内存为移植层的全局数据，不需要应用层管理）<BR>返回：MR_SUCCESS 表示成功，MR_FAILED表示失败</P>
+    <P dir=ltr><BR>typedef struct<BR>{<BR>&nbsp;&nbsp;&nbsp; uint8 
+    authentication_type;<BR>&nbsp;&nbsp;&nbsp; uint8 
+    user_name[32];<BR>&nbsp;&nbsp;&nbsp; uint8 
+    password[32];<BR>&nbsp;&nbsp;&nbsp; uint8 dns[4];<BR>&nbsp;&nbsp;&nbsp; 
+    uint8 apn[100];<BR>}T_DSM_DATA_ACCOUNT;</P></BLOCKQUOTE></FONT>
+  <H5 dir=ltr>MR_SET_DATA_ACCOUNT</H5><FONT size=2 
+  face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P dir=ltr>功能：设置数据账号<BR>参数：input, input_len 
+    为T_DSM_DATA_ACCOUNT结构类型的数据<BR>返回：MR_SUCCESS 
+    成功，MR_FAILED失败，MR_WAITING异步过程通过后续事件通知应用mr_event(MR_DATA_ACCOUNT_EVENT,MR_DATA_ACCOUNT_OP_SET,MR_FAILED);</P>
+    <P 
+    dir=ltr>前面两个参数参考MR_GET_DATA_ACCOUNT_REQ节的定义，第三个参数MR_SUCCESS表示成功，MR_FAILED表示失败。</P></BLOCKQUOTE></FONT>
+  <H5 dir=ltr>MR_SET_DATA_ACCOUNT_USE_FLAG</H5><FONT size=2 
+  face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P dir=ltr>功能：启用设置的数据账号<BR>参数：0 
+    表示使用原先的拨号流程，1，表示使用设置的数据账号<BR>返回：成功MR_SUCCESS, 
+  失败MR_FAILED</P></BLOCKQUOTE></FONT>
+  <H5 dir=ltr>MR_SET_DATA_ACCOUNT_MTK_UI</H5><FONT size=2 
+  face="Verdana, Arial, Helvetica">
+  <BLOCKQUOTE style="MARGIN-RIGHT: 0px" dir=ltr>
+    <P 
+    dir=ltr>功能：通过启用本地的界面显示全部可选的系统数据账号让用户选择，用户选择后，将选择的账号信息，保存到我们指定的数据账号中。<BR>参数：无<BR>返回：MR_SUCCESS,MR_FAILED</FONT></P></BLOCKQUOTE></BLOCKQUOTE></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

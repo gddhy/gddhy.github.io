@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>mr_platEx(1005) - 在状态栏上显示图标</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+
+<link REL="StyleSheet">
+</head>
+
+<body leftMargin=0 topMargin=0 marginheight="0" marginwidth="0">
+<TABLE style="WIDTH: 100%; HEIGHT: 29px" border=0 cellSpacing=0 cellPadding=0 
+width="100%" bgColor=#a6caf0>
+  <TBODY>
+  <TR>
+    <TD width=5></TD>
+    <TD><IMG hspace=2 alt="" align=absMiddle 
+      src="msdn/icon.gif">&nbsp;<STRONG><EM><FONT face=Tahoma>SKYENGINE API&nbsp; 
+      参考手册</FONT></EM></STRONG><a style="PADDING-LEFT: 20px" href="./">返回目录</a></TD>
+    <TD width=60 align=right></TD>
+    <TD width=12>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; PADDING-TOP: 10px">
+<P><FONT face=Arial><FONT size=2><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><FONT 
+face="Verdana, Arial, Helvetica" size=2>&nbsp; 
+<TABLE style="WIDTH: 100%" cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR vAlign=top>
+    <TD noWrap width="10%"><SPAN style="MARGIN-RIGHT: 0px"><FONT 
+      color=#660033><B>int32 mr_platEx</B></FONT></SPAN></TD>
+    <TD>
+      <P dir=ltr style="MARGIN-RIGHT: 0px"><FONT color=#660033><B>(int32 code = 
+      1005, <BR>uint8* input, <BR>int32 input_len, <BR>uint8** output, 
+      <BR>int32* output_len, <BR>MR_PLAT_EX_CB* 
+  cb<BR>)</B></FONT></P></TD></TR></TBODY></TABLE><BR>
+<HR noShade SIZE=1>
+
+<H5>Description</H5>
+<BLOCKQUOTE>显示一张图片，请求移植层显示一张图片（图片显示的位置由移植来确定，可能在idle，或者icon条，或者两个地方都显示等等情况）。</BLOCKQUOTE>
+<H5>Parameters</H5>
+<BLOCKQUOTE>
+  <P>
+  <TABLE style="WIDTH: 87%" cellSpacing=0 cellPadding=5 width="87%" border=1>
+    <TBODY>
+    <TR vAlign=top bgColor=#dddddd>
+      <TD width="20%"><FONT size=2><B>Name</B></FONT></TD>
+      <TD><FONT size=2><B>Description</B></FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input</I></FONT></TD>
+      <TD><FONT size=2>mr_pic_req 数据结构指针</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>input_len</I></FONT></TD>
+      <TD><FONT size=2>mr_pic_req 数据结构长度</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>output_len</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR>
+    <TR vAlign=top>
+      <TD width="20%"><FONT size=2><I>cb</I></FONT></TD>
+      <TD><FONT size=2>无</FONT></TD></TR></TBODY></TABLE></P></BLOCKQUOTE>
+<H5>Return Value</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>MR_SUCCESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  成功<BR>MR_FAILED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  失败<BR>MR_IGNORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  不支持该功能</P></BLOCKQUOTE>
+<H5>Remarks</H5>
+<BLOCKQUOTE dir=ltr style="MARGIN-RIGHT: 0px">
+  <P>mr_pic_req 数据结构：<BR>typedef struct<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; int32 
+  appid;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int32 
+  time;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  int32 img_type;<BR>&nbsp;&nbsp;&nbsp;&nbsp; int32 
+  img_size;<BR>&nbsp;&nbsp;&nbsp;&nbsp; int32 width;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  int32 height;<BR>&nbsp;&nbsp; &nbsp;&nbsp;uint16 color;<BR>&nbsp;&nbsp;&nbsp; 
+  &nbsp;uint8 *buff;<BR>&nbsp;&nbsp; &nbsp; uint8 destId;<BR>}mr_pic_req;</P>
+  <P>参数说明：<BR>appid：请求画图的应用的id。<BR>time：图片闪动的时间，单位是：ms（毫秒）；如果为0 
+  表示不用闪动。<BR>img_type：图片类型<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0：BMP 
+  图片；1：jpg 图片；2：png 图片；3：gif 图片<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  如果是bmp图片的话，buffer 指向的是解压后的点阵数据信息。<BR>img_size：buff 这个指针指向的空间的大小。<BR>color： 
+  透明色（bmp 图片时候起作用）。<BR>buff：&nbsp; 图片数据。<BR>destId：图片显示位置 
+  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  0：表示画idle下的一个小图标<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1：画idle下的整个背景</P>
+  <P><FONT 
+  color=#000000>根据不同的timer大小，底层将确定进行怎样的操作<BR>timer：&nbsp;&nbsp;&nbsp;&nbsp; 0 
+  ：显示icon但不闪动（如果是QQ显示在线图标）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  1000：闪动的显示icon（如果是QQ显示在线图标）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  1：显示离开状态的QQ头像（QQ专用）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  2：显示隐身状态的QQ头像（QQ专用）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  5：MRSTAR平台专用，用于mrp通知移植层，当前QQ已经启动可以实现end键转后台（QQ专用）；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  1001：显示离开状态的QQ头像（QQ专用）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  1002：显示隐身状态的QQ头像（QQ专用）<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  -1：为显示离线状态的QQ头像（QQ专用）<BR></FONT></P></BLOCKQUOTE>
+<H5>Example</H5>
+<BLOCKQUOTE>
+  <P>/*mrp code*/</P>
+  <P>void QQStateIconFicker(int32 appid, int32 
+  timer)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp; mr_pic_req 
+  picture;<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  memset(&amp;picture,0,sizeof(mr_pic_req));<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+  picture.appid=appid;<BR>&nbsp;&nbsp;&nbsp;&nbsp; picture.time = 
+  timer;<BR>&nbsp;&nbsp;&nbsp;&nbsp; picture.img_type = 
+  0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; picture.color= 
+  BM_TRANSPARENT;<BR>&nbsp;&nbsp;&nbsp;&nbsp; picture.destId = 
+  0;<BR>&nbsp;&nbsp;&nbsp;&nbsp; mrc_platEx(1005,(uint8*)&amp;picture, 
+  sizeof(mr_pic_req), 0, 0, 0);</P>
+  <P>}</P>
+  <P>&nbsp;</P></BLOCKQUOTE>
+<H5><SPAN>See Also</SPAN></H5>
+<BLOCKQUOTE>
+  <P><A href="mr_start_dsm_ex.htm"></A>&nbsp;</P></BLOCKQUOTE></FONT></FONT></FONT></P><FONT 
+color=#808080 size=2 face="Times New Roman">
+<HR SIZE=1 noShade>
+<FONT size=1 face=Arial>Copyright ?2005-20010&nbsp;SKY-MOBI</FONT><FONT 
+color=#000000 size=3> </FONT></FONT></DIV>
+<P></P>
+<div style="PADDING-BOTTOM: 10px; PADDING-LEFT: 10px"><a href="./">返回目录</a></div></body>
+</html>

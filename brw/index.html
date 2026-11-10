@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>请使用浏览器打开</title>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
+<style type="text/css">
+	a{text-decoration: none;color: black}
+	#tipdiv{position: absolute;z-index: 100;top: 5px;right: 5px}
+	#brwdiv,#indiv{position: absolute; top:20%;font-size:20px;width: 100%;}
+	#copydiv{
+		display: none;
+		position: fixed;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		margin: 0 auto;
+		width: 100%;
+		text-align: center;
+	}
+	#copyBtn {
+		color: #fff;
+		width: 100%;
+		background-color: #0E76E1;
+		line-height: 2.5rem;
+		font-size: .8rem;
+		broder: 1px solid black;
+		border-radius: 20px 20px 20px 20px;
+		display: block;
+    }
+	.btn::after{broder:none;}
+	input{width: 90%;text-align:center;vertical-align:middle;}
+</style>
+</head>
+<body>
+<div id="tipdiv"><i class="fa fa-hand-o-up" style="font-size:28px;"></i></div>
+<p>请点击右上角 <i class="fa fa-ellipsis-h"></i> 选择使用 浏览器 打开<br />使用浏览器打开可以展示更多精彩内容</p>
+<div id="brwdiv">推荐使用下面浏览器：<br /><a href="https://google.cn/chrome"><i class="fa fa-chrome"></i>Chrome</a><br /> <a href="https://www.microsoft.com/edge"><i class="fa fa-edge"></i>Edge</a><br /> <a href="https://www.firefox.com.cn/"><i class="fa fa-firefox"></i>FireFox</a></div>
+<div style="display:none" id="indiv">
+在下方输入链接
+<input oninput="OnInput (event)" onpropertychange="OnPropChanged (event)" type="text" id="intext" value="" ></input>
+<p style="font-size:14px;">当前页可以生成一个在微信QQ内提示用浏览器打开的链接<br/>效果如上，仅此而已</p>
+</div>
+<div id="copydiv">
+<font id="tip_font">你也可以复制链接到浏览器打开</font>
+<input readonly="readonly" id="foo" value="https://github.com/zenorocha/clipboard.js.git"></input>
+<a href="javascript:void(0)" onClick="copyOnclick()" id="copyBtn"><i class="fa fa-clipboard"></i>复制</a>
+<button id="copyButton" style="display:none" class="btn" data-clipboard-target="#foo">
+copy
+</button>
+</div>
+<script>
+function copyOnclick(){
+	const cBtn = document.getElementById('copyButton');
+	cBtn.click();
+	var clipboard = new ClipboardJS('.btn');
+	
+	clipboard.on('success', function(e) {
+		console.info('Action:', e.action);
+		console.info('Text:', e.text);
+		console.info('Trigger:', e.trigger);
+		
+		e.clearSelection();
+	});
+
+	clipboard.on('error', function(e) {
+		console.error('Action:', e.action);
+		console.error('Trigger:', e.trigger);
+	});
+}
+function base64Encode(str) {
+  return btoa(encodeURIComponent(str));
+}
+
+function base64Decode(str) {
+  return decodeURIComponent(atob(str));
+}
+function showCopy(){
+	const cpdiv = document.getElementById('copydiv');
+	const cpf = document.getElementById('foo');
+	var b64 = window.location.hash.substring(1);
+		if(!(b64==="")){
+			const link = base64Decode(b64);
+			cpdiv.style.display = "block";
+			foo.value = link;
+		}
+}
+function isInternalBrw(){
+	if(navigator.userAgent.match(/QQ\//i)){
+		return true;
+	} else if(navigator.userAgent.match(/MicroMessenger\//i)){
+		return true;
+	} else if(navigator.userAgent.match(/Alipay/i)){
+		return true;
+	} else {
+		return false;
+	}
+}
+if (window.location.hash){
+	if(isInternalBrw()){
+		showCopy();
+	} else {
+		var b64 = window.location.hash.substring(1);
+		if(!(b64==="")){
+			window.location.href = base64Decode(b64);
+		} else {
+			showIn();
+		}
+	}
+} else {
+	if(!isInternalBrw()){
+		showIn();
+	}
+}
+function showIn(){
+	const d_brw = document.getElementById('brwdiv');
+	const d_in = document.getElementById('indiv');
+	d_brw.style.display = "none";
+	d_in.style.display = "block";
+}
+function showInput(text){
+	const cpdiv = document.getElementById('copydiv');
+	const cpf = document.getElementById('foo');
+	const tip = document.getElementById('tip_font');
+	cpdiv.style.display = "block";
+	tip.style.display = "none";
+	foo.value = window.location.href+"#"+base64Encode(text);
+}
+function OnInput (event) {
+	showInput(event.target.value);
+}
+function OnPropChanged (event) {
+	showInput(event.srcElement.value);
+}
+</script>
+</body>
+</html>

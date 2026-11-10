@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片分辨率调整工具</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<style>
+  :root{
+    --md-primary:#6750A4;
+    --md-primary-hover:#5a4592;
+    --md-on-primary:#ffffff;
+    --md-primary-container:#EADDFF;
+    --md-on-primary-container:#21005D;
+    --md-surface:#FEF7FF;
+    --md-surface-variant:#E7E0EC;
+    --md-on-surface:#1D1B20;
+    --md-on-surface-variant:#49454F;
+    --md-outline:#79747E;
+    --md-outline-variant:#CAC4D0;
+    --md-bg:#F3EDF7;
+    --md-error:#B3261E;
+    --md-success:#2E7D32;
+    --md-shadow:rgba(0,0,0,.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Roboto',system-ui,-apple-system,sans-serif;
+    background:var(--md-bg);
+    color:var(--md-on-surface);
+    min-height:100vh;
+    padding:24px 16px 60px;
+  }
+  .material-symbols-outlined{
+    font-family:'Material Symbols Outlined';
+    font-weight:normal;font-style:normal;line-height:1;
+    letter-spacing:normal;text-transform:none;display:inline-block;
+    white-space:nowrap;word-wrap:normal;direction:ltr;
+  }
+  .app-bar{
+    max-width:1100px;margin:0 auto 24px;display:flex;align-items:center;gap:14px;
+    padding:4px 8px;
+  }
+  .app-bar .logo{
+    width:48px;height:48px;border-radius:14px;background:var(--md-primary);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px var(--md-shadow);
+  }
+  .app-bar .logo .material-symbols-outlined{font-size:28px}
+  .app-bar h1{font-size:22px;font-weight:500;letter-spacing:.2px}
+  .app-bar p{font-size:13px;color:var(--md-on-surface-variant);margin-top:2px}
+
+  .layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  @media (max-width:880px){.layout{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--md-surface);border-radius:24px;padding:24px;
+    box-shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{font-size:16px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--md-on-surface)}
+  .card h2 .material-symbols-outlined{font-size:20px;color:var(--md-primary)}
+
+  /* Drop zone */
+  .dropzone{
+    border:2px dashed var(--md-outline-variant);border-radius:20px;
+    padding:40px 20px;text-align:center;cursor:pointer;transition:.2s;
+    background:rgba(103,80,164,.03);position:relative;
+  }
+  .dropzone:hover,.dropzone.drag{border-color:var(--md-primary);background:var(--md-primary-container)}
+  .dropzone .material-symbols-outlined{font-size:56px;color:var(--md-primary);margin-bottom:8px}
+  .dropzone p{color:var(--md-on-surface-variant);font-size:14px}
+  .dropzone .hint{font-size:12px;margin-top:6px;color:var(--md-outline)}
+  .dropzone strong{color:var(--md-primary);font-weight:500}
+
+  .preview-wrap{margin-top:16px;display:none}
+  .preview-wrap.show{display:block}
+  .preview-box{
+    background:
+      linear-gradient(45deg,#e0e0e0 25%,transparent 25%),
+      linear-gradient(-45deg,#e0e0e0 25%,transparent 25%),
+      linear-gradient(45deg,transparent 75%,#e0e0e0 75%),
+      linear-gradient(-45deg,transparent 75%,#e0e0e0 75%);
+    background-size:18px 18px;background-position:0 0,0 9px,9px -9px,-9px 0;
+    border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+    min-height:180px;max-height:340px;border:1px solid var(--md-outline-variant);
+  }
+  .preview-box img{max-width:100%;max-height:340px;display:block}
+  .meta{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    background:var(--md-surface-variant);color:var(--md-on-surface-variant);
+    border-radius:8px;padding:6px 12px;font-size:12.5px;display:flex;align-items:center;gap:6px;
+  }
+  .chip .material-symbols-outlined{font-size:16px}
+
+  /* Fields */
+  .field{position:relative;margin-bottom:18px}
+  .field label{display:block;font-size:12.5px;color:var(--md-on-surface-variant);margin-bottom:6px;font-weight:500}
+  .field input[type=number],.field select{
+    width:100%;padding:12px 14px;font-size:15px;font-family:inherit;
+    border:1px solid var(--md-outline);border-radius:12px;background:var(--md-surface);
+    color:var(--md-on-surface);outline:none;transition:.15s;
+  }
+  .field input[type=number]:focus,.field select:focus{border-color:var(--md-primary);box-shadow:0 0 0 2px rgba(103,80,164,.18)}
+  .dims{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+  .lock-btn{
+    width:44px;height:44px;border-radius:12px;border:1px solid var(--md-outline-variant);
+    background:var(--md-surface);cursor:pointer;display:flex;align-items:center;justify-content:center;
+    color:var(--md-on-surface-variant);transition:.15s;margin-bottom:1px;
+  }
+  .lock-btn.active{background:var(--md-primary-container);color:var(--md-on-primary-container);border-color:var(--md-primary-container)}
+  .lock-btn .material-symbols-outlined{font-size:22px}
+
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .preset{
+    border:1px solid var(--md-outline-variant);background:var(--md-surface);
+    border-radius:20px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--md-on-surface-variant);
+    transition:.15s;font-family:inherit;
+  }
+  .preset:hover{background:var(--md-primary-container);border-color:var(--md-primary-container);color:var(--md-on-primary-container)}
+
+  .scale-row{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .scale-row input[type=range]{flex:1;accent-color:var(--md-primary)}
+  .scale-row .val{min-width:54px;text-align:right;font-size:14px;font-weight:500;color:var(--md-primary)}
+
+  .divider{height:1px;background:var(--md-outline-variant);margin:20px 0}
+
+  .seg{display:flex;background:var(--md-surface-variant);border-radius:12px;padding:4px;gap:4px}
+  .seg button{
+    flex:1;border:none;background:transparent;padding:9px;border-radius:9px;cursor:pointer;
+    font-size:14px;font-weight:500;color:var(--md-on-surface-variant);font-family:inherit;transition:.15s;
+  }
+  .seg button.active{background:var(--md-surface);color:var(--md-primary);box-shadow:0 1px 3px var(--md-shadow)}
+
+  .quality-block{margin-top:16px;transition:.2s}
+  .quality-block.hidden{display:none}
+
+  .btn{
+    width:100%;padding:14px;border:none;border-radius:14px;font-size:15px;font-weight:500;
+    cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s;
+  }
+  .btn-primary{background:var(--md-primary);color:var(--md-on-primary);box-shadow:0 2px 6px var(--md-shadow)}
+  .btn-primary:hover{background:var(--md-primary-hover);box-shadow:0 4px 12px var(--md-shadow)}
+  .btn-primary:disabled{background:var(--md-outline-variant);color:var(--md-outline);cursor:not-allowed;box-shadow:none}
+  .btn-tonal{background:var(--md-primary-container);color:var(--md-on-primary-container);margin-top:10px}
+  .btn-tonal:hover{filter:brightness(.97)}
+
+  .output-info{
+    margin-top:16px;padding:14px;border-radius:14px;background:var(--md-primary-container);
+    color:var(--md-on-primary-container);font-size:13px;display:none;align-items:center;gap:10px;
+  }
+  .output-info.show{display:flex}
+  .output-info .material-symbols-outlined{font-size:20px}
+
+  .empty-hint{color:var(--md-outline);font-size:13.5px;text-align:center;padding:30px 0}
+
+  .snackbar{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+    background:#322F35;color:#F5EFF7;padding:14px 22px;border-radius:10px;font-size:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.3);opacity:0;transition:.3s;z-index:99;display:flex;align-items:center;gap:10px;
+  }
+  .snackbar.show{transform:translateX(-50%) translateY(0);opacity:1}
+  .snackbar .material-symbols-outlined{font-size:20px;color:#D0BCFF}
+
+  input[type=file]{display:none}
+  .footer{max-width:1100px;margin:32px auto 0;text-align:center;color:var(--md-outline);font-size:12.5px}
+</style>
+</head>
+<body>
+  <div class="app-bar">
+    <div class="logo"><span class="material-symbols-outlined">photo_size_select_large</span></div>
+    <div>
+      <h1>图片分辨率调整工具</h1>
+      <p>上传或粘贴图片，快速缩放到指定分辨率 · 支持 JPG / PNG 导出</p>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- 左侧：输入 -->
+    <div class="card">
+      <h2><span class="material-symbols-outlined">add_photo_alternate</span>选择图片</h2>
+      <div class="dropzone" id="dropzone">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        <p><strong>点击选择</strong> 或拖拽图片到此处</p>
+        <p class="hint">也可直接 Ctrl/⌘ + V 粘贴剪贴板图片</p>
+      </div>
+      <input type="file" id="fileInput" accept="image/*">
+
+      <div class="preview-wrap" id="previewWrap">
+        <div class="preview-box"><img id="previewImg" alt="预览"></div>
+        <div class="meta">
+          <span class="chip"><span class="material-symbols-outlined">image</span><span id="metaName">-</span></span>
+          <span class="chip"><span class="material-symbols-outlined">aspect_ratio</span><span id="metaSize">-</span></span>
+          <span class="chip"><span class="material-symbols-outlined">database</span><span id="metaBytes">-</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：调整 -->
+    <div class="card">
+      <h2><span class="material-symbols-outlined">tune</span>调整分辨率</h2>
+
+      <div id="controls" style="display:none">
+        <div class="presets" id="presets"></div>
+
+        <div class="dims">
+          <div class="field" style="margin:0">
+            <label for="wInput">宽度 (px)</label>
+            <input type="number" id="wInput" min="1" placeholder="宽">
+          </div>
+          <button class="lock-btn active" id="lockBtn" title="锁定宽高比">
+            <span class="material-symbols-outlined">link</span>
+          </button>
+          <div class="field" style="margin:0">
+            <label for="hInput">高度 (px)</label>
+            <input type="number" id="hInput" min="1" placeholder="高">
+          </div>
+        </div>
+
+        <div style="margin:16px 0 4px;font-size:12.5px;color:var(--md-on-surface-variant);font-weight:500">按比例缩放</div>
+        <div class="scale-row">
+          <input type="range" id="scaleRange" min="1" max="200" value="100">
+          <span class="val" id="scaleVal">100%</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="field">
+          <label>导出格式</label>
+          <div class="seg" id="formatSeg">
+            <button data-fmt="jpg" class="active">JPG</button>
+            <button data-fmt="png">PNG</button>
+          </div>
+        </div>
+
+        <div class="quality-block" id="qualityBlock">
+          <div class="scale-row">
+            <label style="font-size:12.5px;color:var(--md-on-surface-variant);font-weight:500;min-width:70px">JPG 质量</label>
+            <input type="range" id="qualityRange" min="10" max="100" value="90">
+            <span class="val" id="qualityVal">90%</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <button class="btn btn-primary" id="downloadBtn">
+          <span class="material-symbols-outlined">download</span>缩放并下载
+        </button>
+
+        <div class="output-info" id="outputInfo">
+          <span class="material-symbols-outlined">check_circle</span>
+          <span id="outputText"></span>
+        </div>
+      </div>
+
+      <div class="empty-hint" id="emptyHint">
+        请先在左侧选择或粘贴一张图片
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">纯浏览器本地处理 · 图片不会上传到任何服务器</div>
+
+  <div class="snackbar" id="snackbar"><span class="material-symbols-outlined">info</span><span id="snackText"></span></div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const dropzone=$('dropzone'), fileInput=$('fileInput');
+  const previewWrap=$('previewWrap'), previewImg=$('previewImg');
+  const metaName=$('metaName'), metaSize=$('metaSize'), metaBytes=$('metaBytes');
+  const controls=$('controls'), emptyHint=$('emptyHint');
+  const wInput=$('wInput'), hInput=$('hInput'), lockBtn=$('lockBtn');
+  const scaleRange=$('scaleRange'), scaleVal=$('scaleVal');
+  const formatSeg=$('formatSeg'), qualityBlock=$('qualityBlock');
+  const qualityRange=$('qualityRange'), qualityVal=$('qualityVal');
+  const downloadBtn=$('downloadBtn'), outputInfo=$('outputInfo'), outputText=$('outputText');
+  const presets=$('presets');
+
+  let img=new Image();
+  let origW=0, origH=0, ratio=1;
+  let origName='image';
+  let origBytes=0;
+  let lockRatio=true;
+  let format='jpg';
+  let loaded=false;
+
+  const presetList=[
+    {label:'1920×1080',w:1920,h:1080},
+    {label:'1280×720',w:1280,h:720},
+    {label:'800×800',w:800,h:800},
+    {label:'800×600',w:800,h:600},
+    {label:'512×512',w:512,h:512},
+    {label:'256×256',w:256,h:256},
+  ];
+
+  // 构建预设按钮
+  presetList.forEach(p=>{
+    const b=document.createElement('button');
+    b.className='preset';b.textContent=p.label;
+    b.onclick=()=>{ lockRatio=false; updateLockUI(); wInput.value=p.w; hInput.value=p.h; syncScaleFromW(); };
+    presets.appendChild(b);
+  });
+
+  function fmtBytes(n){
+    if(n<1024) return n+' B';
+    if(n<1048576) return (n/1024).toFixed(1)+' KB';
+    return (n/1048576).toFixed(2)+' MB';
+  }
+
+  function snack(msg){
+    $('snackText').textContent=msg;
+    const s=$('snackbar');s.classList.add('show');
+    clearTimeout(snack._t);snack._t=setTimeout(()=>s.classList.remove('show'),2600);
+  }
+
+  function loadFile(file){
+    if(!file || !file.type.startsWith('image/')){snack('请选择图片文件');return;}
+    origBytes=file.size;
+    origName=(file.name||'pasted-image').replace(/\.[^.]+$/,'')||'image';
+    const reader=new FileReader();
+    reader.onload=e=>{
+      img=new Image();
+      img.onload=()=>{
+        origW=img.naturalWidth; origH=img.naturalHeight; ratio=origW/origH;
+        previewImg.src=img.src;
+        metaName.textContent=origName;
+        metaSize.textContent=origW+' × '+origH+' px';
+        metaBytes.textContent=fmtBytes(origBytes);
+        previewWrap.classList.add('show');
+        controls.style.display='block';
+        emptyHint.style.display='none';
+        wInput.value=origW; hInput.value=origH;
+        scaleRange.value=100; scaleVal.textContent='100%';
+        lockRatio=true; updateLockUI();
+        outputInfo.classList.remove('show');
+        loaded=true;
+        snack('图片已载入');
+      };
+      img.onerror=()=>snack('图片解析失败');
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function updateLockUI(){
+    lockBtn.classList.toggle('active',lockRatio);
+    lockBtn.querySelector('.material-symbols-outlined').textContent=lockRatio?'link':'link_off';
+    lockBtn.title=lockRatio?'已锁定宽高比':'未锁定宽高比';
+  }
+
+  function syncScaleFromW(){
+    const w=parseInt(wInput.value)||0;
+    if(origW>0){ const s=Math.round(w/origW*100); scaleRange.value=Math.min(200,Math.max(1,s)); scaleVal.textContent=scaleRange.value+'%'; }
+  }
+
+  // 宽度输入
+  wInput.addEventListener('input',()=>{
+    if(!loaded) return;
+    let w=parseInt(wInput.value)||0;
+    if(lockRatio && w>0){ hInput.value=Math.round(w/ratio); }
+    syncScaleFromW();
+    outputInfo.classList.remove('show');
+  });
+  // 高度输入
+  hInput.addEventListener('input',()=>{
+    if(!loaded) return;
+    let h=parseInt(hInput.value)||0;
+    if(lockRatio && h>0){ wInput.value=Math.round(h*ratio); }
+    syncScaleFromW();
+    outputInfo.classList.remove('show');
+  });
+
+  lockBtn.addEventListener('click',()=>{ lockRatio=!lockRatio; updateLockUI(); if(lockRatio){ const w=parseInt(wInput.value)||origW; hInput.value=Math.round(w/ratio);} });
+
+  scaleRange.addEventListener('input',()=>{
+    if(!loaded) return;
+    const s=parseInt(scaleRange.value);
+    scaleVal.textContent=s+'%';
+    wInput.value=Math.max(1,Math.round(origW*s/100));
+    hInput.value=Math.max(1,Math.round(origH*s/100));
+    outputInfo.classList.remove('show');
+  });
+
+  // 格式切换
+  formatSeg.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      formatSeg.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); format=b.dataset.fmt;
+      qualityBlock.classList.toggle('hidden',format!=='jpg');
+    });
+  });
+
+  qualityRange.addEventListener('input',()=>{ qualityVal.textContent=qualityRange.value+'%'; });
+
+  function timestamp(){
+    const d=new Date(),p=n=>String(n).padStart(2,'0');
+    return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());
+  }
+
+  downloadBtn.addEventListener('click',()=>{
+    if(!loaded){snack('请先选择图片');return;}
+    let w=parseInt(wInput.value)||0, h=parseInt(hInput.value)||0;
+    if(w<1||h<1){snack('请输入有效的宽高');return;}
+    const canvas=document.createElement('canvas');
+    canvas.width=w; canvas.height=h;
+    const ctx=canvas.getContext('2d');
+    ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality='high';
+    if(format==='jpg'){ ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,w,h); }
+    ctx.drawImage(img,0,0,w,h);
+
+    const mime=format==='jpg'?'image/jpeg':'image/png';
+    const q=format==='jpg'?(parseInt(qualityRange.value)/100):undefined;
+    canvas.toBlob(blob=>{
+      if(!blob){snack('导出失败');return;}
+      const ext=format==='jpg'?'jpg':'png';
+      const fname=origName+'_'+timestamp()+'.'+ext;
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url; a.download=fname; a.click();
+      setTimeout(()=>URL.revokeObjectURL(url),1500);
+      outputText.textContent='已导出 '+fname+' · '+w+'×'+h+' · '+fmtBytes(blob.size);
+      outputInfo.classList.add('show');
+      snack('已开始下载');
+    },mime,q);
+  });
+
+  // 交互：点击 / 拖拽 / 粘贴
+  dropzone.addEventListener('click',()=>fileInput.click());
+  fileInput.addEventListener('change',e=>{ if(e.target.files[0]) loadFile(e.target.files[0]); });
+  ['dragover','dragenter'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.add('drag');}));
+  ['dragleave','drop'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
+  dropzone.addEventListener('drop',e=>{ if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); });
+  window.addEventListener('paste',e=>{
+    const items=e.clipboardData&&e.clipboardData.items;
+    if(!items) return;
+    for(const it of items){
+      if(it.type.startsWith('image/')){ const f=it.getAsFile(); if(f){loadFile(f); e.preventDefault();} break; }
+    }
+  });
+})();
+</script>
+</body>
+</html>
